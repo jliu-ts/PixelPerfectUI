@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -53,26 +53,37 @@ export default function CreationStudio() {
         </div>
 
         {/* Brand & Context Tools (New) */}
-        <div className="flex gap-3 mb-8">
+        <div className="flex gap-2 mb-8 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2">
           <button 
             onClick={() => setLocation("/brand")}
-            className="flex-1 py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
           >
             <Palette size={16} className="text-[#00C4CC]" />
             <div className="text-left">
               <span className="block text-xs font-bold text-white">Brand Kit</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Canva Connected</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Canva Linked</span>
+            </div>
+          </button>
+          
+          <button 
+            onClick={() => setLocation("/store")}
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <ShoppingBag size={16} className="text-[#95BF47]" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Store</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Shopify</span>
             </div>
           </button>
           
           <button 
             onClick={() => setLocation("/context")}
-            className="flex-1 py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
           >
             <BrainCircuit size={16} className="text-blue-400" />
             <div className="text-left">
-              <span className="block text-xs font-bold text-white">Context (MCP)</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">2 Sources Active</span>
+              <span className="block text-xs font-bold text-white">Context</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">MCP Active</span>
             </div>
           </button>
         </div>
