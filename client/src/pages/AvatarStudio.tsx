@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { ArrowLeft, User, Mic, Link2, CheckCircle2, Play, Plus, Loader2, Video } from "lucide-react";
+import { ArrowLeft, User, Mic, Link2, CheckCircle2, Play, Plus, Loader2, Video, Eye, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { GradientButton } from "@/components/GradientButton";
 import avatarImage from "@assets/generated_images/professional_ai_avatar_portrait.png";
@@ -23,6 +23,8 @@ export default function AvatarStudio() {
   const [isConnectingHeyGen, setIsConnectingHeyGen] = useState(false);
   const [isConnectingEleven, setIsConnectingEleven] = useState(false);
   const [connectedServices, setConnectedServices] = useState({ heygen: true, elevenlabs: false });
+  const [isIrisVerified, setIsIrisVerified] = useState(false);
+  const [isVerifyingIris, setIsVerifyingIris] = useState(false);
 
   const handleConnect = (service: "heygen" | "elevenlabs") => {
     if (service === "heygen") setIsConnectingHeyGen(true);
@@ -33,6 +35,14 @@ export default function AvatarStudio() {
       if (service === "heygen") setIsConnectingHeyGen(false);
       else setIsConnectingEleven(false);
     }, 1500);
+  };
+
+  const handleIrisVerification = () => {
+    setIsVerifyingIris(true);
+    setTimeout(() => {
+      setIsVerifyingIris(false);
+      setIsIrisVerified(true);
+    }, 2000);
   };
 
   const handleCreateContent = (avatarId: string) => {
@@ -68,6 +78,52 @@ export default function AvatarStudio() {
 
         <div className="p-6 space-y-6">
           
+          {/* Iris ID Verification Card */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-500/30 relative overflow-hidden">
+            <div className="flex justify-between items-center relative z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20">
+                  <Eye size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                    Iris ID Verification
+                    {isIrisVerified && <ShieldCheck size={14} className="text-green-400" />}
+                  </h3>
+                  <p className="text-xs text-gray-400">
+                    {isIrisVerified 
+                      ? "Identity verified. Secure cloning enabled." 
+                      : "Verify identity to unlock voice cloning features."}
+                  </p>
+                </div>
+              </div>
+              
+              {isIrisVerified ? (
+                <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold flex items-center gap-1 border border-green-500/20">
+                  <CheckCircle2 size={12} /> Verified
+                </span>
+              ) : (
+                <button 
+                  onClick={handleIrisVerification}
+                  disabled={isVerifyingIris}
+                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors flex items-center gap-2"
+                >
+                  {isVerifyingIris ? (
+                    <>
+                      <Loader2 size={12} className="animate-spin" /> Scanning...
+                    </>
+                  ) : (
+                    <>
+                      <Eye size={12} /> Verify Now
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
+            {/* Decorative background effect */}
+            <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl" />
+          </div>
+
           {/* Service Status Cards */}
           <div className="grid grid-cols-2 gap-3">
             <div className={cn(
@@ -149,7 +205,10 @@ export default function AvatarStudio() {
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-start">
-                        <h3 className="text-sm font-bold text-white">{avatar.name}</h3>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-sm font-bold text-white">{avatar.name}</h3>
+                          {isIrisVerified && <ShieldCheck size={12} className="text-blue-400" />}
+                        </div>
                         <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-gray-400 border border-white/5">{avatar.type}</span>
                       </div>
                       <p className="text-xs text-gray-500 mb-2">Ready for generation</p>
@@ -186,6 +245,18 @@ export default function AvatarStudio() {
 
                 {connectedServices.elevenlabs && (
                   <>
+                    {!isIrisVerified && (
+                      <div className="p-4 mb-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-start gap-3">
+                         <ShieldCheck size={20} className="text-yellow-500 shrink-0 mt-0.5" />
+                         <div>
+                           <h4 className="text-xs font-bold text-white">Verification Required</h4>
+                           <p className="text-[10px] text-gray-400 mt-1">
+                             To prevent misuse, you must verify your identity with Iris ID before cloning new voices.
+                           </p>
+                         </div>
+                      </div>
+                    )}
+
                     {VOICES.map(voice => (
                       <div key={voice.id} className="bg-[#1E1E1E] border border-white/5 rounded-xl p-4 flex justify-between items-center">
                         <div className="flex items-center gap-3">
@@ -193,7 +264,10 @@ export default function AvatarStudio() {
                             <Mic size={18} />
                           </div>
                           <div>
-                            <h3 className="text-sm font-bold text-white">{voice.name}</h3>
+                            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                              {voice.name}
+                              {isIrisVerified && voice.type === "Cloned" && <ShieldCheck size={12} className="text-blue-400" />}
+                            </h3>
                             <p className="text-xs text-gray-500">{voice.type}</p>
                           </div>
                         </div>
@@ -203,9 +277,17 @@ export default function AvatarStudio() {
                       </div>
                     ))}
                     
-                    <button className="w-full py-4 rounded-xl border border-dashed border-white/10 flex items-center justify-center gap-2 text-gray-500 hover:text-white hover:border-white/20 transition-all hover:bg-white/5">
+                    <button 
+                      disabled={!isIrisVerified}
+                      className={cn(
+                        "w-full py-4 rounded-xl border border-dashed flex items-center justify-center gap-2 transition-all",
+                        isIrisVerified 
+                          ? "border-white/10 text-gray-500 hover:text-white hover:border-white/20 hover:bg-white/5 cursor-pointer" 
+                          : "border-white/5 text-gray-600 cursor-not-allowed opacity-50"
+                      )}
+                    >
                       <Plus size={18} />
-                      <span className="text-sm font-medium">Clone New Voice</span>
+                      <span className="text-sm font-medium">Clone New Voice {isIrisVerified ? "" : "(Requires Iris ID)"}</span>
                     </button>
                   </>
                 )}
