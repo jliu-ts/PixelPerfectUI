@@ -132,6 +132,14 @@ export default function Profile() {
             </div>
             <span className="text-xs font-bold text-white bg-white/10 px-2 py-1 rounded">$1,240.50</span>
           </button>
+          
+          {/* Pitch Deck Link (Hidden/Investor) */}
+          <button 
+            onClick={() => setLocation("/pitch")}
+            className="w-full mt-3 py-2 text-[10px] text-gray-600 hover:text-gray-400 flex items-center justify-center gap-1 uppercase tracking-widest"
+          >
+            <Target size={10} /> Investor Deck
+          </button>
         </div>
 
         {/* Content Tabs */}

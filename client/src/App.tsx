@@ -19,6 +19,7 @@ import AffiliateDashboard from "@/pages/AffiliateDashboard";
 import CollabRoom from "@/pages/CollabRoom";
 import AssetMarketplace from "@/pages/AssetMarketplace";
 import PricingTiers from "@/pages/PricingTiers";
+import PitchDeck from "@/pages/PitchDeck";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/collab" component={CollabRoom} />
       <Route path="/marketplace" component={AssetMarketplace} />
       <Route path="/pricing" component={PricingTiers} />
+      <Route path="/pitch" component={PitchDeck} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />
