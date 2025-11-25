@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -95,6 +95,28 @@ export default function CreationStudio() {
             <div className="text-left">
               <span className="block text-xs font-bold text-white">Context</span>
               <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">MCP Active</span>
+            </div>
+          </button>
+
+          <button 
+            onClick={() => setLocation("/collab")}
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <Users size={16} className="text-pink-400" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Collab</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Writer's Room</span>
+            </div>
+          </button>
+
+          <button 
+            onClick={() => setLocation("/marketplace")}
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <Store size={16} className="text-yellow-400" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Market</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Buy Assets</span>
             </div>
           </button>
         </div>
