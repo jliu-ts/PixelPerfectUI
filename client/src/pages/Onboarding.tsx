@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { ArrowRight, Zap, Shield, Users, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import bgImage from "@assets/generated_images/abstract_digital_brutalism_gateway.png";
+import bgImage from "@assets/generated_images/abstract_digital_brutalism_gateway,_neon_purple_and_cyan,_geometric_shapes,_entering_a_digital_realm.png";
 
 const STEPS = [
   {
