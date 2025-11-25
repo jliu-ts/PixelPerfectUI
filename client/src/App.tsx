@@ -8,6 +8,8 @@ import GenerationResult from "@/pages/GenerationResult";
 import VideoEditor from "@/pages/VideoEditor";
 import SocialShare from "@/pages/SocialShare";
 import Profile from "@/pages/Profile";
+import BattleMode from "@/pages/BattleMode";
+import ARCamera from "@/pages/ARCamera";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,6 +21,8 @@ function Router() {
       <Route path="/editor" component={VideoEditor} />
       <Route path="/share" component={SocialShare} />
       <Route path="/profile" component={Profile} />
+      <Route path="/battle" component={BattleMode} />
+      <Route path="/camera" component={ARCamera} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />

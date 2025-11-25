@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -51,6 +51,14 @@ export default function CreationStudio() {
           >
             <Film size={16} />
             Video
+          </button>
+          
+          <button 
+            onClick={() => setLocation("/camera")}
+            className="flex-1 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-accent hover:bg-accent/10 hover:text-accent"
+          >
+            <CameraIcon size={16} />
+            AR Cam
           </button>
         </div>
 

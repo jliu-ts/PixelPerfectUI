@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "wouter";
-import { Heart, MessageCircle, Share2, Repeat, MoreHorizontal } from "lucide-react";
+import { Heart, MessageCircle, Share2, Repeat, Swords } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
@@ -19,6 +19,28 @@ export default function HomeFeed() {
 
   return (
     <Layout>
+      {/* Battle Mode Banner (Floating) */}
+      <div 
+        onClick={() => setLocation("/battle")}
+        className="absolute top-20 left-4 right-4 z-30 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl p-3 flex items-center justify-between animate-in slide-in-from-top-4 fade-in duration-700 cursor-pointer hover:bg-black/80 transition-colors group"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-gradient-accent flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.4)]">
+            <Swords size={20} className="text-white" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              Daily Battle 
+              <span className="text-[10px] px-1.5 py-0.5 bg-red-500 rounded text-white font-bold animate-pulse">LIVE</span>
+            </h3>
+            <p className="text-xs text-gray-300">Samurai vs Elf • Win 50 XP</p>
+          </div>
+        </div>
+        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+          <span className="text-lg">👉</span>
+        </div>
+      </div>
+
       {/* Full Screen Feed Item */}
       <div className="relative w-full h-[100dvh] bg-black">
         {/* Background Image (Simulating Video) */}
