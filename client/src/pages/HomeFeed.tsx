@@ -55,7 +55,7 @@ export default function HomeFeed() {
 
         {/* Floating Header */}
         <div className="absolute top-0 left-0 right-0 pt-12 pb-4 px-6 flex justify-between items-center z-20 bg-gradient-to-b from-black/60 to-transparent">
-          <h1 className="text-xl font-display font-bold tracking-wide text-white drop-shadow-lg">Aether Lens</h1>
+          <h1 className="text-xl font-display font-bold tracking-wide text-white drop-shadow-lg">Trending Society</h1>
           <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center">
              <div className="w-4 h-4 rounded-sm border-2 border-white/80" />
           </div>

@@ -88,7 +88,7 @@ export default function PricingTiers() {
             </button>
             <div>
               <h1 className="text-xl font-display font-bold text-white">Membership</h1>
-              <p className="text-xs text-gray-400">Unlock the full power of Aether Lens</p>
+              <p className="text-xs text-gray-400">Unlock the full power of Trending Society</p>
             </div>
           </div>
 

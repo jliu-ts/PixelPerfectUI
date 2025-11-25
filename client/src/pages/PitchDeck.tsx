@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const SLIDES = [
   {
     id: "intro",
-    title: "Aether Lens",
+    title: "Trending Society",
     subtitle: "The Operating System for the AI Creator Economy",
     content: (
       <div className="space-y-6">
@@ -20,7 +20,7 @@ const SLIDES = [
         <div className="p-6 rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-white/10 backdrop-blur-md">
           <h3 className="text-xl font-display font-bold text-white mb-2">The Solution</h3>
           <p className="text-gray-400">
-            **Aether Lens** is the vertical "Super App" that consolidates generation, editing, collaboration, and monetization into a single, mobile-first OS. We don't just build tools; we own the rails.
+            **Trending Society** is the vertical "Super App" that consolidates generation, editing, collaboration, and monetization into a single, mobile-first OS. We don't just build tools; we own the rails.
           </p>
         </div>
       </div>
@@ -52,7 +52,7 @@ const SLIDES = [
   {
     id: "moat",
     title: "Defensibility (The Moat)",
-    subtitle: "Why Aether Lens wins in the long term",
+    subtitle: "Why Trending Society wins in the long term",
     content: (
       <div className="space-y-4">
         <div className="flex gap-4 items-start">
