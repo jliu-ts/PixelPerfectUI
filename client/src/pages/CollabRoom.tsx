@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { ArrowLeft, Users, MessageSquare, Play, Mic, Layers, Plus, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Users, MessageSquare, Play, Mic, Layers, Plus, CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import collabBg from "@assets/generated_images/futuristic_holographic_collaborative_workspace.png";
 
