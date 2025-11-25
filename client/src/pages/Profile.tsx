@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight } from "lucide-react";
+import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
 
