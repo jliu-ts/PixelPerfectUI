@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase } from "lucide-react";
+import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
 
@@ -96,6 +96,25 @@ export default function Profile() {
               Top Up
             </button>
           </div>
+
+          {/* Upgrade Banner */}
+          <button 
+            onClick={() => setLocation("/pricing")}
+            className="w-full p-1 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 mb-3 group"
+          >
+            <div className="bg-[#1E1E1E] rounded-xl p-3 flex items-center justify-between group-hover:bg-transparent transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:text-white">
+                  <Crown size={16} />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xs font-bold text-white">Upgrade to Syndicate</h3>
+                  <p className="text-[10px] text-gray-400 group-hover:text-white/80">Unlock Analytics & 0% Fees</p>
+                </div>
+              </div>
+              <ChevronRight size={16} className="text-gray-500 group-hover:text-white" />
+            </div>
+          </button>
 
           {/* Creator Program Button */}
           <button 

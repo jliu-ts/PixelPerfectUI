@@ -1,0 +1,213 @@
+import React, { useState } from "react";
+import { useLocation } from "wouter";
+import { Layout } from "@/components/Layout";
+import { ArrowLeft, Check, X, Crown, Zap, Globe, ShieldCheck, BarChart3, Users, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { GradientButton } from "@/components/GradientButton";
+
+const TIERS = [
+  {
+    id: "starter",
+    name: "Initiate",
+    price: "0",
+    description: "For new creators exploring the possibilities of AI.",
+    features: [
+      "50 Generation Credits / mo",
+      "Standard Resolution (720p)",
+      "Basic AI Models (Stable Diffusion)",
+      "Public Community Access",
+      "Watermarked Exports"
+    ],
+    notIncluded: [
+      "Voice Cloning",
+      "Collaboration Tools",
+      "Trend Analytics",
+      "Marketplace Selling"
+    ],
+    cta: "Start Creating",
+    popular: false
+  },
+  {
+    id: "creator",
+    name: "Architect",
+    price: "29",
+    description: "For serious creators building a personal brand.",
+    features: [
+      "2,000 Generation Credits / mo",
+      "4K Ultra HD Exports",
+      "Premium Models (Midjourney, Veo)",
+      "Voice Cloning (1 Voice)",
+      "No Watermarks",
+      "Marketplace Buying Access"
+    ],
+    notIncluded: [
+      "Collaboration Tools",
+      "Trend Analytics",
+      "0% Transaction Fees"
+    ],
+    cta: "Upgrade to Architect",
+    popular: true,
+    highlight: "Most Popular"
+  },
+  {
+    id: "agency",
+    name: "Syndicate",
+    price: "99",
+    description: "For agencies and collectives dominating the feed.",
+    features: [
+      "Unlimited Generation Credits",
+      "Writer's Room (5 Seats)",
+      "Viral Trend Prediction Engine",
+      "Audience Sentiment Analysis",
+      "Priority GPU Rendering",
+      "0% Marketplace Fees",
+      "White-label Client Portals"
+    ],
+    notIncluded: [],
+    cta: "Join the Syndicate",
+    popular: false,
+    gradient: "from-purple-600 to-blue-600"
+  }
+];
+
+export default function PricingTiers() {
+  const [, setLocation] = useLocation();
+  const [billingInterval, setBillingInterval] = useState<"monthly" | "yearly">("monthly");
+
+  return (
+    <Layout hideTabs>
+      <div className="min-h-screen bg-background pb-12">
+        {/* Header */}
+        <div className="p-4 pt-8 sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5">
+          <div className="flex items-center gap-3 mb-4">
+            <button 
+              onClick={() => setLocation("/profile")}
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div>
+              <h1 className="text-xl font-display font-bold text-white">Membership</h1>
+              <p className="text-xs text-gray-400">Unlock the full power of Aether Lens</p>
+            </div>
+          </div>
+
+          {/* Billing Toggle */}
+          <div className="flex justify-center">
+            <div className="bg-[#1E1E1E] p-1 rounded-xl border border-white/10 flex relative">
+              <button 
+                onClick={() => setBillingInterval("monthly")}
+                className={cn(
+                  "px-6 py-2 rounded-lg text-xs font-bold transition-all relative z-10",
+                  billingInterval === "monthly" ? "text-white" : "text-gray-500 hover:text-gray-300"
+                )}
+              >
+                Monthly
+              </button>
+              <button 
+                onClick={() => setBillingInterval("yearly")}
+                className={cn(
+                  "px-6 py-2 rounded-lg text-xs font-bold transition-all relative z-10",
+                  billingInterval === "yearly" ? "text-white" : "text-gray-500 hover:text-gray-300"
+                )}
+              >
+                Yearly <span className="text-[10px] text-green-400 ml-1">-20%</span>
+              </button>
+              
+              {/* Sliding Background */}
+              <div className={cn(
+                "absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#2A2A2A] rounded-lg transition-all duration-300",
+                billingInterval === "yearly" ? "left-[calc(50%+2px)]" : "left-1"
+              )} />
+            </div>
+          </div>
+        </div>
+
+        {/* Tiers Grid */}
+        <div className="p-6 space-y-6">
+          {TIERS.map(tier => (
+            <div 
+              key={tier.id} 
+              className={cn(
+                "rounded-2xl border relative overflow-hidden transition-all",
+                tier.popular ? "bg-[#1E1E1E] border-purple-500/50 shadow-lg shadow-purple-900/20" : "bg-[#121212] border-white/10",
+                tier.id === "agency" && "bg-gradient-to-br from-[#1a1a2e] to-[#16213e] border-blue-500/30"
+              )}
+            >
+              {tier.highlight && (
+                <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">
+                  {tier.highlight}
+                </div>
+              )}
+
+              <div className="p-6">
+                <h3 className="text-lg font-display font-bold text-white mb-1 flex items-center gap-2">
+                  {tier.name}
+                  {tier.id === "agency" && <Crown size={16} className="text-yellow-400" />}
+                  {tier.id === "creator" && <Sparkles size={16} className="text-purple-400" />}
+                </h3>
+                <p className="text-xs text-gray-400 mb-4 h-8">{tier.description}</p>
+                
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className="text-3xl font-bold text-white">${tier.price}</span>
+                  <span className="text-sm text-gray-500">/mo</span>
+                </div>
+
+                <button 
+                  className={cn(
+                    "w-full py-3 rounded-xl text-sm font-bold mb-6 transition-all",
+                    tier.popular 
+                      ? "bg-white text-black hover:bg-gray-200" 
+                      : tier.id === "agency" 
+                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:opacity-90"
+                        : "bg-white/10 text-white hover:bg-white/20"
+                  )}
+                >
+                  {tier.cta}
+                </button>
+
+                <div className="space-y-3">
+                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Includes:</p>
+                  {tier.features.map((feature, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className={cn(
+                        "mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shrink-0",
+                        tier.id === "agency" ? "bg-blue-500/20 text-blue-400" : "bg-green-500/10 text-green-500"
+                      )}>
+                        <Check size={10} />
+                      </div>
+                      <span className="text-sm text-gray-300">{feature}</span>
+                    </div>
+                  ))}
+                  
+                  {tier.notIncluded.map((feature, i) => (
+                    <div key={i} className="flex items-start gap-3 opacity-50">
+                      <div className="mt-0.5 w-4 h-4 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 text-red-500">
+                        <X size={10} />
+                      </div>
+                      <span className="text-sm text-gray-500">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Enterprise / Data Upsell */}
+          <div className="p-6 rounded-2xl bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/20 text-center">
+            <div className="w-12 h-12 mx-auto bg-yellow-500/10 rounded-full flex items-center justify-center mb-3 text-yellow-500">
+              <Globe size={24} />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-2">Society Enterprise</h3>
+            <p className="text-sm text-gray-400 mb-4">
+              Own the rails. Custom model training, dedicated GPU clusters, and full API access for platforms.
+            </p>
+            <button className="text-yellow-500 text-sm font-bold hover:text-yellow-400 transition-colors">
+              Contact Sales →
+            </button>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}

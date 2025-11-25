@@ -18,6 +18,7 @@ import AvatarStudio from "@/pages/AvatarStudio";
 import AffiliateDashboard from "@/pages/AffiliateDashboard";
 import CollabRoom from "@/pages/CollabRoom";
 import AssetMarketplace from "@/pages/AssetMarketplace";
+import PricingTiers from "@/pages/PricingTiers";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/affiliate" component={AffiliateDashboard} />
       <Route path="/collab" component={CollabRoom} />
       <Route path="/marketplace" component={AssetMarketplace} />
+      <Route path="/pricing" component={PricingTiers} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />
