@@ -49,7 +49,10 @@ export default function GenerationResult() {
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Upscale</span>
           </button>
 
-          <button className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group">
+          <button 
+            onClick={() => setLocation("/editor")}
+            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group"
+          >
             <SlidersHorizontal size={20} className="text-gray-400 group-hover:text-accent transition-colors" />
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Edit</span>
           </button>

@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import HomeFeed from "@/pages/HomeFeed";
 import CreationStudio from "@/pages/CreationStudio";
 import GenerationResult from "@/pages/GenerationResult";
+import VideoEditor from "@/pages/VideoEditor";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -13,6 +14,7 @@ function Router() {
       <Route path="/" component={HomeFeed} />
       <Route path="/create" component={CreationStudio} />
       <Route path="/result" component={GenerationResult} />
+      <Route path="/editor" component={VideoEditor} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />
