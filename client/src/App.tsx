@@ -15,6 +15,7 @@ import BrandKit from "@/pages/BrandKit";
 import ContextSources from "@/pages/ContextSources";
 import EcommerceConnect from "@/pages/EcommerceConnect";
 import AvatarStudio from "@/pages/AvatarStudio";
+import AffiliateDashboard from "@/pages/AffiliateDashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/context" component={ContextSources} />
       <Route path="/store" component={EcommerceConnect} />
       <Route path="/avatars" component={AvatarStudio} />
+      <Route path="/affiliate" component={AffiliateDashboard} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />

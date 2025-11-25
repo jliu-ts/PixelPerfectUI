@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2 } from "lucide-react";
+import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
 
@@ -77,7 +77,7 @@ export default function Profile() {
         </div>
 
         {/* Credits Wallet Card */}
-        <div className="px-6 mb-8">
+        <div className="px-6 mb-8 space-y-3">
           <div className="w-full p-4 rounded-2xl bg-gradient-to-r from-[#1E1E1E] to-[#252525] border border-white/10 flex items-center justify-between relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-accent opacity-5 group-hover:opacity-10 transition-opacity" />
             
@@ -96,6 +96,23 @@ export default function Profile() {
               Top Up
             </button>
           </div>
+
+          {/* Creator Program Button */}
+          <button 
+            onClick={() => setLocation("/affiliate")}
+            className="w-full p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                <Briefcase size={20} />
+              </div>
+              <div className="text-left">
+                <h3 className="text-sm font-bold text-white">Creator Hub</h3>
+                <p className="text-xs text-gray-400 group-hover:text-gray-300">Brand deals & Earnings</p>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-white bg-white/10 px-2 py-1 rounded">$1,240.50</span>
+          </button>
         </div>
 
         {/* Content Tabs */}
