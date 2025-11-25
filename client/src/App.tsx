@@ -14,6 +14,7 @@ import IdeaGenerator from "@/pages/IdeaGenerator";
 import BrandKit from "@/pages/BrandKit";
 import ContextSources from "@/pages/ContextSources";
 import EcommerceConnect from "@/pages/EcommerceConnect";
+import AvatarStudio from "@/pages/AvatarStudio";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/brand" component={BrandKit} />
       <Route path="/context" component={ContextSources} />
       <Route path="/store" component={EcommerceConnect} />
+      <Route path="/avatars" component={AvatarStudio} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />
