@@ -216,8 +216,8 @@ export default function VideoEditor() {
 
           {/* Export Action */}
           <div className="p-4 border-t border-white/5 bg-black/40">
-            <GradientButton onClick={() => {}} className="py-3 text-sm">
-              EXPORT VIDEO
+            <GradientButton onClick={() => setLocation("/share")} className="py-3 text-sm">
+              NEXT: SHARE
             </GradientButton>
           </div>
         </div>

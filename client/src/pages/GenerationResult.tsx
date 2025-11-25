@@ -68,7 +68,7 @@ export default function GenerationResult() {
 
         {/* Post Button */}
         <div className="mt-8 pb-8">
-          <GradientButton variant="secondary" onClick={() => setLocation("/")}>
+          <GradientButton variant="secondary" onClick={() => setLocation("/share")}>
             POST TO FEED
           </GradientButton>
         </div>
