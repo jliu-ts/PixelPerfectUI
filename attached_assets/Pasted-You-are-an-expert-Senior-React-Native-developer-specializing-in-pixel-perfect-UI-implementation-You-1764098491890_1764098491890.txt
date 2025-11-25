@@ -1,0 +1,42 @@
+You are an expert Senior React Native developer specializing in pixel-perfect UI implementation.
+Your task is to build a functional prototype of the “Aether Lens” app UI based exactly on the three screens shown in the attached image.
+Technical Stack Requirements:
+• Framework: React Native (Expo)
+• Styling: NativeWind (Tailwind CSS for React Native). If you cannot use NativeWind, use standard React Native StyleSheet.
+• Icons: Lucide React Native (or Ionicons as a fallback).
+• Gradients: expo-linear-gradient (Crucial for the buttons and accents).
+• Navigation: Use standard React Navigation structure (Bottom Tabs + Stack).
+Global Style Guide (derived from image):
+• Theme: Dark Mode only.
+• Background: Deep charcoal (#121212 or similar).
+• Text: Primary white (#FFFFFF), Secondary light gray (#A0A0A0).
+• Accent Gradient: A distinct horizontal gradient from Electric Purple (e.g., #7C3AED) to Bright Cyan (e.g., #22D3EE). This is used on main buttons, selected tab icons, and subtle glows.
+• Rounded Corners: Use consistent ‘xl’ or ‘2xl’ rounding for buttons, inputs, and containers.
+Detailed Implementation Plan:
+
+1. Navigation Structure (Bottom Tabs):
+   Create a bottom Tab Navigator reflecting the image:
+   • Home (House icon)
+   • Search (Magnifying glass icon)
+   • Create (Center): This button must be prominent, slightly larger, and feature the purple/cyan gradient icon (like a plus or sparkle).
+   • Notifications (Bell icon)
+   • Profile (User icon)
+1. Screen 1 Implementation: Home Feed (Left Screen)
+   • Build a full-screen vertical feed container. For this prototype, just render one static item.
+   • Video Placeholder: Use a large image component with a space background to simulate the video.
+   • Floating Header: A transparent top bar with the title “Home Feed”.
+   • Right Sidebar: Create a vertical stack of floating action buttons on the right edge: Avatar, Heart (with count), Comment (with count), Share icon, and a “Remix” icon.
+   • Bottom Overlay: Add the username, caption text, and a distinct “View Prompt” button with a dark, semi-transparent background and a subtle gradient border/glow.
+1. Screen 2 Implementation: Creation Studio (Middle Screen)
+   • Header: Simple title “Creation Studio”.
+   • Tab Selector: Implement a segmented control at the top for “[T] Text”, “[Image]”, “[Video]”.
+   • Main Input: A large, multi-line text input area with dark gray background and placeholder text “Describe your dream…”.
+   • Style Parameters: Below the input, create a horizontal ScrollView containing chips/bubbles for styles (e.g., “Anime”, “Cinematic”). The selected chip should have the accent gradient border.
+   • Generate Button: A massive, full-width button at the bottom. It must use the LinearGradient component to achieve the glowing purple-to-cyan look shown in the image, with text “GENERATE (5 Credits)”.
+1. Screen 3 Implementation: Generation Result (Right Screen)
+   • Header: A stack navigation header with a back arrow and title “Generation Result”.
+   • Result Preview: A large, square container showing the resulting image/video placeholder.
+   • Action Row: Below the preview, create a row of three distinct dark gray buttons with icons and text: “Vary”, “Upscale”, and “Edit”.
+   • Post Button: A large, full-width button at the bottom labeled “POST TO FEED”, using the accent gradient structure but perhaps slightly more subdued than the Generate button.
+   Deliverables:
+   Please provide the complete, runnable React Native code. Structure it with a main App.js (containing navigation) and separate components for the three main screens so it is clean and easy to read. Use dummy data where necessary to make the UI look populated.
