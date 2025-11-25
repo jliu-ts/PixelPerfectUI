@@ -11,6 +11,8 @@ import Profile from "@/pages/Profile";
 import BattleMode from "@/pages/BattleMode";
 import ARCamera from "@/pages/ARCamera";
 import IdeaGenerator from "@/pages/IdeaGenerator";
+import BrandKit from "@/pages/BrandKit";
+import ContextSources from "@/pages/ContextSources";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -25,6 +27,8 @@ function Router() {
       <Route path="/battle" component={BattleMode} />
       <Route path="/camera" component={ARCamera} />
       <Route path="/ideas" component={IdeaGenerator} />
+      <Route path="/brand" component={BrandKit} />
+      <Route path="/context" component={ContextSources} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />

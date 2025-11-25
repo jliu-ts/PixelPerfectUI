@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -35,7 +35,7 @@ export default function CreationStudio() {
     <Layout>
       <div className="p-6 pt-12 flex flex-col h-full min-h-[80vh]">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-display font-bold text-white">Creation Studio</h1>
           <div className="flex gap-2">
             <button 
@@ -50,6 +50,31 @@ export default function CreationStudio() {
               <span className="text-xs font-medium text-white">320</span>
             </div>
           </div>
+        </div>
+
+        {/* Brand & Context Tools (New) */}
+        <div className="flex gap-3 mb-8">
+          <button 
+            onClick={() => setLocation("/brand")}
+            className="flex-1 py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <Palette size={16} className="text-[#00C4CC]" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Brand Kit</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Canva Connected</span>
+            </div>
+          </button>
+          
+          <button 
+            onClick={() => setLocation("/context")}
+            className="flex-1 py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <BrainCircuit size={16} className="text-blue-400" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Context (MCP)</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">2 Sources Active</span>
+            </div>
+          </button>
         </div>
 
         {/* Model Selector (New) */}
