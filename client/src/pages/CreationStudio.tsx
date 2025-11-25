@@ -10,9 +10,12 @@ const styles = [
 ];
 
 export default function CreationStudio() {
+  const [location, setLocation] = useLocation();
+  const locationState = window.history.state?.usr;
+  
   const [activeTab, setActiveTab] = useState<"text" | "image" | "video">("image");
-  const [selectedStyle, setSelectedStyle] = useState("Cinematic");
-  const [, setLocation] = useLocation();
+  const [selectedStyle, setSelectedStyle] = useState(locationState?.style || "Cinematic");
+  const [prompt, setPrompt] = useState(locationState?.prompt || "");
 
   return (
     <Layout>
@@ -56,6 +59,8 @@ export default function CreationStudio() {
           <textarea 
             className="w-full h-48 bg-[#1E1E1E] rounded-2xl p-4 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-transparent focus:border-white/10 focus:bg-[#252525] transition-all"
             placeholder="Describe your dream..."
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
           />
           <div className="absolute bottom-4 right-4">
              <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">

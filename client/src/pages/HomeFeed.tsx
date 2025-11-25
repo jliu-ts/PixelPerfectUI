@@ -1,10 +1,22 @@
 import React from "react";
+import { useLocation } from "wouter";
 import { Heart, MessageCircle, Share2, Repeat, MoreHorizontal } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 
 export default function HomeFeed() {
+  const [, setLocation] = useLocation();
+
+  const handleRemix = () => {
+    setLocation("/create", { 
+      state: { 
+        prompt: "Exploring the depths of the nebula with the new V4 model. The colors are absolutely insane! 🌌✨ #AIart #Space",
+        style: "Cinematic"
+      } 
+    });
+  };
+
   return (
     <Layout>
       {/* Full Screen Feed Item */}
@@ -56,10 +68,13 @@ export default function HomeFeed() {
             <span className="text-xs font-medium drop-shadow-md">Share</span>
           </div>
           
-           <div className="flex flex-col items-center gap-1 mt-2">
-             <div className="p-2 rounded-full bg-gradient-to-tr from-purple-600/80 to-cyan-500/80 backdrop-blur-md hover:scale-110 transition-transform">
+          <div className="flex flex-col items-center gap-1 mt-2">
+             <button 
+               onClick={handleRemix}
+               className="p-2 rounded-full bg-gradient-to-tr from-purple-600/80 to-cyan-500/80 backdrop-blur-md hover:scale-110 transition-transform"
+             >
               <Repeat size={24} className="text-white" />
-            </div>
+            </button>
              <span className="text-[10px] font-medium drop-shadow-md">Remix</span>
           </div>
         </div>

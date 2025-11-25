@@ -7,6 +7,7 @@ import CreationStudio from "@/pages/CreationStudio";
 import GenerationResult from "@/pages/GenerationResult";
 import VideoEditor from "@/pages/VideoEditor";
 import SocialShare from "@/pages/SocialShare";
+import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -17,11 +18,11 @@ function Router() {
       <Route path="/result" component={GenerationResult} />
       <Route path="/editor" component={VideoEditor} />
       <Route path="/share" component={SocialShare} />
+      <Route path="/profile" component={Profile} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />
       <Route path="/notifications" component={HomeFeed} />
-      <Route path="/profile" component={HomeFeed} />
       
       <Route component={NotFound} />
     </Switch>
