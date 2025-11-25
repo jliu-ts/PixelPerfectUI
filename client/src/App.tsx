@@ -20,11 +20,16 @@ import CollabRoom from "@/pages/CollabRoom";
 import AssetMarketplace from "@/pages/AssetMarketplace";
 import PricingTiers from "@/pages/PricingTiers";
 import PitchDeck from "@/pages/PitchDeck";
+import Onboarding from "@/pages/Onboarding";
+import Notifications from "@/pages/Notifications";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
+      {/* Default to Onboarding for demo purposes */}
+      <Route path="/welcome" component={Onboarding} />
+      
       <Route path="/" component={HomeFeed} />
       <Route path="/create" component={CreationStudio} />
       <Route path="/result" component={GenerationResult} />
@@ -43,10 +48,10 @@ function Router() {
       <Route path="/marketplace" component={AssetMarketplace} />
       <Route path="/pricing" component={PricingTiers} />
       <Route path="/pitch" component={PitchDeck} />
+      <Route path="/notifications" component={Notifications} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />
-      <Route path="/notifications" component={HomeFeed} />
       
       <Route component={NotFound} />
     </Switch>
