@@ -10,6 +10,7 @@ import SocialShare from "@/pages/SocialShare";
 import Profile from "@/pages/Profile";
 import BattleMode from "@/pages/BattleMode";
 import ARCamera from "@/pages/ARCamera";
+import IdeaGenerator from "@/pages/IdeaGenerator";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/profile" component={Profile} />
       <Route path="/battle" component={BattleMode} />
       <Route path="/camera" component={ARCamera} />
+      <Route path="/ideas" component={IdeaGenerator} />
       
       {/* Placeholder routes */}
       <Route path="/search" component={HomeFeed} />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -23,9 +23,18 @@ export default function CreationStudio() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-display font-bold text-white">Creation Studio</h1>
-          <div className="flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/5">
-            <Sparkles size={14} className="text-accent" />
-            <span className="text-xs font-medium text-white">320 Credits</span>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setLocation("/ideas")}
+              className="flex items-center gap-1 bg-white/5 hover:bg-white/10 px-3 py-1 rounded-full border border-white/5 transition-colors"
+            >
+              <Lightbulb size={14} className="text-yellow-400" />
+              <span className="text-xs font-medium text-white">Ideas</span>
+            </button>
+            <div className="flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+              <Sparkles size={14} className="text-accent" />
+              <span className="text-xs font-medium text-white">320 Credits</span>
+            </div>
           </div>
         </div>
 
