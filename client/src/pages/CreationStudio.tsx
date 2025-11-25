@@ -1,21 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
-  "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave"
+  "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave", "Minimalist"
 ];
+
+const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0"];
+const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
 
 export default function CreationStudio() {
   const [location, setLocation] = useLocation();
   const locationState = window.history.state?.usr;
   
-  const [activeTab, setActiveTab] = useState<"text" | "image" | "video">("image");
+  const [activeTab, setActiveTab] = useState<"text" | "image" | "video">((locationState?.mode as any) || "image");
   const [selectedStyle, setSelectedStyle] = useState(locationState?.style || "Cinematic");
   const [prompt, setPrompt] = useState(locationState?.prompt || "");
+  const [selectedModel, setSelectedModel] = useState(locationState?.model || (activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]));
+  const [isCarouselMode, setIsCarouselMode] = useState(locationState?.prompt?.includes("carousel") || false);
+
+  // Update default model when tab changes if not manually set from idea
+  useEffect(() => {
+    if (!locationState?.model) {
+      setSelectedModel(activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]);
+    }
+  }, [activeTab]);
+
+  const currentModels = activeTab === "video" ? VIDEO_MODELS : IMAGE_MODELS;
 
   return (
     <Layout>
@@ -33,13 +47,30 @@ export default function CreationStudio() {
             </button>
             <div className="flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/5">
               <Sparkles size={14} className="text-accent" />
-              <span className="text-xs font-medium text-white">320 Credits</span>
+              <span className="text-xs font-medium text-white">320</span>
             </div>
           </div>
         </div>
 
+        {/* Model Selector (New) */}
+        <div className="mb-6">
+          <label className="text-xs font-medium text-gray-400 uppercase mb-2 block">Generation Model</label>
+          <div className="relative">
+            <select 
+              value={selectedModel} 
+              onChange={(e) => setSelectedModel(e.target.value)}
+              className="w-full appearance-none bg-[#1E1E1E] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white focus:outline-none focus:border-primary/50 transition-all"
+            >
+              {currentModels.map(m => (
+                <option key={m} value={m}>{m}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" size={16} />
+          </div>
+        </div>
+
         {/* Tab Selector */}
-        <div className="flex p-1 bg-[#1E1E1E] rounded-xl mb-8 border border-white/5">
+        <div className="flex p-1 bg-[#1E1E1E] rounded-xl mb-6 border border-white/5">
           <button 
             onClick={() => setActiveTab("text")}
             className={cn("flex-1 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2", activeTab === "text" ? "bg-[#2A2A2A] text-white shadow-sm" : "text-gray-500 hover:text-gray-300")}
@@ -70,6 +101,25 @@ export default function CreationStudio() {
             AR Cam
           </button>
         </div>
+
+        {/* Format Toggle for Carousel (New) */}
+        {activeTab === "image" && (
+          <div className="flex items-center gap-2 mb-4 px-1">
+            <button 
+              onClick={() => setIsCarouselMode(!isCarouselMode)}
+              className={cn(
+                "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border transition-all",
+                isCarouselMode 
+                  ? "bg-primary/20 border-primary text-primary" 
+                  : "bg-white/5 border-transparent text-gray-400 hover:bg-white/10"
+              )}
+            >
+              <Layers size={14} />
+              Carousel Mode
+            </button>
+            {isCarouselMode && <span className="text-[10px] text-gray-500 animate-in fade-in">Generates 5 sequential slides</span>}
+          </div>
+        )}
 
         {/* Main Input */}
         <div className="relative mb-8 group">

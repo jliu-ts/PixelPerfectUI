@@ -50,12 +50,12 @@ const ARTICLES = [
 
 const GENERATED_IDEAS = {
   101: [
-    { platform: "tiktok", type: "Educational", title: "AI on your phone?", prompt: "Explain edge AI using simple visual metaphors, fast paced, cyber aesthetic, 9:16 aspect ratio" },
-    { platform: "twitter", type: "Opinion", title: "The end of cloud reliance?", prompt: "Write a thread about privacy benefits of local AI models" },
+    { platform: "tiktok", type: "Explainer Video", title: "Edge AI Explained", prompt: "Fast-paced explainer video about Edge AI, cyber visuals, kinetic typography, 9:16", model: "Google Veo" },
+    { platform: "linkedin", type: "Carousel", title: "The Shift to Local AI", prompt: "5-slide carousel explaining the benefits of local AI models: Privacy, Speed, Cost, Offline. Professional minimalist design.", model: "Midjourney v6" },
   ],
   103: [
-    { platform: "instagram", type: "Visual", title: "Frutiger Aero Moodboard", prompt: "Glossy water droplets, tropical fish wallpaper, windows xp bliss, frutiger aero aesthetic, high resolution, 4k" },
-    { platform: "tiktok", type: "Trend", title: "Then vs Now", prompt: "Split screen video comparing flat design vs frutiger aero with upbeat 2000s techno music" },
+    { platform: "instagram", type: "Visual", title: "Frutiger Aero Moodboard", prompt: "Glossy water droplets, tropical fish wallpaper, windows xp bliss, frutiger aero aesthetic, high resolution, 4k", model: "DALL-E 3" },
+    { platform: "youtube", type: "Video Essay", title: "Nostalgia Deep Dive", prompt: "Cinematic documentary style intro about 2000s UI design, slow pan shots of old interfaces, lofi background", model: "Sora" },
   ]
 };
 
@@ -83,7 +83,9 @@ export default function IdeaGenerator() {
     setLocation("/create", { 
       state: { 
         prompt: idea.prompt,
-        style: idea.platform === "instagram" ? "3D Render" : "Cinematic"
+        style: idea.type === "Carousel" ? "Minimalist" : "Cinematic",
+        model: idea.model,
+        mode: idea.type === "Carousel" ? "image" : idea.type.includes("Video") ? "video" : "image"
       } 
     });
   };
