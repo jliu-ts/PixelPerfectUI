@@ -15,7 +15,11 @@ import {
   MoreHorizontal,
   Link as LinkIcon,
   Shield,
-  Zap
+  Zap,
+  X,
+  Save,
+  Trash2,
+  RotateCcw
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
@@ -50,7 +54,7 @@ const SOURCES = [
     name: "n8n Workflows", 
     category: "Productivity",
     description: "Orchestrate complex AI automation pipelines.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/f/f3/N8n-logo.png", 
+    icon: "https://cdn.worldvectorlogo.com/logos/n8n.svg", 
     status: "connected", 
     lastSync: "1h ago",
     activeWorkflows: 8
@@ -60,7 +64,7 @@ const SOURCES = [
     name: "PandaDoc", 
     category: "Productivity",
     description: "Auto-generate contracts and proposals.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/e/e7/PandaDoc_logo.svg", 
+    icon: "https://cdn.worldvectorlogo.com/logos/pandadoc-1.svg", 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -70,7 +74,7 @@ const SOURCES = [
     name: "Google Workspace", 
     category: "Productivity",
     description: "Access Drive, Docs, and Calendar context.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png", 
+    icon: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg", 
     status: "connected", 
     lastSync: "10m ago",
     activeWorkflows: 5
@@ -90,7 +94,7 @@ const SOURCES = [
     name: "Notion", 
     category: "Productivity",
     description: "Sync wikis and project databases.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png", 
+    icon: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg", 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -111,6 +115,8 @@ export default function ContextSources() {
   const [, setLocation] = useLocation();
   const [activeCategory, setActiveCategory] = useState("All");
   const [dragActive, setDragActive] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [selectedSource, setSelectedSource] = useState<typeof SOURCES[0] | null>(null);
 
   const filteredSources = activeCategory === "All" 
     ? SOURCES 
@@ -128,8 +134,138 @@ export default function ContextSources() {
 
   return (
     <Layout hideTabs>
-      <div className="min-h-screen bg-background pb-20">
+      <div className="min-h-screen bg-background pb-20 relative">
         
+        {/* Global Settings Modal */}
+        {settingsOpen && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSettingsOpen(false)}>
+            <div className="bg-[#1E1E1E] w-full max-w-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+              <div className="p-6 border-b border-white/5 flex justify-between items-center">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Settings size={18} /> Context Settings
+                </h2>
+                <button onClick={() => setSettingsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="p-6 space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-white">Auto-Sync</h3>
+                      <p className="text-xs text-gray-400">Automatically refresh connected sources</p>
+                    </div>
+                    <div className="w-10 h-5 bg-green-500 rounded-full relative cursor-pointer">
+                      <div className="absolute right-1 top-1 w-3 h-3 bg-white rounded-full shadow-sm" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-bold text-white">Notifications</h3>
+                      <p className="text-xs text-gray-400">Alerts on sync failures or updates</p>
+                    </div>
+                    <div className="w-10 h-5 bg-white/10 rounded-full relative cursor-pointer">
+                      <div className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full shadow-sm" />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-500 uppercase">Sync Frequency</label>
+                  <select className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none">
+                    <option>Every 15 minutes</option>
+                    <option>Every hour</option>
+                    <option>Daily</option>
+                    <option>Manual only</option>
+                  </select>
+                </div>
+                
+                <div className="pt-4 border-t border-white/5 flex justify-end gap-2">
+                  <button onClick={() => setSettingsOpen(false)} className="px-4 py-2 rounded-lg text-xs font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                    Cancel
+                  </button>
+                  <GradientButton className="px-6 py-2 text-xs">
+                    Save Changes
+                  </GradientButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* App Settings Modal */}
+        {selectedSource && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedSource(null)}>
+            <div className="bg-[#1E1E1E] w-full max-w-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
+              <div className="p-6 border-b border-white/5 flex justify-between items-center bg-[#161616]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center shadow-lg">
+                    <img src={selectedSource.icon} alt={selectedSource.name} className="w-full h-full object-contain" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-white">{selectedSource.name} Settings</h2>
+                    <div className="flex items-center gap-2">
+                      <span className={cn(
+                        "w-2 h-2 rounded-full",
+                        selectedSource.status === "connected" ? "bg-green-500" : "bg-gray-500"
+                      )} />
+                      <span className="text-xs text-gray-400 capitalize">{selectedSource.status}</span>
+                    </div>
+                  </div>
+                </div>
+                <button onClick={() => setSelectedSource(null)} className="text-gray-400 hover:text-white transition-colors">
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-6 overflow-y-auto">
+                <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+                  <div className="flex items-start gap-3">
+                    <Zap size={18} className="text-blue-400 mt-0.5" />
+                    <div>
+                      <h3 className="text-sm font-bold text-white mb-1">Active Workflows</h3>
+                      <p className="text-xs text-gray-300 leading-relaxed">
+                        This integration is currently powering {selectedSource.activeWorkflows} active workflows, including "Daily Summary" and "Content Sync".
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-sm font-bold text-white">Permissions</h3>
+                  <div className="space-y-2">
+                    {["Read Access", "Write Access", "Metadata Access"].map((perm, i) => (
+                      <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5">
+                        <span className="text-sm text-gray-300">{perm}</span>
+                        <CheckCircle2 size={16} className="text-green-500" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-sm font-bold text-white">Actions</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-colors text-xs font-bold text-white">
+                      <RotateCcw size={14} /> Re-sync Now
+                    </button>
+                    <button className="flex items-center justify-center gap-2 p-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 transition-colors text-xs font-bold text-red-400">
+                      <Trash2 size={14} /> Disconnect
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 border-t border-white/5 bg-[#161616] flex justify-end">
+                <GradientButton onClick={() => setSelectedSource(null)} className="px-6 py-2 text-xs">
+                  Done
+                </GradientButton>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex items-center justify-between p-6 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5">
           <div className="flex items-center gap-4">
@@ -149,7 +285,10 @@ export default function ContextSources() {
               <p className="text-xs text-gray-400">Manage your AI's knowledge base & tools</p>
             </div>
           </div>
-          <button className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+          <button 
+            onClick={() => setSettingsOpen(true)}
+            className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+          >
             <Settings size={20} />
           </button>
         </div>
@@ -283,7 +422,10 @@ export default function ContextSources() {
                           <Zap size={12} className="text-yellow-400" />
                           {source.activeWorkflows} Workflows
                         </span>
-                        <button className="p-1.5 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                        <button 
+                          onClick={() => setSelectedSource(source)}
+                          className="p-1.5 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+                        >
                           <Settings size={14} />
                         </button>
                       </>
