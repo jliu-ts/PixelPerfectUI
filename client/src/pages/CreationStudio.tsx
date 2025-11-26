@@ -123,6 +123,16 @@ export default function CreationStudio() {
     });
   };
 
+  // Helper for dynamic preview sizing
+  const getPreviewDimensions = () => {
+    switch(selectedRatio) {
+      case "16:9": return "aspect-video w-full max-w-3xl";
+      case "9:16": return "aspect-[9/16] max-w-[300px] w-full";
+      case "4:5": return "aspect-[4/5] max-w-[360px] w-full";
+      case "1:1": default: return "aspect-square max-w-[400px] w-full";
+    }
+  };
+
   return (
     <Layout>
       <div className="p-6 pt-12 flex flex-col h-full min-h-[80vh]">
@@ -213,22 +223,83 @@ export default function CreationStudio() {
           )}
         </div>
 
-        {/* Main Input Area */}
-        <div className="relative mb-6 group">
+        {/* AI Preview Canvas (Dynamic & Prominent) */}
+        <div className="mb-6 flex justify-center w-full">
+           <div className={cn(
+             "bg-[#151515] rounded-2xl border border-white/10 relative overflow-hidden transition-all duration-500 ease-out shadow-2xl flex items-center justify-center group",
+             getPreviewDimensions()
+           )}>
+              {/* Grid Pattern Overlay */}
+              <div className="absolute inset-0 opacity-20 pointer-events-none" 
+                   style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #444 1px, transparent 0)', backgroundSize: '20px 20px' }}>
+              </div>
+
+              {activeTab === "video" && selectedModel.includes("Avatar") ? (
+                <div className="w-full h-full p-6 overflow-y-auto">
+                   <div className="flex items-center justify-between mb-4 sticky top-0 bg-[#151515]/80 backdrop-blur z-10 py-2">
+                     <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Select Digital Avatar</label>
+                     <span className="text-[10px] text-accent bg-accent/10 px-2 py-1 rounded-full">Avatar Mode Active</span>
+                   </div>
+                   
+                   <div className="grid grid-cols-1 gap-3">
+                      {AVATARS.map((avatar) => (
+                        <button
+                          key={avatar.id}
+                          onClick={() => setSelectedAvatar(avatar.id)}
+                          className={cn(
+                            "w-full text-left px-4 py-4 rounded-xl border transition-all flex items-center justify-between group",
+                            selectedAvatar === avatar.id 
+                              ? "bg-white/10 border-accent text-white" 
+                              : "bg-black/40 border-white/5 hover:bg-white/5 text-gray-400"
+                          )}
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center ring-2 ring-white/5 group-hover:ring-white/20 transition-all">
+                              <User size={20} />
+                            </div>
+                            <div>
+                              <span className="block text-sm font-bold mb-0.5">{avatar.name}</span>
+                              <span className="block text-[10px] opacity-70">{avatar.type}</span>
+                            </div>
+                          </div>
+                          {avatar.optimizedFor?.includes(selectedRatio) && (
+                            <span className="text-[9px] font-bold bg-green-500/20 text-green-400 px-2 py-1 rounded-full border border-green-500/20">
+                              BEST MATCH
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                   </div>
+                </div>
+              ) : (
+                <div className="text-center opacity-40 p-6 relative z-10">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center border border-white/5">
+                    <Sparkles size={24} className="text-white" />
+                  </div>
+                  <p className="text-sm font-medium text-white">AI Preview Canvas</p>
+                  <p className="text-xs text-gray-400 mt-1">Your masterpiece will appear here</p>
+                  <div className="mt-4 text-[10px] text-gray-600 border border-dashed border-white/10 px-3 py-1 rounded-full inline-block">
+                    Ratio: {selectedRatio}
+                  </div>
+                </div>
+              )}
+           </div>
+        </div>
+
+        {/* Main Input Area (Compact) */}
+        <div className="relative mb-8 group">
           <div className="absolute top-3 right-3 z-10 flex gap-1 bg-black/40 backdrop-blur rounded-lg p-1 border border-white/5">
              <button 
                onClick={() => setIsLibraryOpen(true)}
                className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-accent transition-colors group/tooltip relative"
              >
                <BookOpen size={16} />
-               <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Browse Library</span>
              </button>
              <button 
                onClick={() => setShowHistory(!showHistory)}
                className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
              >
                <History size={16} />
-               <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none">History</span>
              </button>
              <div className="w-px h-4 bg-white/10 my-auto mx-1" />
              <button 
@@ -236,37 +307,27 @@ export default function CreationStudio() {
                className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
              >
                <Save size={16} />
-               <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none">Save Prompt</span>
              </button>
           </div>
 
           <textarea 
-            className="w-full h-64 bg-[#1E1E1E] rounded-2xl p-6 pt-12 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-white/5 focus:border-accent/50 focus:bg-[#222222] transition-all shadow-inner"
+            className="w-full h-32 bg-[#1E1E1E] rounded-2xl p-6 pt-6 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-white/5 focus:border-accent/50 focus:bg-[#222222] transition-all shadow-inner"
             placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream image or video..."}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
           />
           
-          {/* Helper Chips */}
-          {!prompt && (
-            <div className="absolute top-1/2 left-6 -translate-y-1/2 flex flex-wrap gap-2 max-w-lg pointer-events-none opacity-50">
-               <span className="px-2 py-1 rounded bg-white/5 text-xs text-gray-400">Cinematic lighting</span>
-               <span className="px-2 py-1 rounded bg-white/5 text-xs text-gray-400">4k resolution</span>
-               <span className="px-2 py-1 rounded bg-white/5 text-xs text-gray-400">Cyberpunk style</span>
-            </div>
-          )}
-          
           {/* Floating Actions */}
-          <div className="absolute bottom-4 right-4 flex gap-2">
+          <div className="absolute bottom-3 right-3 flex gap-2">
              {activeTab === "image" && (
                <button 
                  onClick={() => setIsCarouselMode(!isCarouselMode)}
                  className={cn(
-                   "px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2 text-xs font-bold border border-transparent backdrop-blur-md",
+                   "px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2 text-[10px] font-bold border border-transparent backdrop-blur-md",
                    isCarouselMode ? "bg-primary/20 text-primary border-primary/20" : "bg-black/40 text-gray-400 hover:text-white hover:bg-black/60"
                  )}
                >
-                 <Layers size={14} />
+                 <Layers size={12} />
                  {isCarouselMode ? "Carousel On" : "Carousel Off"}
                </button>
              )}
@@ -275,121 +336,76 @@ export default function CreationStudio() {
                onClick={handleEnhance}
                disabled={isEnhancing}
                className={cn(
-                 "px-4 py-1.5 rounded-lg transition-all flex items-center gap-2 text-xs font-bold border backdrop-blur-md",
+                 "px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-[10px] font-bold border backdrop-blur-md",
                  isEnhancing 
                    ? "bg-accent/20 text-accent border-accent/50 animate-pulse cursor-wait" 
                    : "bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 border-white/5 hover:border-white/20"
                )}
              >
-               <Wand2 size={14} className={isEnhancing ? "animate-spin" : ""} />
+               <Wand2 size={12} className={isEnhancing ? "animate-spin" : ""} />
                {isEnhancing ? "Enhancing..." : "Magic Enhance"}
              </button>
           </div>
         </div>
 
-        {/* Configuration Panel */}
+        {/* Configuration Panel (Side by Side) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Left Column: Model & Style */}
-          <div className="space-y-4">
-            <div>
-              <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">AI Model</label>
-              <div className="flex flex-wrap gap-2">
-                {currentModels.map(m => (
-                  <button
-                    key={m}
-                    onClick={() => setSelectedModel(m)}
-                    className={cn(
-                      "px-3 py-2 rounded-lg text-xs font-bold border transition-all",
-                      selectedModel === m
-                        ? "bg-white text-black border-white shadow-lg scale-105"
-                        : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:text-white hover:border-white/20"
-                    )}
-                  >
-                    {m}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
-              <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-                {STYLES.map(s => (
-                  <button
-                    key={s.id}
-                    onClick={() => setSelectedStyle(s.id)}
-                    className={cn(
-                      "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[100px] text-center relative overflow-hidden group flex flex-col justify-end",
-                      selectedStyle === s.id
-                        ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
-                        : "border-white/5 hover:border-white/20 hover:scale-105"
-                    )}
-                  >
-                    {/* Background Image */}
-                    <div className="absolute inset-0 z-0">
-                      <img 
-                        src={s.image} 
-                        alt={s.label} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
-                      />
-                      <div className={cn(
-                        "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
-                        selectedStyle === s.id ? "opacity-80" : "opacity-100"
-                      )} />
-                    </div>
-                    
-                    <span className={cn(
-                      "relative z-10 transition-colors drop-shadow-md",
-                      selectedStyle === s.id ? "text-accent" : "text-white"
-                    )}>{s.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+          {/* Left Column: Model */}
+          <div>
+             <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">AI Model</label>
+             <div className="flex flex-wrap gap-2">
+               {currentModels.map(m => (
+                 <button
+                   key={m}
+                   onClick={() => setSelectedModel(m)}
+                   className={cn(
+                     "px-3 py-2 rounded-lg text-xs font-bold border transition-all",
+                     selectedModel === m
+                       ? "bg-white text-black border-white shadow-lg scale-105"
+                       : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:text-white hover:border-white/20"
+                   )}
+                 >
+                   {m}
+                 </button>
+               ))}
+             </div>
           </div>
 
-          {/* Right Column: Avatar (Conditional) or Preview Placeholder */}
-          <div className="bg-[#1E1E1E] rounded-2xl border border-white/5 p-1 flex items-center justify-center min-h-[200px] relative overflow-hidden">
-            {activeTab === "video" && selectedModel.includes("Avatar") ? (
-              <div className="w-full h-full p-4">
-                 <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Digital Avatar</label>
-                 <div className="grid grid-cols-1 gap-2">
-                    {AVATARS.map((avatar) => (
-                      <button
-                        key={avatar.id}
-                        onClick={() => setSelectedAvatar(avatar.id)}
-                        className={cn(
-                          "w-full text-left px-4 py-3 rounded-xl border transition-all flex items-center justify-between group",
-                          selectedAvatar === avatar.id 
-                            ? "bg-white/10 border-accent text-white" 
-                            : "bg-black/20 border-transparent hover:bg-white/5 text-gray-400"
-                        )}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                            <User size={14} />
-                          </div>
-                          <div>
-                            <span className="block text-sm font-bold">{avatar.name}</span>
-                            <span className="block text-[10px] opacity-70">{avatar.type}</span>
-                          </div>
-                        </div>
-                        {avatar.optimizedFor?.includes(selectedRatio) && (
-                          <span className="text-[9px] font-bold bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">
-                            BEST MATCH
-                          </span>
-                        )}
-                      </button>
-                    ))}
-                 </div>
-              </div>
-            ) : (
-              <div className="text-center opacity-30 p-6">
-                <Sparkles size={48} className="mx-auto mb-4 text-white" />
-                <p className="text-sm font-medium text-white">AI Preview Canvas</p>
-                <p className="text-xs text-gray-400 mt-1">Your generation will appear here</p>
-              </div>
-            )}
+          {/* Right Column: Style */}
+          <div>
+            <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
+            <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+              {STYLES.map(s => (
+                <button
+                  key={s.id}
+                  onClick={() => setSelectedStyle(s.id)}
+                  className={cn(
+                    "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[80px] text-center relative overflow-hidden group flex flex-col justify-end",
+                    selectedStyle === s.id
+                      ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
+                      : "border-white/5 hover:border-white/20 hover:scale-105"
+                  )}
+                >
+                  {/* Background Image */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src={s.image} 
+                      alt={s.label} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
+                    />
+                    <div className={cn(
+                      "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
+                      selectedStyle === s.id ? "opacity-80" : "opacity-100"
+                    )} />
+                  </div>
+                  
+                  <span className={cn(
+                    "relative z-10 transition-colors drop-shadow-md text-[10px]",
+                    selectedStyle === s.id ? "text-accent" : "text-white"
+                  )}>{s.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
