@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Target, Instagram, Youtube, Twitter, Globe } from "lucide-react";
+import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Target, Instagram, Youtube, Twitter, Globe, Music, Podcast } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
 import gridImage from "@assets/generated_images/abstract_digital_art_square.png";
@@ -21,6 +21,8 @@ export default function Profile() {
     ), color: "#FFFFFF", handle: "@felix_k", connected: true },
     { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "Felix Kjellberg", connected: false },
     { id: "twitter", name: "X", icon: Twitter, color: "#1DA1F2", handle: "@felix", connected: true },
+    { id: "spotify", name: "Spotify", icon: Music, color: "#1DB954", handle: "Future Tech", connected: true },
+    { id: "apple", name: "Apple Podcasts", icon: Podcast, color: "#A64AC9", handle: "Future Tech", connected: true },
   ];
 
   return (

@@ -70,7 +70,7 @@ export default function PodcastStudio() {
             <button className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
               <Settings size={20} />
             </button>
-            <GradientButton size="sm" onClick={handleGenerate} className="px-4">
+            <GradientButton onClick={handleGenerate} className="px-4">
               Next: Publish
             </GradientButton>
           </div>
