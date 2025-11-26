@@ -5,13 +5,14 @@ import { GradientButton } from "@/components/GradientButton";
 import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { MOCK_PROMPTS } from "@/lib/mockData";
+import { MOCK_PROMPTS, MOCK_ARTICLES } from "@/lib/mockData";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Newspaper, FileText, Link as LinkIcon } from "lucide-react";
 
 // Stock Images for Styles
 import cinematicImg from '@assets/stock_images/cinematic_movie_scen_822514bc.jpg';
@@ -84,6 +85,7 @@ export default function CreationStudio() {
   const [showHistory, setShowHistory] = useState(false);
   const [isEnhancing, setIsEnhancing] = useState(false);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+  const [inputMode, setInputMode] = useState<"prompt" | "rss">("prompt");
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -286,66 +288,131 @@ export default function CreationStudio() {
            </div>
         </div>
 
-        {/* Main Input Area (Compact) */}
+        {/* Main Input Area (Compact with Tabs) */}
         <div className="relative mb-8 group">
-          <div className="absolute top-3 right-3 z-10 flex gap-1 bg-black/40 backdrop-blur rounded-lg p-1 border border-white/5">
-             <button 
-               onClick={() => setIsLibraryOpen(true)}
-               className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-accent transition-colors group/tooltip relative"
-             >
-               <BookOpen size={16} />
-             </button>
-             <button 
-               onClick={() => setShowHistory(!showHistory)}
-               className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
-             >
-               <History size={16} />
-             </button>
-             <div className="w-px h-4 bg-white/10 my-auto mx-1" />
-             <button 
-               onClick={handleSavePrompt}
-               className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
-             >
-               <Save size={16} />
-             </button>
+          {/* Input Mode Tabs */}
+          <div className="flex items-center gap-4 mb-3 px-1">
+            <button 
+              onClick={() => setInputMode("prompt")}
+              className={cn(
+                "text-xs font-bold uppercase tracking-wider pb-1 border-b-2 transition-all flex items-center gap-2",
+                inputMode === "prompt" ? "text-white border-accent" : "text-gray-500 border-transparent hover:text-gray-300"
+              )}
+            >
+              <Sparkles size={12} />
+              Custom Prompt
+            </button>
+            <button 
+              onClick={() => setInputMode("rss")}
+              className={cn(
+                "text-xs font-bold uppercase tracking-wider pb-1 border-b-2 transition-all flex items-center gap-2",
+                inputMode === "rss" ? "text-white border-orange-400" : "text-gray-500 border-transparent hover:text-gray-300"
+              )}
+            >
+              <Newspaper size={12} />
+              From Feed
+            </button>
           </div>
 
-          <textarea 
-            className="w-full h-32 bg-[#1E1E1E] rounded-2xl p-6 pt-6 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-white/5 focus:border-accent/50 focus:bg-[#222222] transition-all shadow-inner"
-            placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream image or video..."}
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-          />
-          
-          {/* Floating Actions */}
-          <div className="absolute bottom-3 right-3 flex gap-2">
-             {activeTab === "image" && (
-               <button 
-                 onClick={() => setIsCarouselMode(!isCarouselMode)}
-                 className={cn(
-                   "px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2 text-[10px] font-bold border border-transparent backdrop-blur-md",
-                   isCarouselMode ? "bg-primary/20 text-primary border-primary/20" : "bg-black/40 text-gray-400 hover:text-white hover:bg-black/60"
+          {inputMode === "prompt" ? (
+            <div className="relative">
+              <div className="absolute top-3 right-3 z-10 flex gap-1 bg-black/40 backdrop-blur rounded-lg p-1 border border-white/5">
+                 <button 
+                   onClick={() => setIsLibraryOpen(true)}
+                   className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-accent transition-colors group/tooltip relative"
+                 >
+                   <BookOpen size={16} />
+                 </button>
+                 <button 
+                   onClick={() => setShowHistory(!showHistory)}
+                   className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
+                 >
+                   <History size={16} />
+                 </button>
+                 <div className="w-px h-4 bg-white/10 my-auto mx-1" />
+                 <button 
+                   onClick={handleSavePrompt}
+                   className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
+                 >
+                   <Save size={16} />
+                 </button>
+              </div>
+
+              <textarea 
+                className="w-full h-32 bg-[#1E1E1E] rounded-2xl p-6 pt-6 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-white/5 focus:border-accent/50 focus:bg-[#222222] transition-all shadow-inner"
+                placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream image or video..."}
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+              />
+              
+              {/* Floating Actions */}
+              <div className="absolute bottom-3 right-3 flex gap-2">
+                 {activeTab === "image" && (
+                   <button 
+                     onClick={() => setIsCarouselMode(!isCarouselMode)}
+                     className={cn(
+                       "px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2 text-[10px] font-bold border border-transparent backdrop-blur-md",
+                       isCarouselMode ? "bg-primary/20 text-primary border-primary/20" : "bg-black/40 text-gray-400 hover:text-white hover:bg-black/60"
+                     )}
+                   >
+                     <Layers size={12} />
+                     {isCarouselMode ? "Carousel On" : "Carousel Off"}
+                   </button>
                  )}
-               >
-                 <Layers size={12} />
-                 {isCarouselMode ? "Carousel On" : "Carousel Off"}
-               </button>
-             )}
-             
-             <button 
-               onClick={handleEnhance}
-               disabled={isEnhancing}
-               className={cn(
-                 "px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-[10px] font-bold border backdrop-blur-md",
-                 isEnhancing 
-                   ? "bg-accent/20 text-accent border-accent/50 animate-pulse cursor-wait" 
-                   : "bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 border-white/5 hover:border-white/20"
-               )}
-             >
-               <Wand2 size={12} className={isEnhancing ? "animate-spin" : ""} />
-               {isEnhancing ? "Enhancing..." : "Magic Enhance"}
-             </button>
-          </div>
+                 
+                 <button 
+                   onClick={handleEnhance}
+                   disabled={isEnhancing}
+                   className={cn(
+                     "px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-[10px] font-bold border backdrop-blur-md",
+                     isEnhancing 
+                       ? "bg-accent/20 text-accent border-accent/50 animate-pulse cursor-wait" 
+                       : "bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 border-white/5 hover:border-white/20"
+                   )}
+                 >
+                   <Wand2 size={12} className={isEnhancing ? "animate-spin" : ""} />
+                   {isEnhancing ? "Enhancing..." : "Magic Enhance"}
+                 </button>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-[#1E1E1E] rounded-2xl p-4 border border-white/5 h-40 overflow-hidden flex flex-col">
+               <div className="flex items-center justify-between mb-2">
+                 <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Trending Articles</h4>
+                 <button onClick={() => setLocation("/feeds")} className="text-[10px] text-accent hover:underline flex items-center gap-1">
+                   Manage Feeds <LinkIcon size={10} />
+                 </button>
+               </div>
+               <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar h-full items-center">
+                  {MOCK_ARTICLES.map((article) => (
+                    <button 
+                      key={article.id}
+                      onClick={() => {
+                        setPrompt(`Create a ${activeTab === "video" ? "short form video script" : "visual concept"} about: "${article.title}".\n\nContext: ${article.summary}`);
+                        setInputMode("prompt");
+                        toast({
+                          title: "Article Selected",
+                          description: "Content context added to your prompt.",
+                        });
+                      }}
+                      className="min-w-[240px] w-[240px] h-full bg-black/20 rounded-xl p-3 border border-white/5 hover:border-orange-400/50 hover:bg-white/5 transition-all text-left group flex flex-col relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
+                        <img src={article.image} alt="" className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/80" />
+                      </div>
+                      <div className="relative z-10 flex flex-col h-full">
+                        <span className="text-[9px] text-orange-400 font-bold mb-1">{article.source} • {article.time}</span>
+                        <h5 className="text-xs font-bold text-white leading-tight line-clamp-2 mb-auto group-hover:text-orange-100 transition-colors">{article.title}</h5>
+                        <div className="mt-2 flex items-center gap-1 text-[10px] text-gray-400">
+                           <Plus size={10} /> Use this story
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+               </div>
+            </div>
+          )}
         </div>
 
         {/* Configuration Panel (Side by Side) */}

@@ -64,3 +64,38 @@ export const MOCK_PROMPTS = [
     lastUsed: "4h ago"
   }
 ];
+
+export const MOCK_ARTICLES = [
+  {
+    id: 1,
+    title: "The Future of AI in Content Creation: What Creators Need to Know",
+    source: "TechCrunch",
+    time: "2h ago",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60",
+    summary: "AI tools are rapidly evolving, offering new ways for creators to generate video, images, and text. The key is to leverage these tools for efficiency while maintaining a unique human voice."
+  },
+  {
+    id: 2,
+    title: "Top 10 Social Media Trends for 2025",
+    source: "Social Media Today",
+    time: "4h ago",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop&q=60",
+    summary: "From immersive AR experiences to the return of long-form video, here are the trends that will define the social media landscape in 2025."
+  },
+  {
+    id: 3,
+    title: "SpaceX Launches Next Gen Starship",
+    source: "The Verge",
+    time: "6h ago",
+    image: "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=800&auto=format&fit=crop&q=60",
+    summary: "A successful launch marks a new era for space travel as SpaceX pushes the boundaries of reusable rocket technology."
+  },
+  {
+    id: 4,
+    title: "Minimalism is Back: Design Trends to Watch",
+    source: "Behance Blog",
+    time: "12h ago",
+    image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800&auto=format&fit=crop&q=60",
+    summary: "After years of maximalism, clean lines and whitespace are making a strong comeback in digital product design."
+  }
+];
