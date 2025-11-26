@@ -37,7 +37,13 @@ import {
   YAxis, 
   CartesianGrid,
   BarChart,
-  Bar
+  Bar,
+  RadarChart, 
+  PolarGrid, 
+  PolarAngleAxis, 
+  PolarRadiusAxis, 
+  Radar,
+  Legend
 } from "recharts";
 
 // Mock Data
@@ -156,6 +162,22 @@ const TRANSACTIONS = [
     status: "converted", 
     date: "3h ago" 
   },
+];
+
+const FORMAT_ROI = [
+  { format: "Reels", rpm: 4.50, views: "150k", earnings: "$675" },
+  { format: "Stories", rpm: 1.20, views: "45k", earnings: "$54" },
+  { format: "YouTube", rpm: 12.50, views: "25k", earnings: "$312" },
+  { format: "Blog", rpm: 0.80, views: "10k", earnings: "$8" },
+];
+
+const AUDIENCE_SEGMENTS = [
+  { subject: 'Tech', A: 120, fullMark: 150 },
+  { subject: 'Fashion', A: 98, fullMark: 150 },
+  { subject: 'Finance', A: 86, fullMark: 150 },
+  { subject: 'Travel', A: 99, fullMark: 150 },
+  { subject: 'Gaming', A: 85, fullMark: 150 },
+  { subject: 'Home', A: 65, fullMark: 150 },
 ];
 
 export default function AffiliateDashboard() {
@@ -342,6 +364,84 @@ export default function AffiliateDashboard() {
                        <span className="text-blue-400 font-bold">+5.2%</span>
                        <span className="text-gray-500">engagement rate</span>
                     </div>
+                  </div>
+                </div>
+
+                {/* Advanced Creator Insights Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  {/* Format ROI - Horizontal Bar */}
+                  <div className="lg:col-span-2 p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+                    <div className="flex justify-between items-center mb-6">
+                      <div>
+                        <h3 className="text-base font-bold text-white flex items-center gap-2">
+                          Format Efficiency
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">RPM</span>
+                        </h3>
+                        <p className="text-xs text-gray-400">Revenue per 1,000 views by content type</p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                       {FORMAT_ROI.map((item, i) => (
+                         <div key={i} className="space-y-1">
+                           <div className="flex justify-between text-xs font-bold">
+                             <span className="text-white">{item.format}</span>
+                             <span className="text-green-400">${item.rpm.toFixed(2)} RPM</span>
+                           </div>
+                           <div className="h-2 w-full bg-black/40 rounded-full overflow-hidden flex">
+                             <div 
+                               className="h-full bg-gradient-to-r from-purple-600 to-blue-500 rounded-full" 
+                               style={{ width: `${(item.rpm / 15) * 100}%` }}
+                             />
+                           </div>
+                           <div className="flex justify-between text-[10px] text-gray-500">
+                             <span>{item.views} views</span>
+                             <span>Total: {item.earnings}</span>
+                           </div>
+                         </div>
+                       ))}
+                    </div>
+                  </div>
+
+                  {/* Audience Heatmap - Radar */}
+                  <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col">
+                    <div className="mb-4">
+                      <h3 className="text-base font-bold text-white">Audience Spend</h3>
+                      <p className="text-xs text-gray-400">Purchase power by niche</p>
+                    </div>
+                    <div className="flex-1 min-h-[200px]">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={AUDIENCE_SEGMENTS}>
+                          <PolarGrid stroke="#333" />
+                          <PolarAngleAxis dataKey="subject" tick={{ fill: '#999', fontSize: 10 }} />
+                          <Radar
+                            name="Purchase Power"
+                            dataKey="A"
+                            stroke="#22D3EE"
+                            strokeWidth={2}
+                            fill="#22D3EE"
+                            fillOpacity={0.3}
+                          />
+                        </RadarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Missed Opportunities Alert */}
+                <div className="p-1 rounded-2xl bg-gradient-to-r from-red-500/20 to-orange-500/20">
+                  <div className="bg-[#121212] rounded-xl p-4 flex items-center justify-between">
+                     <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20 animate-pulse">
+                         <Activity size={20} />
+                       </div>
+                       <div>
+                         <h3 className="text-sm font-bold text-white">Revenue Alert: Broken Links</h3>
+                         <p className="text-xs text-gray-400">3 Products in your "Tech Setup" post are out of stock. You missed approx. <span className="text-white font-bold">$145</span> today.</p>
+                       </div>
+                     </div>
+                     <button className="px-4 py-2 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 transition-colors shadow-[0_0_15px_rgba(239,68,68,0.4)]">
+                       Fix Links
+                     </button>
                   </div>
                 </div>
 
