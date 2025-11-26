@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2 } from "lucide-react";
+import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2, Edit2, Trash2, Save, X, Plus, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { MOCK_PROMPTS, MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS } from "@/lib/mockData";
@@ -18,17 +18,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Newspaper, Bot } from "lucide-react";
-
-// Group prompts by category for the quick selector
-const GROUPED_PROMPTS = MOCK_PROMPTS.reduce((acc, prompt) => {
-  const existingCategory = acc.find(c => c.category === prompt.category);
-  if (existingCategory) {
-    existingCategory.items.push(prompt);
-  } else {
-    acc.push({ category: prompt.category, items: [prompt] });
-  }
-  return acc;
-}, [] as { category: string, items: typeof MOCK_PROMPTS }[]);
 
 const VOICES = [
   { id: "el_1", name: "Felix (Professional)", type: "Cloned", status: "ready", model: "Eleven Multilingual v2" },
@@ -50,6 +39,29 @@ export default function CreationStudio() {
   const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [inputMode, setInputMode] = useState<"prompt" | "rss">("prompt");
+
+  // Prompt Library State
+  const [localPrompts, setLocalPrompts] = useState(MOCK_PROMPTS);
+  const [libraryView, setLibraryView] = useState<"list" | "edit" | "create">("list");
+  const [editingPrompt, setEditingPrompt] = useState<typeof MOCK_PROMPTS[0] | null>(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    prompt: "",
+    category: "General",
+    platform: "General",
+    tags: ""
+  });
+
+  // Group prompts by category for the quick selector
+  const groupedPrompts = localPrompts.reduce((acc, prompt) => {
+    const existingCategory = acc.find(c => c.category === prompt.category);
+    if (existingCategory) {
+      existingCategory.items.push(prompt);
+    } else {
+      acc.push({ category: prompt.category, items: [prompt] });
+    }
+    return acc;
+  }, [] as { category: string, items: typeof MOCK_PROMPTS }[]);
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -75,6 +87,62 @@ export default function CreationStudio() {
       case "4:5": return "aspect-[4/5] max-w-[360px] w-full";
       case "1:1": default: return "aspect-square max-w-[400px] w-full";
     }
+  };
+
+  const handleEditPrompt = (prompt: typeof MOCK_PROMPTS[0], e: React.MouseEvent) => {
+    e.stopPropagation();
+    setEditingPrompt(prompt);
+    setFormData({
+      title: prompt.title,
+      prompt: prompt.prompt,
+      category: prompt.category,
+      platform: prompt.platform,
+      tags: prompt.tags.join(", ")
+    });
+    setLibraryView("edit");
+  };
+
+  const handleDeletePrompt = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLocalPrompts(prev => prev.filter(p => p.id !== id));
+    toast({
+      title: "Prompt deleted",
+      description: "The prompt has been removed from your library.",
+    });
+  };
+
+  const handleSavePrompt = () => {
+    if (!formData.title || !formData.prompt) {
+      toast({
+        title: "Missing fields",
+        description: "Please provide at least a title and prompt text.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const tagsArray = formData.tags.split(",").map(t => t.trim()).filter(Boolean);
+
+    if (libraryView === "create") {
+      const newPrompt = {
+        id: Math.max(...localPrompts.map(p => p.id)) + 1,
+        ...formData,
+        tags: tagsArray,
+        lastUsed: "Just now"
+      };
+      setLocalPrompts([newPrompt, ...localPrompts]);
+      toast({ title: "Prompt created", description: "New prompt added to library." });
+    } else if (libraryView === "edit" && editingPrompt) {
+      setLocalPrompts(prev => prev.map(p => p.id === editingPrompt.id ? {
+        ...p,
+        ...formData,
+        tags: tagsArray
+      } : p));
+      toast({ title: "Prompt updated", description: "Changes saved successfully." });
+    }
+
+    setLibraryView("list");
+    setEditingPrompt(null);
   };
 
   return (
@@ -184,6 +252,16 @@ export default function CreationStudio() {
                    )}
                  >
                    <Newspaper size={10} /> {inputMode === "rss" ? "Feed Active" : "Add Context"}
+                 </button>
+                 <div className="w-px h-3 bg-white/10 mx-1" />
+                 <button 
+                   onClick={() => {
+                     setLibraryView("list");
+                     setIsLibraryOpen(true);
+                   }}
+                   className="text-[10px] font-medium transition-colors flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/5 text-accent"
+                 >
+                   <Library size={10} /> Library
                  </button>
               </div>
 
@@ -381,46 +459,168 @@ export default function CreationStudio() {
       <Dialog open={isLibraryOpen} onOpenChange={setIsLibraryOpen}>
         <DialogContent className="bg-[#1E1E1E] border-white/10 text-white max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="font-display text-xl flex items-center gap-2">
-              <Library className="text-accent" size={20} /> 
-              Select a Prompt
+            <DialogTitle className="font-display text-xl flex items-center justify-between w-full">
+              <div className="flex items-center gap-2">
+                <Library className="text-accent" size={20} /> 
+                {libraryView === "list" ? "Prompt Library" : libraryView === "create" ? "Create Prompt" : "Edit Prompt"}
+              </div>
+              {libraryView === "list" && (
+                <button 
+                  onClick={() => {
+                    setFormData({ title: "", prompt: "", category: "General", platform: "General", tags: "" });
+                    setLibraryView("create");
+                  }}
+                  className="text-xs bg-accent text-black px-3 py-1.5 rounded-lg font-bold hover:bg-accent/80 flex items-center gap-1"
+                >
+                  <Plus size={14} /> New Prompt
+                </button>
+              )}
+              {libraryView !== "list" && (
+                 <button 
+                   onClick={() => {
+                     setLibraryView("list");
+                     setEditingPrompt(null);
+                   }}
+                   className="text-xs bg-white/10 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-white/20 flex items-center gap-1"
+                 >
+                   <ChevronLeft size={14} /> Back to List
+                 </button>
+              )}
             </DialogTitle>
           </DialogHeader>
           
-          <div className="space-y-6 mt-4">
-            {GROUPED_PROMPTS.map((category, i) => (
-              <div key={i}>
-                <h4 className="text-xs font-bold text-gray-500 uppercase mb-3 tracking-wider">{category.category}</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {category.items.map((item, j) => (
-                    <button
-                      key={j}
-                      onClick={() => {
-                        setPrompt(item.prompt);
-                        setIsLibraryOpen(false);
-                      }}
-                      className="text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-bold text-sm text-white group-hover:text-accent transition-colors">{item.title}</span>
-                        <span className="text-[10px] text-gray-500">{item.platform}</span>
+          {libraryView === "list" ? (
+            <div className="space-y-6 mt-4">
+              {groupedPrompts.map((category, i) => (
+                <div key={i}>
+                  <h4 className="text-xs font-bold text-gray-500 uppercase mb-3 tracking-wider">{category.category}</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {category.items.map((item, j) => (
+                      <div
+                        key={item.id}
+                        onClick={() => {
+                          setPrompt(item.prompt);
+                          setIsLibraryOpen(false);
+                        }}
+                        className="relative text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col cursor-pointer"
+                      >
+                        <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-[#1E1E1E] rounded-lg p-1 shadow-lg border border-white/5">
+                           <button 
+                             onClick={(e) => handleEditPrompt(item, e)}
+                             className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white"
+                           >
+                             <Edit2 size={12} />
+                           </button>
+                           <button 
+                             onClick={(e) => handleDeletePrompt(item.id, e)}
+                             className="p-1.5 hover:bg-red-500/20 rounded-md text-gray-400 hover:text-red-400"
+                           >
+                             <Trash2 size={12} />
+                           </button>
+                        </div>
+
+                        <div className="flex items-center justify-between mb-2 pr-12">
+                          <span className="font-bold text-sm text-white group-hover:text-accent transition-colors">{item.title}</span>
+                        </div>
+                        <span className="text-[10px] text-gray-500 mb-2 block">{item.platform}</span>
+                        <p className="text-xs text-gray-400 line-clamp-3 mb-3 flex-1">
+                          "{item.prompt}"
+                        </p>
+                        <div className="flex flex-wrap gap-1 mt-auto">
+                          {item.tags.map((tag, k) => (
+                            <span key={k} className="text-[9px] px-1.5 py-0.5 bg-black/30 rounded text-gray-500 border border-white/5">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-400 line-clamp-3 mb-3 flex-1">
-                        "{item.prompt}"
-                      </p>
-                      <div className="flex flex-wrap gap-1 mt-auto">
-                        {item.tags.map((tag, k) => (
-                          <span key={k} className="text-[9px] px-1.5 py-0.5 bg-black/30 rounded text-gray-500 border border-white/5">
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                    </button>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {groupedPrompts.length === 0 && (
+                <div className="text-center py-12 text-gray-500">
+                  <Library size={48} className="mx-auto mb-4 opacity-20" />
+                  <p>No prompts found. Create one to get started!</p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-4 mt-2">
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-gray-400 uppercase">Title</label>
+                <input 
+                  type="text" 
+                  value={formData.title}
+                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-accent focus:outline-none"
+                  placeholder="e.g. Viral TikTok Hook"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-400 uppercase">Category</label>
+                  <input 
+                    type="text" 
+                    value={formData.category}
+                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-accent focus:outline-none"
+                    placeholder="e.g. Social"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-gray-400 uppercase">Platform</label>
+                  <input 
+                    type="text" 
+                    value={formData.platform}
+                    onChange={(e) => setFormData({...formData, platform: e.target.value})}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-accent focus:outline-none"
+                    placeholder="e.g. Instagram"
+                  />
                 </div>
               </div>
-            ))}
-          </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-gray-400 uppercase">Prompt</label>
+                <textarea 
+                  value={formData.prompt}
+                  onChange={(e) => setFormData({...formData, prompt: e.target.value})}
+                  className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-accent focus:outline-none min-h-[120px] resize-none"
+                  placeholder="Write your prompt here..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-gray-400 uppercase">Tags (comma separated)</label>
+                <input 
+                  type="text" 
+                  value={formData.tags}
+                  onChange={(e) => setFormData({...formData, tags: e.target.value})}
+                  className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-accent focus:outline-none"
+                  placeholder="e.g. Viral, Tech, 4K"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button 
+                  onClick={handleSavePrompt}
+                  className="flex-1 bg-accent text-black py-3 rounded-xl font-bold hover:bg-accent/80 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Save size={16} /> Save Prompt
+                </button>
+                <button 
+                  onClick={() => {
+                    setLibraryView("list");
+                    setEditingPrompt(null);
+                  }}
+                  className="px-6 bg-white/5 text-white py-3 rounded-xl font-bold hover:bg-white/10 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </Layout>
