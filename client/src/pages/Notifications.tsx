@@ -151,7 +151,7 @@ export default function Notifications() {
                 <ArrowLeft className="h-5 w-5" />
               </button>
               <div className="flex items-center gap-2">
-                <h1 className="font-display text-xl font-bold text-foreground">Alerts</h1>
+                <h1 className="font-display text-xl font-bold text-foreground">Notifications</h1>
                 {unreadCount > 0 && (
                   <span className="bg-accent text-black text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {unreadCount} New

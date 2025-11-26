@@ -23,7 +23,7 @@ export const SIDEBAR_NAVIGATION = [
       { href: "/", icon: Home, label: "Home" },
       { href: "/create", icon: Plus, label: "Studio", highlight: true },
       { href: "/profile", icon: User, label: "Profile" },
-      { href: "/notifications", icon: Bell, label: "Alerts", indicator: true },
+      { href: "/notifications", icon: Bell, label: "Notifications", indicator: true },
     ]
   },
   {
