@@ -1,42 +1,51 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { ArrowLeft, ArrowRight, ChevronRight, Target, Zap, Shield, Globe, Layers, Coins, Users, Cpu } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Target, Zap, Shield, Globe, Layers, Coins, Users, Cpu, Plane, BarChart3, Smartphone, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SLIDES = [
   {
     id: "intro",
     title: "Trending Society",
-    subtitle: "The Operating System for the AI Creator Economy",
+    subtitle: "The AI Content Super App for the Creator Economy",
     content: (
       <div className="space-y-6">
         <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 backdrop-blur-md">
-          <h3 className="text-xl font-display font-bold text-white mb-2">The Problem</h3>
+          <h3 className="text-xl font-display font-bold text-white mb-2">The Problem: Fragmentation</h3>
           <p className="text-gray-400">
-            Creators today use 10+ fragmented tools: one for video gen, one for editing, another for link-in-bio, and yet another for brand deals. The workflow is broken, data is siloed, and monetization is friction-heavy.
+            Creators today juggle 10+ isolated apps: CapCut for editing, Midjourney for assets, Linktree for bio, Instagram/TikTok for distribution, and separate affiliate dashboards. The workflow is broken and inefficient.
           </p>
         </div>
         <div className="p-6 rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-white/10 backdrop-blur-md">
-          <h3 className="text-xl font-display font-bold text-white mb-2">The Solution</h3>
+          <h3 className="text-xl font-display font-bold text-white mb-2">The Solution: One Super App</h3>
           <p className="text-gray-400">
-            **Trending Society** is the vertical "Super App" that consolidates generation, editing, collaboration, and monetization into a single, mobile-first OS. We don't just build tools; we own the rails.
+            **Trending Society** unifies the entire lifecycle. From AI generation & editing to cross-platform social management and direct monetization. A single, mobile-first OS for the modern creator.
           </p>
         </div>
       </div>
     )
   },
   {
-    id: "product",
-    title: "Product Ecosystem",
-    subtitle: "A unified creative suite powered by multi-model AI",
+    id: "superapp",
+    title: "The Social Super App",
+    subtitle: "Unified Identity & Cross-Platform Discovery",
     content: (
       <div className="grid grid-cols-2 gap-3">
+        <div className="col-span-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+            <Globe size={24} />
+          </div>
+          <div>
+            <h4 className="font-bold text-white">Universal Profile</h4>
+            <p className="text-xs text-gray-400">One identity connecting Instagram, TikTok, YouTube, and X.</p>
+          </div>
+        </div>
         {[
-          { icon: <Zap />, title: "Creation Studio", desc: "Aggregates Veo, Sora, Midjourney into one interface." },
-          { icon: <Shield />, title: "Iris ID Auth", desc: "Biometric verification for anti-deepfake voice cloning." },
-          { icon: <Users />, title: "Writer's Room", desc: "Real-time multiplayer collaboration for teams." },
-          { icon: <Layers />, title: "Asset Market", desc: "Buy/sell prompts & templates (Economic Moat)." },
+          { icon: <Share2 />, title: "Unified Feed", desc: "Aggregate content from all platforms in one view." },
+          { icon: <Users />, title: "Apify Intelligence", desc: "Cross-platform creator discovery & following." },
+          { icon: <Zap />, title: "1-Click Re-Style", desc: "Remix any viral post style instantly with AI." },
+          { icon: <Smartphone />, title: "Mobile First", desc: "Native experiences for the vertical video era." },
         ].map((item, i) => (
           <div key={i} className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
             <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white mb-3">
@@ -46,6 +55,47 @@ const SLIDES = [
             <p className="text-[10px] text-gray-400 leading-relaxed">{item.desc}</p>
           </div>
         ))}
+      </div>
+    )
+  },
+  {
+    id: "monetization",
+    title: "Monetization & Rewards",
+    subtitle: "Embedded Finance for Creators",
+    content: (
+      <div className="space-y-4">
+        <div className="p-4 rounded-xl bg-gradient-to-r from-[#1E1E1E] to-[#252525] border border-white/10">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center gap-3">
+               <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
+                 <Coins size={20} />
+               </div>
+               <div>
+                 <h4 className="font-bold text-white">Affiliate Engine</h4>
+                 <p className="text-xs text-gray-400">Integrated CJ & Impact Radius</p>
+               </div>
+            </div>
+            <span className="text-xs font-mono text-green-400 bg-green-500/10 px-2 py-1 rounded">LIVE</span>
+          </div>
+          <p className="text-xs text-gray-400">Creators generate tracking links instantly and embed them in AI content. No more copy-pasting from 5 different dashboards.</p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+           <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/10">
+             <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 mb-2">
+               <Plane size={16} />
+             </div>
+             <h4 className="font-bold text-white text-sm">Viator Rewards</h4>
+             <p className="text-[10px] text-gray-400 mt-1">Redeem earnings for real-world travel experiences.</p>
+           </div>
+           <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/10">
+             <div className="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400 mb-2">
+               <BarChart3 size={16} />
+             </div>
+             <h4 className="font-bold text-white text-sm">Gamified Scoreboard</h4>
+             <p className="text-[10px] text-gray-400 mt-1">Generation Credits (⚡) vs Reward Gems (💎).</p>
+           </div>
+        </div>
       </div>
     )
   },
@@ -82,9 +132,9 @@ const SLIDES = [
             <Globe size={20} />
           </div>
           <div>
-            <h4 className="font-bold text-white">Fintech Rails</h4>
+            <h4 className="font-bold text-white">Platform Agnostic</h4>
             <p className="text-xs text-gray-400 mt-1">
-              Integrated Web3 wallets allow instant global payouts for brand deals, bypassing traditional banking friction and fees.
+              We are the neutral layer above the "Walled Gardens" (TikTok, IG). We aggregate the audience, owning the relationship regardless of which platform is trending.
             </p>
           </div>
         </div>
@@ -120,10 +170,10 @@ const SLIDES = [
         </div>
         <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
           <div>
-            <h4 className="font-bold text-white text-sm">Enterprise API</h4>
-            <p className="text-[10px] text-gray-400">Platform Infrastructure</p>
+            <h4 className="font-bold text-white text-sm">Affiliate Revenue</h4>
+            <p className="text-[10px] text-gray-400">Commission on Sales</p>
           </div>
-          <span className="text-lg font-bold text-white">Custom</span>
+          <span className="text-lg font-bold text-white">5-10<span className="text-xs text-gray-500">%</span></span>
         </div>
       </div>
     )
