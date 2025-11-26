@@ -1,7 +1,7 @@
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
 import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
-import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss, Palette, BrainCircuit, Bot, Camera, Square, RectangleHorizontal, RectangleVertical, Instagram, Youtube, Twitter, Linkedin, Podcast, Code, Newspaper, Video, Share2, Type, Image as ImageIcon } from "lucide-react";
+import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss, Palette, BrainCircuit, Bot, Camera, Square, RectangleHorizontal, RectangleVertical, Instagram, Youtube, Twitter, Linkedin, Podcast, Code, Newspaper, Video, Share2, Type, Image as ImageIcon, Presentation, Scale, Handshake } from "lucide-react";
 
 // Stock Images for Styles (Mock Imports for data structure)
 // Ideally these would be actual imports in the component or handled via a proper asset manager
@@ -41,12 +41,15 @@ export const SIDEBAR_NAVIGATION = [
     ]
   },
   {
-    title: "Me",
+    title: "Business & Growth",
     items: [
-      { href: "/profile", icon: User, label: "Profile" },
+      { href: "/media-kit", icon: Presentation, label: "Media Kit", badge: "LIVE" },
+      { href: "/legal", icon: Scale, label: "Legal Guard" },
+      { href: "/sponsorships", icon: Handshake, label: "Sponsorships" },
       { href: "/affiliate", icon: Briefcase, label: "Creator Hub" },
-      { href: "/notifications", icon: Bell, label: "Alerts", indicator: true },
       { href: "/store", icon: ShoppingBag, label: "My Store" },
+      { href: "/profile", icon: User, label: "Profile" },
+      { href: "/notifications", icon: Bell, label: "Alerts", indicator: true },
     ]
   }
 ];
