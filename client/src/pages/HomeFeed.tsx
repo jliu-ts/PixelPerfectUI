@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation } from "wouter";
-import { Heart, MessageCircle, Share2, Repeat, Swords, Music2, Verified } from "lucide-react";
+import { Heart, MessageCircle, Share2, Repeat, Swords, Music2, Verified, Plus, Zap, Sparkles } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
+import { cn } from "@/lib/utils";
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 
 // Mock Feed Data
@@ -42,6 +43,15 @@ const FEED_ITEMS = [
   }
 ];
 
+// Mock Stories Data
+const STORIES = [
+  { id: "battle", type: "live", name: "Live Battle", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Battle" },
+  { id: 1, type: "story", name: "OpenAI", avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", hasNew: true },
+  { id: 2, type: "story", name: "Midjourney", avatar: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Midjourney_Emblem.png", hasNew: true },
+  { id: 3, type: "story", name: "Runway", avatar: "https://assets-global.website-files.com/636b95c61654d9600f53423c/636b95c61654d90e7f53426e_Runway-Logomark-Black.svg", hasNew: false },
+  { id: 4, type: "story", name: "Pika", avatar: "https://api.dicebear.com/7.x/shapes/svg?seed=Pika", hasNew: true },
+];
+
 export default function HomeFeed() {
   const [, setLocation] = useLocation();
 
@@ -56,25 +66,51 @@ export default function HomeFeed() {
 
   return (
     <Layout>
-      {/* Battle Mode Banner (Floating) */}
-      <div 
-        onClick={() => setLocation("/battle")}
-        className="fixed top-20 left-4 right-4 z-30 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl p-3 flex items-center justify-between animate-in slide-in-from-top-4 fade-in duration-700 cursor-pointer hover:bg-black/80 transition-colors group max-w-[calc(100%-32px)] mx-auto md:max-w-[416px]"
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-accent flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.4)]">
-            <Swords size={20} className="text-white" />
+      {/* Top Stories Rail (Instagram/Snapchat Pattern) */}
+      <div className="fixed top-0 left-0 right-0 z-30 pt-4 pb-2 bg-gradient-to-b from-black/90 to-transparent">
+        <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 pb-4 items-center">
+          
+          {/* Add Yours / Create */}
+          <div className="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer" onClick={() => setLocation("/create")}>
+            <div className="w-16 h-16 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors relative">
+              <Plus size={24} className="text-white" />
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center border border-black">
+                <Plus size={12} className="text-white" />
+              </div>
+            </div>
+            <span className="text-[10px] text-gray-300 font-medium">Create</span>
           </div>
-          <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              Daily Battle 
-              <span className="text-[10px] px-1.5 py-0.5 bg-red-500 rounded text-white font-bold animate-pulse">LIVE</span>
-            </h3>
-            <p className="text-xs text-gray-300">Samurai vs Elf • Win 50 XP</p>
+
+          {/* Live Battle (TikTok Live Pattern) */}
+          <div className="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer group" onClick={() => setLocation("/battle")}>
+            <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-red-500 to-purple-600 animate-pulse relative">
+              <div className="w-full h-full rounded-full border-2 border-black bg-gray-900 overflow-hidden relative">
+                <img src={STORIES[0].avatar} className="w-full h-full object-cover opacity-80" />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                  <Swords size={20} className="text-white" />
+                </div>
+              </div>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-red-500 px-2 py-0.5 rounded text-[8px] font-bold text-white uppercase tracking-wider border border-black shadow-lg">
+                LIVE
+              </div>
+            </div>
+            <span className="text-[10px] text-white font-bold">Battle</span>
           </div>
-        </div>
-        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-          <span className="text-lg">👉</span>
+
+          {/* Stories (Model Updates) */}
+          {STORIES.slice(1).map(story => (
+            <div key={story.id} className="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer group">
+              <div className={cn(
+                "w-16 h-16 rounded-full p-[2px] relative transition-transform group-active:scale-95",
+                story.hasNew ? "bg-gradient-accent" : "bg-white/20"
+              )}>
+                <div className="w-full h-full rounded-full border-2 border-black bg-black overflow-hidden p-0.5">
+                  <img src={story.avatar} className="w-full h-full rounded-full object-cover bg-white" />
+                </div>
+              </div>
+              <span className="text-[10px] text-gray-300 font-medium truncate max-w-[64px]">{story.name}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -93,33 +129,44 @@ export default function HomeFeed() {
             {/* Gradient Overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90" />
 
+            {/* CapCut Style Template Button (Innovation) */}
+            <div className="absolute left-4 bottom-40 z-20">
+              <button 
+                onClick={handleRemix}
+                className="flex items-center gap-2 px-3 py-1.5 rounded bg-black/40 backdrop-blur-md border border-white/10 hover:bg-black/60 transition-colors"
+              >
+                <Sparkles size={12} className="text-yellow-400" />
+                <span className="text-[10px] font-bold text-white">Try this Style</span>
+              </button>
+            </div>
+
             {/* Right Sidebar Actions */}
             <div className="absolute right-4 bottom-28 flex flex-col items-center gap-6 z-20">
               <div className="flex flex-col items-center gap-1">
-                <div className="w-12 h-12 rounded-full border-2 border-white p-0.5 mb-2 relative">
+                <div className="w-12 h-12 rounded-full border-2 border-white p-0.5 mb-2 relative transition-transform hover:scale-110">
                   <img src={item.avatar} alt="User" className="w-full h-full rounded-full bg-white/20" />
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-red-500 rounded-full p-0.5 border border-black">
-                    <div className="w-2 h-2 bg-white rounded-full" />
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-red-500 rounded-full p-0.5 border border-black cursor-pointer hover:bg-red-600">
+                    <Plus size={10} className="text-white" />
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col items-center gap-1">
-                <div className="p-2 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200">
-                  <Heart size={28} className="text-white" />
+              <div className="flex flex-col items-center gap-1 group">
+                <div className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200">
+                  <Heart size={28} className="text-white group-hover:text-red-500 transition-colors" />
                 </div>
                 <span className="text-xs font-medium drop-shadow-md text-white">{item.likes}</span>
               </div>
 
-              <div className="flex flex-col items-center gap-1">
-                 <div className="p-2 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200">
+              <div className="flex flex-col items-center gap-1 group">
+                 <div className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200">
                   <MessageCircle size={28} className="text-white" />
                 </div>
                 <span className="text-xs font-medium drop-shadow-md text-white">{item.comments}</span>
               </div>
 
-              <div className="flex flex-col items-center gap-1">
-                 <div className="p-2 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200">
+              <div className="flex flex-col items-center gap-1 group">
+                 <div className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200">
                   <Share2 size={28} className="text-white" />
                 </div>
                 <span className="text-xs font-medium drop-shadow-md text-white">Share</span>
@@ -128,11 +175,10 @@ export default function HomeFeed() {
               <div className="flex flex-col items-center gap-1 mt-2">
                  <button 
                    onClick={handleRemix}
-                   className="p-2 rounded-full bg-gradient-to-tr from-purple-600/80 to-cyan-500/80 backdrop-blur-md hover:scale-110 transition-transform animate-pulse"
+                   className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 flex items-center justify-center animate-[spin_4s_linear_infinite] shadow-lg border-2 border-white/20"
                  >
-                  <Repeat size={24} className="text-white" />
+                   <img src={item.avatar} className="w-6 h-6 rounded-full" />
                 </button>
-                 <span className="text-[10px] font-medium drop-shadow-md text-white">Remix</span>
               </div>
             </div>
 
@@ -143,15 +189,12 @@ export default function HomeFeed() {
                   @{item.username}
                   {item.verified && <Verified size={14} className="text-blue-400" />}
                 </span>
-                <button className="text-xs bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded-full text-white backdrop-blur-sm transition-colors">
-                  Follow
-                </button>
               </div>
               <p className="text-white/90 text-sm leading-relaxed line-clamp-2 mb-3 drop-shadow-md max-w-[90%] pointer-events-auto">
                 {item.description}
               </p>
               
-              <div className="flex items-center gap-2 text-white/80 text-xs font-medium mb-4 animate-pulse">
+              <div className="flex items-center gap-2 text-white/80 text-xs font-medium mb-4">
                  <Music2 size={12} />
                  <div className="overflow-hidden w-32">
                    <p className="whitespace-nowrap animate-marquee">{item.music}</p>
