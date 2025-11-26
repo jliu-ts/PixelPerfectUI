@@ -53,7 +53,9 @@ export default function CreationStudio() {
         </div>
 
         {/* Brand & Context Tools (New) */}
-        <div className="flex gap-2 mb-8 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2">
+        <div className="mb-8">
+          <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Creator Tools</h3>
+          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2">
           <button 
             onClick={() => setLocation("/brand")}
             className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
@@ -131,6 +133,7 @@ export default function CreationStudio() {
             </div>
           </button>
         </div>
+      </div>
 
         {/* Model Selector (New) */}
         <div className="mb-6">

@@ -45,13 +45,13 @@ const FEED_ITEMS = [
   }
 ];
 
-// Mock Stories Data
+// Mock Stories Data (Super App Channels)
 const STORIES = [
   { id: "battle", type: "live", name: "Live Battle", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Battle" },
-  { id: 1, type: "story", name: "OpenAI", avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", hasNew: true },
-  { id: 2, type: "story", name: "Midjourney", avatar: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Midjourney_Emblem.png", hasNew: true },
-  { id: 3, type: "story", name: "Runway", avatar: "https://assets-global.website-files.com/636b95c61654d9600f53423c/636b95c61654d90e7f53426e_Runway-Logomark-Black.svg", hasNew: false },
-  { id: 4, type: "story", name: "Pika", avatar: "https://api.dicebear.com/7.x/shapes/svg?seed=Pika", hasNew: true },
+  { id: 1, type: "story", name: "Instagram", avatar: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", hasNew: true },
+  { id: 2, type: "story", name: "TikTok", avatar: "https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg", hasNew: true },
+  { id: 3, type: "story", name: "YouTube", avatar: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg", hasNew: false },
+  { id: 4, type: "story", name: "OpenAI", avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", hasNew: true },
 ];
 
 export default function HomeFeed() {
