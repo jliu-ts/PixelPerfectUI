@@ -256,7 +256,10 @@ export default function CreationStudio() {
               <div className="relative group">
                 <button className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white focus:outline-none focus:border-primary/50 transition-all flex items-center justify-between text-left group-focus-within:border-primary/50">
                   <span className="flex items-center gap-2">
-                    {ASPECT_RATIOS.find(r => r.id === selectedRatio)?.icon({ size: 16 })}
+                    {(() => {
+                      const Icon = ASPECT_RATIOS.find(r => r.id === selectedRatio)?.icon;
+                      return Icon && <Icon size={16} />;
+                    })()}
                     {ASPECT_RATIOS.find(r => r.id === selectedRatio)?.label}
                   </span>
                   <ChevronDown size={16} className="text-gray-500" />
