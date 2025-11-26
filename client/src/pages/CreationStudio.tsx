@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -87,6 +87,17 @@ export default function CreationStudio() {
             </div>
           </button>
           
+          <button 
+            onClick={() => setLocation("/research")}
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <Bot size={16} className="text-cyan-400" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Society AI</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Deep Research</span>
+            </div>
+          </button>
+
           <button 
             onClick={() => setLocation("/context")}
             className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"

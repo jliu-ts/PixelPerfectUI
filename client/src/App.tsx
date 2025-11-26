@@ -23,6 +23,7 @@ import PitchDeck from "@/pages/PitchDeck";
 import Onboarding from "@/pages/Onboarding";
 import Notifications from "@/pages/Notifications";
 import SearchPage from "@/pages/SearchPage";
+import DeepResearch from "@/pages/DeepResearch";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -51,6 +52,7 @@ function Router() {
       <Route path="/pitch" component={PitchDeck} />
       <Route path="/notifications" component={Notifications} />
       <Route path="/search" component={SearchPage} />
+      <Route path="/research" component={DeepResearch} />
       
       <Route component={NotFound} />
     </Switch>
