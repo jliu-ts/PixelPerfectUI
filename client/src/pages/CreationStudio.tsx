@@ -68,7 +68,7 @@ export default function CreationStudio() {
   };
 
   return (
-    <Layout>
+    <Layout hideTabs>
       <div className="flex flex-col h-screen bg-background relative">
         {/* AI Preview Canvas (Full Height Focus) */}
         <div className="flex-1 flex items-center justify-center pb-32 px-4 overflow-hidden">

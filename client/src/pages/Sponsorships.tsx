@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { 
+  ArrowLeft,
   Inbox, 
   MessageSquare, 
   CheckCircle, 
@@ -95,19 +97,28 @@ const DEALS = [
 ];
 
 export default function Sponsorships() {
+  const [, setLocation] = useLocation();
   const [selectedDeal, setSelectedDeal] = useState<typeof DEALS[0] | null>(null);
 
   return (
-    <Layout>
+    <Layout hideTabs>
       <div className="min-h-screen bg-background pb-20 flex flex-col h-screen overflow-hidden">
         
         {/* Header */}
         <div className="p-6 border-b border-white/5 bg-[#121212] flex items-center justify-between shrink-0">
-          <div>
-            <h1 className="text-2xl font-display font-bold text-white flex items-center gap-2">
-              Sponsorship Pipeline
-            </h1>
-            <p className="text-sm text-gray-400">Manage your brand deals and negotiations.</p>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setLocation("/")}
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div>
+              <h1 className="text-2xl font-display font-bold text-white flex items-center gap-2">
+                Sponsorship Pipeline
+              </h1>
+              <p className="text-sm text-gray-400">Manage your brand deals and negotiations.</p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <div className="relative hidden md:block">

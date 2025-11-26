@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
+import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { 
+  ArrowLeft,
   Shield, 
   FileText, 
   UploadCloud, 
@@ -50,6 +52,7 @@ const MOCK_ANALYSIS = {
 };
 
 export default function LegalGuard() {
+  const [, setLocation] = useLocation();
   const [file, setFile] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<typeof MOCK_ANALYSIS | null>(null);
@@ -72,12 +75,20 @@ export default function LegalGuard() {
   };
 
   return (
-    <Layout>
+    <Layout hideTabs>
       <div className="min-h-screen bg-background pb-20">
         
         {/* Header */}
         <div className="p-6 border-b border-white/5 bg-[#121212] sticky top-0 z-20">
           <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-4 mb-4">
+              <button 
+                onClick={() => setLocation("/")}
+                className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+              >
+                <ArrowLeft size={24} />
+              </button>
+            </div>
             <div className="flex items-center gap-3 mb-1">
               <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400">
                 <Scale size={24} />
