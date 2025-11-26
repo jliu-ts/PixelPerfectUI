@@ -54,7 +54,7 @@ function Router() {
       <Route path="/profile" component={Profile} />
       <Route path="/wallet" component={Wallet} />
       <Route path="/battle" component={BattleMode} />
-      <Route path="/camera" component={ARCamera} />
+      <Route path="/ar-cam" component={ARCamera} />
       <Route path="/ideas" component={IdeaGenerator} />
       <Route path="/brand" component={BrandKit} />
       <Route path="/context" component={ContextSources} />
