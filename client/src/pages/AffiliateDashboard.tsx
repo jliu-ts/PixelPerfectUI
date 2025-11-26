@@ -68,7 +68,10 @@ const CAMPAIGNS = [
     type: "USDC",
     platform: "Instagram",
     spots: "3/5 Left",
-    deadline: "2 Days" 
+    deadline: "2 Days",
+    matchScore: 98,
+    avgPayout: "$450",
+    requirements: ["1 Reel (min 30s)", "3 Stories", "Link in Bio"]
   },
   { 
     id: 2, 
@@ -80,7 +83,10 @@ const CAMPAIGNS = [
     type: "USDT",
     platform: "YouTube",
     spots: "Full",
-    deadline: "Closed"
+    deadline: "Closed",
+    matchScore: 85,
+    avgPayout: "$1,100",
+    requirements: ["1 Dedicated Video", "Product Integration", "Cross-post Shorts"]
   },
   { 
     id: 3, 
@@ -92,17 +98,20 @@ const CAMPAIGNS = [
     type: "USDC",
     platform: "TikTok",
     spots: "Unlimited",
-    deadline: "Ongoing"
+    deadline: "Ongoing",
+    matchScore: 92,
+    avgPayout: "$250",
+    requirements: ["1 TikTok Video", "Educational Angle", "Template Link"]
   },
 ];
 
 const REWARDS = [
-  { id: 1, name: "Midjourney 1 Month", cost: "30 Credits", discount: "100% OFF", icon: "🎨", type: "Software" },
-  { id: 2, name: "Adobe Creative Cloud", cost: "100 Credits", discount: "20% OFF", icon: "🖌️", type: "Software" },
-  { id: 3, name: "Epidemic Sound", cost: "50 Credits", discount: "3 Months Free", icon: "🎵", type: "Service" },
-  { id: 4, name: "Paris City Tour (Viator)", cost: "1200 Credits", discount: "Free Ticket", icon: "🗼", type: "Travel" },
-  { id: 5, name: "Bali Digital Nomad Retreat", cost: "2500 Credits", discount: "All Inclusive", icon: "🌴", type: "Travel" },
-  { id: 6, name: "NYC Helicopter Ride", cost: "1800 Credits", discount: "VIP Access", icon: "🚁", type: "Experience" },
+  { id: 1, name: "Midjourney 1 Month", cost: "30 Credits", discount: "100% OFF", icon: "🎨", type: "Software", progress: 80 },
+  { id: 2, name: "Adobe Creative Cloud", cost: "100 Credits", discount: "20% OFF", icon: "🖌️", type: "Software", progress: 45 },
+  { id: 3, name: "Epidemic Sound", cost: "50 Credits", discount: "3 Months Free", icon: "🎵", type: "Service", progress: 90 },
+  { id: 4, name: "Paris City Tour (Viator)", cost: "1200 Credits", discount: "Free Ticket", icon: "🗼", type: "Travel", progress: 38 },
+  { id: 5, name: "Bali Digital Nomad Retreat", cost: "2500 Credits", discount: "All Inclusive", icon: "🌴", type: "Travel", progress: 18 },
+  { id: 6, name: "NYC Helicopter Ride", cost: "1800 Credits", discount: "VIP Access", icon: "🚁", type: "Experience", progress: 25 },
 ];
 
 const NETWORKS = [
@@ -567,54 +576,97 @@ export default function AffiliateDashboard() {
             {activeTab === "campaigns" && (
               <div className="animate-in fade-in slide-in-from-bottom-4 grid gap-4">
                 {CAMPAIGNS.map(campaign => (
-                  <div key={campaign.id} className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:border-white/10 transition-all relative overflow-hidden">
-                    <div className="flex items-start gap-4 relative z-10">
-                      <div className="w-14 h-14 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
-                        <img src={campaign.logo} alt={campaign.brand} className="w-full h-full object-contain" />
+                  <div key={campaign.id} className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col gap-4 group hover:border-white/10 transition-all relative overflow-hidden">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+                      <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
+                          <img src={campaign.logo} alt={campaign.brand} className="w-full h-full object-contain" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-bold text-white text-base">{campaign.title}</h3>
+                            <span className={cn(
+                              "px-2 py-0.5 rounded text-[10px] font-bold uppercase border",
+                              campaign.status === "active" ? "bg-green-500/10 text-green-400 border-green-500/20" :
+                              campaign.status === "applied" ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" :
+                              "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                            )}>
+                              {campaign.status}
+                            </span>
+                            {campaign.matchScore > 90 && (
+                              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase border bg-purple-500/10 text-purple-400 border-purple-500/20 flex items-center gap-1">
+                                <Zap size={10} fill="currentColor" /> {campaign.matchScore}% Match
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-400">
+                            <span className="font-bold text-white">{campaign.brand}</span>
+                            <span className="flex items-center gap-1"><DollarSign size={12} /> {campaign.reward} {campaign.type}</span>
+                            <span className="flex items-center gap-1"><Globe size={12} /> {campaign.platform}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-bold text-white text-base">{campaign.title}</h3>
-                          <span className={cn(
-                            "px-2 py-0.5 rounded text-[10px] font-bold uppercase border",
-                            campaign.status === "active" ? "bg-green-500/10 text-green-400 border-green-500/20" :
-                            campaign.status === "applied" ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" :
-                            "bg-blue-500/10 text-blue-400 border-blue-500/20"
-                          )}>
-                            {campaign.status}
-                          </span>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-400">
-                          <span className="font-bold text-white">{campaign.brand}</span>
-                          <span className="flex items-center gap-1"><DollarSign size={12} /> {campaign.reward} {campaign.type}</span>
-                          <span className="flex items-center gap-1"><Globe size={12} /> {campaign.platform}</span>
-                        </div>
+                      
+                      <div className="flex items-center gap-3 md:border-l md:border-white/5 md:pl-6">
+                         <div className="text-right hidden md:block">
+                            <p className="text-[10px] text-gray-500 uppercase font-bold">Deadline</p>
+                            <p className="text-xs text-white font-medium">{campaign.deadline}</p>
+                         </div>
+                         <div className="text-right hidden md:block mr-2">
+                            <p className="text-[10px] text-gray-500 uppercase font-bold">Availability</p>
+                            <p className="text-xs text-white font-medium">{campaign.spots}</p>
+                         </div>
+
+                        {campaign.status === "applied" ? (
+                          <button className="px-6 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 text-xs font-bold cursor-not-allowed flex items-center gap-2">
+                            <Clock size={14} /> Processing
+                          </button>
+                        ) : campaign.status === "active" ? (
+                          <button className="px-6 py-2.5 rounded-xl bg-green-500 text-black border border-green-400 text-xs font-bold hover:brightness-110 transition-all shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center gap-2">
+                             Submit Content
+                          </button>
+                        ) : (
+                          <div className="flex gap-2">
+                            <button className="px-4 py-2.5 rounded-xl bg-white/5 text-white border border-white/10 text-xs font-bold hover:bg-white/10 transition-all">
+                              Negotiate
+                            </button>
+                            <button className="px-6 py-2.5 rounded-xl bg-white text-black border border-white text-xs font-bold hover:bg-gray-200 transition-all flex items-center gap-2">
+                              Apply Now <ArrowUpRight size={14} />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    
-                    <div className="flex items-center gap-3 md:border-l md:border-white/5 md:pl-6 relative z-10">
-                       <div className="text-right hidden md:block">
-                          <p className="text-[10px] text-gray-500 uppercase font-bold">Deadline</p>
-                          <p className="text-xs text-white font-medium">{campaign.deadline}</p>
-                       </div>
-                       <div className="text-right hidden md:block mr-2">
-                          <p className="text-[10px] text-gray-500 uppercase font-bold">Availability</p>
-                          <p className="text-xs text-white font-medium">{campaign.spots}</p>
-                       </div>
 
-                      {campaign.status === "applied" ? (
-                        <button className="px-6 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 text-xs font-bold cursor-not-allowed flex items-center gap-2">
-                          <Clock size={14} /> Processing
-                        </button>
-                      ) : campaign.status === "active" ? (
-                        <button className="px-6 py-2.5 rounded-xl bg-green-500 text-black border border-green-400 text-xs font-bold hover:brightness-110 transition-all shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center gap-2">
-                           Submit Content
-                        </button>
-                      ) : (
-                        <button className="px-6 py-2.5 rounded-xl bg-white text-black border border-white text-xs font-bold hover:bg-gray-200 transition-all flex items-center gap-2">
-                          Apply Now <ArrowUpRight size={14} />
-                        </button>
-                      )}
+                    {/* Requirements & Insights Panel */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-white/5">
+                      <div>
+                        <p className="text-[10px] font-bold text-gray-500 uppercase mb-2">Requirements</p>
+                        <div className="flex flex-wrap gap-2">
+                          {campaign.requirements?.map((req, i) => (
+                            <span key={i} className="text-[10px] px-2 py-1 rounded bg-white/5 text-gray-300 border border-white/5">
+                              {req}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between md:justify-end gap-6">
+                        <div>
+                          <p className="text-[10px] font-bold text-gray-500 uppercase mb-1">Market Rate</p>
+                          <p className="text-xs font-bold text-white">{campaign.avgPayout} Avg.</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-bold text-gray-500 uppercase mb-1">Competition</p>
+                          <div className="flex -space-x-2">
+                            {[1,2,3].map(i => (
+                              <div key={i} className="w-6 h-6 rounded-full bg-gray-700 border-2 border-[#1E1E1E]" />
+                            ))}
+                            <div className="w-6 h-6 rounded-full bg-gray-800 border-2 border-[#1E1E1E] flex items-center justify-center text-[8px] text-white font-bold">
+                              +12
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Hover Gradient */}
@@ -628,6 +680,24 @@ export default function AffiliateDashboard() {
             {activeTab === "networks" && (
               <div className="animate-in fade-in slide-in-from-bottom-4 space-y-6">
                 
+                {/* Commission Scanner Alert */}
+                <div className="p-1 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20">
+                  <div className="bg-[#121212] rounded-xl p-4 flex items-center justify-between">
+                     <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20">
+                         <Zap size={20} />
+                       </div>
+                       <div>
+                         <h3 className="text-sm font-bold text-white">Rate Scanner Active</h3>
+                         <p className="text-xs text-gray-400">We found <span className="text-white font-bold">3 products</span> paying higher commissions on Impact vs Amazon. Switch links to earn +$45/mo.</p>
+                       </div>
+                     </div>
+                     <button className="px-4 py-2 rounded-lg bg-blue-500 text-white text-xs font-bold hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.4)]">
+                       Auto-Optimize
+                     </button>
+                  </div>
+                </div>
+
                 {/* Major Networks */}
                 <div className="grid gap-4">
                   {NETWORKS.map(network => (
@@ -637,11 +707,18 @@ export default function AffiliateDashboard() {
                             {network.logo}
                           </div>
                           <div>
-                             <h3 className="font-bold text-white">{network.name}</h3>
+                             <div className="flex items-center gap-2">
+                               <h3 className="font-bold text-white">{network.name}</h3>
+                               {network.status === "connected" && (
+                                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20">
+                                   Auto-Link Active
+                                 </span>
+                               )}
+                             </div>
                              <div className="flex items-center gap-3 mt-1">
                                <span className={cn(
-                                 "text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1",
-                                 network.status === "connected" ? "bg-green-500/10 text-green-400" : "bg-gray-500/10 text-gray-400"
+                                 "text-[10px] font-bold flex items-center gap-1",
+                                 network.status === "connected" ? "text-green-400" : "text-gray-500"
                                )}>
                                  <div className={cn("w-1.5 h-1.5 rounded-full", network.status === "connected" ? "bg-green-500" : "bg-gray-400")} />
                                  {network.status === "connected" ? "Connected" : "Disconnected"}
@@ -705,14 +782,30 @@ export default function AffiliateDashboard() {
             {/* REWARDS TAB */}
             {activeTab === "rewards" && (
               <div className="animate-in fade-in slide-in-from-bottom-4">
+                 {/* Goal Progress Header */}
                  <div className="mb-6 p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-white/10 relative overflow-hidden">
                     <div className="relative z-10 max-w-lg">
-                       <h2 className="text-2xl font-display font-bold text-white mb-2">Creator Rewards Program</h2>
-                       <p className="text-sm text-gray-300 mb-6 leading-relaxed">
-                         Redeem your hard-earned credits for exclusive software deals, travel experiences, and cash bonuses. You have <span className="text-white font-bold">{rewardCredits} credits</span> available.
-                       </p>
+                       <div className="flex items-center gap-2 mb-2">
+                         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500 text-black">GOLD TIER</span>
+                         <span className="text-xs text-gray-300">Next Reward: Bali Retreat</span>
+                       </div>
+                       <h2 className="text-2xl font-display font-bold text-white mb-4">Creator Rewards Program</h2>
+                       
+                       {/* Progress Bar */}
+                       <div className="space-y-2 mb-6">
+                         <div className="flex justify-between text-xs font-bold text-white">
+                           <span>Progress</span>
+                           <span>1200 / 2500 Gems</span>
+                         </div>
+                         <div className="h-3 w-full bg-black/40 rounded-full overflow-hidden border border-white/5">
+                           <div className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 w-[48%] relative">
+                             <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/50 animate-pulse" />
+                           </div>
+                         </div>
+                       </div>
+
                        <button className="px-5 py-2.5 bg-white text-black rounded-xl text-xs font-bold hover:bg-gray-200 transition-colors">
-                         View History
+                         View Tier Benefits
                        </button>
                     </div>
                     <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-accent/10 to-transparent pointer-events-none" />
@@ -734,6 +827,20 @@ export default function AffiliateDashboard() {
                       <div className="relative z-10 mb-4 min-h-[60px]">
                         <h3 className="font-bold text-white text-base mb-1 group-hover:text-accent transition-colors">{reward.name}</h3>
                         <p className="text-xs text-green-400 font-bold bg-green-400/10 inline-block px-2 py-0.5 rounded">{reward.discount}</p>
+                      </div>
+
+                      {/* Goal Tracking for Individual Item */}
+                      <div className="relative z-10 mb-4">
+                        <div className="flex justify-between text-[10px] text-gray-500 mb-1">
+                          <span>Goal</span>
+                          <span>{reward.progress}%</span>
+                        </div>
+                        <div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden">
+                           <div 
+                             className="h-full bg-white/30 group-hover:bg-accent transition-colors rounded-full" 
+                             style={{ width: `${reward.progress}%` }} 
+                           />
+                        </div>
                       </div>
 
                       <div className="pt-4 border-t border-white/5 flex justify-between items-center relative z-10">
