@@ -47,11 +47,7 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
           )}
 
           <main className="flex-1 relative overflow-y-auto no-scrollbar pb-24 md:pb-0 h-full">
-            {!hideTabs && (
-              <div className="hidden md:block pt-4">
-                <AppBreadcrumbs />
-              </div>
-            )}
+            {/* Breadcrumbs removed for cleaner app-like feel */}
             {children}
           </main>
           {!hideTabs && <div className="md:hidden"><BottomTabs /></div>}

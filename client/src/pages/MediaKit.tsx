@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { 
+  ArrowLeft,
   Download, 
   Share2, 
   Instagram, 
@@ -93,26 +95,42 @@ const PAST_COLLABS = [
 
 export default function MediaKit() {
   const [isEditing, setIsEditing] = useState(false);
+  const [, setLocation] = useLocation();
 
   return (
-    <Layout>
+    <Layout hideTabs>
       <div className="min-h-screen bg-background pb-20">
+        {/* Header */}
+        <div className="flex items-center gap-4 p-4 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5 justify-between">
+          <div className="flex items-center gap-3">
+             <button 
+              onClick={() => setLocation("/profile")}
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div>
+              <h1 className="text-lg font-display font-bold text-white flex items-center gap-2">
+                Media Kit
+              </h1>
+              <p className="text-xs text-gray-400">Showcase your stats & packages</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <button className="p-2 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-white/10 border border-white/10 transition-colors">
+              <Share2 size={18} />
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-bold hover:bg-gray-200 transition-colors">
+              <Download size={14} /> PDF
+            </button>
+          </div>
+        </div>
         
         {/* Hero Section */}
         <div className="relative h-64 w-full bg-black overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 to-blue-900/40 z-0" />
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1200&auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay" />
           
-          {/* Actions Bar */}
-          <div className="absolute top-4 right-4 z-20 flex gap-2">
-            <button className="p-2 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-white/10 border border-white/10 transition-colors">
-              <Share2 size={18} />
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-bold hover:bg-gray-200 transition-colors">
-              <Download size={14} /> Download PDF
-            </button>
-          </div>
-
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 bg-gradient-to-t from-background to-transparent z-10">
              <div className="flex flex-col md:flex-row md:items-end gap-6">
                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl border-4 border-background bg-gray-800 overflow-hidden shadow-2xl relative">
