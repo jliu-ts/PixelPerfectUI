@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
-import { Heart, MessageCircle, Share2, Repeat, Swords, Music2, Verified, Plus, Zap, Sparkles } from "lucide-react";
+import { Heart, MessageCircle, Share2, Repeat, Swords, Music2, Verified, Plus, Zap, Sparkles, X, Send } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { cn } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
 import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
@@ -15,8 +22,8 @@ const FEED_ITEMS = [
     username: "cosmic_dreamer",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
     description: "Exploring the depths of the nebula with the new V4 model. The colors are absolutely insane! 🌌✨ #AIart #Space",
-    likes: "4.2k",
-    comments: "842",
+    likes: 4200,
+    comments: 842,
     music: "Original Audio - cosmic_dreamer",
     image: bgImage,
     verified: true
@@ -26,8 +33,8 @@ const FEED_ITEMS = [
     username: "pixel_ninja",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ninja",
     description: "Cyberpunk cityscapes are my jam. Generated this in 4K using the new 'Neon Noir' preset. 🏙️🤖 #Cyberpunk #DigitalArt",
-    likes: "12.5k",
-    comments: "1.2k",
+    likes: 12500,
+    comments: 1200,
     music: "Cyber City - Neon Beats",
     image: cyberpunkImage,
     verified: false
@@ -37,25 +44,54 @@ const FEED_ITEMS = [
     username: "nature_whisperer",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Annie",
     description: "Found this hidden waterfall in the latent space. 🌿💧 So peaceful. #Nature #AI #Relax",
-    likes: "8.9k",
-    comments: "560",
+    likes: 8900,
+    comments: 560,
     music: "Forest Sounds - Nature",
     image: natureImage,
     verified: true
   }
 ];
 
-// Mock Stories Data (Super App Channels)
+// Expanded Mock Stories Data (Super App Channels)
 const STORIES = [
   { id: "battle", type: "live", name: "Live Battle", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Battle" },
   { id: 1, type: "story", name: "Instagram", avatar: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", hasNew: true },
   { id: 2, type: "story", name: "TikTok", avatar: "https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg", hasNew: true },
   { id: 3, type: "story", name: "YouTube", avatar: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg", hasNew: false },
   { id: 4, type: "story", name: "OpenAI", avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", hasNew: true },
+  { id: 5, type: "story", name: "Midjourney", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Midjourney", hasNew: true },
+  { id: 6, type: "story", name: "Runway", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Runway", hasNew: false },
+  { id: 7, type: "story", name: "Stable Diff", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Stable", hasNew: true },
+  { id: 8, type: "story", name: "Pika Labs", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Pika", hasNew: true },
+  { id: 9, type: "story", name: "ElevenLabs", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Eleven", hasNew: false },
+  { id: 10, type: "story", name: "HuggingFace", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Hugging", hasNew: true },
+  { id: 11, type: "story", name: "Leonardo", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Leonardo", hasNew: false },
+];
+
+// Mock Comments Data
+const MOCK_COMMENTS = [
+  { id: 1, user: "art_lover_99", text: "This is incredible! Which model did you use?", time: "2m" },
+  { id: 2, user: "prompt_engineer", text: "The lighting is perfect. Mind sharing the seed?", time: "5m" },
+  { id: 3, user: "cyber_punk", text: "🔥🔥🔥", time: "12m" },
+  { id: 4, user: "future_vision", text: "AI art just keeps getting better.", time: "1h" },
 ];
 
 export default function HomeFeed() {
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  
+  // State for interactions
+  const [likedPosts, setLikedPosts] = useState<Record<number, boolean>>({});
+  const [likeCounts, setLikeCounts] = useState<Record<number, number>>(
+    FEED_ITEMS.reduce((acc, item) => ({ ...acc, [item.id]: item.likes }), {})
+  );
+  
+  // Comment Modal State
+  const [activeCommentPost, setActiveCommentPost] = useState<number | null>(null);
+  const [commentText, setCommentText] = useState("");
+  const [postComments, setPostComments] = useState<Record<number, typeof MOCK_COMMENTS>>(
+    FEED_ITEMS.reduce((acc, item) => ({ ...acc, [item.id]: [...MOCK_COMMENTS] }), {})
+  );
 
   const handleRemix = () => {
     setLocation("/create", { 
@@ -64,6 +100,46 @@ export default function HomeFeed() {
         style: "Cinematic"
       } 
     });
+  };
+
+  const toggleLike = (postId: number) => {
+    const isLiked = likedPosts[postId];
+    setLikedPosts(prev => ({ ...prev, [postId]: !isLiked }));
+    setLikeCounts(prev => ({ 
+      ...prev, 
+      [postId]: isLiked ? prev[postId] - 1 : prev[postId] + 1 
+    }));
+    
+    // Trigger haptic feedback pattern visually
+    if (!isLiked) {
+      // Could add animation trigger here
+    }
+  };
+
+  const handlePostComment = () => {
+    if (!commentText.trim() || activeCommentPost === null) return;
+    
+    const newComment = {
+      id: Date.now(),
+      user: "You",
+      text: commentText,
+      time: "Just now"
+    };
+    
+    setPostComments(prev => ({
+      ...prev,
+      [activeCommentPost]: [newComment, ...prev[activeCommentPost]]
+    }));
+    
+    setCommentText("");
+    toast({
+      title: "Comment posted",
+      description: "Your thought has been shared with the community.",
+    });
+  };
+
+  const formatNumber = (num: number) => {
+    return num >= 1000 ? (num / 1000).toFixed(1) + 'k' : num.toString();
   };
 
   return (
@@ -154,17 +230,33 @@ export default function HomeFeed() {
               </div>
 
               <div className="flex flex-col items-center gap-1 group">
-                <div className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200 md:p-3">
-                  <Heart size={28} className="text-white group-hover:text-red-500 transition-colors md:w-8 md:h-8" />
+                <div 
+                  onClick={() => toggleLike(item.id)}
+                  className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200 md:p-3"
+                >
+                  <Heart 
+                    size={28} 
+                    className={cn(
+                      "transition-colors md:w-8 md:h-8",
+                      likedPosts[item.id] ? "fill-red-500 text-red-500" : "text-white group-hover:text-red-500"
+                    )} 
+                  />
                 </div>
-                <span className="text-xs font-medium drop-shadow-md text-white md:text-sm">{item.likes}</span>
+                <span className="text-xs font-medium drop-shadow-md text-white md:text-sm">
+                  {formatNumber(likeCounts[item.id])}
+                </span>
               </div>
 
               <div className="flex flex-col items-center gap-1 group">
-                 <div className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200 md:p-3">
+                 <div 
+                   onClick={() => setActiveCommentPost(item.id)}
+                   className="p-2 rounded-full bg-white/10 backdrop-blur-md group-hover:bg-white/20 transition-colors cursor-pointer active:scale-90 duration-200 md:p-3"
+                 >
                   <MessageCircle size={28} className="text-white md:w-8 md:h-8" />
                 </div>
-                <span className="text-xs font-medium drop-shadow-md text-white md:text-sm">{item.comments}</span>
+                <span className="text-xs font-medium drop-shadow-md text-white md:text-sm">
+                  {formatNumber(item.comments)}
+                </span>
               </div>
 
               <div className="flex flex-col items-center gap-1 group">
@@ -206,6 +298,58 @@ export default function HomeFeed() {
           </div>
         ))}
       </div>
+
+      {/* Comments Sheet / Modal */}
+      <Dialog open={activeCommentPost !== null} onOpenChange={(open) => !open && setActiveCommentPost(null)}>
+        <DialogContent className="bg-[#1E1E1E] border-t border-white/10 text-white w-full max-w-md h-[70vh] fixed bottom-0 top-auto left-1/2 -translate-x-1/2 translate-y-0 rounded-t-3xl p-0 gap-0 shadow-2xl overflow-hidden md:rounded-2xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:h-[600px]">
+          <div className="p-4 border-b border-white/10 flex items-center justify-between sticky top-0 bg-[#1E1E1E] z-10">
+            <h3 className="font-bold text-center flex-1">Comments ({formatNumber(activeCommentPost ? likeCounts[activeCommentPost] : 0)})</h3>
+            <button onClick={() => setActiveCommentPost(null)} className="absolute right-4 text-gray-400 hover:text-white">
+              <X size={20} />
+            </button>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar pb-20">
+            {activeCommentPost && postComments[activeCommentPost]?.map((comment) => (
+              <div key={comment.id} className="flex gap-3 items-start">
+                <div className="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0">
+                  <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${comment.user}`} className="w-full h-full rounded-full" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xs font-bold text-gray-300">{comment.user}</span>
+                    <span className="text-[10px] text-gray-500">{comment.time}</span>
+                  </div>
+                  <p className="text-sm text-white leading-snug mt-0.5">{comment.text}</p>
+                </div>
+                <button className="text-gray-500 hover:text-red-500">
+                  <Heart size={14} />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-4 border-t border-white/10 bg-[#1E1E1E] absolute bottom-0 w-full">
+            <div className="flex items-center gap-2 bg-black/30 rounded-full px-4 py-2 border border-white/10 focus-within:border-white/30 transition-colors">
+              <input 
+                type="text" 
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handlePostComment()}
+                placeholder="Add a comment..."
+                className="flex-1 bg-transparent text-sm text-white placeholder:text-gray-500 focus:outline-none"
+              />
+              <button 
+                onClick={handlePostComment}
+                disabled={!commentText.trim()}
+                className="text-blue-500 disabled:opacity-50 hover:text-blue-400 font-bold"
+              >
+                <Send size={16} />
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }
