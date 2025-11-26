@@ -43,7 +43,7 @@ const REWARDS = [
 export default function AffiliateDashboard() {
   const [, setLocation] = useLocation();
   const [walletConnected, setWalletConnected] = useState(false);
-  const [activeTab, setActiveTab] = useState<"overview" | "campaigns" | "rewards">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "campaigns" | "networks" | "rewards">("overview");
 
   const connectWallet = () => {
     // Simulate wallet connection
@@ -112,6 +112,12 @@ export default function AffiliateDashboard() {
               className={cn("flex-1 py-2 rounded-lg text-xs font-bold transition-all", activeTab === "campaigns" ? "bg-[#2A2A2A] text-white shadow-sm" : "text-gray-500 hover:text-gray-300")}
             >
               Brand Deals
+            </button>
+            <button 
+              onClick={() => setActiveTab("networks")}
+              className={cn("flex-1 py-2 rounded-lg text-xs font-bold transition-all", activeTab === "networks" ? "bg-[#2A2A2A] text-white shadow-sm" : "text-gray-500 hover:text-gray-300")}
+            >
+              Networks
             </button>
             <button 
               onClick={() => setActiveTab("rewards")}
@@ -198,6 +204,104 @@ export default function AffiliateDashboard() {
                     )}
                   </div>
                 ))}
+              </div>
+            )}
+
+            {/* NETWORKS TAB */}
+            {activeTab === "networks" && (
+              <div className="animate-in fade-in slide-in-from-bottom-4 space-y-6">
+                
+                {/* Major Networks */}
+                <div className="space-y-3">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase">Affiliate Networks</h3>
+                  
+                  {/* CJ */}
+                  <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center">
+                          <span className="text-black font-black text-lg">CJ</span>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-white text-sm">CJ Affiliate</h3>
+                          <p className="text-xs text-gray-400">Connect to access tracking links</p>
+                        </div>
+                      </div>
+                      <button className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-bold text-white border border-white/10 transition-colors">
+                        Connect
+                      </button>
+                    </div>
+                    <div className="bg-black/20 p-3 rounded-lg border border-white/5">
+                      <p className="text-[10px] text-gray-500 mb-2">Auto-Link Injection</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-gray-300">Automatically add affiliate links to posts</span>
+                        <div className="w-8 h-4 bg-green-500/20 rounded-full relative cursor-pointer border border-green-500/50">
+                          <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-green-500 rounded-full shadow-sm" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Impact */}
+                  <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center">
+                          <span className="text-red-600 font-black text-lg">ir</span>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-white text-sm">Impact Radius</h3>
+                          <p className="text-xs text-gray-400">Synced: 12 active campaigns</p>
+                        </div>
+                      </div>
+                      <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] font-bold border border-green-500/20 flex items-center gap-1">
+                        <CheckCircle2 size={10} /> Active
+                      </span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="flex-1 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold text-gray-300 border border-white/5 transition-colors">
+                        Browse Marketplace
+                      </button>
+                      <button className="flex-1 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold text-gray-300 border border-white/5 transition-colors">
+                        Sync Links
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Custom Link Builder */}
+                <div className="space-y-3">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase">One-Off Link Builder</h3>
+                  <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5 space-y-3">
+                    <div>
+                      <label className="text-[10px] font-bold text-gray-500 uppercase mb-1 block">Product URL</label>
+                      <input 
+                        type="text" 
+                        placeholder="https://brand.com/product"
+                        className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-accent/50"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-gray-500 uppercase mb-1 block">Affiliate Param</label>
+                      <div className="flex gap-2">
+                        <input 
+                          type="text" 
+                          placeholder="?ref="
+                          className="w-20 bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-accent/50"
+                        />
+                        <input 
+                          type="text" 
+                          placeholder="your-code-123"
+                          className="flex-1 bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-accent/50"
+                        />
+                      </div>
+                    </div>
+                    <GradientButton className="w-full py-2 text-xs">
+                      Generate Trackable Link
+                    </GradientButton>
+                  </div>
+                </div>
+
               </div>
             )}
 

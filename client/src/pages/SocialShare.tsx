@@ -123,6 +123,38 @@ export default function SocialShare() {
             </div>
           </div>
 
+          {/* Link Injection (New) */}
+          <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-medium text-gray-400 uppercase flex items-center gap-2">
+                <ShoppingBag size={14} />
+                Affiliate Link Injection
+              </h3>
+              <span className="text-[10px] text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">
+                AUTO-GENERATED
+              </span>
+            </div>
+            <div className="flex gap-2">
+               <div className="flex-1 relative">
+                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                   <Link2 size={14} />
+                 </div>
+                 <input 
+                   type="text" 
+                   defaultValue="https://amzn.to/3G8j2xL"
+                   className="w-full bg-black/20 border border-white/10 rounded-lg pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-primary/50"
+                 />
+               </div>
+               <button className="px-3 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold text-white border border-white/10 transition-colors">
+                 Edit
+               </button>
+            </div>
+            <p className="text-[10px] text-gray-500 mt-2 flex items-center gap-1.5">
+              <Check size={10} className="text-green-500" />
+              Link will be added to bio/caption automatically
+            </p>
+          </div>
+
           {/* Platforms List */}
           <div>
             <h3 className="text-sm font-medium text-gray-400 uppercase mb-4 flex items-center justify-between">
