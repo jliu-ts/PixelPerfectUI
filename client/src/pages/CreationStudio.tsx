@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus, BookOpen } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus, BookOpen, MoreHorizontal, Maximize2, Minimize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { MOCK_PROMPTS, MOCK_ARTICLES } from "@/lib/mockData";
@@ -86,6 +86,7 @@ export default function CreationStudio() {
   const [isEnhancing, setIsEnhancing] = useState(false);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [inputMode, setInputMode] = useState<"prompt" | "rss">("prompt");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -191,38 +192,6 @@ export default function CreationStudio() {
               Audio
             </button>
           </div>
-
-          {/* Aspect Ratio Selector (Inline) */}
-          {(activeTab === "image" || activeTab === "video") && (
-            <div className="relative group w-40">
-              <button className="w-full h-full bg-[#1E1E1E] border border-white/10 rounded-xl px-3 flex items-center justify-between text-sm font-medium text-white hover:bg-white/5 transition-colors">
-                <span className="flex items-center gap-2">
-                  {(() => {
-                    const Icon = ASPECT_RATIOS.find(r => r.id === selectedRatio)?.icon;
-                    return Icon && <Icon size={16} />;
-                  })()}
-                  {ASPECT_RATIOS.find(r => r.id === selectedRatio)?.label}
-                </span>
-                <ChevronDown size={14} className="text-gray-500" />
-              </button>
-              
-              <div className="absolute top-full right-0 mt-2 w-48 bg-[#252525] border border-white/10 rounded-xl shadow-xl overflow-hidden z-20 hidden group-focus-within:block hover:block">
-                {ASPECT_RATIOS.map((ratio) => (
-                  <button
-                    key={ratio.id}
-                    onClick={() => setSelectedRatio(ratio.id)}
-                    className="w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white flex items-center justify-between transition-colors"
-                  >
-                    <span className="flex items-center gap-2">
-                      <ratio.icon size={14} />
-                      {ratio.label}
-                    </span>
-                    <span className="text-[10px] text-gray-500">{ratio.id}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* AI Preview Canvas (Dynamic & Prominent) */}
@@ -288,191 +257,250 @@ export default function CreationStudio() {
            </div>
         </div>
 
-        {/* Main Input Area (Compact with Tabs) */}
-        <div className="relative mb-8 group">
-          {/* Input Mode Tabs */}
-          <div className="flex items-center gap-4 mb-3 px-1">
-            <button 
-              onClick={() => setInputMode("prompt")}
-              className={cn(
-                "text-xs font-bold uppercase tracking-wider pb-1 border-b-2 transition-all flex items-center gap-2",
-                inputMode === "prompt" ? "text-white border-accent" : "text-gray-500 border-transparent hover:text-gray-300"
-              )}
-            >
-              <Sparkles size={12} />
-              Custom Prompt
-            </button>
-            <button 
-              onClick={() => setInputMode("rss")}
-              className={cn(
-                "text-xs font-bold uppercase tracking-wider pb-1 border-b-2 transition-all flex items-center gap-2",
-                inputMode === "rss" ? "text-white border-orange-400" : "text-gray-500 border-transparent hover:text-gray-300"
-              )}
-            >
-              <Newspaper size={12} />
-              From Feed
-            </button>
+        {/* Main Input Area (Consolidated & Expandable) */}
+        <div className={cn(
+          "relative mb-8 group bg-[#1E1E1E] border border-white/5 rounded-2xl transition-all duration-300 flex flex-col",
+          isExpanded ? "fixed inset-4 z-50 shadow-2xl h-auto bg-[#151515] border-white/20" : ""
+        )}>
+          {/* Input Mode Tabs & Actions */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setInputMode("prompt")}
+                className={cn(
+                  "text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2",
+                  inputMode === "prompt" ? "text-white" : "text-gray-500 hover:text-gray-300"
+                )}
+              >
+                <Sparkles size={12} />
+                Custom Prompt
+              </button>
+              <div className="w-px h-3 bg-white/10" />
+              <button 
+                onClick={() => setInputMode("rss")}
+                className={cn(
+                  "text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2",
+                  inputMode === "rss" ? "text-orange-400" : "text-gray-500 hover:text-gray-300"
+                )}
+              >
+                <Newspaper size={12} />
+                From Feed
+              </button>
+            </div>
+            
+            <div className="flex items-center gap-2">
+               {isExpanded && (
+                 <button 
+                   onClick={() => setIsExpanded(false)} 
+                   className="p-1.5 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white"
+                 >
+                   <Minimize2 size={14} />
+                 </button>
+               )}
+               {!isExpanded && (
+                 <button 
+                   onClick={() => setIsExpanded(true)} 
+                   className="p-1.5 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white"
+                 >
+                   <Maximize2 size={14} />
+                 </button>
+               )}
+            </div>
           </div>
 
-          {inputMode === "prompt" ? (
-            <div className="relative">
-              <div className="absolute top-3 right-3 z-10 flex gap-1 bg-black/40 backdrop-blur rounded-lg p-1 border border-white/5">
-                 <button 
-                   onClick={() => setIsLibraryOpen(true)}
-                   className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-accent transition-colors group/tooltip relative"
-                 >
-                   <BookOpen size={16} />
-                 </button>
-                 <button 
-                   onClick={() => setShowHistory(!showHistory)}
-                   className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
-                 >
-                   <History size={16} />
-                 </button>
-                 <div className="w-px h-4 bg-white/10 my-auto mx-1" />
-                 <button 
-                   onClick={handleSavePrompt}
-                   className="p-2 rounded-md hover:bg-white/10 text-gray-400 hover:text-white transition-colors group/tooltip relative"
-                 >
-                   <Save size={16} />
-                 </button>
+          {/* Content Area */}
+          <div className="flex-1 relative">
+            {inputMode === "prompt" ? (
+              <>
+                <textarea 
+                  className={cn(
+                    "w-full bg-transparent p-4 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none",
+                    isExpanded ? "h-[calc(100vh-250px)]" : "h-32"
+                  )}
+                  placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream image or video..."}
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                />
+                
+                {/* Floating Tools inside text area */}
+                <div className="absolute top-2 right-2 flex flex-col gap-1">
+                   <button 
+                     onClick={() => setIsLibraryOpen(true)}
+                     className="p-2 rounded-lg bg-black/20 hover:bg-black/40 text-gray-400 hover:text-accent transition-colors"
+                     title="Library"
+                   >
+                     <BookOpen size={14} />
+                   </button>
+                   <button 
+                     onClick={() => setShowHistory(!showHistory)}
+                     className="p-2 rounded-lg bg-black/20 hover:bg-black/40 text-gray-400 hover:text-white transition-colors"
+                     title="History"
+                   >
+                     <History size={14} />
+                   </button>
+                </div>
+              </>
+            ) : (
+              <div className="p-4 h-40 overflow-hidden flex flex-col">
+                 <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar h-full items-center">
+                    {MOCK_ARTICLES.map((article) => (
+                      <button 
+                        key={article.id}
+                        onClick={() => {
+                          setPrompt(`Create a ${activeTab === "video" ? "short form video script" : "visual concept"} about: "${article.title}".\n\nContext: ${article.summary}`);
+                          setInputMode("prompt");
+                          toast({
+                            title: "Article Selected",
+                            description: "Content context added to your prompt.",
+                          });
+                        }}
+                        className="min-w-[240px] w-[240px] h-full bg-black/20 rounded-xl p-3 border border-white/5 hover:border-orange-400/50 hover:bg-white/5 transition-all text-left group flex flex-col relative overflow-hidden"
+                      >
+                        <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
+                          <img src={article.image} alt="" className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/80" />
+                        </div>
+                        <div className="relative z-10 flex flex-col h-full">
+                          <span className="text-[9px] text-orange-400 font-bold mb-1">{article.source} • {article.time}</span>
+                          <h5 className="text-xs font-bold text-white leading-tight line-clamp-2 mb-auto group-hover:text-orange-100 transition-colors">{article.title}</h5>
+                          <div className="mt-2 flex items-center gap-1 text-[10px] text-gray-400">
+                             <Plus size={10} /> Use this story
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                 </div>
               </div>
+            )}
+          </div>
 
-              <textarea 
-                className="w-full h-32 bg-[#1E1E1E] rounded-2xl p-6 pt-6 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-white/5 focus:border-accent/50 focus:bg-[#222222] transition-all shadow-inner"
-                placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream image or video..."}
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-              />
-              
-              {/* Floating Actions */}
-              <div className="absolute bottom-3 right-3 flex gap-2">
-                 {activeTab === "image" && (
+          {/* Integrated Toolbar (Bottom of Input) */}
+          <div className="p-2 border-t border-white/5 bg-black/20 rounded-b-2xl flex flex-wrap items-center justify-between gap-2">
+             <div className="flex items-center gap-2 flex-wrap">
+                {/* Model Selector (Integrated) */}
+                <div className="relative group">
+                  <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10">
+                    <Bot size={12} className="text-accent" />
+                    {selectedModel}
+                    <ChevronDown size={10} className="opacity-50" />
+                  </button>
+                  <div className="absolute bottom-full left-0 mb-2 w-48 bg-[#252525] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50 hidden group-hover:block">
+                    {currentModels.map(m => (
+                      <button
+                        key={m}
+                        onClick={() => setSelectedModel(m)}
+                        className={cn(
+                          "w-full text-left px-3 py-2 text-xs hover:bg-white/5 transition-colors",
+                          selectedModel === m ? "text-accent font-bold bg-white/5" : "text-gray-400"
+                        )}
+                      >
+                        {m}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Aspect Ratio Selector (Integrated) */}
+                {(activeTab === "image" || activeTab === "video") && (
+                  <div className="relative group">
+                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10">
+                      {(() => {
+                        const Icon = ASPECT_RATIOS.find(r => r.id === selectedRatio)?.icon || Square;
+                        return <Icon size={12} className="text-blue-400" />;
+                      })()}
+                      {ASPECT_RATIOS.find(r => r.id === selectedRatio)?.label}
+                      <ChevronDown size={10} className="opacity-50" />
+                    </button>
+                    <div className="absolute bottom-full left-0 mb-2 w-40 bg-[#252525] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50 hidden group-hover:block">
+                      {ASPECT_RATIOS.map((ratio) => (
+                        <button
+                          key={ratio.id}
+                          onClick={() => setSelectedRatio(ratio.id)}
+                          className={cn(
+                            "w-full text-left px-3 py-2 text-xs hover:bg-white/5 transition-colors flex items-center gap-2",
+                            selectedRatio === ratio.id ? "text-blue-400 font-bold bg-white/5" : "text-gray-400"
+                          )}
+                        >
+                          <ratio.icon size={12} />
+                          {ratio.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Style Indicator */}
+                <div className="px-3 py-1.5 rounded-lg bg-white/5 text-xs font-medium text-gray-400 border border-dashed border-white/10 flex items-center gap-2">
+                  <Palette size={12} className="text-pink-400" />
+                  {STYLES.find(s => s.id === selectedStyle)?.label || selectedStyle}
+                </div>
+             </div>
+
+             {/* Action Buttons */}
+             <div className="flex items-center gap-2">
+                {activeTab === "image" && (
                    <button 
                      onClick={() => setIsCarouselMode(!isCarouselMode)}
                      className={cn(
-                       "px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2 text-[10px] font-bold border border-transparent backdrop-blur-md",
-                       isCarouselMode ? "bg-primary/20 text-primary border-primary/20" : "bg-black/40 text-gray-400 hover:text-white hover:bg-black/60"
+                       "p-1.5 rounded-lg transition-colors",
+                       isCarouselMode ? "bg-primary/20 text-primary" : "hover:bg-white/10 text-gray-400"
                      )}
+                     title="Carousel Mode"
                    >
-                     <Layers size={12} />
-                     {isCarouselMode ? "Carousel On" : "Carousel Off"}
+                     <Layers size={14} />
                    </button>
                  )}
-                 
-                 <button 
+                <button 
                    onClick={handleEnhance}
                    disabled={isEnhancing}
                    className={cn(
-                     "px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-[10px] font-bold border backdrop-blur-md",
+                     "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all",
                      isEnhancing 
-                       ? "bg-accent/20 text-accent border-accent/50 animate-pulse cursor-wait" 
-                       : "bg-black/40 text-gray-300 hover:text-white hover:bg-black/60 border-white/5 hover:border-white/20"
+                       ? "bg-accent/20 text-accent cursor-wait" 
+                       : "bg-gradient-to-r from-indigo-500/20 to-purple-500/20 hover:from-indigo-500/30 hover:to-purple-500/30 text-white border border-white/5"
                    )}
                  >
                    <Wand2 size={12} className={isEnhancing ? "animate-spin" : ""} />
-                   {isEnhancing ? "Enhancing..." : "Magic Enhance"}
+                   {isEnhancing ? "Magic..." : "Enhance"}
                  </button>
-              </div>
-            </div>
-          ) : (
-            <div className="bg-[#1E1E1E] rounded-2xl p-4 border border-white/5 h-40 overflow-hidden flex flex-col">
-               <div className="flex items-center justify-between mb-2">
-                 <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Trending Articles</h4>
-                 <button onClick={() => setLocation("/feeds")} className="text-[10px] text-accent hover:underline flex items-center gap-1">
-                   Manage Feeds <LinkIcon size={10} />
-                 </button>
-               </div>
-               <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar h-full items-center">
-                  {MOCK_ARTICLES.map((article) => (
-                    <button 
-                      key={article.id}
-                      onClick={() => {
-                        setPrompt(`Create a ${activeTab === "video" ? "short form video script" : "visual concept"} about: "${article.title}".\n\nContext: ${article.summary}`);
-                        setInputMode("prompt");
-                        toast({
-                          title: "Article Selected",
-                          description: "Content context added to your prompt.",
-                        });
-                      }}
-                      className="min-w-[240px] w-[240px] h-full bg-black/20 rounded-xl p-3 border border-white/5 hover:border-orange-400/50 hover:bg-white/5 transition-all text-left group flex flex-col relative overflow-hidden"
-                    >
-                      <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity">
-                        <img src={article.image} alt="" className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-black/80" />
-                      </div>
-                      <div className="relative z-10 flex flex-col h-full">
-                        <span className="text-[9px] text-orange-400 font-bold mb-1">{article.source} • {article.time}</span>
-                        <h5 className="text-xs font-bold text-white leading-tight line-clamp-2 mb-auto group-hover:text-orange-100 transition-colors">{article.title}</h5>
-                        <div className="mt-2 flex items-center gap-1 text-[10px] text-gray-400">
-                           <Plus size={10} /> Use this story
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-               </div>
-            </div>
-          )}
-        </div>
-
-        {/* Configuration Panel (Side by Side) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Left Column: Model */}
-          <div>
-             <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">AI Model</label>
-             <div className="flex flex-wrap gap-2">
-               {currentModels.map(m => (
-                 <button
-                   key={m}
-                   onClick={() => setSelectedModel(m)}
-                   className={cn(
-                     "px-3 py-2 rounded-lg text-xs font-bold border transition-all",
-                     selectedModel === m
-                       ? "bg-white text-black border-white shadow-lg scale-105"
-                       : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:text-white hover:border-white/20"
-                   )}
-                 >
-                   {m}
-                 </button>
-               ))}
              </div>
           </div>
+        </div>
 
-          {/* Right Column: Style */}
-          <div>
-            <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
-            <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-              {STYLES.map(s => (
-                <button
-                  key={s.id}
-                  onClick={() => setSelectedStyle(s.id)}
-                  className={cn(
-                    "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[80px] text-center relative overflow-hidden group flex flex-col justify-end",
-                    selectedStyle === s.id
-                      ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
-                      : "border-white/5 hover:border-white/20 hover:scale-105"
-                  )}
-                >
-                  {/* Background Image */}
-                  <div className="absolute inset-0 z-0">
-                    <img 
-                      src={s.image} 
-                      alt={s.label} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
-                    />
-                    <div className={cn(
-                      "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
-                      selectedStyle === s.id ? "opacity-80" : "opacity-100"
-                    )} />
-                  </div>
-                  
-                  <span className={cn(
-                    "relative z-10 transition-colors drop-shadow-md text-[10px]",
-                    selectedStyle === s.id ? "text-accent" : "text-white"
-                  )}>{s.label}</span>
-                </button>
-              ))}
-            </div>
+        {/* Style Browser (Bottom Visual Strip) */}
+        <div className="mb-8">
+          <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
+          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+            {STYLES.map(s => (
+              <button
+                key={s.id}
+                onClick={() => setSelectedStyle(s.id)}
+                className={cn(
+                  "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[80px] text-center relative overflow-hidden group flex flex-col justify-end",
+                  selectedStyle === s.id
+                    ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
+                    : "border-white/5 hover:border-white/20 hover:scale-105"
+                )}
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                  <img 
+                    src={s.image} 
+                    alt={s.label} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
+                  />
+                  <div className={cn(
+                    "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
+                    selectedStyle === s.id ? "opacity-80" : "opacity-100"
+                  )} />
+                </div>
+                
+                <span className={cn(
+                  "relative z-10 transition-colors drop-shadow-md text-[10px]",
+                  selectedStyle === s.id ? "text-accent" : "text-white"
+                )}>{s.label}</span>
+              </button>
+            ))}
           </div>
         </div>
 
