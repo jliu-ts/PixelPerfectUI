@@ -5,10 +5,12 @@ import { ArrowLeft, Database, Plus, RefreshCw, CheckCircle2, XCircle, BrainCircu
 import { cn } from "@/lib/utils";
 
 const SOURCES = [
-  { id: "notion", name: "Notion", icon: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png", status: "connected", lastSync: "2m ago" },
-  { id: "drive", name: "Google Drive", icon: "https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg", status: "connected", lastSync: "1h ago" },
-  { id: "github", name: "GitHub", icon: "https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg", status: "disconnected", lastSync: null },
-  { id: "slack", name: "Slack", icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg", status: "disconnected", lastSync: null },
+  { id: "airtable", name: "Airtable", icon: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg", status: "connected", lastSync: "5m ago" },
+  { id: "slack", name: "Slack", icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg", status: "connected", lastSync: "Live" },
+  { id: "n8n", name: "n8n Workflows", icon: "https://upload.wikimedia.org/wikipedia/commons/f/f3/N8n-logo.png", status: "connected", lastSync: "1h ago" },
+  { id: "pandadoc", name: "PandaDoc", icon: "https://upload.wikimedia.org/wikipedia/commons/e/e7/PandaDoc_logo.svg", status: "disconnected", lastSync: null },
+  { id: "google", name: "Google Workspace", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png", status: "connected", lastSync: "10m ago" },
+  { id: "canva", name: "Canva", icon: "https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg", status: "connected", lastSync: "30m ago" },
 ];
 
 export default function ContextSources() {
@@ -27,19 +29,19 @@ export default function ContextSources() {
           </button>
           <div>
             <h1 className="text-xl font-display font-bold text-white flex items-center gap-2">
-              Knowledge Base
+              Integrations Hub
               <BrainCircuit size={18} className="text-accent" />
             </h1>
-            <p className="text-xs text-gray-400">Manage MCP Context Sources</p>
+            <p className="text-xs text-gray-400">Manage your connected ecosystem</p>
           </div>
         </div>
 
         <div className="p-6">
           {/* MCP Explanation */}
           <div className="mb-8 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-            <h3 className="text-sm font-bold text-blue-400 mb-1">Why use MCP?</h3>
+            <h3 className="text-sm font-bold text-blue-400 mb-1">Connected Ecosystem</h3>
             <p className="text-xs text-gray-300 leading-relaxed">
-              The Model Context Protocol (MCP) allows our AI to securely access your private company data to generate more accurate and relevant content without hallucinations.
+              Your stack is synced. Society AI uses Perplexity & Tavily for search, Claude & OpenAI for reasoning, and Replicate for generation.
             </p>
           </div>
 
