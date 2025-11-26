@@ -12,6 +12,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Newspaper, FileText, Link as LinkIcon } from "lucide-react";
 
 // Stock Images for Styles
@@ -157,6 +163,52 @@ export default function CreationStudio() {
           </div>
         </div>
 
+        {/* Studio Toolkit (Reorganized - Top) */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+              <Rocket size={14} /> Creative Suite
+            </h3>
+          </div>
+          
+          <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2">
+            {[
+              { icon: Library, label: "Library", color: "text-orange-400", path: "/library", desc: "Saved prompts" },
+              { icon: Palette, label: "Brand Kit", color: "text-[#00C4CC]", path: "/brand", desc: "Logos & assets" },
+              { icon: BrainCircuit, label: "Context", color: "text-blue-400", path: "/context", desc: "Knowledge" },
+              { icon: User, label: "Avatars", color: "text-purple-400", path: "/avatars", desc: "Digital twins" },
+              { icon: CameraIcon, label: "AR Cam", color: "text-pink-400", path: "/camera", desc: "Filters" },
+              { icon: Bot, label: "AI Agent", color: "text-cyan-400", path: "/research", desc: "Research" },
+              { icon: Users, label: "Collab", color: "text-green-400", path: "/collab", desc: "Team work" },
+            ].map((tool) => (
+              <button 
+                key={tool.label}
+                onClick={() => setLocation(tool.path)}
+                className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center group-hover:bg-[#252525] group-hover:scale-105 group-hover:border-white/20 transition-all shadow-sm relative overflow-hidden">
+                   <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-current", tool.color.replace('text-', 'bg-'))} />
+                   <tool.icon size={24} className={cn("transition-colors relative z-10", tool.color)} />
+                </div>
+                <div className="text-center">
+                  <span className="text-[11px] font-semibold text-gray-300 group-hover:text-white transition-colors block leading-tight">{tool.label}</span>
+                  <span className="text-[9px] text-gray-600 group-hover:text-gray-500 transition-colors block mt-0.5">{tool.desc}</span>
+                </div>
+              </button>
+            ))}
+            
+            {/* Add Button */}
+             <button className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
+                <div className="w-14 h-14 rounded-2xl border border-dashed border-white/10 flex items-center justify-center group-hover:bg-white/5 group-hover:border-white/30 transition-all">
+                   <Plus size={20} className="text-gray-600 group-hover:text-white transition-colors" />
+                </div>
+                <div className="text-center">
+                  <span className="text-[11px] font-semibold text-gray-500 group-hover:text-gray-400 transition-colors block leading-tight">Add App</span>
+                </div>
+              </button>
+          </div>
+        </div>
+
         {/* Tab Selector (Optimized) */}
         <div className="flex items-center gap-2 mb-6">
           <div className="flex-1 flex p-1 bg-[#1E1E1E] rounded-xl border border-white/5">
@@ -191,6 +243,43 @@ export default function CreationStudio() {
               <Mic size={16} />
               Audio
             </button>
+          </div>
+        </div>
+
+        {/* Visual Style (Moved to Top) */}
+        <div className="mb-8">
+          <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
+          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+            {STYLES.map(s => (
+              <button
+                key={s.id}
+                onClick={() => setSelectedStyle(s.id)}
+                className={cn(
+                  "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[80px] text-center relative overflow-hidden group flex flex-col justify-end",
+                  selectedStyle === s.id
+                    ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
+                    : "border-white/5 hover:border-white/20 hover:scale-105"
+                )}
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                  <img 
+                    src={s.image} 
+                    alt={s.label} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
+                  />
+                  <div className={cn(
+                    "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
+                    selectedStyle === s.id ? "opacity-80" : "opacity-100"
+                  )} />
+                </div>
+                
+                <span className={cn(
+                  "relative z-10 transition-colors drop-shadow-md text-[10px]",
+                  selectedStyle === s.id ? "text-accent" : "text-white"
+                )}>{s.label}</span>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -377,56 +466,60 @@ export default function CreationStudio() {
           {/* Integrated Toolbar (Bottom of Input) */}
           <div className="p-2 border-t border-white/5 bg-black/20 rounded-b-2xl flex flex-wrap items-center justify-between gap-2">
              <div className="flex items-center gap-2 flex-wrap">
-                {/* Model Selector (Integrated) */}
-                <div className="relative group">
-                  <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10">
-                    <Bot size={12} className="text-accent" />
-                    {selectedModel}
-                    <ChevronDown size={10} className="opacity-50" />
-                  </button>
-                  <div className="absolute bottom-full left-0 mb-2 w-48 bg-[#252525] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50 hidden group-hover:block">
+                {/* Model Selector (DropdownMenu) */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10 outline-none">
+                      <Bot size={12} className="text-accent" />
+                      {selectedModel}
+                      <ChevronDown size={10} className="opacity-50" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="bg-[#252525] border-white/10 text-white w-48">
                     {currentModels.map(m => (
-                      <button
+                      <DropdownMenuItem
                         key={m}
                         onClick={() => setSelectedModel(m)}
                         className={cn(
-                          "w-full text-left px-3 py-2 text-xs hover:bg-white/5 transition-colors",
-                          selectedModel === m ? "text-accent font-bold bg-white/5" : "text-gray-400"
+                          "text-xs focus:bg-white/10 cursor-pointer",
+                          selectedModel === m ? "text-accent font-bold" : "text-gray-400"
                         )}
                       >
                         {m}
-                      </button>
+                      </DropdownMenuItem>
                     ))}
-                  </div>
-                </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
-                {/* Aspect Ratio Selector (Integrated) */}
+                {/* Aspect Ratio Selector (DropdownMenu) */}
                 {(activeTab === "image" || activeTab === "video") && (
-                  <div className="relative group">
-                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10">
-                      {(() => {
-                        const Icon = ASPECT_RATIOS.find(r => r.id === selectedRatio)?.icon || Square;
-                        return <Icon size={12} className="text-blue-400" />;
-                      })()}
-                      {ASPECT_RATIOS.find(r => r.id === selectedRatio)?.label}
-                      <ChevronDown size={10} className="opacity-50" />
-                    </button>
-                    <div className="absolute bottom-full left-0 mb-2 w-40 bg-[#252525] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50 hidden group-hover:block">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10 outline-none">
+                        {(() => {
+                          const Icon = ASPECT_RATIOS.find(r => r.id === selectedRatio)?.icon || Square;
+                          return <Icon size={12} className="text-blue-400" />;
+                        })()}
+                        {ASPECT_RATIOS.find(r => r.id === selectedRatio)?.label}
+                        <ChevronDown size={10} className="opacity-50" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-[#252525] border-white/10 text-white w-40">
                       {ASPECT_RATIOS.map((ratio) => (
-                        <button
+                        <DropdownMenuItem
                           key={ratio.id}
                           onClick={() => setSelectedRatio(ratio.id)}
                           className={cn(
-                            "w-full text-left px-3 py-2 text-xs hover:bg-white/5 transition-colors flex items-center gap-2",
-                            selectedRatio === ratio.id ? "text-blue-400 font-bold bg-white/5" : "text-gray-400"
+                            "text-xs focus:bg-white/10 cursor-pointer flex items-center gap-2",
+                            selectedRatio === ratio.id ? "text-blue-400 font-bold" : "text-gray-400"
                           )}
                         >
                           <ratio.icon size={12} />
                           {ratio.label}
-                        </button>
+                        </DropdownMenuItem>
                       ))}
-                    </div>
-                  </div>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 )}
 
                 {/* Style Indicator */}
@@ -467,42 +560,6 @@ export default function CreationStudio() {
           </div>
         </div>
 
-        {/* Style Browser (Bottom Visual Strip) */}
-        <div className="mb-8">
-          <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
-          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
-            {STYLES.map(s => (
-              <button
-                key={s.id}
-                onClick={() => setSelectedStyle(s.id)}
-                className={cn(
-                  "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[80px] text-center relative overflow-hidden group flex flex-col justify-end",
-                  selectedStyle === s.id
-                    ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
-                    : "border-white/5 hover:border-white/20 hover:scale-105"
-                )}
-              >
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                  <img 
-                    src={s.image} 
-                    alt={s.label} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
-                  />
-                  <div className={cn(
-                    "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
-                    selectedStyle === s.id ? "opacity-80" : "opacity-100"
-                  )} />
-                </div>
-                
-                <span className={cn(
-                  "relative z-10 transition-colors drop-shadow-md text-[10px]",
-                  selectedStyle === s.id ? "text-accent" : "text-white"
-                )}>{s.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* Generate Button */}
         <div className="mb-10">
@@ -511,51 +568,6 @@ export default function CreationStudio() {
           </GradientButton>
         </div>
 
-        {/* Studio Toolkit (Reorganized) */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-              <Rocket size={14} /> Creative Suite
-            </h3>
-          </div>
-          
-          <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2">
-            {[
-              { icon: Library, label: "Library", color: "text-orange-400", path: "/library", desc: "Saved prompts" },
-              { icon: Palette, label: "Brand Kit", color: "text-[#00C4CC]", path: "/brand", desc: "Logos & assets" },
-              { icon: BrainCircuit, label: "Context", color: "text-blue-400", path: "/context", desc: "Knowledge" },
-              { icon: User, label: "Avatars", color: "text-purple-400", path: "/avatars", desc: "Digital twins" },
-              { icon: CameraIcon, label: "AR Cam", color: "text-pink-400", path: "/camera", desc: "Filters" },
-              { icon: Bot, label: "AI Agent", color: "text-cyan-400", path: "/research", desc: "Research" },
-              { icon: Users, label: "Collab", color: "text-green-400", path: "/collab", desc: "Team work" },
-            ].map((tool) => (
-              <button 
-                key={tool.label}
-                onClick={() => setLocation(tool.path)}
-                className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center group-hover:bg-[#252525] group-hover:scale-105 group-hover:border-white/20 transition-all shadow-sm relative overflow-hidden">
-                   <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-current", tool.color.replace('text-', 'bg-'))} />
-                   <tool.icon size={24} className={cn("transition-colors relative z-10", tool.color)} />
-                </div>
-                <div className="text-center">
-                  <span className="text-[11px] font-semibold text-gray-300 group-hover:text-white transition-colors block leading-tight">{tool.label}</span>
-                  <span className="text-[9px] text-gray-600 group-hover:text-gray-500 transition-colors block mt-0.5">{tool.desc}</span>
-                </div>
-              </button>
-            ))}
-            
-            {/* Add Button */}
-             <button className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
-                <div className="w-14 h-14 rounded-2xl border border-dashed border-white/10 flex items-center justify-center group-hover:bg-white/5 group-hover:border-white/30 transition-all">
-                   <Plus size={20} className="text-gray-600 group-hover:text-white transition-colors" />
-                </div>
-                <div className="text-center">
-                  <span className="text-[11px] font-semibold text-gray-500 group-hover:text-gray-400 transition-colors block leading-tight">Add App</span>
-                </div>
-              </button>
-          </div>
-        </div>
 
       </div>
       
