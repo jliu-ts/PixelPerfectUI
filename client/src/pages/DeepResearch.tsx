@@ -17,7 +17,10 @@ import {
   Layers,
   ChevronDown,
   ChevronUp,
-  StopCircle
+  StopCircle,
+  Paperclip,
+  Plus,
+  X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -50,6 +53,14 @@ const THINKING_STEPS = [
   "Synthesizing answer..."
 ];
 
+const CONTEXT_OPTIONS = [
+  { id: "all", label: "Full Context", icon: Sparkles, color: "text-cyan-400" },
+  { id: "web", label: "Web Search", icon: Globe, color: "text-blue-400" },
+  { id: "workspace", label: "Google Drive", icon: "https://cdn.simpleicons.org/google/4285F4", type: "img" },
+  { id: "slack", label: "Slack", icon: "https://cdn.simpleicons.org/slack/4A154B", type: "img" },
+  { id: "notion", label: "Notion", icon: "https://cdn.simpleicons.org/notion/FFFFFF", type: "img" },
+];
+
 export default function DeepResearch() {
   const [, setLocation] = useLocation();
   const [query, setQuery] = useState("");
@@ -57,6 +68,8 @@ export default function DeepResearch() {
   const [isTyping, setIsTyping] = useState(false);
   const [thinkingStepIndex, setThinkingStepIndex] = useState(0);
   const [isThinkingExpanded, setIsThinkingExpanded] = useState(true);
+  const [activeContext, setActiveContext] = useState("all");
+  const [isContextOpen, setIsContextOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -308,10 +321,74 @@ export default function DeepResearch() {
                   }
                 }}
                 placeholder="Ask a follow-up..."
-                className="w-full bg-transparent text-sm text-white placeholder:text-gray-500 p-4 pr-14 min-h-[56px] max-h-32 resize-none focus:outline-none scrollbar-hide"
+                className="w-full bg-transparent text-sm text-white placeholder:text-gray-500 p-4 pr-14 min-h-[80px] max-h-32 resize-none focus:outline-none scrollbar-hide"
                 disabled={isTyping}
               />
               
+              <div className="absolute left-4 bottom-3 flex items-center gap-2">
+                 {/* Context Selector Pill */}
+                 <div className="relative">
+                   <button 
+                     onClick={() => setIsContextOpen(!isContextOpen)}
+                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-xs font-medium text-gray-300 hover:text-white"
+                   >
+                     {(() => {
+                       const ctx = CONTEXT_OPTIONS.find(c => c.id === activeContext);
+                       if (!ctx) return null;
+                       return (
+                         <>
+                           {ctx.type === "img" ? (
+                             <img src={ctx.icon as string} className="w-3.5 h-3.5 object-contain" alt="" />
+                           ) : (
+                             <ctx.icon size={14} className={ctx.color} />
+                           )}
+                           {ctx.label}
+                           <ChevronUp size={12} className={cn("text-gray-500 transition-transform", isContextOpen ? "rotate-180" : "")} />
+                         </>
+                       );
+                     })()}
+                   </button>
+
+                   {/* Context Dropdown */}
+                   {isContextOpen && (
+                     <div className="absolute bottom-full left-0 mb-2 w-48 bg-[#1E1E1E] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-bottom-2">
+                       <div className="p-1">
+                         {CONTEXT_OPTIONS.map((ctx) => (
+                           <button
+                             key={ctx.id}
+                             onClick={() => { setActiveContext(ctx.id); setIsContextOpen(false); }}
+                             className={cn(
+                               "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-colors",
+                               activeContext === ctx.id ? "bg-white/10 text-white" : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
+                             )}
+                           >
+                             {ctx.type === "img" ? (
+                               <img src={ctx.icon as string} className="w-4 h-4 object-contain" alt="" />
+                             ) : (
+                               <ctx.icon size={14} className={ctx.color} />
+                             )}
+                             {ctx.label}
+                             {activeContext === ctx.id && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400" />}
+                           </button>
+                         ))}
+                       </div>
+                       <div className="p-1 border-t border-white/5">
+                         <button 
+                           onClick={() => setLocation("/context")}
+                           className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
+                         >
+                           <Plus size={12} /> Add Source
+                         </button>
+                       </div>
+                     </div>
+                   )}
+                 </div>
+
+                 <button className="p-1.5 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
+                   <Paperclip size={16} />
+                 </button>
+              </div>
+
               <div className="absolute right-2 bottom-2">
                 {isTyping ? (
                   <button 
@@ -331,13 +408,9 @@ export default function DeepResearch() {
                 )}
               </div>
             </div>
-            <div className="flex justify-center gap-4 mt-3">
-              <button className="flex items-center gap-1.5 text-[10px] font-medium text-gray-500 hover:text-gray-300 transition-colors">
-                <Globe size={12} /> Search Web
-              </button>
-              <button className="flex items-center gap-1.5 text-[10px] font-medium text-gray-500 hover:text-gray-300 transition-colors">
-                <BookOpen size={12} /> Academic
-              </button>
+            
+            <div className="flex justify-center text-[10px] text-gray-600 mt-3">
+              Society AI can make mistakes. Check important info.
             </div>
           </div>
         </div>

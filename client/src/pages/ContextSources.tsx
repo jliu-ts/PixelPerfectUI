@@ -34,7 +34,7 @@ const SOURCES = [
     name: "Airtable", 
     category: "Data",
     description: "Sync bases for content calendars & CRM.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg", 
+    icon: "https://cdn.simpleicons.org/airtable/18BFFF", 
     status: "connected", 
     lastSync: "5m ago",
     activeWorkflows: 3
@@ -44,7 +44,7 @@ const SOURCES = [
     name: "Slack", 
     category: "Communication",
     description: "Monitor channels for trends & alerts.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg", 
+    icon: "https://cdn.simpleicons.org/slack/4A154B", 
     status: "connected", 
     lastSync: "Live",
     activeWorkflows: 12
@@ -54,7 +54,7 @@ const SOURCES = [
     name: "n8n Workflows", 
     category: "Productivity",
     description: "Orchestrate complex AI automation pipelines.",
-    icon: "https://cdn.worldvectorlogo.com/logos/n8n.svg", 
+    icon: "https://cdn.simpleicons.org/n8n/FF6584", 
     status: "connected", 
     lastSync: "1h ago",
     activeWorkflows: 8
@@ -64,7 +64,7 @@ const SOURCES = [
     name: "PandaDoc", 
     category: "Productivity",
     description: "Auto-generate contracts and proposals.",
-    icon: "https://cdn.worldvectorlogo.com/logos/pandadoc-1.svg", 
+    icon: "https://cdn.simpleicons.org/pandadoc/43A047", 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -74,7 +74,7 @@ const SOURCES = [
     name: "Google Workspace", 
     category: "Productivity",
     description: "Access Drive, Docs, and Calendar context.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg", 
+    icon: "https://cdn.simpleicons.org/google/4285F4", 
     status: "connected", 
     lastSync: "10m ago",
     activeWorkflows: 5
@@ -84,7 +84,7 @@ const SOURCES = [
     name: "Canva", 
     category: "Creative",
     description: "Generate and edit visual assets directly.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg", 
+    icon: "https://cdn.simpleicons.org/canva/00C4CC", 
     status: "connected", 
     lastSync: "30m ago",
     activeWorkflows: 2
@@ -94,7 +94,7 @@ const SOURCES = [
     name: "Notion", 
     category: "Productivity",
     description: "Sync wikis and project databases.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg", 
+    icon: "https://cdn.simpleicons.org/notion/FFFFFF", 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -104,7 +104,7 @@ const SOURCES = [
     name: "Figma", 
     category: "Creative",
     description: "Read design tokens and asset libraries.",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg", 
+    icon: "https://cdn.simpleicons.org/figma/F24E1E", 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
