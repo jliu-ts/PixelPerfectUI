@@ -21,7 +21,8 @@ import {
   Bookmark
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { MOCK_PROMPTS } from "@/lib/mockData";
+import { usePrompts, Prompt } from "@/hooks/usePrompts";
+import { PromptLibraryModal } from "@/components/PromptLibraryModal";
 
 // Mock Data
 const CATEGORIES = ["All", "Product", "Social", "Business", "Art", "Education"];
@@ -29,11 +30,16 @@ const PLATFORMS = ["All", "Instagram", "TikTok", "YouTube", "LinkedIn", "General
 
 export default function PromptLibrary() {
   const [, setLocation] = useLocation();
-  const [prompts, setPrompts] = useState(MOCK_PROMPTS);
+  const { prompts, deletePrompt } = usePrompts();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedPlatform, setSelectedPlatform] = useState("All");
   const [copiedId, setCopiedId] = useState<number | null>(null);
+
+  // Modal State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalView, setModalView] = useState<"list" | "create" | "edit">("list");
+  const [selectedPromptForEdit, setSelectedPromptForEdit] = useState<Prompt | null>(null);
 
   const filteredPrompts = prompts.filter(p => {
     const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -66,7 +72,19 @@ export default function PromptLibrary() {
   };
 
   const handleDelete = (id: number) => {
-    setPrompts(prompts.filter(p => p.id !== id));
+    deletePrompt(id);
+  };
+
+  const handleCreate = () => {
+    setModalView("create");
+    setSelectedPromptForEdit(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEdit = (prompt: Prompt) => {
+    setModalView("edit");
+    setSelectedPromptForEdit(prompt);
+    setIsModalOpen(true);
   };
 
   const getPlatformIcon = (platform: string) => {
@@ -94,7 +112,10 @@ export default function PromptLibrary() {
                 Organize and reuse your best prompts for consistent content creation across platforms.
               </p>
             </div>
-            <button className="px-4 py-2 rounded-xl bg-gradient-accent text-black text-xs font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-lg">
+            <button 
+              onClick={handleCreate}
+              className="px-4 py-2 rounded-xl bg-gradient-accent text-black text-xs font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-lg"
+            >
               <Plus size={16} /> New Prompt
             </button>
           </div>
@@ -155,7 +176,10 @@ export default function PromptLibrary() {
                     <span className="text-[10px] text-gray-500">• {prompt.category}</span>
                   </div>
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-1.5 rounded hover:bg-white/10 text-gray-400 hover:text-white">
+                    <button 
+                      onClick={() => handleEdit(prompt)}
+                      className="p-1.5 rounded hover:bg-white/10 text-gray-400 hover:text-white"
+                    >
                       <Edit size={14} />
                     </button>
                     <button 
@@ -208,6 +232,14 @@ export default function PromptLibrary() {
           )}
         </div>
       </div>
+
+      {/* Prompt Library Modal used for Creating/Editing */}
+      <PromptLibraryModal 
+        isOpen={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        initialView={modalView}
+        promptToEdit={selectedPromptForEdit}
+      />
     </Layout>
   );
 }

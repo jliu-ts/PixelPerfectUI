@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Library, Plus, ChevronLeft, Edit2, Trash2, Save } from "lucide-react";
 import { usePrompts, Prompt } from "@/hooks/usePrompts";
@@ -6,14 +6,41 @@ import { usePrompts, Prompt } from "@/hooks/usePrompts";
 interface PromptLibraryModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  onSelectPrompt: (promptText: string) => void;
+  onSelectPrompt?: (promptText: string) => void;
+  initialView?: "list" | "edit" | "create";
+  promptToEdit?: Prompt | null;
 }
 
-export function PromptLibraryModal({ isOpen, onOpenChange, onSelectPrompt }: PromptLibraryModalProps) {
+export function PromptLibraryModal({ 
+  isOpen, 
+  onOpenChange, 
+  onSelectPrompt, 
+  initialView = "list",
+  promptToEdit = null
+}: PromptLibraryModalProps) {
   const { getPromptsByCategory, addPrompt, updatePrompt, deletePrompt } = usePrompts();
-  const [view, setView] = useState<"list" | "edit" | "create">("list");
-  const [editingPrompt, setEditingPrompt] = useState<Prompt | null>(null);
+  const [view, setView] = useState<"list" | "edit" | "create">(initialView);
+  const [editingPrompt, setEditingPrompt] = useState<Prompt | null>(promptToEdit);
   
+  // Reset state when modal opens/closes or props change
+  useEffect(() => {
+    if (isOpen) {
+      setView(initialView);
+      setEditingPrompt(promptToEdit);
+      if (promptToEdit) {
+         setFormData({
+          title: promptToEdit.title,
+          prompt: promptToEdit.prompt,
+          category: promptToEdit.category,
+          platform: promptToEdit.platform,
+          tags: promptToEdit.tags.join(", ")
+        });
+      } else if (initialView === "create") {
+        resetForm();
+      }
+    }
+  }, [isOpen, initialView, promptToEdit]);
+
   // Form State
   const [formData, setFormData] = useState({
     title: "",
@@ -68,8 +95,14 @@ export function PromptLibraryModal({ isOpen, onOpenChange, onSelectPrompt }: Pro
       });
     }
 
-    setView("list");
-    resetForm();
+    // If we are in a mode where we want to just close after save (like from external trigger), we can do that
+    // But default behavior inside the modal is to go back to list
+    if (initialView !== "list") {
+      onOpenChange(false);
+    } else {
+      setView("list");
+      resetForm();
+    }
   };
 
   const groupedPrompts = getPromptsByCategory();
@@ -97,7 +130,7 @@ export function PromptLibraryModal({ isOpen, onOpenChange, onSelectPrompt }: Pro
                 <Plus size={14} /> New Prompt
               </button>
             )}
-            {view !== "list" && (
+            {view !== "list" && initialView === "list" && (
                <button 
                  onClick={() => {
                    setView("list");
@@ -121,8 +154,10 @@ export function PromptLibraryModal({ isOpen, onOpenChange, onSelectPrompt }: Pro
                     <div
                       key={item.id}
                       onClick={() => {
-                        onSelectPrompt(item.prompt);
-                        onOpenChange(false);
+                        if (onSelectPrompt) {
+                          onSelectPrompt(item.prompt);
+                          onOpenChange(false);
+                        }
                       }}
                       className="relative text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col cursor-pointer"
                     >
@@ -235,8 +270,12 @@ export function PromptLibraryModal({ isOpen, onOpenChange, onSelectPrompt }: Pro
               </button>
               <button 
                 onClick={() => {
-                  setView("list");
-                  resetForm();
+                  if (initialView !== "list") {
+                    onOpenChange(false);
+                  } else {
+                    setView("list");
+                    resetForm();
+                  }
                 }}
                 className="px-6 bg-white/5 text-white py-3 rounded-xl font-bold hover:bg-white/10 transition-colors"
               >
