@@ -140,7 +140,10 @@ export default function IdeaGenerator() {
               </p>
             </div>
             <div className="flex gap-2">
-              <button className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-white/5 transition-colors flex items-center gap-2">
+              <button 
+                onClick={() => setLocation("/feeds")}
+                className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-white/5 transition-colors flex items-center gap-2"
+              >
                 <Rss size={14} /> Manage Feeds
               </button>
             </div>
