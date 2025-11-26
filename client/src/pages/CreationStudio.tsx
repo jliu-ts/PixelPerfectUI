@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical } from "lucide-react";
+import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { MOCK_PROMPTS, MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS } from "@/lib/mockData";
@@ -30,6 +30,12 @@ const GROUPED_PROMPTS = MOCK_PROMPTS.reduce((acc, prompt) => {
   return acc;
 }, [] as { category: string, items: typeof MOCK_PROMPTS }[]);
 
+const VOICES = [
+  { id: "el_1", name: "Felix (Professional)", type: "Cloned", status: "ready", model: "Eleven Multilingual v2" },
+  { id: "el_2", name: "Felix (Excited)", type: "Cloned", status: "ready", model: "Eleven Turbo v2.5" },
+  { id: "el_pre_1", name: "Adam", type: "Premade", status: "ready", model: "Standard" },
+];
+
 export default function CreationStudio() {
   const [location, setLocation] = useLocation();
   const locationState = window.history.state?.usr;
@@ -41,6 +47,7 @@ export default function CreationStudio() {
   const [prompt, setPrompt] = useState(locationState?.prompt || "");
   const [selectedModel, setSelectedModel] = useState(locationState?.model || (activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]));
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [inputMode, setInputMode] = useState<"prompt" | "rss">("prompt");
 
@@ -104,18 +111,17 @@ export default function CreationStudio() {
                           )}
                         >
                           <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center ring-2 ring-white/5 group-hover:ring-white/20 transition-all">
-                              <User size={20} />
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center ring-2 ring-white/5 group-hover:ring-white/20 transition-all overflow-hidden">
+                              {/* Assuming avatar.image is available from mockData */}
+                              <img src={avatar.image || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"} alt={avatar.name} className="w-full h-full object-cover" />
                             </div>
                             <div>
                               <span className="block text-sm font-bold mb-0.5">{avatar.name}</span>
                               <span className="block text-[10px] opacity-70">{avatar.type}</span>
                             </div>
                           </div>
-                          {avatar.optimizedFor?.includes(selectedRatio) && (
-                            <span className="text-[9px] font-bold bg-green-500/20 text-green-400 px-2 py-1 rounded-full border border-green-500/20">
-                              BEST MATCH
-                            </span>
+                          {selectedAvatar === avatar.id && (
+                            <CheckCircle2 size={16} className="text-accent" />
                           )}
                         </button>
                       ))}
@@ -255,6 +261,43 @@ export default function CreationStudio() {
                          ))}
                       </DropdownMenuContent>
                     </DropdownMenu>
+
+                    {/* Voice Selector (Conditional) */}
+                    {(activeTab === "video" && (selectedModel.includes("Avatar") || selectedModel.includes("HeyGen"))) && (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/20 hover:bg-black/40 text-[11px] font-medium text-gray-300 hover:text-white transition-colors border border-white/5 hover:border-white/10">
+                             <Mic size={12} className={selectedVoice ? "text-orange-400" : ""} />
+                             {selectedVoice ? VOICES.find(v => v.id === selectedVoice)?.name.split(" ")[0] : "Voice"}
+                             <ChevronDown size={10} className="opacity-50" />
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="bg-[#1E1E1E]/95 backdrop-blur-xl border-white/10 text-white w-[280px] p-2 rounded-xl shadow-2xl mb-2" sideOffset={10}>
+                           <div className="px-2 py-1.5 text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Select Voice</div>
+                           {VOICES.map(v => (
+                             <DropdownMenuItem
+                               key={v.id}
+                               onClick={() => setSelectedVoice(v.id)}
+                               className={cn(
+                                 "flex items-center justify-between p-2.5 rounded-lg focus:bg-white/10 cursor-pointer mb-1",
+                                 selectedVoice === v.id ? "bg-white/5 border border-orange-500/20" : "border border-transparent"
+                               )}
+                             >
+                                <div className="flex items-center gap-3">
+                                   <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500">
+                                      <Mic size={14} />
+                                   </div>
+                                   <div>
+                                      <span className={cn("text-xs font-bold block", selectedVoice === v.id ? "text-orange-400" : "text-white")}>{v.name}</span>
+                                      <span className="text-[9px] text-gray-500">{v.model}</span>
+                                   </div>
+                                </div>
+                                {selectedVoice === v.id && <CheckCircle2 size={14} className="text-orange-400" />}
+                             </DropdownMenuItem>
+                           ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
 
                     {/* Aspect Ratio */}
                     {(activeTab === "image" || activeTab === "video") && (
