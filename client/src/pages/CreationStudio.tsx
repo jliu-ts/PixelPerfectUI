@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -163,6 +163,11 @@ export default function CreationStudio() {
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {/* Essentials */}
+            <button onClick={() => setLocation("/library")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <Library size={20} className="text-orange-400 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">Prompts</span>
+              <span className="block text-[10px] text-gray-500">My Library</span>
+            </button>
             <button onClick={() => setLocation("/brand")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
               <Palette size={20} className="text-[#00C4CC] mb-2 group-hover:scale-110 transition-transform" />
               <span className="block text-sm font-bold text-white">Brand Kit</span>

@@ -31,6 +31,7 @@ import NotFound from "@/pages/not-found";
 
 import PodcastStudio from "@/pages/PodcastStudio";
 import PodcastPublish from "@/pages/PodcastPublish";
+import PromptLibrary from "@/pages/PromptLibrary";
 
 function Router() {
   return (
@@ -40,6 +41,7 @@ function Router() {
       
       <Route path="/" component={HomeFeed} />
       <Route path="/create" component={CreationStudio} />
+      <Route path="/library" component={PromptLibrary} />
       <Route path="/podcast/studio" component={PodcastStudio} />
       <Route path="/podcast/publish" component={PodcastPublish} />
       <Route path="/result" component={GenerationResult} />

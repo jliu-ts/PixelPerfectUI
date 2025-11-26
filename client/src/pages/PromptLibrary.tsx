@@ -1,0 +1,239 @@
+import React, { useState } from "react";
+import { useLocation } from "wouter";
+import { Layout } from "@/components/Layout";
+import { GradientButton } from "@/components/GradientButton";
+import { 
+  Library, 
+  Plus, 
+  Copy, 
+  Trash2, 
+  Edit, 
+  Tag, 
+  Filter, 
+  Search,
+  Smartphone,
+  Monitor,
+  Instagram,
+  Youtube,
+  Linkedin,
+  Check,
+  ArrowRight,
+  Bookmark
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// Mock Data
+const INITIAL_PROMPTS = [
+  {
+    id: 1,
+    title: "Tech Product Showcase",
+    prompt: "Cinematic 4K product shot of [PRODUCT], floating in zero gravity, studio lighting, sleek black background with neon blue rim light, highly detailed textures, macro lens, 8k resolution",
+    category: "Product",
+    platform: "Instagram",
+    tags: ["Cinematic", "Product", "Tech"],
+    lastUsed: "2h ago"
+  },
+  {
+    id: 2,
+    title: "Viral TikTok Hook",
+    prompt: "POV: You just discovered [TOPIC] and it changed your life. Fast cuts, dynamic text overlay, high energy background music, trending audio style.",
+    category: "Social",
+    platform: "TikTok",
+    tags: ["Viral", "Short Form", "Hook"],
+    lastUsed: "1d ago"
+  },
+  {
+    id: 3,
+    title: "LinkedIn Thought Leadership",
+    prompt: "Professional headshot of a diverse team collaborating in a modern glass office, natural lighting, candid style, depth of field, corporate but approachable atmosphere.",
+    category: "Business",
+    platform: "LinkedIn",
+    tags: ["Professional", "Corporate", "Team"],
+    lastUsed: "3d ago"
+  },
+  {
+    id: 4,
+    title: "Cyberpunk Cityscape",
+    prompt: "Futuristic city street at night, raining, neon signs reflecting in puddles, towering skyscrapers with holographic ads, cyberpunk aesthetic, blade runner style, volumetric fog.",
+    category: "Art",
+    platform: "General",
+    tags: ["Cyberpunk", "Scifi", "Atmospheric"],
+    lastUsed: "1w ago"
+  }
+];
+
+const CATEGORIES = ["All", "Product", "Social", "Business", "Art", "Education"];
+const PLATFORMS = ["All", "Instagram", "TikTok", "YouTube", "LinkedIn", "General"];
+
+export default function PromptLibrary() {
+  const [, setLocation] = useLocation();
+  const [prompts, setPrompts] = useState(INITIAL_PROMPTS);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedPlatform, setSelectedPlatform] = useState("All");
+  const [copiedId, setCopiedId] = useState<number | null>(null);
+
+  const filteredPrompts = prompts.filter(p => {
+    const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          p.prompt.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
+    const matchesPlatform = selectedPlatform === "All" || p.platform === selectedPlatform;
+    return matchesSearch && matchesCategory && matchesPlatform;
+  });
+
+  const handleCopy = (id: number, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const handleUse = (promptText: string) => {
+    setLocation("/create", { state: { prompt: promptText } });
+  };
+
+  const handleDelete = (id: number) => {
+    setPrompts(prompts.filter(p => p.id !== id));
+  };
+
+  const getPlatformIcon = (platform: string) => {
+    switch (platform) {
+      case "Instagram": return <Instagram size={14} />;
+      case "TikTok": return <Smartphone size={14} />;
+      case "YouTube": return <Youtube size={14} />;
+      case "LinkedIn": return <Linkedin size={14} />;
+      default: return <Monitor size={14} />;
+    }
+  };
+
+  return (
+    <Layout>
+      <div className="min-h-screen bg-background pb-24 md:pb-8">
+        {/* Header */}
+        <div className="px-6 pt-8 pb-6 border-b border-white/5 bg-gradient-to-b from-[#1E1E1E] to-transparent sticky top-0 z-10 backdrop-blur-md">
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <h1 className="text-2xl font-display font-bold text-white flex items-center gap-2 mb-2">
+                Prompt Library
+                <Library size={20} className="text-accent" />
+              </h1>
+              <p className="text-sm text-gray-400 max-w-md">
+                Organize and reuse your best prompts for consistent content creation across platforms.
+              </p>
+            </div>
+            <button className="px-4 py-2 rounded-xl bg-gradient-accent text-black text-xs font-bold hover:brightness-110 transition-all flex items-center gap-2 shadow-lg">
+              <Plus size={16} /> New Prompt
+            </button>
+          </div>
+
+          {/* Search and Filters */}
+          <div className="space-y-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
+              <input 
+                type="text" 
+                placeholder="Search prompts..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 transition-all"
+              />
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
+              <div className="flex items-center gap-2 mr-2 border-r border-white/10 pr-4">
+                <Filter size={14} className="text-gray-500" />
+                <span className="text-xs font-bold text-gray-500 uppercase">Filters</span>
+              </div>
+              
+              {/* Categories */}
+              <div className="flex gap-2 overflow-x-auto no-scrollbar">
+                {CATEGORIES.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap border",
+                      selectedCategory === cat
+                        ? "bg-white/10 text-white border-white/20"
+                        : "bg-transparent text-gray-500 border-transparent hover:text-gray-300 hover:bg-white/5"
+                    )}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Prompts Grid */}
+        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredPrompts.length > 0 ? (
+            filteredPrompts.map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="bg-[#1E1E1E] border border-white/5 rounded-2xl p-5 flex flex-col group hover:border-white/20 transition-all relative"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="flex items-center gap-1 px-2 py-1 rounded bg-white/5 text-[10px] font-bold text-gray-300 border border-white/5">
+                      {getPlatformIcon(prompt.platform)} {prompt.platform}
+                    </span>
+                    <span className="text-[10px] text-gray-500">• {prompt.category}</span>
+                  </div>
+                  <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button className="p-1.5 rounded hover:bg-white/10 text-gray-400 hover:text-white">
+                      <Edit size={14} />
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(prompt.id)}
+                      className="p-1.5 rounded hover:bg-red-500/20 text-gray-400 hover:text-red-500"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </div>
+
+                <h3 className="text-base font-bold text-white mb-2 group-hover:text-accent transition-colors">
+                  {prompt.title}
+                </h3>
+                
+                <div className="bg-black/40 rounded-xl p-3 mb-4 border border-white/5 flex-1 relative group/code">
+                  <p className="text-xs text-gray-400 line-clamp-3 font-mono leading-relaxed">
+                    {prompt.prompt}
+                  </p>
+                  <button 
+                    onClick={() => handleCopy(prompt.id, prompt.prompt)}
+                    className="absolute top-2 right-2 p-1.5 rounded bg-[#1E1E1E] text-gray-400 hover:text-white opacity-0 group-hover/code:opacity-100 transition-opacity shadow-lg border border-white/10"
+                  >
+                    {copiedId === prompt.id ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between mt-auto pt-2">
+                  <div className="flex gap-1 flex-wrap">
+                    {prompt.tags.map(tag => (
+                      <span key={tag} className="text-[10px] text-gray-500 px-1.5 py-0.5 bg-white/5 rounded">#{tag}</span>
+                    ))}
+                  </div>
+                  
+                  <button 
+                    onClick={() => handleUse(prompt.prompt)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-accent hover:text-black text-xs font-bold text-white transition-all border border-white/5 hover:border-accent"
+                  >
+                    Use <ArrowRight size={12} />
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 text-center opacity-50">
+              <Bookmark size={48} className="mb-4 text-gray-600" />
+              <h3 className="text-lg font-bold text-white mb-2">No prompts found</h3>
+              <p className="text-sm text-gray-400">Try adjusting your search or create a new one.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </Layout>
+  );
+}
