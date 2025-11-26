@@ -17,12 +17,12 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
       <Sidebar />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex justify-center relative h-screen overflow-hidden">
-        <div className="w-full max-w-md md:max-w-2xl lg:max-w-3xl h-full min-h-screen relative bg-background flex flex-col shadow-2xl overflow-hidden md:border-x md:border-white/5">
+      <div className="flex-1 flex relative h-screen overflow-hidden">
+        <div className="flex-1 w-full h-full min-h-screen relative bg-background flex flex-col overflow-hidden">
           
           {/* Top Navigation Overlay (Mobile Only) */}
           {!hideTabs && (
-            <nav className="md:hidden fixed top-0 max-w-md w-full z-50 p-4 flex justify-between items-center pointer-events-none">
+            <nav className="md:hidden fixed top-0 w-full z-50 p-4 flex justify-between items-center pointer-events-none">
               <div className="pointer-events-auto flex items-center gap-2">
                  <div className="w-8 h-8 rounded-lg bg-gradient-accent flex items-center justify-center font-display font-bold text-black text-sm shadow-[0_0_15px_rgba(124,58,237,0.5)]">
                    TS
