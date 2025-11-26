@@ -13,7 +13,7 @@ import {
 interface PromptLibraryModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  onSelectPrompt?: (promptText: string) => void;
+  onSelectPrompt?: (prompt: Prompt) => void;
   initialView?: "list" | "edit" | "create";
   promptToEdit?: Prompt | null;
 }
@@ -173,7 +173,7 @@ export function PromptLibraryModal({
                       key={item.id}
                       onClick={() => {
                         if (onSelectPrompt) {
-                          onSelectPrompt(item.prompt);
+                          onSelectPrompt(item);
                           onOpenChange(false);
                         }
                       }}

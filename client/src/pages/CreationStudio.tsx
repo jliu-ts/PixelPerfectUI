@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2 } from "lucide-react";
+import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS } from "@/lib/mockData";
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Newspaper, Bot } from "lucide-react";
 import { PromptLibraryModal } from "@/components/PromptLibraryModal";
+import { Prompt } from "@/hooks/usePrompts";
 
 const VOICES = [
   { id: "el_1", name: "Felix (Professional)", type: "Cloned", status: "ready", model: "Eleven Multilingual v2" },
@@ -34,6 +35,7 @@ export default function CreationStudio() {
   const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [inputMode, setInputMode] = useState<"prompt" | "rss">("prompt");
+  const [selectedPromptTitle, setSelectedPromptTitle] = useState<string | null>(null);
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -61,9 +63,14 @@ export default function CreationStudio() {
     }
   };
 
-  const handleSelectPrompt = (promptText: string) => {
-    setPrompt(promptText);
+  const handleSelectPrompt = (prompt: Prompt) => {
+    setPrompt(prompt.prompt);
+    setSelectedPromptTitle(prompt.title);
     setIsLibraryOpen(false);
+  };
+
+  const clearSelectedPrompt = () => {
+    setSelectedPromptTitle(null);
   };
 
   return (
@@ -187,6 +194,22 @@ export default function CreationStudio() {
 
               {/* Input Area */}
               <div className="relative px-2">
+                {/* Active Prompt Pill */}
+                {selectedPromptTitle && inputMode === "prompt" && (
+                  <div className="absolute -top-3 left-4 z-10">
+                    <div className="flex items-center gap-1.5 bg-accent text-black text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-lg cursor-default animate-in fade-in slide-in-from-bottom-2">
+                      <Library size={10} />
+                      Using: {selectedPromptTitle}
+                      <button 
+                        onClick={clearSelectedPrompt}
+                        className="ml-1 hover:bg-black/10 rounded-full p-0.5"
+                      >
+                        <X size={10} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                  {inputMode === "prompt" ? (
                     <textarea 
                       className="w-full bg-transparent p-3 text-base text-white placeholder:text-gray-500 resize-none focus:outline-none min-h-[60px] max-h-[200px]"
