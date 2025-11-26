@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Search, Bell } from "lucide-react";
 import { BottomTabs } from "./BottomTabs";
 import { Sidebar } from "./Sidebar";
+import { AppBreadcrumbs } from "./Breadcrumbs";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -45,6 +46,9 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
           )}
 
           <main className="flex-1 relative overflow-y-auto no-scrollbar pb-24 md:pb-0 h-full">
+            <div className="hidden md:block pt-4">
+              <AppBreadcrumbs />
+            </div>
             {children}
           </main>
           {!hideTabs && <div className="md:hidden"><BottomTabs /></div>}
