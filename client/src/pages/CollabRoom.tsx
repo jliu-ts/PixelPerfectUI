@@ -148,7 +148,7 @@ export default function CollabRoom() {
             <button className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors">
               <Settings size={20} />
             </button>
-            <GradientButton className="hidden md:flex gap-2">
+            <GradientButton size="sm" className="hidden md:flex gap-2">
               <Share2 size={14} /> Share
             </GradientButton>
           </div>
