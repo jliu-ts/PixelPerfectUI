@@ -2,12 +2,42 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const styles = [
   "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave", "Minimalist"
+];
+
+const QUICK_PROMPTS = [
+  {
+    category: "Product",
+    items: [
+      { title: "Cinematic Product Shot", text: "Cinematic 4K product shot of [PRODUCT], floating in zero gravity, studio lighting, sleek black background with neon blue rim light, highly detailed textures, macro lens, 8k resolution" },
+      { title: "Minimalist Packaging", text: "Clean minimalist packaging design for organic skincare brand, pastel colors, soft lighting, white background, high end aesthetic" }
+    ]
+  },
+  {
+    category: "Social",
+    items: [
+      { title: "Viral TikTok Hook", text: "POV: You just discovered [TOPIC] and it changed your life. Fast cuts, dynamic text overlay, high energy background music, trending audio style." },
+      { title: "Instagram Lifestyle", text: "Candid lifestyle photo of a digital nomad working from a bali cafe, natural sunlight, aesthetic coffee latte art, macbook pro, lush greenery, depth of field" }
+    ]
+  },
+  {
+    category: "Art & Design",
+    items: [
+      { title: "Cyberpunk City", text: "Futuristic city street at night, raining, neon signs reflecting in puddles, towering skyscrapers with holographic ads, cyberpunk aesthetic, blade runner style, volumetric fog." },
+      { title: "Abstract 3D", text: "Abstract 3D shape render, glass dispersion effect, iridescent colors, dark background, octane render, 8k, wallpaper" }
+    ]
+  }
 ];
 
 const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "HeyGen Avatar"];
@@ -46,6 +76,7 @@ export default function CreationStudio() {
   const [isCarouselMode, setIsCarouselMode] = useState(locationState?.prompt?.includes("carousel") || false);
   const [showHistory, setShowHistory] = useState(false);
   const [isEnhancing, setIsEnhancing] = useState(false);
+  const [isLibraryOpen, setIsLibraryOpen] = useState(false);
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -144,6 +175,13 @@ export default function CreationStudio() {
         {/* Main Input Area */}
         <div className="relative mb-6 group">
           <div className="absolute top-4 right-4 z-10 flex gap-2">
+             <button 
+               onClick={() => setIsLibraryOpen(true)}
+               className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+               title="Browse Library"
+             >
+               <BookOpen size={16} />
+             </button>
              <button 
                onClick={() => setShowHistory(!showHistory)}
                className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
@@ -398,6 +436,41 @@ export default function CreationStudio() {
         </div>
 
       </div>
+      
+      {/* Prompt Library Modal */}
+      <Dialog open={isLibraryOpen} onOpenChange={setIsLibraryOpen}>
+        <DialogContent className="bg-[#1E1E1E] border-white/10 text-white max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-display text-xl flex items-center gap-2">
+              <Library className="text-accent" size={20} /> 
+              Select a Prompt
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-6 mt-4">
+            {QUICK_PROMPTS.map((category, i) => (
+              <div key={i}>
+                <h4 className="text-xs font-bold text-gray-500 uppercase mb-3 tracking-wider">{category.category}</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {category.items.map((item, j) => (
+                    <button
+                      key={j}
+                      onClick={() => {
+                        setPrompt(item.text);
+                        setIsLibraryOpen(false);
+                      }}
+                      className="text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col"
+                    >
+                      <h5 className="font-bold text-white text-sm mb-2 group-hover:text-accent transition-colors">{item.title}</h5>
+                      <p className="text-xs text-gray-400 line-clamp-3 leading-relaxed">{item.text}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }
