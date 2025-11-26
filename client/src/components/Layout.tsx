@@ -16,8 +16,10 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
         {/* Top Navigation Overlay (Only show if tabs are visible, implying a main feed page) */}
         {!hideTabs && (
           <nav className="fixed top-0 max-w-md w-full z-50 p-4 flex justify-between items-center pointer-events-none">
-            <div className="pointer-events-auto">
-               {/* TS Logo Placeholder */}
+            <div className="pointer-events-auto flex items-center gap-2">
+               <div className="w-8 h-8 rounded-lg bg-gradient-accent flex items-center justify-center font-display font-bold text-black text-sm shadow-[0_0_15px_rgba(124,58,237,0.5)]">
+                 TS
+               </div>
             </div>
             
             <div className="flex gap-4 pointer-events-auto">

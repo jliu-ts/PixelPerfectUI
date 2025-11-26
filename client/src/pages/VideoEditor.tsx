@@ -197,9 +197,30 @@ export default function VideoEditor() {
                   </button>
                 ))}
 
-                {(activeTool !== "filters" && activeTool !== "effects") && (
+                {(activeTool !== "filters" && activeTool !== "effects" && activeTool !== "text" && activeTool !== "music") && (
                   <div className="w-full text-center text-gray-500 text-sm italic">
                     {TOOLS.find(t => t.id === activeTool)?.label} options coming soon
+                  </div>
+                )}
+
+                {activeTool === "text" && (
+                  <div className="flex items-center gap-2 w-full">
+                    <input 
+                      type="text" 
+                      placeholder="Enter text..." 
+                      className="flex-1 bg-[#252525] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-accent"
+                    />
+                    <button className="p-2 rounded-lg bg-white text-black font-bold text-xs hover:bg-gray-200">ADD</button>
+                  </div>
+                )}
+
+                {activeTool === "music" && (
+                  <div className="flex gap-2 overflow-x-auto no-scrollbar w-full">
+                    {["LoFi Chill", "Cyber Punk", "Epic Trap", "Cinematic"].map(track => (
+                      <button key={track} className="px-3 py-1.5 rounded-lg bg-[#252525] border border-white/5 hover:bg-[#333] text-xs whitespace-nowrap flex items-center gap-2">
+                        <Music size={12} /> {track}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
