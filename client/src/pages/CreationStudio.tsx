@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -16,7 +16,7 @@ export default function CreationStudio() {
   const [location, setLocation] = useLocation();
   const locationState = window.history.state?.usr;
   
-  const [activeTab, setActiveTab] = useState<"text" | "image" | "video">((locationState?.mode as any) || "image");
+  const [activeTab, setActiveTab] = useState<"text" | "image" | "video" | "audio">((locationState?.mode as any) || "image");
   const [selectedStyle, setSelectedStyle] = useState(locationState?.style || "Cinematic");
   const [prompt, setPrompt] = useState(locationState?.prompt || "");
   const [selectedModel, setSelectedModel] = useState(locationState?.model || (activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]));
@@ -52,118 +52,7 @@ export default function CreationStudio() {
           </div>
         </div>
 
-        {/* Brand & Context Tools (New) */}
-        <div className="mb-8">
-          <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Creator Tools</h3>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2">
-          <button 
-            onClick={() => setLocation("/podcast/studio")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <Mic size={16} className="text-orange-500" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Podcast</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">AI Audio Studio</span>
-            </div>
-          </button>
-          
-          <button 
-            onClick={() => setLocation("/brand")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <Palette size={16} className="text-[#00C4CC]" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Brand Kit</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Canva Linked</span>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => setLocation("/avatars")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <User size={16} className="text-purple-400" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Avatars</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">HeyGen + 11Labs</span>
-            </div>
-          </button>
-          
-          <button 
-            onClick={() => setLocation("/store")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <ShoppingBag size={16} className="text-[#95BF47]" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Store</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Shopify</span>
-            </div>
-          </button>
-          
-          <button 
-            onClick={() => setLocation("/research")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <Bot size={16} className="text-cyan-400" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Society AI</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Deep Research</span>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => setLocation("/context")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <BrainCircuit size={16} className="text-blue-400" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Context</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">MCP Active</span>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => setLocation("/collab")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <Users size={16} className="text-pink-400" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Collab</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Writer's Room</span>
-            </div>
-          </button>
-
-          <button 
-            onClick={() => setLocation("/marketplace")}
-            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
-          >
-            <Store size={16} className="text-yellow-400" />
-            <div className="text-left">
-              <span className="block text-xs font-bold text-white">Market</span>
-              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">Buy Assets</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
-        {/* Model Selector (New) */}
-        <div className="mb-6">
-          <label className="text-xs font-medium text-gray-400 uppercase mb-2 block">Generation Model</label>
-          <div className="relative">
-            <select 
-              value={selectedModel} 
-              onChange={(e) => setSelectedModel(e.target.value)}
-              className="w-full appearance-none bg-[#1E1E1E] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white focus:outline-none focus:border-primary/50 transition-all"
-            >
-              {currentModels.map(m => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" size={16} />
-          </div>
-        </div>
-
-        {/* Tab Selector */}
+        {/* Tab Selector (Optimized) */}
         <div className="flex p-1 bg-[#1E1E1E] rounded-xl mb-6 border border-white/5">
           <button 
             onClick={() => setActiveTab("text")}
@@ -186,81 +75,133 @@ export default function CreationStudio() {
             <Film size={16} />
             Video
           </button>
-          
           <button 
-            onClick={() => setLocation("/camera")}
-            className="flex-1 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-accent hover:bg-accent/10 hover:text-accent"
+            onClick={() => {
+              setActiveTab("audio");
+              setLocation("/podcast/studio");
+            }}
+            className={cn("flex-1 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2", activeTab === "audio" ? "bg-[#2A2A2A] text-white shadow-sm" : "text-gray-500 hover:text-gray-300")}
           >
-            <CameraIcon size={16} />
-            AR Cam
+            <Mic size={16} />
+            Audio
           </button>
         </div>
 
-        {/* Format Toggle for Carousel (New) */}
-        {activeTab === "image" && (
-          <div className="flex items-center gap-2 mb-4 px-1">
-            <button 
-              onClick={() => setIsCarouselMode(!isCarouselMode)}
-              className={cn(
-                "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border transition-all",
-                isCarouselMode 
-                  ? "bg-primary/20 border-primary text-primary" 
-                  : "bg-white/5 border-transparent text-gray-400 hover:bg-white/10"
-              )}
-            >
-              <Layers size={14} />
-              Carousel Mode
-            </button>
-            {isCarouselMode && <span className="text-[10px] text-gray-500 animate-in fade-in">Generates 5 sequential slides</span>}
-          </div>
-        )}
-
-        {/* Main Input */}
-        <div className="relative mb-8 group">
+        {/* Main Input Area */}
+        <div className="relative mb-6 group">
           <textarea 
-            className="w-full h-48 bg-[#1E1E1E] rounded-2xl p-4 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-transparent focus:border-white/10 focus:bg-[#252525] transition-all"
-            placeholder="Describe your dream..."
+            className="w-full h-40 bg-[#1E1E1E] rounded-2xl p-4 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-transparent focus:border-white/10 focus:bg-[#252525] transition-all"
+            placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream..."}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
           />
-          <div className="absolute bottom-4 right-4">
+          <div className="absolute bottom-4 right-4 flex gap-2">
+             {activeTab === "image" && (
+               <button 
+                 onClick={() => setIsCarouselMode(!isCarouselMode)}
+                 className={cn(
+                   "p-2 rounded-lg transition-colors flex items-center gap-2 text-xs font-bold",
+                   isCarouselMode ? "bg-primary/20 text-primary" : "bg-white/5 text-gray-400 hover:text-white"
+                 )}
+               >
+                 <Layers size={16} />
+                 {isCarouselMode ? "Carousel On" : ""}
+               </button>
+             )}
              <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
                <Sparkles size={18} />
              </button>
           </div>
         </div>
 
-        {/* Style Parameters */}
-        <div className="mb-auto">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Style Preset</h3>
-            <button className="text-xs text-accent hover:underline">View All</button>
-          </div>
-          
-          <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
-            {styles.map((style) => (
-              <button
-                key={style}
-                onClick={() => setSelectedStyle(style)}
-                className={cn(
-                  "px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap border transition-all",
-                  selectedStyle === style 
-                    ? "bg-[#1E1E1E] text-white border-accent shadow-[0_0_15px_-5px_rgba(34,211,238,0.3)]" 
-                    : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:border-white/20 hover:text-gray-200"
-                )}
+        {/* Model & Style Settings */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div>
+            <label className="text-xs font-medium text-gray-400 uppercase mb-2 block">Model</label>
+            <div className="relative">
+              <select 
+                value={selectedModel} 
+                onChange={(e) => setSelectedModel(e.target.value)}
+                className="w-full appearance-none bg-[#1E1E1E] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white focus:outline-none focus:border-primary/50 transition-all"
               >
-                {style}
-              </button>
-            ))}
+                {currentModels.map(m => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" size={16} />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs font-medium text-gray-400 uppercase mb-2 block">Style</label>
+            <div className="relative">
+              <select 
+                value={selectedStyle} 
+                onChange={(e) => setSelectedStyle(e.target.value)}
+                className="w-full appearance-none bg-[#1E1E1E] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white focus:outline-none focus:border-primary/50 transition-all"
+              >
+                {styles.map(s => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" size={16} />
+            </div>
           </div>
         </div>
 
         {/* Generate Button */}
-        <div className="mt-8">
+        <div className="mb-10">
           <GradientButton onClick={() => setLocation("/result")}>
             GENERATE <span className="opacity-70 text-sm ml-1 font-normal">(5 Credits)</span>
           </GradientButton>
         </div>
+
+        {/* Studio Toolkit (Reorganized) */}
+        <div className="mb-8">
+          <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+            <Rocket size={14} /> Studio Toolkit
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {/* Essentials */}
+            <button onClick={() => setLocation("/brand")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <Palette size={20} className="text-[#00C4CC] mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">Brand Kit</span>
+              <span className="block text-[10px] text-gray-500">Assets & Logos</span>
+            </button>
+
+            <button onClick={() => setLocation("/context")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <BrainCircuit size={20} className="text-blue-400 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">Context</span>
+              <span className="block text-[10px] text-gray-500">Knowledge Base</span>
+            </button>
+
+            <button onClick={() => setLocation("/avatars")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <User size={20} className="text-purple-400 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">Avatars</span>
+              <span className="block text-[10px] text-gray-500">Digital Twins</span>
+            </button>
+
+            <button onClick={() => setLocation("/camera")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <CameraIcon size={20} className="text-pink-400 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">AR Cam</span>
+              <span className="block text-[10px] text-gray-500">Filters & Lenses</span>
+            </button>
+
+            {/* Advanced */}
+            <button onClick={() => setLocation("/research")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <Bot size={20} className="text-cyan-400 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">Society AI</span>
+              <span className="block text-[10px] text-gray-500">Deep Research</span>
+            </button>
+
+            <button onClick={() => setLocation("/collab")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
+              <Users size={20} className="text-green-400 mb-2 group-hover:scale-110 transition-transform" />
+              <span className="block text-sm font-bold text-white">Collab</span>
+              <span className="block text-[10px] text-gray-500">Writer's Room</span>
+            </button>
+          </div>
+        </div>
+
       </div>
     </Layout>
   );
