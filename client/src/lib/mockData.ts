@@ -1,3 +1,68 @@
+import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
+import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
+import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
+
+// Mock Feed Data
+export const FEED_ITEMS = [
+  {
+    id: 1,
+    username: "cosmic_dreamer",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+    description: "Exploring the depths of the nebula with the new V4 model. The colors are absolutely insane! 🌌✨ #AIart #Space",
+    likes: 4200,
+    comments: 842,
+    music: "Original Audio - cosmic_dreamer",
+    image: bgImage,
+    verified: true
+  },
+  {
+    id: 2,
+    username: "pixel_ninja",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ninja",
+    description: "Cyberpunk cityscapes are my jam. Generated this in 4K using the new 'Neon Noir' preset. 🏙️🤖 #Cyberpunk #DigitalArt",
+    likes: 12500,
+    comments: 1200,
+    music: "Cyber City - Neon Beats",
+    image: cyberpunkImage,
+    verified: false
+  },
+  {
+    id: 3,
+    username: "nature_whisperer",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Annie",
+    description: "Found this hidden waterfall in the latent space. 🌿💧 So peaceful. #Nature #AI #Relax",
+    likes: 8900,
+    comments: 560,
+    music: "Forest Sounds - Nature",
+    image: natureImage,
+    verified: true
+  }
+];
+
+// Expanded Mock Stories Data (Super App Channels)
+export const STORIES = [
+  { id: "battle", type: "live", name: "Live Battle", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Battle" },
+  { id: 1, type: "story", name: "Instagram", avatar: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", hasNew: true },
+  { id: 2, type: "story", name: "TikTok", avatar: "https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg", hasNew: true },
+  { id: 3, type: "story", name: "YouTube", avatar: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg", hasNew: false },
+  { id: 4, type: "story", name: "OpenAI", avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg", hasNew: true },
+  { id: 5, type: "story", name: "Midjourney", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Midjourney", hasNew: true },
+  { id: 6, type: "story", name: "Runway", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Runway", hasNew: false },
+  { id: 7, type: "story", name: "Stable Diff", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Stable", hasNew: true },
+  { id: 8, type: "story", name: "Pika Labs", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Pika", hasNew: true },
+  { id: 9, type: "story", name: "ElevenLabs", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Eleven", hasNew: false },
+  { id: 10, type: "story", name: "HuggingFace", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Hugging", hasNew: true },
+  { id: 11, type: "story", name: "Leonardo", avatar: "https://api.dicebear.com/7.x/identicon/svg?seed=Leonardo", hasNew: false },
+];
+
+// Mock Comments Data
+export const MOCK_COMMENTS = [
+  { id: 1, user: "art_lover_99", text: "This is incredible! Which model did you use?", time: "2m" },
+  { id: 2, user: "prompt_engineer", text: "The lighting is perfect. Mind sharing the seed?", time: "5m" },
+  { id: 3, user: "cyber_punk", text: "🔥🔥🔥", time: "12m" },
+  { id: 4, user: "future_vision", text: "AI art just keeps getting better.", time: "1h" },
+];
+
 // Mock Prompt Data
 export const MOCK_PROMPTS = [
   {
