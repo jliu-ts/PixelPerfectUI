@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Target } from "lucide-react";
+import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Target, Instagram, Youtube, Twitter, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
 import gridImage from "@assets/generated_images/abstract_digital_art_square.png";
@@ -10,6 +10,18 @@ import gridImage from "@assets/generated_images/abstract_digital_art_square.png"
 export default function Profile() {
   const [, setLocation] = useLocation();
   const [activeTab, setActiveTab] = React.useState<"creations" | "saved">("creations");
+
+  // Mock Connected Accounts
+  const CONNECTED_ACCOUNTS = [
+    { id: "instagram", name: "Instagram", icon: Instagram, color: "#E1306C", handle: "@felix.art", connected: true },
+    { id: "tiktok", name: "TikTok", icon: ({ className }: { className?: string }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor" height="24" width="24">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+      </svg>
+    ), color: "#FFFFFF", handle: "@felix_k", connected: true },
+    { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "Felix Kjellberg", connected: false },
+    { id: "twitter", name: "X", icon: Twitter, color: "#1DA1F2", handle: "@felix", connected: true },
+  ];
 
   return (
     <Layout>
@@ -74,6 +86,41 @@ export default function Profile() {
               <span className="text-lg font-bold text-white">14.5k</span>
               <span className="text-xs text-gray-500 uppercase tracking-wide">Likes</span>
             </div>
+          </div>
+        </div>
+
+        {/* Connected Accounts (Super App Feature) */}
+        <div className="px-6 mb-8">
+          <h3 className="text-xs font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
+            <Globe size={12} /> Connected Socials
+          </h3>
+          <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+            {CONNECTED_ACCOUNTS.map((account) => (
+              <div 
+                key={account.id} 
+                className={cn(
+                  "min-w-[100px] p-3 rounded-xl border flex flex-col items-center gap-2 transition-all cursor-pointer",
+                  account.connected 
+                    ? "bg-[#1E1E1E] border-white/10 hover:border-white/30" 
+                    : "bg-transparent border-dashed border-white/10 opacity-60 hover:opacity-100 hover:bg-white/5"
+                )}
+              >
+                <div 
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: account.connected ? account.color : '#333', color: account.id === 'tiktok' || account.id === 'x' ? 'black' : 'white' }}
+                >
+                  <account.icon className="w-4 h-4 text-white" />
+                </div>
+                <div className="text-center">
+                  <span className="text-[10px] font-bold text-white block truncate max-w-[80px]">
+                    {account.connected ? account.handle : "Connect"}
+                  </span>
+                  <span className="text-[8px] text-gray-500 uppercase">
+                    {account.name}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
