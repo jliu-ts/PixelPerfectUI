@@ -161,7 +161,7 @@ export default function CreationStudio() {
             <Rocket size={14} /> Studio Toolkit
           </h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {/* Essentials */}
             <button onClick={() => setLocation("/brand")} className="p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 transition-all text-left group">
               <Palette size={20} className="text-[#00C4CC] mb-2 group-hover:scale-110 transition-transform" />

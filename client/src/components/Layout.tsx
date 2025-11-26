@@ -44,7 +44,7 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
             </nav>
           )}
 
-          <main className="flex-1 relative overflow-y-auto no-scrollbar pb-24 md:pb-0">
+          <main className="flex-1 relative overflow-y-auto no-scrollbar pb-24 md:pb-0 h-full">
             {children}
           </main>
           {!hideTabs && <div className="md:hidden"><BottomTabs /></div>}
