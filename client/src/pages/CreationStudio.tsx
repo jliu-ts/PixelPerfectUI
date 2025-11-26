@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const styles = [
@@ -56,6 +56,17 @@ export default function CreationStudio() {
         <div className="mb-8">
           <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Creator Tools</h3>
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2">
+          <button 
+            onClick={() => setLocation("/podcast/studio")}
+            className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"
+          >
+            <Mic size={16} className="text-orange-500" />
+            <div className="text-left">
+              <span className="block text-xs font-bold text-white">Podcast</span>
+              <span className="block text-[10px] text-gray-500 group-hover:text-gray-300">AI Audio Studio</span>
+            </div>
+          </button>
+          
           <button 
             onClick={() => setLocation("/brand")}
             className="min-w-[140px] py-3 px-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors group"

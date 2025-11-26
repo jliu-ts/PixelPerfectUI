@@ -29,6 +29,9 @@ import DesignSystem from "@/pages/DesignSystem";
 import Wallet from "@/pages/Wallet";
 import NotFound from "@/pages/not-found";
 
+import PodcastStudio from "@/pages/PodcastStudio";
+import PodcastPublish from "@/pages/PodcastPublish";
+
 function Router() {
   return (
     <Switch>
@@ -37,6 +40,8 @@ function Router() {
       
       <Route path="/" component={HomeFeed} />
       <Route path="/create" component={CreationStudio} />
+      <Route path="/podcast/studio" component={PodcastStudio} />
+      <Route path="/podcast/publish" component={PodcastPublish} />
       <Route path="/result" component={GenerationResult} />
       <Route path="/editor" component={VideoEditor} />
       <Route path="/share" component={SocialShare} />
