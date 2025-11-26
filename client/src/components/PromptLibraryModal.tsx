@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Library, Plus, ChevronLeft, Edit2, Trash2, Save } from "lucide-react";
 import { usePrompts, Prompt } from "@/hooks/usePrompts";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface PromptLibraryModalProps {
   isOpen: boolean;
@@ -10,6 +17,17 @@ interface PromptLibraryModalProps {
   initialView?: "list" | "edit" | "create";
   promptToEdit?: Prompt | null;
 }
+
+const PLATFORM_OPTIONS = [
+  "Instagram",
+  "TikTok",
+  "YouTube",
+  "LinkedIn",
+  "Twitter",
+  "Pinterest",
+  "Facebook",
+  "General"
+];
 
 export function PromptLibraryModal({ 
   isOpen, 
@@ -230,13 +248,25 @@ export function PromptLibraryModal({
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-bold text-gray-400 uppercase">Platform</label>
-                <input 
-                  type="text" 
-                  value={formData.platform}
-                  onChange={(e) => setFormData({...formData, platform: e.target.value})}
-                  className="w-full bg-black/20 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-accent focus:outline-none"
-                  placeholder="e.g. Instagram"
-                />
+                <Select 
+                  value={formData.platform} 
+                  onValueChange={(value) => setFormData({...formData, platform: value})}
+                >
+                  <SelectTrigger className="w-full bg-black/20 border border-white/10 rounded-lg h-[46px] text-sm text-white focus:ring-accent focus:ring-offset-0">
+                    <SelectValue placeholder="Select Platform" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#1E1E1E] border-white/10 text-white">
+                    {PLATFORM_OPTIONS.map((platform) => (
+                      <SelectItem 
+                        key={platform} 
+                        value={platform}
+                        className="focus:bg-white/10 focus:text-white cursor-pointer"
+                      >
+                        {platform}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
