@@ -3,6 +3,8 @@ import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { ArrowLeft, Database, Plus, RefreshCw, CheckCircle2, XCircle, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const SOURCES = [
   { id: "airtable", name: "Airtable", icon: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Airtable_Logo.svg", status: "connected", lastSync: "5m ago" },
@@ -38,19 +40,19 @@ export default function ContextSources() {
 
         <div className="p-6">
           {/* MCP Explanation */}
-          <div className="mb-8 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+          <Card className="mb-8 p-4 bg-blue-500/10 border-blue-500/20">
             <h3 className="text-sm font-bold text-blue-400 mb-1">Connected Ecosystem</h3>
             <p className="text-xs text-gray-300 leading-relaxed">
               Your stack is synced. Society AI uses Perplexity & Tavily for search, Claude & OpenAI for reasoning, and Replicate for generation.
             </p>
-          </div>
+          </Card>
 
           {/* Active Sources */}
           <div className="space-y-4">
             {SOURCES.map(source => (
-              <div 
+              <Card 
                 key={source.id}
-                className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-between group hover:border-white/10 transition-colors"
+                className="p-4 flex items-center justify-between group hover:border-white/10 transition-colors bg-card"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center">
@@ -58,15 +60,15 @@ export default function ContextSources() {
                   </div>
                   <div>
                     <h3 className="font-bold text-white text-sm">{source.name}</h3>
-                    <p className="text-xs text-gray-500 flex items-center gap-1">
+                    <div className="mt-1">
                       {source.status === "connected" ? (
-                        <span className="text-green-500 flex items-center gap-1">
+                        <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 gap-1 h-5 px-1.5 text-[10px]">
                           <CheckCircle2 size={10} /> Synced {source.lastSync}
-                        </span>
+                        </Badge>
                       ) : (
-                        <span className="text-gray-500">Not connected</span>
+                        <span className="text-xs text-gray-500">Not connected</span>
                       )}
-                    </p>
+                    </div>
                   </div>
                 </div>
 
@@ -79,7 +81,7 @@ export default function ContextSources() {
                     Connect
                   </button>
                 )}
-              </div>
+              </Card>
             ))}
           </div>
 
