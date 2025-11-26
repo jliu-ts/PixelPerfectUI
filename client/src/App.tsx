@@ -28,6 +28,9 @@ import DeepResearch from "@/pages/DeepResearch";
 import DesignSystem from "@/pages/DesignSystem";
 import Wallet from "@/pages/Wallet";
 import ManageFeeds from "@/pages/ManageFeeds";
+import MediaKit from "@/pages/MediaKit";
+import LegalGuard from "@/pages/LegalGuard";
+import Sponsorships from "@/pages/Sponsorships";
 import NotFound from "@/pages/not-found";
 
 import PodcastStudio from "@/pages/PodcastStudio";
@@ -68,6 +71,9 @@ function Router() {
       <Route path="/research" component={DeepResearch} />
       <Route path="/design" component={DesignSystem} />
       <Route path="/feeds" component={ManageFeeds} />
+      <Route path="/media-kit" component={MediaKit} />
+      <Route path="/legal" component={LegalGuard} />
+      <Route path="/sponsorships" component={Sponsorships} />
       
       <Route component={NotFound} />
     </Switch>
