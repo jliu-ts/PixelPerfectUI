@@ -83,6 +83,12 @@ export function Sidebar() {
               <span className="text-sm font-medium">Avatars</span>
             </div>
           </Link>
+          <Link href="/ar-cam">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/ar-cam") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <Camera size={20} />
+              <span className="text-sm font-medium">AR Cam</span>
+            </div>
+          </Link>
           <Link href="/context">
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/context") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <BrainCircuit size={20} />
