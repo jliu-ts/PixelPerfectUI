@@ -487,45 +487,45 @@ export default function CreationStudio() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-              <Rocket size={14} /> Studio Toolkit
+              <Rocket size={14} /> Creative Suite
             </h3>
-            <button className="text-[10px] text-accent hover:underline">Customize Toolbar</button>
           </div>
           
-          <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-2">
-            {/* Compact Toolbar Items */}
-            <button onClick={() => setLocation("/library")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <Library size={18} className="text-orange-400 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">Prompts</span>
-            </button>
-            <button onClick={() => setLocation("/brand")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <Palette size={18} className="text-[#00C4CC] mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">Brand</span>
-            </button>
-            <button onClick={() => setLocation("/context")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <BrainCircuit size={18} className="text-blue-400 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">Context</span>
-            </button>
-            <button onClick={() => setLocation("/avatars")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <User size={18} className="text-purple-400 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">Avatars</span>
-            </button>
-            <button onClick={() => setLocation("/camera")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <CameraIcon size={18} className="text-pink-400 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">AR Cam</span>
-            </button>
-            <button onClick={() => setLocation("/research")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <Bot size={18} className="text-cyan-400 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">AI Agent</span>
-            </button>
-            <button onClick={() => setLocation("/collab")} className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <Users size={18} className="text-green-400 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-400 group-hover:text-white">Collab</span>
-            </button>
-            <button className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#1E1E1E] border border-dashed border-white/10 hover:border-white/20 hover:bg-white/5 transition-all group">
-              <Plus size={18} className="text-gray-600 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-[9px] font-medium text-gray-500 group-hover:text-white">Add</span>
-            </button>
+          <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2">
+            {[
+              { icon: Library, label: "Library", color: "text-orange-400", path: "/library", desc: "Saved prompts" },
+              { icon: Palette, label: "Brand Kit", color: "text-[#00C4CC]", path: "/brand", desc: "Logos & assets" },
+              { icon: BrainCircuit, label: "Context", color: "text-blue-400", path: "/context", desc: "Knowledge" },
+              { icon: User, label: "Avatars", color: "text-purple-400", path: "/avatars", desc: "Digital twins" },
+              { icon: CameraIcon, label: "AR Cam", color: "text-pink-400", path: "/camera", desc: "Filters" },
+              { icon: Bot, label: "AI Agent", color: "text-cyan-400", path: "/research", desc: "Research" },
+              { icon: Users, label: "Collab", color: "text-green-400", path: "/collab", desc: "Team work" },
+            ].map((tool) => (
+              <button 
+                key={tool.label}
+                onClick={() => setLocation(tool.path)}
+                className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center group-hover:bg-[#252525] group-hover:scale-105 group-hover:border-white/20 transition-all shadow-sm relative overflow-hidden">
+                   <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-current", tool.color.replace('text-', 'bg-'))} />
+                   <tool.icon size={24} className={cn("transition-colors relative z-10", tool.color)} />
+                </div>
+                <div className="text-center">
+                  <span className="text-[11px] font-semibold text-gray-300 group-hover:text-white transition-colors block leading-tight">{tool.label}</span>
+                  <span className="text-[9px] text-gray-600 group-hover:text-gray-500 transition-colors block mt-0.5">{tool.desc}</span>
+                </div>
+              </button>
+            ))}
+            
+            {/* Add Button */}
+             <button className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
+                <div className="w-14 h-14 rounded-2xl border border-dashed border-white/10 flex items-center justify-center group-hover:bg-white/5 group-hover:border-white/30 transition-all">
+                   <Plus size={20} className="text-gray-600 group-hover:text-white transition-colors" />
+                </div>
+                <div className="text-center">
+                  <span className="text-[11px] font-semibold text-gray-500 group-hover:text-gray-400 transition-colors block leading-tight">Add App</span>
+                </div>
+              </button>
           </div>
         </div>
 
