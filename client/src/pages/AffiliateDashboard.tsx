@@ -12,7 +12,9 @@ import {
   ChevronRight, 
   CheckCircle2,
   CreditCard,
-  Coins
+  Coins,
+  Zap,
+  Gem
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
@@ -47,6 +49,10 @@ export default function AffiliateDashboard() {
   const [, setLocation] = useLocation();
   const [walletConnected, setWalletConnected] = useState(false);
   const [activeTab, setActiveTab] = useState<"overview" | "campaigns" | "networks" | "rewards">("overview");
+  
+  // Mock Scoreboard Data
+  const [genCredits, setGenCredits] = useState(450);
+  const [rewardCredits, setRewardCredits] = useState(1200);
 
   const connectWallet = () => {
     // Simulate wallet connection
@@ -57,19 +63,31 @@ export default function AffiliateDashboard() {
     <Layout hideTabs>
       <div className="min-h-screen bg-background pb-8">
         {/* Header */}
-        <div className="flex items-center gap-4 p-4 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5">
-          <button 
-            onClick={() => setLocation("/profile")}
-            className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
-          >
-            <ArrowLeft size={24} />
-          </button>
-          <div>
-            <h1 className="text-xl font-display font-bold text-white flex items-center gap-2">
-              Creator Hub
-              <Briefcase size={18} className="text-green-400" />
-            </h1>
-            <p className="text-xs text-gray-400">Monetize your content</p>
+        <div className="flex items-center gap-4 p-4 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5 justify-between">
+          <div className="flex items-center gap-3">
+             <button 
+              onClick={() => setLocation("/profile")}
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div>
+              <h1 className="text-lg font-display font-bold text-white flex items-center gap-2">
+                Creator Hub
+              </h1>
+            </div>
+          </div>
+
+          {/* Scoreboard (New) */}
+          <div className="flex items-center gap-2 bg-black/40 p-1 rounded-lg border border-white/10">
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30">
+              <Zap size={12} className="text-yellow-400 fill-yellow-400" />
+              <span className="text-xs font-bold text-white">{genCredits}</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-gradient-to-r from-emerald-600/20 to-cyan-600/20 border border-emerald-500/30">
+              <Gem size={12} className="text-cyan-400 fill-cyan-400" />
+              <span className="text-xs font-bold text-white">{rewardCredits}</span>
+            </div>
           </div>
         </div>
 
