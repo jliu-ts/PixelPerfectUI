@@ -27,6 +27,7 @@ import SearchPage from "@/pages/SearchPage";
 import DeepResearch from "@/pages/DeepResearch";
 import DesignSystem from "@/pages/DesignSystem";
 import Wallet from "@/pages/Wallet";
+import ManageFeeds from "@/pages/ManageFeeds";
 import NotFound from "@/pages/not-found";
 
 import PodcastStudio from "@/pages/PodcastStudio";
@@ -66,6 +67,7 @@ function Router() {
       <Route path="/search" component={SearchPage} />
       <Route path="/research" component={DeepResearch} />
       <Route path="/design" component={DesignSystem} />
+      <Route path="/feeds" component={ManageFeeds} />
       
       <Route component={NotFound} />
     </Switch>
