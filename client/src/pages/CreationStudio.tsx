@@ -163,52 +163,6 @@ export default function CreationStudio() {
           </div>
         </div>
 
-        {/* Studio Toolkit (Reorganized - Top) */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-              <Rocket size={14} /> Creative Suite
-            </h3>
-          </div>
-          
-          <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2">
-            {[
-              { icon: Library, label: "Library", color: "text-orange-400", path: "/library", desc: "Saved prompts" },
-              { icon: Palette, label: "Brand Kit", color: "text-[#00C4CC]", path: "/brand", desc: "Logos & assets" },
-              { icon: BrainCircuit, label: "Context", color: "text-blue-400", path: "/context", desc: "Knowledge" },
-              { icon: User, label: "Avatars", color: "text-purple-400", path: "/avatars", desc: "Digital twins" },
-              { icon: CameraIcon, label: "AR Cam", color: "text-pink-400", path: "/camera", desc: "Filters" },
-              { icon: Bot, label: "AI Agent", color: "text-cyan-400", path: "/research", desc: "Research" },
-              { icon: Users, label: "Collab", color: "text-green-400", path: "/collab", desc: "Team work" },
-            ].map((tool) => (
-              <button 
-                key={tool.label}
-                onClick={() => setLocation(tool.path)}
-                className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center group-hover:bg-[#252525] group-hover:scale-105 group-hover:border-white/20 transition-all shadow-sm relative overflow-hidden">
-                   <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-current", tool.color.replace('text-', 'bg-'))} />
-                   <tool.icon size={24} className={cn("transition-colors relative z-10", tool.color)} />
-                </div>
-                <div className="text-center">
-                  <span className="text-[11px] font-semibold text-gray-300 group-hover:text-white transition-colors block leading-tight">{tool.label}</span>
-                  <span className="text-[9px] text-gray-600 group-hover:text-gray-500 transition-colors block mt-0.5">{tool.desc}</span>
-                </div>
-              </button>
-            ))}
-            
-            {/* Add Button */}
-             <button className="min-w-[80px] flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
-                <div className="w-14 h-14 rounded-2xl border border-dashed border-white/10 flex items-center justify-center group-hover:bg-white/5 group-hover:border-white/30 transition-all">
-                   <Plus size={20} className="text-gray-600 group-hover:text-white transition-colors" />
-                </div>
-                <div className="text-center">
-                  <span className="text-[11px] font-semibold text-gray-500 group-hover:text-gray-400 transition-colors block leading-tight">Add App</span>
-                </div>
-              </button>
-          </div>
-        </div>
-
         {/* Tab Selector (Optimized) */}
         <div className="flex items-center gap-2 mb-6">
           <div className="flex-1 flex p-1 bg-[#1E1E1E] rounded-xl border border-white/5">

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
-import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss } from "lucide-react";
+import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss, Palette, BrainCircuit, Bot, Camera } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Sidebar() {
@@ -56,9 +56,9 @@ export function Sidebar() {
           </Link>
         </div>
 
-        {/* Creation */}
+        {/* Creative Suite */}
         <div className="space-y-1">
-          <h3 className="px-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Create</h3>
+          <h3 className="px-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Creative Suite</h3>
           <Link href="/create">
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all cursor-pointer group", isActive("/create") ? "bg-gradient-accent text-black font-bold shadow-lg" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <Plus size={20} />
@@ -69,6 +69,30 @@ export function Sidebar() {
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/library") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <Library size={20} />
               <span className="text-sm font-medium">Prompt Library</span>
+            </div>
+          </Link>
+          <Link href="/brand">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/brand") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <Palette size={20} />
+              <span className="text-sm font-medium">Brand Kit</span>
+            </div>
+          </Link>
+          <Link href="/avatars">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/avatars") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <User size={20} />
+              <span className="text-sm font-medium">Avatars</span>
+            </div>
+          </Link>
+          <Link href="/context">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/context") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <BrainCircuit size={20} />
+              <span className="text-sm font-medium">Context</span>
+            </div>
+          </Link>
+          <Link href="/research">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/research") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <Bot size={20} />
+              <span className="text-sm font-medium">AI Agent</span>
             </div>
           </Link>
           <Link href="/collab">
