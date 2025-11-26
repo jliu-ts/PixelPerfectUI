@@ -38,6 +38,9 @@ const REWARDS = [
   { id: 1, name: "Midjourney 1 Month", cost: "30 Credits", discount: "100% OFF", icon: "🎨" },
   { id: 2, name: "Adobe Creative Cloud", cost: "100 Credits", discount: "20% OFF", icon: "🖌️" },
   { id: 3, name: "Epidemic Sound", cost: "50 Credits", discount: "3 Months Free", icon: "🎵" },
+  { id: 4, name: "Paris City Tour (Viator)", cost: "1200 Credits", discount: "Free Ticket", icon: "🗼" },
+  { id: 5, name: "Bali Digital Nomad Retreat", cost: "2500 Credits", discount: "All Inclusive", icon: "🌴" },
+  { id: 6, name: "NYC Helicopter Ride", cost: "1800 Credits", discount: "VIP Access", icon: "🚁" },
 ];
 
 export default function AffiliateDashboard() {
