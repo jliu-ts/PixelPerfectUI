@@ -26,23 +26,22 @@ export default function CollabRoom() {
     <Layout hideTabs>
       <div className="min-h-screen bg-background flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 pt-8 bg-background/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-20">
-          <div className="flex items-center gap-3">
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
             <button 
               onClick={() => setLocation("/create")}
-              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-lg font-display font-bold text-white flex items-center gap-2">
+              <h1 className="font-display text-xl font-bold text-foreground flex items-center gap-2">
                 Writer's Room
                 <span className="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-[10px] border border-green-500/20 flex items-center gap-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                   Live
                 </span>
               </h1>
-              <p className="text-xs text-gray-400">Project: Cyber Sneakers Launch</p>
             </div>
           </div>
           

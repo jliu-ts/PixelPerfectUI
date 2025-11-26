@@ -109,14 +109,14 @@ export default function SocialShare() {
       <div className="flex flex-col min-h-screen bg-background pb-8">
         
         {/* Header */}
-        <div className="flex items-center gap-4 p-4 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5">
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center gap-4">
           <button 
             onClick={() => setLocation("/result")}
-            className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ArrowLeft size={24} />
+            <ArrowLeft className="h-5 w-5" />
           </button>
-          <h1 className="text-xl font-display font-bold text-white">Share to Socials</h1>
+          <h1 className="font-display text-xl font-bold text-foreground">Share to Socials</h1>
         </div>
 
         <div className="p-6 space-y-8">

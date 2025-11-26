@@ -79,17 +79,16 @@ export default function PricingTiers() {
     <Layout hideTabs>
       <div className="min-h-screen bg-background pb-12">
         {/* Header */}
-        <div className="p-4 pt-8 sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
             <button 
               onClick={() => setLocation("/profile")}
-              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-xl font-display font-bold text-white">Membership</h1>
-              <p className="text-xs text-gray-400">Unlock the full power of Trending Society</p>
+              <h1 className="font-display text-xl font-bold text-foreground">Membership</h1>
             </div>
           </div>
 

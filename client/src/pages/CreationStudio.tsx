@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2, X } from "lucide-react";
+import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2, X, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS, VOICES } from "@/lib/mockData";
@@ -70,6 +70,17 @@ export default function CreationStudio() {
   return (
     <Layout hideTabs>
       <div className="flex flex-col h-screen bg-background relative">
+        {/* Header */}
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center gap-4">
+          <button 
+            onClick={() => setLocation("/")}
+            className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <h1 className="font-display text-xl font-bold text-foreground">Creation Studio</h1>
+        </div>
+
         {/* AI Preview Canvas (Full Height Focus) */}
         <div className="flex-1 flex items-center justify-center pb-32 px-4 overflow-hidden">
            <div className={cn(

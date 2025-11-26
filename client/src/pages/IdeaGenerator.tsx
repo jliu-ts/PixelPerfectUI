@@ -124,32 +124,36 @@ export default function IdeaGenerator() {
     : ARTICLES.filter(a => a.category === selectedCategory);
 
   return (
-    <Layout>
+    <Layout hideTabs>
       <div className="min-h-screen bg-background pb-24 md:pb-8">
         
-        {/* Hero / Header */}
-        <div className="px-6 pt-8 pb-6 border-b border-white/5 bg-gradient-to-b from-[#1E1E1E] to-transparent">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <h1 className="text-2xl font-display font-bold text-white flex items-center gap-2 mb-2">
-                Idea Lab
-                <Sparkles size={20} className="text-accent" />
-              </h1>
-              <p className="text-sm text-gray-400 max-w-md">
-                AI-powered content brainstorming engine. Connects to RSS feeds and social trends to generate infinite content ideas.
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setLocation("/feeds")}
-                className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-white/5 transition-colors flex items-center gap-2"
-              >
-                <Rss size={14} /> Manage Feeds
-              </button>
-            </div>
+        {/* Standard Sticky Header */}
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setLocation("/")}
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <h1 className="font-display text-xl font-bold text-foreground flex items-center gap-2">
+              Idea Lab
+              <Sparkles size={16} className="text-accent" />
+            </h1>
           </div>
+          <button 
+            onClick={() => setLocation("/feeds")}
+            className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-white/5 transition-colors flex items-center gap-2"
+          >
+            <Rss size={14} /> Manage Feeds
+          </button>
+        </div>
 
-          {/* Category Filter */}
+        {/* Category Filter Bar */}
+        <div className="px-6 py-4 border-b border-white/5 bg-gradient-to-b from-[#1E1E1E] to-transparent">
+          <p className="text-sm text-gray-400 mb-4 max-w-md">
+            AI-powered content brainstorming engine. Connects to RSS feeds and social trends.
+          </p>
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {CATEGORIES.map(cat => (
               <button

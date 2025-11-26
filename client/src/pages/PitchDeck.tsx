@@ -199,17 +199,19 @@ export default function PitchDeck() {
   return (
     <div className="min-h-screen bg-black font-sans text-white flex flex-col">
       {/* Header */}
-      <div className="p-6 flex justify-between items-center">
-        <button 
-          onClick={() => setLocation("/profile")}
-          className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-        >
-          <ArrowLeft size={20} />
-        </button>
-        <div className="text-xs font-bold tracking-widest text-gray-500 uppercase">
-          Investor Deck • {currentSlide + 1}/{SLIDES.length}
+      <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => setLocation("/profile")}
+            className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <h1 className="font-display text-xl font-bold text-foreground">Investor Deck</h1>
         </div>
-        <div className="w-10" /> {/* Spacer */}
+        <div className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
+          {currentSlide + 1}/{SLIDES.length}
+        </div>
       </div>
 
       {/* Slide Content */}
