@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { ArrowLeft, Search, X, TrendingUp, User, Sparkles, Layers, Clock, Instagram, Youtube, Twitter, Globe } from "lucide-react";
+import { ArrowLeft, Search, X, TrendingUp, User, Sparkles, Layers, Clock, Instagram, Youtube, Twitter, Globe, Filter, Video, Image, Type, Mic, Smartphone, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Mock Data
@@ -26,22 +26,50 @@ const RESULTS = {
   inspiration: [
     { id: 1, title: "Future Interfaces", source: "Pinterest", image: "https://picsum.photos/seed/interface/300/200" },
     { id: 2, title: "Holographic UI Design", source: "Behance", image: "https://picsum.photos/seed/holographic/300/200" },
+    { id: 3, title: "Motion Graphics Showreel", source: "Vimeo", image: "https://picsum.photos/seed/motion/300/200" },
+    { id: 4, title: "Typography Trends 2024", source: "Medium", image: "https://picsum.photos/seed/type/300/200" },
   ]
 };
+
+const PLATFORMS = [
+  { id: "instagram", label: "Instagram", icon: Instagram },
+  { id: "tiktok", label: "TikTok", icon: Smartphone },
+  { id: "youtube", label: "YouTube", icon: Youtube },
+  { id: "twitter", label: "Twitter/X", icon: Twitter },
+  { id: "linkedin", label: "LinkedIn", icon: Globe },
+];
+
+const FORMATS = [
+  { id: "video", label: "Video", icon: Video },
+  { id: "image", label: "Image", icon: Image },
+  { id: "text", label: "Text", icon: Type },
+  { id: "audio", label: "Audio", icon: Mic },
+];
 
 export default function SearchPage() {
   const [, setLocation] = useLocation();
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"all" | "creators" | "assets" | "inspiration">("all");
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
+  const [selectedFormat, setSelectedFormat] = useState<string | null>(null);
 
   const clearSearch = () => setQuery("");
+
+  const togglePlatform = (id: string) => {
+    setSelectedPlatform(prev => prev === id ? null : id);
+  };
+
+  const toggleFormat = (id: string) => {
+    setSelectedFormat(prev => prev === id ? null : id);
+  };
 
   return (
     <Layout hideTabs>
       <div className="min-h-screen bg-background pb-8">
         {/* Header / Search Bar */}
-        <div className="p-4 pt-8 sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5">
-          <div className="flex items-center gap-3">
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5">
+          <div className="p-4 pt-8 flex items-center gap-3">
             <button 
               onClick={() => setLocation("/")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
@@ -67,17 +95,79 @@ export default function SearchPage() {
                 </button>
               )}
             </div>
+            <button 
+              onClick={() => setShowFilters(!showFilters)}
+              className={cn(
+                "p-3 rounded-xl border transition-colors",
+                showFilters || selectedPlatform || selectedFormat
+                  ? "bg-accent text-black border-accent shadow-[0_0_10px_rgba(124,58,237,0.3)]"
+                  : "bg-[#1E1E1E] border-white/10 text-gray-400 hover:text-white hover:border-white/20"
+              )}
+            >
+              <Filter size={20} />
+            </button>
           </div>
           
+          {/* Advanced Filters Panel */}
+          {showFilters && (
+            <div className="px-4 pb-4 animate-in slide-in-from-top-2 fade-in duration-200 border-b border-white/5 bg-[#151515]">
+              <div className="space-y-4 pt-2">
+                {/* Platforms */}
+                <div>
+                  <h3 className="text-[10px] font-bold text-gray-500 uppercase mb-2 tracking-wider">Platforms</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {PLATFORMS.map(platform => (
+                      <button
+                        key={platform.id}
+                        onClick={() => togglePlatform(platform.id)}
+                        className={cn(
+                          "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all",
+                          selectedPlatform === platform.id
+                            ? "bg-white text-black border-white shadow-sm"
+                            : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
+                        )}
+                      >
+                        <platform.icon size={12} />
+                        {platform.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Content Formats */}
+                <div>
+                  <h3 className="text-[10px] font-bold text-gray-500 uppercase mb-2 tracking-wider">Format</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {FORMATS.map(format => (
+                      <button
+                        key={format.id}
+                        onClick={() => toggleFormat(format.id)}
+                        className={cn(
+                          "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all",
+                          selectedFormat === format.id
+                            ? "bg-white text-black border-white shadow-sm"
+                            : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
+                        )}
+                      >
+                        <format.icon size={12} />
+                        {format.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
           {/* Filter Tabs (Only show when searching) */}
-          {query && (
-            <div className="flex gap-4 mt-4 overflow-x-auto no-scrollbar pb-1">
+          {query && !showFilters && (
+            <div className="flex gap-4 px-4 pb-0 overflow-x-auto no-scrollbar">
               {["all", "creators", "assets", "inspiration"].map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab as any)}
                   className={cn(
-                    "text-xs font-bold capitalize pb-2 border-b-2 transition-colors whitespace-nowrap px-1",
+                    "text-xs font-bold capitalize pb-3 border-b-2 transition-colors whitespace-nowrap px-1",
                     activeTab === tab ? "text-white border-accent" : "text-gray-500 border-transparent hover:text-gray-300"
                   )}
                 >
