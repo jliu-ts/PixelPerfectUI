@@ -69,7 +69,7 @@ export default function HomeFeed() {
   return (
     <Layout>
       {/* Top Stories Rail (Instagram/Snapchat Pattern) */}
-      <div className="fixed top-0 left-0 right-0 z-30 pt-4 pb-2 bg-gradient-to-b from-black/90 to-transparent">
+      <div className="absolute top-0 left-0 right-0 z-30 pt-4 pb-2 bg-gradient-to-b from-black/90 to-transparent">
         <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 pb-4 items-center">
           
           {/* Add Yours / Create */}
