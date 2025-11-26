@@ -5,6 +5,8 @@ import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { cn } from "@/lib/utils";
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
+import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
+import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
 
 // Mock Feed Data
 const FEED_ITEMS = [
@@ -27,7 +29,7 @@ const FEED_ITEMS = [
     likes: "12.5k",
     comments: "1.2k",
     music: "Cyber City - Neon Beats",
-    image: "https://picsum.photos/seed/cyber/400/800", // Placeholder
+    image: cyberpunkImage,
     verified: false
   },
   {
@@ -38,7 +40,7 @@ const FEED_ITEMS = [
     likes: "8.9k",
     comments: "560",
     music: "Forest Sounds - Nature",
-    image: "https://picsum.photos/seed/nature/400/800", // Placeholder
+    image: natureImage,
     verified: true
   }
 ];

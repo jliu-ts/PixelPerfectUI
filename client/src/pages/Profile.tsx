@@ -5,6 +5,7 @@ import { GradientButton } from "@/components/GradientButton";
 import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
+import gridImage from "@assets/generated_images/abstract_digital_art_square.png";
 
 export default function Profile() {
   const [, setLocation] = useLocation();
@@ -171,7 +172,7 @@ export default function Profile() {
           {[...Array(6)].map((_, i) => (
             <div key={i} className="aspect-square rounded-xl bg-[#1E1E1E] overflow-hidden relative group cursor-pointer">
               <img 
-                src={`https://picsum.photos/seed/${i + 40}/400/400`} 
+                src={gridImage} 
                 alt="Creation" 
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
               />

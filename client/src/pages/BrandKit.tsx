@@ -4,12 +4,13 @@ import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Palette, Type, Image as ImageIcon, Link2, CheckCircle2, RefreshCw, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import templateImage from "@assets/generated_images/instagram_story_template_tech.png";
 
 // Mock Data
 const TEMPLATES = [
-  { id: 1, name: "Instagram Story - Tech", image: "https://picsum.photos/seed/canva1/200/355" },
-  { id: 2, name: "LinkedIn Carousel", image: "https://picsum.photos/seed/canva2/300/300" },
-  { id: 3, name: "YouTube Thumbnail", image: "https://picsum.photos/seed/canva3/320/180" },
+  { id: 1, name: "Instagram Story - Tech", image: templateImage },
+  { id: 2, name: "LinkedIn Carousel", image: templateImage }, // Reusing for consistency
+  { id: 3, name: "YouTube Thumbnail", image: templateImage },
 ];
 
 const BRAND_COLORS = ["#7C3AED", "#22D3EE", "#FFFFFF", "#000000", "#FF5733"];

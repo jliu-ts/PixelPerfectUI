@@ -12,7 +12,8 @@ import {
   Link2,
   Globe,
   Share2,
-  Loader2
+  Loader2,
+  ShoppingBag
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
