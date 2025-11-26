@@ -5,8 +5,8 @@ import { ArrowLeft, User, Mic, Link2, CheckCircle2, Play, Plus, Loader2, Video, 
 import { cn } from "@/lib/utils";
 import { GradientButton } from "@/components/GradientButton";
 import avatarImage from "@assets/generated_images/professional_ai_avatar_portrait.png";
-import heyGenLogo from "@assets/stock_images/heygen_logo_icon_f9a51736.jpg";
-import elevenLabsLogo from "@assets/stock_images/elevenlabs_logo_icon_080eebfa.jpg";
+import heyGenLogo from "@assets/stock_images/heygen_logo_official_29b26384.jpg";
+import elevenLabsLogo from "@assets/stock_images/elevenlabs_logo_offi_6bae9ee6.jpg";
 
 const AVATARS = [
   { id: "hg_1", name: "Studio Felix", image: avatarImage, type: "Instant Avatar", status: "ready", capabilities: ["4K Video", "Gestures"] },
@@ -47,12 +47,12 @@ export default function AvatarStudio() {
     }, 2000);
   };
 
-  const handleCreateContent = (avatarId: string) => {
+  const handleCreateContent = (avatarId: string, model: string = "HeyGen Avatar") => {
     setLocation("/create", {
       state: {
         prompt: "Hi, I'm Felix! Welcome to my new video created entirely with AI.",
         mode: "video",
-        model: "HeyGen Avatar",
+        model: model,
         style: "Studio"
       }
     });
@@ -259,7 +259,7 @@ export default function AvatarStudio() {
                       </div>
 
                       <button 
-                        onClick={() => handleCreateContent(avatar.id)}
+                        onClick={() => handleCreateContent(avatar.id, "HeyGen Avatar")}
                         disabled={avatar.status !== "ready"}
                         className="text-xs font-bold text-purple-400 hover:text-purple-300 flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
@@ -336,7 +336,11 @@ export default function AvatarStudio() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                           <button className="p-2 hover:bg-white/5 rounded-full text-gray-400 hover:text-white transition-colors" title="Use Voice">
+                           <button 
+                             onClick={() => handleCreateContent(voice.id, "ElevenLabs Voice")}
+                             className="p-2 hover:bg-white/5 rounded-full text-gray-400 hover:text-white transition-colors" 
+                             title="Use Voice"
+                           >
                              <Sparkles size={16} />
                            </button>
                            <button className="p-2 hover:bg-white/5 rounded-full text-gray-400 hover:text-white transition-colors" title="Play Sample">
