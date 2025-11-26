@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
-import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb } from "lucide-react";
+import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Sidebar() {
@@ -74,6 +74,12 @@ export function Sidebar() {
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/profile") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <User size={20} />
               <span className="text-sm font-medium">Profile</span>
+            </div>
+          </Link>
+          <Link href="/affiliate">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/affiliate") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <Briefcase size={20} />
+              <span className="text-sm font-medium">Creator Hub</span>
             </div>
           </Link>
           <Link href="/notifications">
