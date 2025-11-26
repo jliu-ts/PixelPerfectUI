@@ -140,8 +140,20 @@ export function Sidebar() {
         </div>
       </div>
 
+      {/* Pro Upgrade Card (Moved from Right Sidebar) */}
+      <div className="mt-4 mb-4 p-4 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity" />
+        <h3 className="text-xs font-bold text-white mb-1 relative z-10">Unlock Creator Pro</h3>
+        <p className="text-[10px] text-gray-400 mb-3 relative z-10 leading-relaxed">
+          Get advanced analytics & 0% platform fees.
+        </p>
+        <button className="w-full py-2 rounded-lg bg-white text-black text-[10px] font-bold hover:bg-gray-200 transition-colors relative z-10 flex items-center justify-center gap-1">
+          Upgrade Now
+        </button>
+      </div>
+
       {/* Bottom Stats/Actions */}
-      <div className="mt-auto pt-6 border-t border-white/5">
+      <div className="pt-4 border-t border-white/5">
          <Link href="/wallet">
            <div className="px-4 py-3 rounded-xl bg-white/5 mb-2 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors">
              <div className="flex items-center gap-2">
