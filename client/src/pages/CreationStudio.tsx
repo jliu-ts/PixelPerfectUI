@@ -464,13 +464,17 @@ export default function CreationStudio() {
                 <Library className="text-accent" size={20} /> 
                 {libraryView === "list" ? "Prompt Library" : libraryView === "create" ? "Create Prompt" : "Edit Prompt"}
               </div>
+            </DialogTitle>
+            
+            {/* Actions Bar - Moved outside of DialogTitle but inside Header area */}
+            <div className="flex justify-end pt-2">
               {libraryView === "list" && (
                 <button 
                   onClick={() => {
                     setFormData({ title: "", prompt: "", category: "General", platform: "General", tags: "" });
                     setLibraryView("create");
                   }}
-                  className="text-xs bg-accent text-black px-3 py-1.5 rounded-lg font-bold hover:bg-accent/80 flex items-center gap-1"
+                  className="text-xs bg-accent text-black px-3 py-1.5 rounded-lg font-bold hover:bg-accent/80 flex items-center gap-1 z-20 relative"
                 >
                   <Plus size={14} /> New Prompt
                 </button>
@@ -481,16 +485,16 @@ export default function CreationStudio() {
                      setLibraryView("list");
                      setEditingPrompt(null);
                    }}
-                   className="text-xs bg-white/10 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-white/20 flex items-center gap-1"
+                   className="text-xs bg-white/10 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-white/20 flex items-center gap-1 z-20 relative"
                  >
                    <ChevronLeft size={14} /> Back to List
                  </button>
               )}
-            </DialogTitle>
+            </div>
           </DialogHeader>
           
           {libraryView === "list" ? (
-            <div className="space-y-6 mt-4">
+            <div className="space-y-6 mt-2">
               {groupedPrompts.map((category, i) => (
                 <div key={i}>
                   <h4 className="text-xs font-bold text-gray-500 uppercase mb-3 tracking-wider">{category.category}</h4>
@@ -504,16 +508,19 @@ export default function CreationStudio() {
                         }}
                         className="relative text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col cursor-pointer"
                       >
-                        <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-[#1E1E1E] rounded-lg p-1 shadow-lg border border-white/5">
+                        {/* Edit Controls - Increased Z-index and padding for easier clicking */}
+                        <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-[#1E1E1E] rounded-lg p-1 shadow-lg border border-white/5 z-10">
                            <button 
                              onClick={(e) => handleEditPrompt(item, e)}
-                             className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white"
+                             className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white transition-colors"
+                             title="Edit Prompt"
                            >
                              <Edit2 size={12} />
                            </button>
                            <button 
                              onClick={(e) => handleDeletePrompt(item.id, e)}
-                             className="p-1.5 hover:bg-red-500/20 rounded-md text-gray-400 hover:text-red-400"
+                             className="p-1.5 hover:bg-red-500/20 rounded-md text-gray-400 hover:text-red-400 transition-colors"
+                             title="Delete Prompt"
                            >
                              <Trash2 size={12} />
                            </button>

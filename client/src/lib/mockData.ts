@@ -68,9 +68,9 @@ export const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "
 export const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
 
 export const AVATARS = [
-  { id: "hg_1", name: "Studio Felix", type: "Instant", optimizedFor: ["16:9", "1:1"] },
-  { id: "hg_2", name: "Casual Felix", type: "Photo", optimizedFor: ["9:16", "4:5"] },
-  { id: "hg_3", name: "Presenter Felix", type: "Studio", optimizedFor: ["16:9"] },
+  { id: "hg_1", name: "Studio Felix", type: "Instant", optimizedFor: ["16:9", "1:1"], image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" },
+  { id: "hg_2", name: "Casual Felix", type: "Photo", optimizedFor: ["9:16", "4:5"], image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Casual" },
+  { id: "hg_3", name: "Presenter Felix", type: "Studio", optimizedFor: ["16:9"], image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Presenter" },
 ];
 
 export const ASPECT_RATIOS = [
