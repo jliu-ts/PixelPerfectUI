@@ -22,6 +22,7 @@ import PricingTiers from "@/pages/PricingTiers";
 import PitchDeck from "@/pages/PitchDeck";
 import Onboarding from "@/pages/Onboarding";
 import Notifications from "@/pages/Notifications";
+import SearchPage from "@/pages/SearchPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -49,9 +50,7 @@ function Router() {
       <Route path="/pricing" component={PricingTiers} />
       <Route path="/pitch" component={PitchDeck} />
       <Route path="/notifications" component={Notifications} />
-      
-      {/* Placeholder routes */}
-      <Route path="/search" component={HomeFeed} />
+      <Route path="/search" component={SearchPage} />
       
       <Route component={NotFound} />
     </Switch>

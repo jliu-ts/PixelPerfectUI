@@ -1,0 +1,207 @@
+import React, { useState } from "react";
+import { useLocation } from "wouter";
+import { Layout } from "@/components/Layout";
+import { ArrowLeft, Search, X, TrendingUp, User, Sparkles, Layers, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// Mock Data
+const RECENT_SEARCHES = ["Cyberpunk aesthetics", "Neon city loop", "Minimalist fonts"];
+const TRENDING_TOPICS = ["#FrutigerAero", "#DarkFantasy", "#Y2K", "#Synthwave", "#Abstract3D"];
+
+const RESULTS = {
+  creators: [
+    { id: 1, name: "NeonDreamer", handle: "@neondreamer", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Neon", followers: "12.5k" },
+    { id: 2, name: "PixelArtist", handle: "@pixelart", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pixel", followers: "8.2k" },
+  ],
+  assets: [
+    { id: 1, title: "Cyberpunk City Pack", type: "3D Model", downloads: "1.2k", image: "https://picsum.photos/seed/cybercity/100/100" },
+    { id: 2, title: "Neon Glitch Overlay", type: "Video Effect", downloads: "3.5k", image: "https://picsum.photos/seed/glitch/100/100" },
+  ],
+  inspiration: [
+    { id: 1, title: "Future Interfaces", source: "Pinterest", image: "https://picsum.photos/seed/interface/300/200" },
+    { id: 2, title: "Holographic UI Design", source: "Behance", image: "https://picsum.photos/seed/holographic/300/200" },
+  ]
+};
+
+export default function SearchPage() {
+  const [, setLocation] = useLocation();
+  const [query, setQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<"all" | "creators" | "assets" | "inspiration">("all");
+
+  const clearSearch = () => setQuery("");
+
+  return (
+    <Layout hideTabs>
+      <div className="min-h-screen bg-background pb-8">
+        {/* Header / Search Bar */}
+        <div className="p-4 pt-8 sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setLocation("/")}
+              className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            >
+              <ArrowLeft size={24} />
+            </button>
+            <div className="flex-1 relative">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+              <input 
+                type="text" 
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search creators, assets, trends..." 
+                className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl pl-10 pr-10 py-3 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors placeholder:text-gray-600"
+                autoFocus
+              />
+              {query && (
+                <button 
+                  onClick={clearSearch}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+          </div>
+          
+          {/* Filter Tabs (Only show when searching) */}
+          {query && (
+            <div className="flex gap-4 mt-4 overflow-x-auto no-scrollbar pb-1">
+              {["all", "creators", "assets", "inspiration"].map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab as any)}
+                  className={cn(
+                    "text-xs font-bold capitalize pb-2 border-b-2 transition-colors whitespace-nowrap px-1",
+                    activeTab === tab ? "text-white border-accent" : "text-gray-500 border-transparent hover:text-gray-300"
+                  )}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="p-6">
+          {!query ? (
+            /* Empty State / Discovery */
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+              {/* Recent Searches */}
+              <div>
+                <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
+                  <Clock size={12} /> Recent
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {RECENT_SEARCHES.map(term => (
+                    <button 
+                      key={term}
+                      onClick={() => setQuery(term)}
+                      className="px-3 py-1.5 rounded-lg bg-[#1E1E1E] border border-white/5 text-sm text-gray-300 hover:bg-white/5 hover:border-white/10 transition-colors"
+                    >
+                      {term}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trending Topics */}
+              <div>
+                <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
+                  <TrendingUp size={12} /> Trending Now
+                </h3>
+                <div className="space-y-2">
+                  {TRENDING_TOPICS.map((topic, i) => (
+                    <button 
+                      key={topic}
+                      onClick={() => setQuery(topic)}
+                      className="w-full p-3 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-between hover:bg-white/5 group"
+                    >
+                      <span className="text-sm font-bold text-white">{topic}</span>
+                      <span className="text-xs text-gray-500 group-hover:text-accent transition-colors">
+                        {12 - i}k posts
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Search Results */
+            <div className="space-y-6 animate-in fade-in">
+              
+              {/* Creators Section */}
+              {(activeTab === "all" || activeTab === "creators") && (
+                <div>
+                  <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
+                    <User size={12} /> Creators
+                  </h3>
+                  <div className="space-y-3">
+                    {RESULTS.creators.map(creator => (
+                      <div key={creator.id} className="flex items-center justify-between p-3 rounded-xl bg-[#1E1E1E] border border-white/5">
+                        <div className="flex items-center gap-3">
+                          <img src={creator.avatar} className="w-10 h-10 rounded-full bg-gray-700" alt={creator.name} />
+                          <div>
+                            <h4 className="text-sm font-bold text-white">{creator.name}</h4>
+                            <p className="text-xs text-gray-500">{creator.handle}</p>
+                          </div>
+                        </div>
+                        <button className="px-3 py-1 rounded-lg bg-white text-black text-xs font-bold hover:bg-gray-200">
+                          Follow
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Assets Section */}
+              {(activeTab === "all" || activeTab === "assets") && (
+                <div>
+                  <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
+                    <Layers size={12} /> Assets
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {RESULTS.assets.map(asset => (
+                      <div key={asset.id} className="rounded-xl bg-[#1E1E1E] border border-white/5 overflow-hidden group cursor-pointer" onClick={() => setLocation("/marketplace")}>
+                        <div className="aspect-square relative">
+                          <img src={asset.image} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt={asset.title} />
+                          <div className="absolute bottom-2 right-2 text-[10px] bg-black/60 backdrop-blur px-1.5 py-0.5 rounded text-white">
+                            {asset.type}
+                          </div>
+                        </div>
+                        <div className="p-2">
+                          <h4 className="text-xs font-bold text-white truncate">{asset.title}</h4>
+                          <p className="text-[10px] text-gray-500">{asset.downloads} downloads</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Inspiration Section (Only show if specifically searching or active tab) */}
+              {(activeTab === "all" || activeTab === "inspiration") && (
+                 <div>
+                   <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
+                     <Sparkles size={12} /> Inspiration
+                   </h3>
+                   <div className="grid grid-cols-2 gap-3">
+                     {RESULTS.inspiration.map(item => (
+                       <div key={item.id} className="rounded-xl overflow-hidden relative group cursor-pointer" onClick={() => setLocation("/ideas")}>
+                         <img src={item.image} className="w-full aspect-video object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt={item.title} />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-2">
+                           <h4 className="text-xs font-bold text-white">{item.title}</h4>
+                           <p className="text-[10px] text-gray-400">via {item.source}</p>
+                         </div>
+                       </div>
+                     ))}
+                   </div>
+                 </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </Layout>
+  );
+}
