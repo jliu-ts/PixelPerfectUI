@@ -21,53 +21,15 @@ import {
   Bookmark
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MOCK_PROMPTS } from "@/lib/mockData";
 
 // Mock Data
-const INITIAL_PROMPTS = [
-  {
-    id: 1,
-    title: "Tech Product Showcase",
-    prompt: "Cinematic 4K product shot of [PRODUCT], floating in zero gravity, studio lighting, sleek black background with neon blue rim light, highly detailed textures, macro lens, 8k resolution",
-    category: "Product",
-    platform: "Instagram",
-    tags: ["Cinematic", "Product", "Tech"],
-    lastUsed: "2h ago"
-  },
-  {
-    id: 2,
-    title: "Viral TikTok Hook",
-    prompt: "POV: You just discovered [TOPIC] and it changed your life. Fast cuts, dynamic text overlay, high energy background music, trending audio style.",
-    category: "Social",
-    platform: "TikTok",
-    tags: ["Viral", "Short Form", "Hook"],
-    lastUsed: "1d ago"
-  },
-  {
-    id: 3,
-    title: "LinkedIn Thought Leadership",
-    prompt: "Professional headshot of a diverse team collaborating in a modern glass office, natural lighting, candid style, depth of field, corporate but approachable atmosphere.",
-    category: "Business",
-    platform: "LinkedIn",
-    tags: ["Professional", "Corporate", "Team"],
-    lastUsed: "3d ago"
-  },
-  {
-    id: 4,
-    title: "Cyberpunk Cityscape",
-    prompt: "Futuristic city street at night, raining, neon signs reflecting in puddles, towering skyscrapers with holographic ads, cyberpunk aesthetic, blade runner style, volumetric fog.",
-    category: "Art",
-    platform: "General",
-    tags: ["Cyberpunk", "Scifi", "Atmospheric"],
-    lastUsed: "1w ago"
-  }
-];
-
 const CATEGORIES = ["All", "Product", "Social", "Business", "Art", "Education"];
 const PLATFORMS = ["All", "Instagram", "TikTok", "YouTube", "LinkedIn", "General"];
 
 export default function PromptLibrary() {
   const [, setLocation] = useLocation();
-  const [prompts, setPrompts] = useState(INITIAL_PROMPTS);
+  const [prompts, setPrompts] = useState(MOCK_PROMPTS);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedPlatform, setSelectedPlatform] = useState("All");

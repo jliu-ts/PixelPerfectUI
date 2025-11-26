@@ -5,6 +5,7 @@ import { GradientButton } from "@/components/GradientButton";
 import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { MOCK_PROMPTS } from "@/lib/mockData";
 import {
   Dialog,
   DialogContent,
@@ -16,29 +17,16 @@ const styles = [
   "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave", "Minimalist"
 ];
 
-const QUICK_PROMPTS = [
-  {
-    category: "Product",
-    items: [
-      { title: "Cinematic Product Shot", text: "Cinematic 4K product shot of [PRODUCT], floating in zero gravity, studio lighting, sleek black background with neon blue rim light, highly detailed textures, macro lens, 8k resolution" },
-      { title: "Minimalist Packaging", text: "Clean minimalist packaging design for organic skincare brand, pastel colors, soft lighting, white background, high end aesthetic" }
-    ]
-  },
-  {
-    category: "Social",
-    items: [
-      { title: "Viral TikTok Hook", text: "POV: You just discovered [TOPIC] and it changed your life. Fast cuts, dynamic text overlay, high energy background music, trending audio style." },
-      { title: "Instagram Lifestyle", text: "Candid lifestyle photo of a digital nomad working from a bali cafe, natural sunlight, aesthetic coffee latte art, macbook pro, lush greenery, depth of field" }
-    ]
-  },
-  {
-    category: "Art & Design",
-    items: [
-      { title: "Cyberpunk City", text: "Futuristic city street at night, raining, neon signs reflecting in puddles, towering skyscrapers with holographic ads, cyberpunk aesthetic, blade runner style, volumetric fog." },
-      { title: "Abstract 3D", text: "Abstract 3D shape render, glass dispersion effect, iridescent colors, dark background, octane render, 8k, wallpaper" }
-    ]
+// Group prompts by category for the quick selector
+const GROUPED_PROMPTS = MOCK_PROMPTS.reduce((acc, prompt) => {
+  const existingCategory = acc.find(c => c.category === prompt.category);
+  if (existingCategory) {
+    existingCategory.items.push(prompt);
+  } else {
+    acc.push({ category: prompt.category, items: [prompt] });
   }
-];
+  return acc;
+}, [] as { category: string, items: typeof MOCK_PROMPTS }[]);
 
 const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "HeyGen Avatar"];
 const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
@@ -448,7 +436,7 @@ export default function CreationStudio() {
           </DialogHeader>
           
           <div className="space-y-6 mt-4">
-            {QUICK_PROMPTS.map((category, i) => (
+            {GROUPED_PROMPTS.map((category, i) => (
               <div key={i}>
                 <h4 className="text-xs font-bold text-gray-500 uppercase mb-3 tracking-wider">{category.category}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -456,13 +444,13 @@ export default function CreationStudio() {
                     <button
                       key={j}
                       onClick={() => {
-                        setPrompt(item.text);
+                        setPrompt(item.prompt);
                         setIsLibraryOpen(false);
                       }}
                       className="text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col"
                     >
                       <h5 className="font-bold text-white text-sm mb-2 group-hover:text-accent transition-colors">{item.title}</h5>
-                      <p className="text-xs text-gray-400 line-clamp-3 leading-relaxed">{item.text}</p>
+                      <p className="text-xs text-gray-400 line-clamp-3 leading-relaxed">{item.prompt}</p>
                     </button>
                   ))}
                 </div>
