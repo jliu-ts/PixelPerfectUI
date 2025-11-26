@@ -4,53 +4,7 @@ import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Search, Filter, Star, Download, Coins, Lock, Unlock } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const MARKETPLACE_ITEMS = [
-  { 
-    id: 1, 
-    title: "Cinematic Cyberpunk Pack", 
-    creator: "NeonDreamer", 
-    type: "Prompt Pack", 
-    price: 50, 
-    rating: 4.9, 
-    downloads: 1200,
-    image: "https://picsum.photos/seed/cyber/300/200",
-    tags: ["Midjourney", "Video"] 
-  },
-  { 
-    id: 2, 
-    title: "Viral TikTok Hooks", 
-    creator: "ContentKing", 
-    type: "Script Template", 
-    price: 25, 
-    rating: 4.7, 
-    downloads: 850,
-    image: "https://picsum.photos/seed/tiktok/300/200",
-    tags: ["Scripts", "Viral"] 
-  },
-  { 
-    id: 3, 
-    title: "Ethereal Fantasy LUTS", 
-    creator: "VisualArtist", 
-    type: "Filter Preset", 
-    price: 0, 
-    rating: 4.8, 
-    downloads: 5000,
-    image: "https://picsum.photos/seed/fantasy/300/200",
-    tags: ["Filters", "Free"] 
-  },
-  { 
-    id: 4, 
-    title: "Minimalist Brand Kit", 
-    creator: "DesignPro", 
-    type: "Template", 
-    price: 100, 
-    rating: 5.0, 
-    downloads: 320,
-    image: "https://picsum.photos/seed/brand/300/200",
-    tags: ["Canva", "Branding"] 
-  },
-];
+import { MARKETPLACE_ITEMS } from "@/lib/mockData";
 
 export default function AssetMarketplace() {
   const [, setLocation] = useLocation();

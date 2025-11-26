@@ -9,22 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-// Mock Data
-const INITIAL_FEEDS = [
-  { id: 1, name: "TechCrunch", url: "https://techcrunch.com/feed", category: "tech", status: "active", lastSync: "2m ago", icon: Code },
-  { id: 2, name: "The Verge", url: "https://www.theverge.com/rss/index.xml", category: "tech", status: "active", lastSync: "5m ago", icon: Zap },
-  { id: 3, name: "Behance Popular", url: "https://www.behance.net/feeds/projects", category: "design", status: "active", lastSync: "1h ago", icon: Palette },
-  { id: 4, name: "Dribbble Popular", url: "https://dribbble.com/shots/popular.rss", category: "design", status: "error", lastSync: "Failed", icon: Palette },
-  { id: 5, name: "NYT Technology", url: "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", category: "news", status: "active", lastSync: "15m ago", icon: Newspaper },
-];
-
-const CATEGORIES = [
-  { id: "all", label: "All Feeds" },
-  { id: "tech", label: "Technology" },
-  { id: "design", label: "Design & Art" },
-  { id: "news", label: "News & Trends" },
-];
+import { INITIAL_FEEDS, FEED_CATEGORIES } from "@/lib/mockData";
 
 export default function ManageFeeds() {
   const [, setLocation] = useLocation();
@@ -96,7 +81,7 @@ export default function ManageFeeds() {
 
           {/* Category Tabs */}
           <div className="px-4 pb-0 overflow-x-auto no-scrollbar flex gap-4">
-            {CATEGORIES.map(cat => (
+            {FEED_CATEGORIES.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}

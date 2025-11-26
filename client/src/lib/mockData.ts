@@ -1,7 +1,7 @@
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
 import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
-import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss, Palette, BrainCircuit, Bot, Camera, Square, RectangleHorizontal, RectangleVertical, Instagram, Youtube, Twitter, Linkedin, Podcast } from "lucide-react";
+import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss, Palette, BrainCircuit, Bot, Camera, Square, RectangleHorizontal, RectangleVertical, Instagram, Youtube, Twitter, Linkedin, Podcast, Code, Newspaper, Video, Share2, Type, Image as ImageIcon } from "lucide-react";
 
 // Stock Images for Styles (Mock Imports for data structure)
 // Ideally these would be actual imports in the component or handled via a proper asset manager
@@ -73,11 +73,128 @@ export const AVATARS = [
   { id: "hg_3", name: "Presenter Felix", type: "Studio", optimizedFor: ["16:9"], image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Presenter" },
 ];
 
+export const VOICES = [
+  { id: "el_1", name: "Felix (Professional)", type: "Cloned", status: "ready", model: "Eleven Multilingual v2" },
+  { id: "el_2", name: "Felix (Excited)", type: "Cloned", status: "ready", model: "Eleven Turbo v2.5" },
+  { id: "el_pre_1", name: "Adam", type: "Premade", status: "ready", model: "Standard" },
+];
+
 export const ASPECT_RATIOS = [
   { id: "1:1", label: "Square", icon: Square, desc: "Instagram Post" },
   { id: "16:9", label: "Landscape", icon: RectangleHorizontal, desc: "YouTube" },
   { id: "9:16", label: "Portrait", icon: RectangleVertical, desc: "TikTok / Reels" },
   { id: "4:5", label: "Vertical", icon: RectangleVertical, desc: "IG Portrait" },
+];
+
+// --- Feed Data ---
+export const INITIAL_FEEDS = [
+  { id: 1, name: "TechCrunch", url: "https://techcrunch.com/feed", category: "tech", status: "active", lastSync: "2m ago", icon: Code },
+  { id: 2, name: "The Verge", url: "https://www.theverge.com/rss/index.xml", category: "tech", status: "active", lastSync: "5m ago", icon: Zap },
+  { id: 3, name: "Behance Popular", url: "https://www.behance.net/feeds/projects", category: "design", status: "active", lastSync: "1h ago", icon: Palette },
+  { id: 4, name: "Dribbble Popular", url: "https://dribbble.com/shots/popular.rss", category: "design", status: "error", lastSync: "Failed", icon: Palette },
+  { id: 5, name: "NYT Technology", url: "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml", category: "news", status: "active", lastSync: "15m ago", icon: Newspaper },
+];
+
+export const FEED_CATEGORIES = [
+  { id: "all", label: "All Feeds" },
+  { id: "tech", label: "Technology" },
+  { id: "design", label: "Design & Art" },
+  { id: "news", label: "News & Trends" },
+];
+
+// --- Marketplace Data ---
+export const MARKETPLACE_ITEMS = [
+  { 
+    id: 1, 
+    title: "Cinematic Cyberpunk Pack", 
+    creator: "NeonDreamer", 
+    type: "Prompt Pack", 
+    price: 50, 
+    rating: 4.9, 
+    downloads: 1200,
+    image: "https://picsum.photos/seed/cyber/300/200",
+    tags: ["Midjourney", "Video"] 
+  },
+  { 
+    id: 2, 
+    title: "Viral TikTok Hooks", 
+    creator: "ContentKing", 
+    type: "Script Template", 
+    price: 25, 
+    rating: 4.7, 
+    downloads: 850,
+    image: "https://picsum.photos/seed/tiktok/300/200",
+    tags: ["Scripts", "Viral"] 
+  },
+  { 
+    id: 3, 
+    title: "Ethereal Fantasy LUTS", 
+    creator: "VisualArtist", 
+    type: "Filter Preset", 
+    price: 0, 
+    rating: 4.8, 
+    downloads: 5000,
+    image: "https://picsum.photos/seed/fantasy/300/200",
+    tags: ["Filters", "Free"] 
+  },
+  { 
+    id: 4, 
+    title: "Minimalist Brand Kit", 
+    creator: "DesignPro", 
+    type: "Template", 
+    price: 100, 
+    rating: 5.0, 
+    downloads: 320,
+    image: "https://picsum.photos/seed/brand/300/200",
+    tags: ["Canva", "Branding"] 
+  },
+];
+
+// --- Ecommerce Data ---
+export const ECOMMERCE_PRODUCTS = [
+  { id: 1, name: "Neon Cyber Hoodie", price: "$89.00", image: "https://picsum.photos/seed/hoodie/300/300", status: "active", category: "Apparel" },
+  { id: 2, name: "Holographic Sneakers", price: "$145.00", image: "https://picsum.photos/seed/sneakers/300/300", status: "active", category: "Footwear" },
+  { id: 3, name: "Neural Link Headset", price: "$299.00", image: "https://picsum.photos/seed/headset/300/300", status: "draft", category: "Electronics" },
+  { id: 4, name: "Smart Water Bottle", price: "$45.00", image: "https://picsum.photos/seed/bottle/300/300", status: "active", category: "Accessories" },
+];
+
+export const ECOMMERCE_GENERATION_OPTIONS = [
+  {
+    id: "video-ad",
+    label: "Video Commercial",
+    icon: Video,
+    description: "High-energy cinematic product showcase",
+    model: "Google Veo",
+    mode: "video",
+    style: "Cinematic"
+  },
+  {
+    id: "social-post",
+    label: "Social Media Post",
+    icon: Share2,
+    description: "Viral-ready Instagram/TikTok content",
+    model: "Midjourney v6",
+    mode: "image",
+    style: "Lifestyle"
+  },
+  {
+    id: "product-photo",
+    label: "AI Photoshoot",
+    icon: ImageIcon,
+    description: "Studio quality product photography",
+    model: "Stable Diffusion XL",
+    mode: "image",
+    style: "Studio"
+  },
+  {
+    id: "copy",
+    label: "Marketing Copy",
+    icon: Type,
+    description: "SEO-optimized product descriptions",
+    model: "GPT-4",
+    mode: "text",
+    style: "Professional"
+  }
 ];
 
 // --- Profile Data ---

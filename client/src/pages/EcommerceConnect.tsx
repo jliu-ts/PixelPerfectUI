@@ -13,59 +13,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-
-// Mock Products
-const PRODUCTS = [
-  { id: 1, name: "Neon Cyber Hoodie", price: "$89.00", image: "https://picsum.photos/seed/hoodie/300/300", status: "active", category: "Apparel" },
-  { id: 2, name: "Holographic Sneakers", price: "$145.00", image: "https://picsum.photos/seed/sneakers/300/300", status: "active", category: "Footwear" },
-  { id: 3, name: "Neural Link Headset", price: "$299.00", image: "https://picsum.photos/seed/headset/300/300", status: "draft", category: "Electronics" },
-  { id: 4, name: "Smart Water Bottle", price: "$45.00", image: "https://picsum.photos/seed/bottle/300/300", status: "active", category: "Accessories" },
-];
-
-const GENERATION_OPTIONS = [
-  {
-    id: "video-ad",
-    label: "Video Commercial",
-    icon: Video,
-    description: "High-energy cinematic product showcase",
-    model: "Google Veo",
-    mode: "video",
-    style: "Cinematic"
-  },
-  {
-    id: "social-post",
-    label: "Social Media Post",
-    icon: Share2,
-    description: "Viral-ready Instagram/TikTok content",
-    model: "Midjourney v6",
-    mode: "image",
-    style: "Lifestyle"
-  },
-  {
-    id: "product-photo",
-    label: "AI Photoshoot",
-    icon: ImageIcon,
-    description: "Studio quality product photography",
-    model: "Stable Diffusion XL",
-    mode: "image",
-    style: "Studio"
-  },
-  {
-    id: "copy",
-    label: "Marketing Copy",
-    icon: Type,
-    description: "SEO-optimized product descriptions",
-    model: "GPT-4",
-    mode: "text",
-    style: "Professional"
-  }
-];
+import { ECOMMERCE_PRODUCTS, ECOMMERCE_GENERATION_OPTIONS } from "@/lib/mockData";
 
 export default function EcommerceConnect() {
   const [, setLocation] = useLocation();
   const [isConnected, setIsConnected] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<typeof PRODUCTS[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<typeof ECOMMERCE_PRODUCTS[0] | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleConnect = () => {
@@ -76,12 +30,12 @@ export default function EcommerceConnect() {
     }, 1500);
   };
 
-  const handleOpenGenerate = (product: typeof PRODUCTS[0]) => {
+  const handleOpenGenerate = (product: typeof ECOMMERCE_PRODUCTS[0]) => {
     setSelectedProduct(product);
     setIsDialogOpen(true);
   };
 
-  const handleSelectOption = (option: typeof GENERATION_OPTIONS[0]) => {
+  const handleSelectOption = (option: typeof ECOMMERCE_GENERATION_OPTIONS[0]) => {
     if (!selectedProduct) return;
     
     setLocation("/create", { 
@@ -176,7 +130,7 @@ export default function EcommerceConnect() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                {PRODUCTS.map(product => (
+                {ECOMMERCE_PRODUCTS.map(product => (
                   <div key={product.id} className="bg-[#1E1E1E] border border-white/5 rounded-xl overflow-hidden group relative hover:border-white/20 transition-colors">
                     <div className="aspect-square relative overflow-hidden">
                       <img src={product.image} alt={product.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
@@ -238,7 +192,7 @@ export default function EcommerceConnect() {
             </DialogHeader>
             
             <div className="grid grid-cols-1 gap-3 mt-2">
-              {GENERATION_OPTIONS.map((option) => (
+              {ECOMMERCE_GENERATION_OPTIONS.map((option) => (
                 <button
                   key={option.id}
                   onClick={() => handleSelectOption(option)}

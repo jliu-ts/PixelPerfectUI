@@ -4,7 +4,7 @@ import { Layout } from "@/components/Layout";
 import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical, Mic, CheckCircle2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS } from "@/lib/mockData";
+import { MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS, VOICES } from "@/lib/mockData";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +14,6 @@ import {
 import { Newspaper, Bot } from "lucide-react";
 import { PromptLibraryModal } from "@/components/PromptLibraryModal";
 import { Prompt } from "@/hooks/usePrompts";
-
-const VOICES = [
-  { id: "el_1", name: "Felix (Professional)", type: "Cloned", status: "ready", model: "Eleven Multilingual v2" },
-  { id: "el_2", name: "Felix (Excited)", type: "Cloned", status: "ready", model: "Eleven Turbo v2.5" },
-  { id: "el_pre_1", name: "Adam", type: "Premade", status: "ready", model: "Standard" },
-];
 
 export default function CreationStudio() {
   const [location, setLocation] = useLocation();
