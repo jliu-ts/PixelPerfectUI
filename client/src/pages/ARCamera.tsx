@@ -38,7 +38,8 @@ export default function ARCamera() {
     if (!ctx) return;
 
     const drawMesh = () => {
-      ctx.clearRect(0, 0, canvasRef.current!.width, canvasRef.current!.height);
+      if (!canvasRef.current) return;
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       
       // Mock face points
       ctx.strokeStyle = activeFilter === "cyber" ? "#22D3EE" : 
