@@ -13,8 +13,27 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-const styles = [
-  "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave", "Minimalist"
+// Stock Images for Styles
+import cinematicImg from '@assets/stock_images/cinematic_movie_scen_822514bc.jpg';
+import oilPaintingImg from '@assets/stock_images/classic_oil_painting_28485a67.jpg';
+import ghibliImg from '@assets/stock_images/anime_fantasy_landsc_a6de3658.jpg';
+import polaroidImg from '@assets/stock_images/vintage_polaroid_pho_adc9f752.jpg';
+import vaporwaveImg from '@assets/stock_images/vaporwave_aesthetic__fe2a5089.jpg';
+import minimalistImg from '@assets/stock_images/minimalist_design_cl_951de8ce.jpg';
+import animeImg from '@assets/stock_images/anime_character_acti_3ec23b6b.jpg';
+import render3dImg from '@assets/stock_images/3d_render_abstract_s_bdea587d.jpg';
+import cyberpunkImg from '@assets/stock_images/cyberpunk_city_neon__75c69652.jpg';
+
+const STYLES = [
+  { id: "Anime", label: "Anime", image: animeImg },
+  { id: "Cinematic", label: "Cinematic", image: cinematicImg },
+  { id: "3D Render", label: "3D Render", image: render3dImg },
+  { id: "Oil Painting", label: "Oil Painting", image: oilPaintingImg },
+  { id: "Cyberpunk", label: "Cyberpunk", image: cyberpunkImg },
+  { id: "Studio Ghibli", label: "Studio Ghibli", image: ghibliImg },
+  { id: "Polaroid", label: "Polaroid", image: polaroidImg },
+  { id: "Vaporwave", label: "Vaporwave", image: vaporwaveImg },
+  { id: "Minimalist", label: "Minimalist", image: minimalistImg }
 ];
 
 // Group prompts by category for the quick selector
@@ -295,23 +314,34 @@ export default function CreationStudio() {
             <div>
               <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
               <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-                {styles.map(s => (
+                {STYLES.map(s => (
                   <button
-                    key={s}
-                    onClick={() => setSelectedStyle(s)}
+                    key={s.id}
+                    onClick={() => setSelectedStyle(s.id)}
                     className={cn(
-                      "px-4 py-6 rounded-xl text-xs font-bold border transition-all min-w-[100px] text-center relative overflow-hidden group",
-                      selectedStyle === s
-                        ? "bg-accent text-black border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)]"
-                        : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:text-white hover:border-white/20"
+                      "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[100px] text-center relative overflow-hidden group flex flex-col justify-end",
+                      selectedStyle === s.id
+                        ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
+                        : "border-white/5 hover:border-white/20 hover:scale-105"
                     )}
                   >
-                    <span className="relative z-10">{s}</span>
-                    {/* Abstract BG Pattern */}
-                    <div className={cn(
-                      "absolute inset-0 opacity-20 transition-opacity",
-                      selectedStyle === s ? "bg-white/20" : "bg-transparent group-hover:bg-white/5"
-                    )} />
+                    {/* Background Image */}
+                    <div className="absolute inset-0 z-0">
+                      <img 
+                        src={s.image} 
+                        alt={s.label} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
+                      />
+                      <div className={cn(
+                        "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
+                        selectedStyle === s.id ? "opacity-80" : "opacity-100"
+                      )} />
+                    </div>
+                    
+                    <span className={cn(
+                      "relative z-10 transition-colors drop-shadow-md",
+                      selectedStyle === s.id ? "text-accent" : "text-white"
+                    )}>{s.label}</span>
                   </button>
                 ))}
               </div>
