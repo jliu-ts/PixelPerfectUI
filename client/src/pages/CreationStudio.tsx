@@ -200,43 +200,6 @@ export default function CreationStudio() {
           </div>
         </div>
 
-        {/* Visual Style (Moved to Top) */}
-        <div className="mb-8">
-          <label className="text-xs font-bold text-gray-500 uppercase mb-3 block tracking-wider">Visual Style</label>
-          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
-            {STYLES.map(s => (
-              <button
-                key={s.id}
-                onClick={() => setSelectedStyle(s.id)}
-                className={cn(
-                  "px-3 py-8 rounded-xl text-xs font-bold border transition-all min-w-[80px] text-center relative overflow-hidden group flex flex-col justify-end",
-                  selectedStyle === s.id
-                    ? "border-accent shadow-[0_0_15px_rgba(34,211,238,0.3)] scale-105"
-                    : "border-white/5 hover:border-white/20 hover:scale-105"
-                )}
-              >
-                {/* Background Image */}
-                <div className="absolute inset-0 z-0">
-                  <img 
-                    src={s.image} 
-                    alt={s.label} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60 group-hover:opacity-80" 
-                  />
-                  <div className={cn(
-                    "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity",
-                    selectedStyle === s.id ? "opacity-80" : "opacity-100"
-                  )} />
-                </div>
-                
-                <span className={cn(
-                  "relative z-10 transition-colors drop-shadow-md text-[10px]",
-                  selectedStyle === s.id ? "text-accent" : "text-white"
-                )}>{s.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* AI Preview Canvas (Dynamic & Prominent) */}
         <div className="mb-6 flex justify-center w-full">
            <div className={cn(
@@ -476,11 +439,36 @@ export default function CreationStudio() {
                   </DropdownMenu>
                 )}
 
-                {/* Style Indicator */}
-                <div className="px-3 py-1.5 rounded-lg bg-white/5 text-xs font-medium text-gray-400 border border-dashed border-white/10 flex items-center gap-2">
-                  <Palette size={12} className="text-pink-400" />
-                  {STYLES.find(s => s.id === selectedStyle)?.label || selectedStyle}
-                </div>
+                {/* Style Selector (Integrated Dropdown) */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                     <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors border border-transparent hover:border-white/10 outline-none">
+                      <Palette size={12} className="text-pink-400" />
+                      {STYLES.find(s => s.id === selectedStyle)?.label || selectedStyle}
+                      <ChevronDown size={10} className="opacity-50" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="bg-[#252525] border-white/10 text-white w-64 p-2">
+                     <div className="grid grid-cols-2 gap-2">
+                        {STYLES.map(s => (
+                          <DropdownMenuItem
+                            key={s.id}
+                            onClick={() => setSelectedStyle(s.id)}
+                            className={cn(
+                              "text-xs focus:bg-white/10 cursor-pointer p-0 rounded-md overflow-hidden relative h-16 group border border-transparent hover:border-white/20",
+                              selectedStyle === s.id ? "ring-1 ring-accent" : ""
+                            )}
+                          >
+                            <div className="absolute inset-0">
+                              <img src={s.image} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt={s.label} />
+                              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-colors" />
+                            </div>
+                            <span className="relative z-10 p-2 font-bold text-white drop-shadow-md">{s.label}</span>
+                          </DropdownMenuItem>
+                        ))}
+                     </div>
+                  </DropdownMenuContent>
+                </DropdownMenu>
              </div>
 
              {/* Action Buttons */}
