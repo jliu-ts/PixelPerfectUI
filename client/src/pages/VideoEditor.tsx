@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { GradientButton } from "@/components/GradientButton";
+import { useToast } from "@/hooks/use-toast";
 import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.png";
 
 // Mock data for tools
@@ -55,6 +56,7 @@ const EFFECTS = [
 
 export default function VideoEditor() {
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
   const [activeTool, setActiveTool] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("none");
@@ -63,6 +65,13 @@ export default function VideoEditor() {
 
   // Simulate playing state
   const togglePlay = () => setIsPlaying(!isPlaying);
+
+  const handleSave = () => {
+    toast({
+      title: "Project Saved",
+      description: "Your edits have been saved to your draft.",
+    });
+  };
 
   return (
     <Layout hideTabs>
@@ -84,7 +93,10 @@ export default function VideoEditor() {
             <button className="p-2 rounded-full hover:bg-white/10 transition-colors">
               <Redo2 size={20} className="text-gray-400" />
             </button>
-            <button className="px-4 py-1.5 bg-white text-black font-bold rounded-full text-sm hover:bg-gray-200 transition-colors">
+            <button 
+              onClick={handleSave}
+              className="px-4 py-1.5 bg-white text-black font-bold rounded-full text-sm hover:bg-gray-200 transition-colors"
+            >
               Save
             </button>
           </div>

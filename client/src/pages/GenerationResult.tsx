@@ -5,8 +5,18 @@ import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Wand2, Scaling, SlidersHorizontal, Download, Share2 } from "lucide-react";
 import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.png";
 
+import { useToast } from "@/hooks/use-toast";
+
 export default function GenerationResult() {
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
+
+  const handleFeatureNotReady = (feature: string) => {
+    toast({
+      title: "Coming Soon",
+      description: `${feature} will be available in the next update.`,
+    });
+  };
 
   return (
     <Layout hideTabs>
@@ -21,7 +31,10 @@ export default function GenerationResult() {
           </button>
           <h1 className="text-xl font-display font-bold text-white">Generation Result</h1>
           <div className="ml-auto flex gap-2">
-             <button className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+             <button 
+               onClick={() => handleFeatureNotReady("Download")}
+               className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+             >
                <Download size={20} />
              </button>
           </div>
@@ -39,12 +52,18 @@ export default function GenerationResult() {
 
         {/* Action Row */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <button className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group">
+          <button 
+            onClick={() => handleFeatureNotReady("Variation")}
+            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group"
+          >
             <Wand2 size={20} className="text-gray-400 group-hover:text-accent transition-colors" />
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Vary</span>
           </button>
           
-          <button className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group">
+          <button 
+            onClick={() => handleFeatureNotReady("Upscale")}
+            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group"
+          >
             <Scaling size={20} className="text-gray-400 group-hover:text-accent transition-colors" />
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Upscale</span>
           </button>
