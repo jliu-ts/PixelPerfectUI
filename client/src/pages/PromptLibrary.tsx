@@ -87,8 +87,20 @@ export default function PromptLibrary() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const handleUse = (promptText: string) => {
-    setLocation("/create", { state: { prompt: promptText } });
+  const handleUse = (prompt: any) => {
+    // Infer mode based on platform/category
+    let mode = "text";
+    if (["Instagram", "Art", "Product"].includes(prompt.platform) || prompt.category === "Art") mode = "image";
+    if (["TikTok", "YouTube"].includes(prompt.platform)) mode = "video";
+    if (prompt.platform === "LinkedIn" || prompt.platform === "Twitter") mode = "text";
+
+    setLocation("/create", { 
+      state: { 
+        prompt: prompt.prompt,
+        mode: mode,
+        style: prompt.tags[0] || "Cinematic"
+      } 
+    });
   };
 
   const handleDelete = (id: number) => {
@@ -217,7 +229,7 @@ export default function PromptLibrary() {
                   </div>
                   
                   <button 
-                    onClick={() => handleUse(prompt.prompt)}
+                    onClick={() => handleUse(prompt)}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-accent hover:text-black text-xs font-bold text-white transition-all border border-white/5 hover:border-accent"
                   >
                     Use <ArrowRight size={12} />

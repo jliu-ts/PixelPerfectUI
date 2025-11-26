@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 const styles = [
   "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave", "Minimalist"
@@ -12,15 +13,24 @@ const styles = [
 const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0"];
 const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
 
+const MOCK_HISTORY = [
+  "A futuristic city with flying cars and neon lights",
+  "Portrait of a cat wearing a spacesuit",
+  "Marketing copy for a new coffee brand"
+];
+
 export default function CreationStudio() {
   const [location, setLocation] = useLocation();
   const locationState = window.history.state?.usr;
+  const { toast } = useToast();
   
   const [activeTab, setActiveTab] = useState<"text" | "image" | "video" | "audio">((locationState?.mode as any) || "image");
   const [selectedStyle, setSelectedStyle] = useState(locationState?.style || "Cinematic");
   const [prompt, setPrompt] = useState(locationState?.prompt || "");
   const [selectedModel, setSelectedModel] = useState(locationState?.model || (activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]));
   const [isCarouselMode, setIsCarouselMode] = useState(locationState?.prompt?.includes("carousel") || false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [isEnhancing, setIsEnhancing] = useState(false);
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -29,7 +39,36 @@ export default function CreationStudio() {
     }
   }, [activeTab]);
 
+  // Effect to handle incoming state updates (like from Library)
+  useEffect(() => {
+    if (locationState?.mode) setActiveTab(locationState.mode);
+    if (locationState?.prompt) setPrompt(locationState.prompt);
+    if (locationState?.style) setSelectedStyle(locationState.style);
+  }, [locationState]);
+
   const currentModels = activeTab === "video" ? VIDEO_MODELS : IMAGE_MODELS;
+
+  const handleEnhance = () => {
+    if (!prompt) return;
+    setIsEnhancing(true);
+    // Mock AI enhancement
+    setTimeout(() => {
+      setPrompt((prev: string) => prev + ", highly detailed, 8k resolution, professional lighting, trending on artstation, masterpiece");
+      setIsEnhancing(false);
+      toast({
+        title: "Prompt Enhanced",
+        description: "AI has added details to your prompt for better results.",
+      });
+    }, 1500);
+  };
+
+  const handleSavePrompt = () => {
+    if (!prompt) return;
+    toast({
+      title: "Prompt Saved",
+      description: "Added to your library successfully.",
+    });
+  };
 
   return (
     <Layout>
@@ -89,29 +128,85 @@ export default function CreationStudio() {
 
         {/* Main Input Area */}
         <div className="relative mb-6 group">
+          <div className="absolute top-4 right-4 z-10 flex gap-2">
+             <button 
+               onClick={() => setShowHistory(!showHistory)}
+               className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+               title="History"
+             >
+               <History size={16} />
+             </button>
+             <button 
+               onClick={handleSavePrompt}
+               className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+               title="Save to Library"
+             >
+               <Save size={16} />
+             </button>
+          </div>
+
           <textarea 
-            className="w-full h-40 bg-[#1E1E1E] rounded-2xl p-4 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-transparent focus:border-white/10 focus:bg-[#252525] transition-all"
+            className="w-full h-48 bg-[#1E1E1E] rounded-2xl p-4 pt-12 text-lg text-white placeholder:text-gray-600 resize-none focus:outline-none border border-transparent focus:border-white/10 focus:bg-[#252525] transition-all"
             placeholder={activeTab === "text" ? "What would you like to write?" : "Describe your dream..."}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
           />
+          
+          {/* Floating Actions */}
           <div className="absolute bottom-4 right-4 flex gap-2">
              {activeTab === "image" && (
                <button 
                  onClick={() => setIsCarouselMode(!isCarouselMode)}
                  className={cn(
-                   "p-2 rounded-lg transition-colors flex items-center gap-2 text-xs font-bold",
-                   isCarouselMode ? "bg-primary/20 text-primary" : "bg-white/5 text-gray-400 hover:text-white"
+                   "px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2 text-xs font-bold border border-transparent",
+                   isCarouselMode ? "bg-primary/20 text-primary border-primary/20" : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
                  )}
                >
-                 <Layers size={16} />
-                 {isCarouselMode ? "Carousel On" : ""}
+                 <Layers size={14} />
+                 {isCarouselMode ? "Carousel" : "Carousel"}
                </button>
              )}
-             <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
-               <Sparkles size={18} />
+             
+             <button 
+               onClick={handleEnhance}
+               disabled={isEnhancing}
+               className={cn(
+                 "px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 text-xs font-bold border",
+                 isEnhancing 
+                   ? "bg-accent/20 text-accent border-accent/50 animate-pulse cursor-wait" 
+                   : "bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 border-white/5 hover:border-white/20"
+               )}
+             >
+               <Wand2 size={14} className={isEnhancing ? "animate-spin" : ""} />
+               {isEnhancing ? "Enhancing..." : "Enhance"}
              </button>
           </div>
+
+          {/* Quick History Popover */}
+          {showHistory && (
+            <div className="absolute top-12 right-4 w-64 bg-[#252525] border border-white/10 rounded-xl shadow-2xl z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+              <div className="flex items-center justify-between p-3 border-b border-white/5">
+                <span className="text-xs font-bold text-gray-400 uppercase">Recent</span>
+                <button onClick={() => setShowHistory(false)} className="text-gray-500 hover:text-white">
+                  <X size={14} />
+                </button>
+              </div>
+              <div className="max-h-48 overflow-y-auto">
+                {MOCK_HISTORY.map((h, i) => (
+                  <button 
+                    key={i}
+                    onClick={() => {
+                      setPrompt(h);
+                      setShowHistory(false);
+                    }}
+                    className="w-full text-left p-3 text-xs text-gray-300 hover:bg-white/5 hover:text-white border-b border-white/5 last:border-0 transition-colors line-clamp-2"
+                  >
+                    {h}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Model & Style Settings */}
