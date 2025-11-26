@@ -105,6 +105,59 @@ const NETWORKS = [
   { id: "shareasale", name: "ShareASale", logo: "SS", status: "disconnected", campaigns: 0, clicks: "0" },
 ];
 
+const TRANSACTIONS = [
+  { 
+    id: "tx_1", 
+    source: "Instagram", 
+    content: "Viral Reel #2", 
+    contentType: "Video", 
+    utm: "utm_source=ig&utm_medium=reel", 
+    payout: 45.00, 
+    status: "converted", 
+    date: "Just now" 
+  },
+  { 
+    id: "tx_2", 
+    source: "TikTok", 
+    content: "Bio Link", 
+    contentType: "Link", 
+    utm: "utm_source=tiktok&utm_medium=bio", 
+    payout: 12.50, 
+    status: "converted", 
+    date: "15m ago" 
+  },
+  { 
+    id: "tx_3", 
+    source: "YouTube", 
+    content: "Tech Review", 
+    contentType: "Video", 
+    utm: "utm_source=yt&utm_medium=desc", 
+    payout: 120.00, 
+    status: "converted", 
+    date: "1h ago" 
+  },
+  { 
+    id: "tx_4", 
+    source: "Blog", 
+    content: "Top 10 Tools", 
+    contentType: "Article", 
+    utm: "utm_source=web&utm_medium=seo", 
+    payout: 0.00, 
+    status: "click", 
+    date: "2h ago" 
+  },
+  { 
+    id: "tx_5", 
+    source: "Twitter", 
+    content: "Thread", 
+    contentType: "Post", 
+    utm: "utm_source=x&utm_medium=thread", 
+    payout: 8.50, 
+    status: "converted", 
+    date: "3h ago" 
+  },
+];
+
 export default function AffiliateDashboard() {
   const [, setLocation] = useLocation();
   const [walletConnected, setWalletConnected] = useState(false);
@@ -340,6 +393,71 @@ export default function AffiliateDashboard() {
                         />
                       </AreaChart>
                     </ResponsiveContainer>
+                  </div>
+                </div>
+
+                {/* Transaction Table */}
+                <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+                  <div className="flex justify-between items-center mb-4">
+                    <div>
+                      <h3 className="text-base font-bold text-white">Recent Conversions</h3>
+                      <p className="text-xs text-gray-400">Real-time tracking from all channels</p>
+                    </div>
+                    <button className="text-xs font-bold text-accent hover:text-white transition-colors">
+                      View All
+                    </button>
+                  </div>
+                  
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="text-left border-b border-white/5">
+                          <th className="pb-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Time</th>
+                          <th className="pb-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Source</th>
+                          <th className="pb-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Content</th>
+                          <th className="pb-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider">UTM Params</th>
+                          <th className="pb-3 text-[10px] font-bold text-gray-500 uppercase tracking-wider text-right">Payout</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {TRANSACTIONS.map((tx) => (
+                          <tr key={tx.id} className="group hover:bg-white/5 transition-colors">
+                            <td className="py-3 text-xs text-gray-400 font-mono">{tx.date}</td>
+                            <td className="py-3">
+                              <div className="flex items-center gap-2">
+                                <span className={cn(
+                                  "w-1.5 h-1.5 rounded-full",
+                                  tx.status === "converted" ? "bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]" : "bg-blue-500"
+                                )} />
+                                <span className="text-sm font-bold text-white">{tx.source}</span>
+                              </div>
+                            </td>
+                            <td className="py-3">
+                              <div className="flex flex-col">
+                                <span className="text-xs text-white font-medium">{tx.content}</span>
+                                <span className="text-[10px] text-gray-500">{tx.contentType}</span>
+                              </div>
+                            </td>
+                            <td className="py-3">
+                              <code className="text-[10px] text-gray-500 bg-black/20 px-1.5 py-0.5 rounded border border-white/5 font-mono">
+                                {tx.utm}
+                              </code>
+                            </td>
+                            <td className="py-3 text-right">
+                              {tx.status === "converted" ? (
+                                <span className="text-sm font-bold text-green-400">
+                                  +${tx.payout.toFixed(2)}
+                                </span>
+                              ) : (
+                                <span className="text-xs font-bold text-gray-500">
+                                  Click
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
