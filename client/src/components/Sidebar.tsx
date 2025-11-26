@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
-import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store } from "lucide-react";
+import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Sidebar() {
@@ -33,6 +33,12 @@ export function Sidebar() {
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/search") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <Search size={20} />
               <span className="text-sm font-medium">Explore</span>
+            </div>
+          </Link>
+          <Link href="/ideas">
+            <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/ideas") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
+              <Lightbulb size={20} />
+              <span className="text-sm font-medium">Ideas</span>
             </div>
           </Link>
           <Link href="/marketplace">
