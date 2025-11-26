@@ -18,38 +18,42 @@ const cyberpunkImg = "https://images.unsplash.com/photo-1515630278258-407f664989
 // --- Sidebar Navigation Data ---
 export const SIDEBAR_NAVIGATION = [
   {
-    title: "Discover",
+    title: "Start",
     items: [
-      { href: "/", icon: Home, label: "Home Feed" },
-      { href: "/search", icon: Search, label: "Explore" },
-      { href: "/ideas", icon: Lightbulb, label: "Ideas", badge: "NEW" },
-      { href: "/marketplace", icon: Store, label: "Marketplace" },
-      { href: "/feeds", icon: Rss, label: "My Feeds" },
-    ]
-  },
-  {
-    title: "Creative Suite",
-    items: [
+      { href: "/", icon: Home, label: "Home" },
       { href: "/create", icon: Plus, label: "Studio", highlight: true },
-      { href: "/library", icon: Library, label: "Prompt Library" },
-      { href: "/brand", icon: Palette, label: "Brand Kit" },
-      { href: "/avatars", icon: User, label: "Avatars" },
-      { href: "/ar-cam", icon: Camera, label: "AR Cam" },
-      { href: "/context", icon: BrainCircuit, label: "Context" },
-      { href: "/research", icon: Bot, label: "AI Agent" },
-      { href: "/collab", icon: Users, label: "Collab Room" },
+      { href: "/profile", icon: User, label: "Profile" },
+      { href: "/notifications", icon: Bell, label: "Alerts", indicator: true },
     ]
   },
   {
-    title: "Business & Growth",
+    title: "Create",
     items: [
-      { href: "/media-kit", icon: Presentation, label: "Media Kit", badge: "LIVE" },
-      { href: "/legal", icon: Scale, label: "Legal Guard" },
+      { href: "/ideas", icon: Lightbulb, label: "Idea Lab", badge: "NEW" },
+      { href: "/collab", icon: Users, label: "Collab Room" },
+      { href: "/research", icon: Bot, label: "AI Agent" },
+      { href: "/brand", icon: Palette, label: "Brand Kit" },
+      { href: "/library", icon: Library, label: "Prompt Library" },
+      { href: "/avatars", icon: User, label: "Avatars" },
+    ]
+  },
+  {
+    title: "Growth",
+    items: [
       { href: "/sponsorships", icon: Handshake, label: "Sponsorships" },
       { href: "/affiliate", icon: Briefcase, label: "Creator Hub" },
       { href: "/store", icon: ShoppingBag, label: "My Store" },
-      { href: "/profile", icon: User, label: "Profile" },
-      { href: "/notifications", icon: Bell, label: "Alerts", indicator: true },
+      { href: "/media-kit", icon: Presentation, label: "Media Kit", badge: "LIVE" },
+      { href: "/legal", icon: Scale, label: "Legal Guard" },
+    ]
+  },
+  {
+    title: "Discover",
+    items: [
+      { href: "/feeds", icon: Rss, label: "My Feeds" },
+      { href: "/search", icon: Search, label: "Explore" },
+      { href: "/marketplace", icon: Store, label: "Marketplace" },
+      { href: "/context", icon: BrainCircuit, label: "Context" },
     ]
   }
 ];
