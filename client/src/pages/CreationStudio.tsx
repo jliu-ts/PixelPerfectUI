@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square } from "lucide-react";
+import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
@@ -10,8 +10,13 @@ const styles = [
   "Anime", "Cinematic", "3D Render", "Oil Painting", "Cyberpunk", "Studio Ghibli", "Polaroid", "Vaporwave", "Minimalist"
 ];
 
-const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0"];
+const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "HeyGen Avatar"];
 const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
+
+const AVATARS = [
+  { id: "hg_1", name: "Studio Felix", type: "Instant" },
+  { id: "hg_2", name: "Casual Felix", type: "Photo" },
+];
 
 const ASPECT_RATIOS = [
   { id: "1:1", label: "Square", icon: Square, desc: "Instagram Post" },
@@ -36,6 +41,7 @@ export default function CreationStudio() {
   const [selectedRatio, setSelectedRatio] = useState("1:1");
   const [prompt, setPrompt] = useState(locationState?.prompt || "");
   const [selectedModel, setSelectedModel] = useState(locationState?.model || (activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]));
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [isCarouselMode, setIsCarouselMode] = useState(locationState?.prompt?.includes("carousel") || false);
   const [showHistory, setShowHistory] = useState(false);
   const [isEnhancing, setIsEnhancing] = useState(false);
@@ -249,6 +255,44 @@ export default function CreationStudio() {
               <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" size={16} />
             </div>
           </div>
+          {/* Avatar Selector (Only for Video + Avatar Model) */}
+          {activeTab === "video" && selectedModel.includes("Avatar") && (
+            <div className="col-span-2 md:col-span-1">
+              <label className="text-xs font-medium text-gray-400 uppercase mb-2 block">Avatar</label>
+              <div className="relative group">
+                <button className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white focus:outline-none focus:border-primary/50 transition-all flex items-center justify-between text-left group-focus-within:border-primary/50">
+                  <span className="flex items-center gap-2">
+                    <User size={16} />
+                    {selectedAvatar ? AVATARS.find(a => a.id === selectedAvatar)?.name : "Select Avatar"}
+                  </span>
+                  <ChevronDown size={16} className="text-gray-500" />
+                </button>
+                
+                <div className="absolute top-full left-0 right-0 mt-2 bg-[#252525] border border-white/10 rounded-xl shadow-xl overflow-hidden z-20 hidden group-focus-within:block hover:block">
+                  {AVATARS.map((avatar) => (
+                    <button
+                      key={avatar.id}
+                      onClick={() => setSelectedAvatar(avatar.id)}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white flex items-center justify-between transition-colors"
+                    >
+                      <span className="flex items-center gap-2">
+                        <User size={14} />
+                        {avatar.name}
+                      </span>
+                      <span className="text-[10px] text-gray-500">{avatar.type}</span>
+                    </button>
+                  ))}
+                  <button
+                     onClick={() => setLocation("/avatars")}
+                     className="w-full text-left px-4 py-3 text-xs text-accent font-bold hover:bg-white/5 border-t border-white/5 flex items-center gap-2"
+                   >
+                     <Plus size={12} /> Create New Avatar
+                   </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Aspect Ratio Selector (Only for Image/Video) */}
           {(activeTab === "image" || activeTab === "video") && (
             <div className="col-span-2 md:col-span-1">
