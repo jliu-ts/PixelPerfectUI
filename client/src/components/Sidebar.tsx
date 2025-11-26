@@ -38,7 +38,8 @@ export function Sidebar() {
           <Link href="/ideas">
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/ideas") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <Lightbulb size={20} />
-              <span className="text-sm font-medium">Ideas</span>
+              <span className="text-sm font-medium flex-1">Ideas</span>
+              <span className="text-[8px] font-bold bg-accent/20 text-accent px-1.5 py-0.5 rounded">NEW</span>
             </div>
           </Link>
           <Link href="/marketplace">
@@ -78,7 +79,8 @@ export function Sidebar() {
           <Link href="/notifications">
             <div className={cn("flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors cursor-pointer group", isActive("/notifications") ? "bg-white/10 text-white" : "text-gray-400 hover:text-white hover:bg-white/5")}>
               <Bell size={20} />
-              <span className="text-sm font-medium">Alerts</span>
+              <span className="text-sm font-medium flex-1">Alerts</span>
+              <span className="w-2 h-2 rounded-full bg-red-500"></span>
             </div>
           </Link>
           <Link href="/store">

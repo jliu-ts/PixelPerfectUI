@@ -126,9 +126,10 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Credits Wallet Card */}
-        <div className="px-6 mb-8 space-y-3">
-          <div className="w-full p-4 rounded-2xl bg-gradient-to-r from-[#1E1E1E] to-[#252525] border border-white/10 flex items-center justify-between relative overflow-hidden group">
+        {/* Dashboard Grid (Responsive) */}
+        <div className="px-6 mb-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+          {/* Credits Wallet Card */}
+          <div className="w-full p-4 rounded-2xl bg-gradient-to-r from-[#1E1E1E] to-[#252525] border border-white/10 flex flex-col justify-between relative overflow-hidden group min-h-[120px]">
             <div className="absolute inset-0 bg-gradient-accent opacity-5 group-hover:opacity-10 transition-opacity" />
             
             <div className="relative z-10">
@@ -143,7 +144,7 @@ export default function Profile() {
 
             <button 
               onClick={() => setLocation("/wallet")}
-              className="relative z-10 px-4 py-2 rounded-xl bg-white text-black text-xs font-bold flex items-center gap-1 hover:bg-gray-200 transition-colors shadow-lg"
+              className="relative z-10 mt-2 w-full py-2 rounded-xl bg-white text-black text-xs font-bold flex items-center justify-center gap-1 hover:bg-gray-200 transition-colors shadow-lg"
             >
               <Zap size={14} className="fill-black" />
               Top Up
@@ -153,45 +154,40 @@ export default function Profile() {
           {/* Upgrade Banner */}
           <button 
             onClick={() => setLocation("/pricing")}
-            className="w-full p-1 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 mb-3 group"
+            className="w-full h-full min-h-[120px] rounded-2xl bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 p-4 flex flex-col justify-between group hover:border-purple-500/50 transition-all"
           >
-            <div className="bg-[#1E1E1E] rounded-xl p-3 flex items-center justify-between group-hover:bg-transparent transition-colors">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:text-white">
-                  <Crown size={16} />
-                </div>
-                <div className="text-left">
-                  <h3 className="text-xs font-bold text-white">Upgrade to Syndicate</h3>
-                  <p className="text-[10px] text-gray-400 group-hover:text-white/80">Unlock Analytics & 0% Fees</p>
-                </div>
+            <div className="flex items-start justify-between w-full">
+              <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-500 transition-colors">
+                <Crown size={16} />
               </div>
-              <ChevronRight size={16} className="text-gray-500 group-hover:text-white" />
+              <span className="px-2 py-1 rounded-md bg-purple-500/20 text-purple-300 text-[10px] font-bold">PRO</span>
+            </div>
+            <div className="text-left">
+              <h3 className="text-sm font-bold text-white group-hover:text-purple-200 transition-colors">Syndicate Plan</h3>
+              <p className="text-[10px] text-gray-400">Unlock Analytics & 0% Fees</p>
             </div>
           </button>
 
           {/* Creator Program Button */}
           <button 
             onClick={() => setLocation("/affiliate")}
-            className="w-full p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors group"
+            className="w-full h-full min-h-[120px] rounded-2xl bg-[#1E1E1E] border border-white/5 p-4 flex flex-col justify-between hover:bg-white/5 transition-colors group"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+            <div className="flex items-start justify-between w-full">
+              <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
                 <Briefcase size={20} />
               </div>
-              <div className="text-left">
-                <h3 className="text-sm font-bold text-white">Creator Hub</h3>
-                <p className="text-xs text-gray-400 group-hover:text-gray-300">Brand deals & Earnings</p>
+              <ChevronRight size={16} className="text-gray-600 group-hover:text-white transition-colors" />
+            </div>
+            <div className="text-left">
+              <div className="flex justify-between items-end">
+                <div>
+                   <h3 className="text-sm font-bold text-white">Creator Hub</h3>
+                   <p className="text-[10px] text-gray-400">Brand deals & Earnings</p>
+                </div>
+                <span className="text-xs font-bold text-white bg-white/10 px-2 py-1 rounded">$1,240.50</span>
               </div>
             </div>
-            <span className="text-xs font-bold text-white bg-white/10 px-2 py-1 rounded">$1,240.50</span>
-          </button>
-          
-          {/* Pitch Deck Link (Hidden/Investor) */}
-          <button 
-            onClick={() => setLocation("/pitch")}
-            className="w-full mt-3 py-2 text-[10px] text-gray-600 hover:text-gray-400 flex items-center justify-center gap-1 uppercase tracking-widest"
-          >
-            <Target size={10} /> Investor Deck
           </button>
         </div>
 
