@@ -24,6 +24,7 @@ import Onboarding from "@/pages/Onboarding";
 import Notifications from "@/pages/Notifications";
 import SearchPage from "@/pages/SearchPage";
 import DeepResearch from "@/pages/DeepResearch";
+import DesignSystem from "@/pages/DesignSystem";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -53,6 +54,7 @@ function Router() {
       <Route path="/notifications" component={Notifications} />
       <Route path="/search" component={SearchPage} />
       <Route path="/research" component={DeepResearch} />
+      <Route path="/design" component={DesignSystem} />
       
       <Route component={NotFound} />
     </Switch>
