@@ -14,8 +14,9 @@ const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "HeyGen 
 const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
 
 const AVATARS = [
-  { id: "hg_1", name: "Studio Felix", type: "Instant" },
-  { id: "hg_2", name: "Casual Felix", type: "Photo" },
+  { id: "hg_1", name: "Studio Felix", type: "Instant", optimizedFor: ["16:9", "1:1"] },
+  { id: "hg_2", name: "Casual Felix", type: "Photo", optimizedFor: ["9:16", "4:5"] },
+  { id: "hg_3", name: "Presenter Felix", type: "Studio", optimizedFor: ["16:9"] },
 ];
 
 const ASPECT_RATIOS = [
@@ -279,7 +280,14 @@ export default function CreationStudio() {
                         <User size={14} />
                         {avatar.name}
                       </span>
-                      <span className="text-[10px] text-gray-500">{avatar.type}</span>
+                      <div className="flex items-center gap-2">
+                        {avatar.optimizedFor?.includes(selectedRatio) && (
+                          <span className="text-[8px] font-bold bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded border border-green-500/20">
+                            BEST MATCH
+                          </span>
+                        )}
+                        <span className="text-[10px] text-gray-500">{avatar.type}</span>
+                      </div>
                     </button>
                   ))}
                   <button
