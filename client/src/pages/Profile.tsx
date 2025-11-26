@@ -32,7 +32,11 @@ export default function Profile() {
         <path d="M17.75 12.04c0-3.15-2.6-5.72-5.75-5.72-3.15 0-5.72 2.57-5.72 5.72 0 3.15 2.57 5.72 5.72 5.72 1.24 0 2.4-.4 3.35-1.08v1.5c-.98.66-2.18 1.08-3.35 1.08-4.25 0-7.72-3.47-7.72-7.72S7.75 4.32 12 4.32c3.86 0 7.08 2.85 7.63 6.56.1.63.12 1.24.05 1.84-.18 1.66-1.64 2.78-3.27 2.78-1.38 0-2.54-.88-2.87-2.17h-.05c-.57 1.28-1.78 2.17-3.23 2.17-2.04 0-3.72-1.68-3.72-3.72 0-2.04 1.68-3.72 3.72-3.72 1.44 0 2.66.89 3.23 2.16h.05V9.22h1.95v4.64c0 .33.03.66.1.97.2.93 1.06 1.51 1.96 1.51.98 0 1.82-.66 1.94-1.63.06-.48.05-.97-.04-1.45-.45-3.08-3.09-5.46-6.24-5.46-3.42 0-6.22 2.8-6.22 6.22 0 3.42 2.8 6.22 6.22 6.22 1.71 0 3.26-.7 4.38-1.82l1.42 1.42c-1.48 1.48-3.53 2.4-5.8 2.4-4.53 0-8.22-3.69-8.22-8.22S7.47 2.32 12 2.32c4.53 0 8.22 3.69 8.22 8.22 0 .67-.07 1.32-.19 1.96-.2.98-.64 1.87-1.26 2.61-.62.74-1.38 1.31-2.24 1.66-.86.35-1.79.53-2.78.53-2.04 0-3.88-.78-5.25-2.04l1.35-1.48c1.03.95 2.41 1.52 3.9 1.52 1.1 0 2.11-.33 2.94-.89.83-.56 1.45-1.36 1.75-2.31.14-.42.23-.87.23-1.33V12.04zm-5.75-3.72c-1.1 0-2 1-2 2 0 1.1.9 2 2 2 1.1 0 2-.9 2-2 0-1.1-.9-2-2-2z" fillRule="evenodd"/>
       </svg>
     ), color: "#FFFFFF", handle: "@felix", connected: true },
-    { id: "spotify", name: "Spotify", icon: Music, color: "#1DB954", handle: "Future Tech", connected: true },
+    { id: "spotify", name: "Spotify", icon: ({ className }: { className?: string }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor" height="24" width="24">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.72.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+    ), color: "#1DB954", handle: "Future Tech", connected: true },
     { id: "apple", name: "Apple Podcasts", icon: Podcast, color: "#A64AC9", handle: "Future Tech", connected: true },
   ];
 
@@ -119,10 +123,13 @@ export default function Profile() {
                 )}
               >
                 <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: account.connected ? account.color : '#333', color: account.id === 'tiktok' || account.id === 'x' ? 'black' : 'white' }}
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+                  style={{ 
+                    backgroundColor: account.connected ? account.color : '#333',
+                    color: ['tiktok', 'threads', 'x'].includes(account.id) && account.connected ? 'black' : 'white'
+                  }}
                 >
-                  <account.icon className="w-4 h-4 text-white" />
+                  <account.icon className="w-4 h-4 fill-current" />
                 </div>
                 <div className="text-center">
                   <span className="text-[10px] font-bold text-white block truncate max-w-[80px]">
