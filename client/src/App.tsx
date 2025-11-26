@@ -17,6 +17,7 @@ import EcommerceConnect from "@/pages/EcommerceConnect";
 import AvatarStudio from "@/pages/AvatarStudio";
 import AffiliateDashboard from "@/pages/AffiliateDashboard";
 import CollabRoom from "@/pages/CollabRoom";
+import WritersRoom from "@/pages/WritersRoom";
 import AssetMarketplace from "@/pages/AssetMarketplace";
 import PricingTiers from "@/pages/PricingTiers";
 import PitchDeck from "@/pages/PitchDeck";
@@ -48,6 +49,7 @@ function Router() {
       <Route path="/avatars" component={AvatarStudio} />
       <Route path="/affiliate" component={AffiliateDashboard} />
       <Route path="/collab" component={CollabRoom} />
+      <Route path="/writer" component={WritersRoom} />
       <Route path="/marketplace" component={AssetMarketplace} />
       <Route path="/pricing" component={PricingTiers} />
       <Route path="/pitch" component={PitchDeck} />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
-import { ArrowLeft, Users, MessageSquare, Play, Mic, Layers, Plus, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowLeft, Users, MessageSquare, Play, Mic, Layers, Plus, CheckCircle2, Loader2, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import collabBg from "@assets/generated_images/futuristic_holographic_collaborative_workspace.png";
 
@@ -66,7 +66,12 @@ export default function CollabRoom() {
           <div className="bg-[#1E1E1E] border border-white/5 rounded-xl overflow-hidden">
             <div className="p-3 bg-white/5 border-b border-white/5 flex justify-between items-center">
               <h3 className="text-xs font-bold text-gray-400 uppercase">Script & Storyboard</h3>
-              <span className="text-[10px] text-gray-500">Last saved 30s ago</span>
+              <button 
+                onClick={() => setLocation("/writer")}
+                className="text-[10px] text-accent hover:text-white flex items-center gap-1 transition-colors"
+              >
+                Open in Writer <ArrowUpRight size={10} />
+              </button>
             </div>
             <div className="p-4 space-y-4">
               {[
