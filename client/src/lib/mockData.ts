@@ -1,6 +1,97 @@
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
 import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
+import { Home, Search, Plus, Bell, User, Settings, Zap, ShoppingBag, Users, Store, Lightbulb, Briefcase, Library, Rss, Palette, BrainCircuit, Bot, Camera, Square, RectangleHorizontal, RectangleVertical, Instagram, Youtube, Twitter, Linkedin, Podcast } from "lucide-react";
+
+// Stock Images for Styles (Mock Imports for data structure)
+// Ideally these would be actual imports in the component or handled via a proper asset manager
+const cinematicImg = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=60";
+const oilPaintingImg = "https://images.unsplash.com/photo-1579783902614-a3fb39279c53?w=400&auto=format&fit=crop&q=60";
+const ghibliImg = "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=60";
+const polaroidImg = "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400&auto=format&fit=crop&q=60";
+const vaporwaveImg = "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=400&auto=format&fit=crop&q=60";
+const minimalistImg = "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=400&auto=format&fit=crop&q=60";
+const animeImg = "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&auto=format&fit=crop&q=60";
+const render3dImg = "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&auto=format&fit=crop&q=60";
+const cyberpunkImg = "https://images.unsplash.com/photo-1515630278258-407f66498911?w=400&auto=format&fit=crop&q=60";
+
+// --- Sidebar Navigation Data ---
+export const SIDEBAR_NAVIGATION = [
+  {
+    title: "Discover",
+    items: [
+      { href: "/", icon: Home, label: "Home Feed" },
+      { href: "/search", icon: Search, label: "Explore" },
+      { href: "/ideas", icon: Lightbulb, label: "Ideas", badge: "NEW" },
+      { href: "/marketplace", icon: Store, label: "Marketplace" },
+      { href: "/feeds", icon: Rss, label: "My Feeds" },
+    ]
+  },
+  {
+    title: "Creative Suite",
+    items: [
+      { href: "/create", icon: Plus, label: "Studio", highlight: true },
+      { href: "/library", icon: Library, label: "Prompt Library" },
+      { href: "/brand", icon: Palette, label: "Brand Kit" },
+      { href: "/avatars", icon: User, label: "Avatars" },
+      { href: "/ar-cam", icon: Camera, label: "AR Cam" },
+      { href: "/context", icon: BrainCircuit, label: "Context" },
+      { href: "/research", icon: Bot, label: "AI Agent" },
+      { href: "/collab", icon: Users, label: "Collab Room" },
+    ]
+  },
+  {
+    title: "Me",
+    items: [
+      { href: "/profile", icon: User, label: "Profile" },
+      { href: "/affiliate", icon: Briefcase, label: "Creator Hub" },
+      { href: "/notifications", icon: Bell, label: "Alerts", indicator: true },
+      { href: "/store", icon: ShoppingBag, label: "My Store" },
+    ]
+  }
+];
+
+// --- Creation Studio Data ---
+export const CREATION_STYLES = [
+  { id: "Anime", label: "Anime", image: animeImg },
+  { id: "Cinematic", label: "Cinematic", image: cinematicImg },
+  { id: "3D Render", label: "3D Render", image: render3dImg },
+  { id: "Oil Painting", label: "Oil Painting", image: oilPaintingImg },
+  { id: "Cyberpunk", label: "Cyberpunk", image: cyberpunkImg },
+  { id: "Studio Ghibli", label: "Studio Ghibli", image: ghibliImg },
+  { id: "Polaroid", label: "Polaroid", image: polaroidImg },
+  { id: "Vaporwave", label: "Vaporwave", image: vaporwaveImg },
+  { id: "Minimalist", label: "Minimalist", image: minimalistImg }
+];
+
+export const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "HeyGen Avatar"];
+export const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
+
+export const AVATARS = [
+  { id: "hg_1", name: "Studio Felix", type: "Instant", optimizedFor: ["16:9", "1:1"] },
+  { id: "hg_2", name: "Casual Felix", type: "Photo", optimizedFor: ["9:16", "4:5"] },
+  { id: "hg_3", name: "Presenter Felix", type: "Studio", optimizedFor: ["16:9"] },
+];
+
+export const ASPECT_RATIOS = [
+  { id: "1:1", label: "Square", icon: Square, desc: "Instagram Post" },
+  { id: "16:9", label: "Landscape", icon: RectangleHorizontal, desc: "YouTube" },
+  { id: "9:16", label: "Portrait", icon: RectangleVertical, desc: "TikTok / Reels" },
+  { id: "4:5", label: "Vertical", icon: RectangleVertical, desc: "IG Portrait" },
+];
+
+// --- Profile Data ---
+export const CONNECTED_ACCOUNTS = [
+  { id: "instagram", name: "Instagram", icon: Instagram, color: "#E1306C", handle: "@felix.art", connected: true },
+  { id: "tiktok", name: "TikTok", icon: null, color: "#FFFFFF", handle: "@felix_k", connected: true, isCustomIcon: true }, // Using a flag for custom icons
+  { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "Felix Kjellberg", connected: false },
+  { id: "twitter", name: "X", icon: Twitter, color: "#1DA1F2", handle: "@felix", connected: true },
+  { id: "linkedin", name: "LinkedIn", icon: Linkedin, color: "#0077B5", handle: "Felix Kjellberg", connected: true },
+  { id: "pinterest", name: "Pinterest", icon: null, color: "#BD081C", handle: "@felix_pins", connected: false, isCustomIcon: true },
+  { id: "threads", name: "Threads", icon: null, color: "#FFFFFF", handle: "@felix", connected: true, isCustomIcon: true },
+  { id: "spotify", name: "Spotify", icon: null, color: "#1DB954", handle: "Future Tech", connected: true, isCustomIcon: true },
+  { id: "apple", name: "Apple Podcasts", icon: Podcast, color: "#A64AC9", handle: "Future Tech", connected: true },
+];
 
 // Mock Feed Data
 export const FEED_ITEMS = [

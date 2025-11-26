@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { GradientButton } from "@/components/GradientButton";
-import { Image as ImageIcon, Film, Type, Sparkles, Camera as CameraIcon, Lightbulb, ChevronDown, Layers, Palette, BrainCircuit, ShoppingBag, User, Users, Store, Bot, Mic, Rocket, Library, Wand2, Save, History, X, Monitor, Smartphone, RectangleHorizontal, RectangleVertical, Square, Plus, BookOpen, MoreHorizontal, Maximize2, Minimize2, Zap } from "lucide-react";
+import { Image as ImageIcon, Film, Sparkles, ChevronDown, Palette, User, Rocket, Library, Zap, Square, RectangleHorizontal, RectangleVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import { MOCK_PROMPTS, MOCK_ARTICLES } from "@/lib/mockData";
+import { MOCK_PROMPTS, MOCK_ARTICLES, CREATION_STYLES, VIDEO_MODELS, IMAGE_MODELS, AVATARS, ASPECT_RATIOS } from "@/lib/mockData";
 import {
   Dialog,
   DialogContent,
@@ -18,30 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Newspaper, FileText, Link as LinkIcon } from "lucide-react";
-
-// Stock Images for Styles
-import cinematicImg from '@assets/stock_images/cinematic_movie_scen_822514bc.jpg';
-import oilPaintingImg from '@assets/stock_images/classic_oil_painting_28485a67.jpg';
-import ghibliImg from '@assets/stock_images/anime_fantasy_landsc_a6de3658.jpg';
-import polaroidImg from '@assets/stock_images/vintage_polaroid_pho_adc9f752.jpg';
-import vaporwaveImg from '@assets/stock_images/vaporwave_aesthetic__fe2a5089.jpg';
-import minimalistImg from '@assets/stock_images/minimalist_design_cl_951de8ce.jpg';
-import animeImg from '@assets/stock_images/anime_character_acti_3ec23b6b.jpg';
-import render3dImg from '@assets/stock_images/3d_render_abstract_s_bdea587d.jpg';
-import cyberpunkImg from '@assets/stock_images/cyberpunk_city_neon__75c69652.jpg';
-
-const STYLES = [
-  { id: "Anime", label: "Anime", image: animeImg },
-  { id: "Cinematic", label: "Cinematic", image: cinematicImg },
-  { id: "3D Render", label: "3D Render", image: render3dImg },
-  { id: "Oil Painting", label: "Oil Painting", image: oilPaintingImg },
-  { id: "Cyberpunk", label: "Cyberpunk", image: cyberpunkImg },
-  { id: "Studio Ghibli", label: "Studio Ghibli", image: ghibliImg },
-  { id: "Polaroid", label: "Polaroid", image: polaroidImg },
-  { id: "Vaporwave", label: "Vaporwave", image: vaporwaveImg },
-  { id: "Minimalist", label: "Minimalist", image: minimalistImg }
-];
+import { Newspaper, Bot } from "lucide-react";
 
 // Group prompts by category for the quick selector
 const GROUPED_PROMPTS = MOCK_PROMPTS.reduce((acc, prompt) => {
@@ -54,28 +30,6 @@ const GROUPED_PROMPTS = MOCK_PROMPTS.reduce((acc, prompt) => {
   return acc;
 }, [] as { category: string, items: typeof MOCK_PROMPTS }[]);
 
-const VIDEO_MODELS = ["Google Veo", "Sora", "Runway Gen-2", "Pika 1.0", "HeyGen Avatar"];
-const IMAGE_MODELS = ["Midjourney v6", "DALL-E 3", "Stable Diffusion XL", "Adobe Firefly"];
-
-const AVATARS = [
-  { id: "hg_1", name: "Studio Felix", type: "Instant", optimizedFor: ["16:9", "1:1"] },
-  { id: "hg_2", name: "Casual Felix", type: "Photo", optimizedFor: ["9:16", "4:5"] },
-  { id: "hg_3", name: "Presenter Felix", type: "Studio", optimizedFor: ["16:9"] },
-];
-
-const ASPECT_RATIOS = [
-  { id: "1:1", label: "Square", icon: Square, desc: "Instagram Post" },
-  { id: "16:9", label: "Landscape", icon: RectangleHorizontal, desc: "YouTube" },
-  { id: "9:16", label: "Portrait", icon: RectangleVertical, desc: "TikTok / Reels" },
-  { id: "4:5", label: "Vertical", icon: RectangleVertical, desc: "IG Portrait" },
-];
-
-const MOCK_HISTORY = [
-  "A futuristic city with flying cars and neon lights",
-  "Portrait of a cat wearing a spacesuit",
-  "Marketing copy for a new coffee brand"
-];
-
 export default function CreationStudio() {
   const [location, setLocation] = useLocation();
   const locationState = window.history.state?.usr;
@@ -87,12 +41,8 @@ export default function CreationStudio() {
   const [prompt, setPrompt] = useState(locationState?.prompt || "");
   const [selectedModel, setSelectedModel] = useState(locationState?.model || (activeTab === "video" ? VIDEO_MODELS[0] : IMAGE_MODELS[0]));
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-  const [isCarouselMode, setIsCarouselMode] = useState(locationState?.prompt?.includes("carousel") || false);
-  const [showHistory, setShowHistory] = useState(false);
-  const [isEnhancing, setIsEnhancing] = useState(false);
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [inputMode, setInputMode] = useState<"prompt" | "rss">("prompt");
-  const [isExpanded, setIsExpanded] = useState(false);
 
   // Update default model when tab changes if not manually set from idea
   useEffect(() => {
@@ -109,28 +59,6 @@ export default function CreationStudio() {
   }, [locationState]);
 
   const currentModels = activeTab === "video" ? VIDEO_MODELS : IMAGE_MODELS;
-
-  const handleEnhance = () => {
-    if (!prompt) return;
-    setIsEnhancing(true);
-    // Mock AI enhancement
-    setTimeout(() => {
-      setPrompt((prev: string) => prev + ", highly detailed, 8k resolution, professional lighting, trending on artstation, masterpiece");
-      setIsEnhancing(false);
-      toast({
-        title: "Prompt Enhanced",
-        description: "AI has added details to your prompt for better results.",
-      });
-    }, 1500);
-  };
-
-  const handleSavePrompt = () => {
-    if (!prompt) return;
-    toast({
-      title: "Prompt Saved",
-      description: "Added to your library successfully.",
-    });
-  };
 
   // Helper for dynamic preview sizing
   const getPreviewDimensions = () => {
@@ -282,7 +210,8 @@ export default function CreationStudio() {
                           </button>
                        ))}
                     </div>
-                 )}
+                 )
+                 }
               </div>
 
               {/* Bottom Toolbar (Pill Style) */}
@@ -362,12 +291,12 @@ export default function CreationStudio() {
                         <DropdownMenuTrigger asChild>
                           <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/20 hover:bg-black/40 text-[11px] font-medium text-gray-300 hover:text-white transition-colors border border-white/5 hover:border-white/10">
                              <Palette size={12} />
-                             {STYLES.find(s => s.id === selectedStyle)?.label || "Style"}
+                             {CREATION_STYLES.find(s => s.id === selectedStyle)?.label || "Style"}
                           </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="bg-[#1E1E1E] border-white/10 text-white w-64 p-2 mb-2" sideOffset={10}>
                            <div className="grid grid-cols-2 gap-2">
-                              {STYLES.map(s => (
+                              {CREATION_STYLES.map(s => (
                                 <DropdownMenuItem
                                   key={s.id}
                                   onClick={() => setSelectedStyle(s.id)}
@@ -429,8 +358,20 @@ export default function CreationStudio() {
                       }}
                       className="text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col"
                     >
-                      <h5 className="font-bold text-white text-sm mb-2 group-hover:text-accent transition-colors">{item.title}</h5>
-                      <p className="text-xs text-gray-400 line-clamp-3 leading-relaxed">{item.prompt}</p>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-bold text-sm text-white group-hover:text-accent transition-colors">{item.title}</span>
+                        <span className="text-[10px] text-gray-500">{item.platform}</span>
+                      </div>
+                      <p className="text-xs text-gray-400 line-clamp-3 mb-3 flex-1">
+                        "{item.prompt}"
+                      </p>
+                      <div className="flex flex-wrap gap-1 mt-auto">
+                        {item.tags.map((tag, k) => (
+                          <span key={k} className="text-[9px] px-1.5 py-0.5 bg-black/30 rounded text-gray-500 border border-white/5">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
                     </button>
                   ))}
                 </div>
