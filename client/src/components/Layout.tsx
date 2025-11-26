@@ -23,10 +23,18 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
   const [isRightSidebarOpen, setIsRightSidebarOpen] = React.useState(true);
   const [articlePage, setArticlePage] = React.useState(0);
   const [selectedArticle, setSelectedArticle] = React.useState<typeof MOCK_ARTICLES[0] | null>(null);
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const ITEMS_PER_PAGE = 5;
-  const totalPages = Math.ceil(MOCK_ARTICLES.length / ITEMS_PER_PAGE);
-  const displayedArticles = MOCK_ARTICLES.slice(articlePage * ITEMS_PER_PAGE, (articlePage + 1) * ITEMS_PER_PAGE);
+  
+  const filteredArticles = MOCK_ARTICLES.filter(article => 
+    article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    article.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    article.source.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+  const displayedArticles = filteredArticles.slice(articlePage * ITEMS_PER_PAGE, (articlePage + 1) * ITEMS_PER_PAGE);
   
   return (
     <div className="min-h-screen w-full bg-background text-foreground flex justify-center md:justify-start overflow-hidden">
@@ -120,6 +128,21 @@ export function Layout({ children, hideTabs = false }: LayoutProps) {
                    <Newspaper size={14} className="text-blue-400" /> Trending News
                  </h3>
                  <button onClick={() => setLocation("/feeds")} className="text-[10px] text-accent hover:underline">View All</button>
+               </div>
+
+               {/* Search Bar */}
+               <div className="relative mb-4">
+                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={14} />
+                 <input 
+                   type="text" 
+                   placeholder="Search topics..." 
+                   value={searchQuery}
+                   onChange={(e) => {
+                     setSearchQuery(e.target.value);
+                     setArticlePage(0); // Reset to first page on search
+                   }}
+                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 transition-colors"
+                 />
                </div>
                
                <div className="space-y-3 overflow-y-auto no-scrollbar flex-1 pr-1">

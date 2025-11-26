@@ -179,11 +179,43 @@ export const MOCK_ARTICLES = [
     summary: "Analyzing the crash of play-to-earn models and the future of blockchain integration in video games."
   },
   {
-    id: 15,
-    title: "Remote Work Trends 2025",
-    source: "Forbes",
+    id: 16,
+    title: "The Rise of Slow Content",
+    source: "Medium",
     time: "1w ago",
-    image: "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=800&auto=format&fit=crop&q=60",
-    summary: "Hybrid models are here to stay, but companies are finding new ways to foster culture and collaboration remotely."
+    image: "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=800&auto=format&fit=crop&q=60",
+    summary: "Counter to the fast-paced short-form trend, creators are finding success with long, meditative, and highly produced content."
+  },
+  {
+    id: 17,
+    title: "Authenticity vs. AI Perfection",
+    source: "AdAge",
+    time: "1w ago",
+    image: "https://images.unsplash.com/photo-1493612276216-ee3925520721?w=800&auto=format&fit=crop&q=60",
+    summary: "Audiences are craving raw, unpolished moments as a reaction to increasingly perfect AI-generated imagery."
+  },
+  {
+    id: 18,
+    title: "Niche Communities are the New Mainstream",
+    source: "Substack",
+    time: "2w ago",
+    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=60",
+    summary: "Mass appeal is out. Deeply engaged micro-communities are where the real value and connection happen."
+  },
+  {
+    id: 19,
+    title: "Data Privacy for Creators",
+    source: "Electronic Frontier Foundation",
+    time: "2w ago",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=60",
+    summary: "Protecting your digital footprint and understanding platform terms of service is more critical than ever."
+  },
+  {
+    id: 20,
+    title: "The Evolution of Influencer Marketing",
+    source: "Marketing Dive",
+    time: "2w ago",
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=60",
+    summary: "Brands are moving away from transactional posts towards long-term partnerships and co-creation."
   }
 ];
