@@ -26,6 +26,7 @@ import Notifications from "@/pages/Notifications";
 import SearchPage from "@/pages/SearchPage";
 import DeepResearch from "@/pages/DeepResearch";
 import DesignSystem from "@/pages/DesignSystem";
+import Wallet from "@/pages/Wallet";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -40,6 +41,7 @@ function Router() {
       <Route path="/editor" component={VideoEditor} />
       <Route path="/share" component={SocialShare} />
       <Route path="/profile" component={Profile} />
+      <Route path="/wallet" component={Wallet} />
       <Route path="/battle" component={BattleMode} />
       <Route path="/camera" component={ARCamera} />
       <Route path="/ideas" component={IdeaGenerator} />

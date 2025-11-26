@@ -139,7 +139,10 @@ export default function Profile() {
               </p>
             </div>
 
-            <button className="relative z-10 px-4 py-2 rounded-xl bg-white text-black text-xs font-bold flex items-center gap-1 hover:bg-gray-200 transition-colors shadow-lg">
+            <button 
+              onClick={() => setLocation("/wallet")}
+              className="relative z-10 px-4 py-2 rounded-xl bg-white text-black text-xs font-bold flex items-center gap-1 hover:bg-gray-200 transition-colors shadow-lg"
+            >
               <Zap size={14} className="fill-black" />
               Top Up
             </button>
