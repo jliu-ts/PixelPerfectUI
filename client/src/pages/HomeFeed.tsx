@@ -69,8 +69,8 @@ export default function HomeFeed() {
   return (
     <Layout>
       {/* Top Stories Rail (Instagram/Snapchat Pattern) */}
-      <div className="absolute top-0 left-0 right-0 z-30 pt-4 pb-2 bg-gradient-to-b from-black/90 to-transparent">
-        <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 pb-4 items-center">
+      <div className="absolute top-0 left-0 right-0 z-30 pt-6 pb-8 bg-gradient-to-b from-black/90 via-black/50 to-transparent pointer-events-none">
+        <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 items-center pointer-events-auto">
           
           {/* Add Yours / Create */}
           <div className="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer" onClick={() => setLocation("/create")}>
@@ -132,10 +132,10 @@ export default function HomeFeed() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90 pointer-events-none" />
 
             {/* CapCut Style Template Button (Innovation) */}
-            <div className="absolute left-4 bottom-40 z-20 md:left-8 md:bottom-32">
+            <div className="absolute left-4 top-24 z-20 md:left-8">
               <button 
                 onClick={handleRemix}
-                className="flex items-center gap-2 px-3 py-1.5 rounded bg-black/40 backdrop-blur-md border border-white/10 hover:bg-black/60 transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:bg-black/60 transition-colors"
               >
                 <Sparkles size={12} className="text-yellow-400" />
                 <span className="text-[10px] font-bold text-white md:text-xs">Try this Style</span>
@@ -185,18 +185,18 @@ export default function HomeFeed() {
             </div>
 
             {/* Bottom Overlay */}
-            <div className="absolute bottom-20 left-4 right-16 z-20 text-left pointer-events-none md:left-8 md:right-24 md:bottom-12">
+            <div className="absolute bottom-20 left-4 right-16 z-20 text-left pointer-events-none md:left-8 md:right-24 md:bottom-12 flex flex-col items-start max-w-[70%] md:max-w-[60%]">
               <div className="flex items-center gap-2 mb-2 pointer-events-auto">
                 <span className="font-bold text-white text-lg shadow-black drop-shadow-md flex items-center gap-1 md:text-xl">
                   @{item.username}
                   {item.verified && <Verified size={14} className="text-blue-400 md:w-5 md:h-5" />}
                 </span>
               </div>
-              <p className="text-white/90 text-sm leading-relaxed line-clamp-2 mb-3 drop-shadow-md max-w-[90%] pointer-events-auto md:text-base md:max-w-[80%]">
+              <p className="text-white/90 text-sm leading-relaxed line-clamp-3 mb-3 drop-shadow-md pointer-events-auto md:text-base">
                 {item.description}
               </p>
               
-              <div className="flex items-center gap-2 text-white/80 text-xs font-medium mb-4 md:text-sm">
+              <div className="flex items-center gap-2 text-white/80 text-xs font-medium mb-4 md:text-sm bg-black/20 px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/5 pointer-events-auto">
                  <Music2 size={12} className="md:w-4 md:h-4" />
                  <div className="overflow-hidden w-32 md:w-48">
                    <p className="whitespace-nowrap animate-marquee">{item.music}</p>
