@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { ArrowLeft, Search, X, TrendingUp, User, Sparkles, Layers, Clock, Instagram, Youtube, Twitter, Globe, Filter, Video, Image, Type, Mic, Smartphone, Monitor } from "lucide-react";
+import { ArrowLeft, Search, X, TrendingUp, User, Sparkles, Layers, Clock, Instagram, Youtube, Twitter, Globe, Filter, Video, Image, Type, Mic, Smartphone, Monitor, Heart, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Mock Data
 const RECENT_SEARCHES = ["Cyberpunk aesthetics", "Neon city loop", "Minimalist fonts"];
 const TRENDING_TOPICS = ["#FrutigerAero", "#DarkFantasy", "#Y2K", "#Synthwave", "#Abstract3D"];
+
+// Mock Explore Feed (IG Grid Style)
+const EXPLORE_FEED = Array.from({ length: 24 }).map((_, i) => ({
+  id: i,
+  image: `https://picsum.photos/seed/explore${i}/500/500`,
+  likes: Math.floor(Math.random() * 10000) + 500,
+  type: i % 6 === 0 ? "video" : "image",
+  isReel: i % 8 === 0
+}));
 
 const RESULTS = {
   creators: [
@@ -22,12 +31,18 @@ const RESULTS = {
   assets: [
     { id: 1, title: "Cyberpunk City Pack", type: "3D Model", downloads: "1.2k", image: "https://picsum.photos/seed/cybercity/100/100" },
     { id: 2, title: "Neon Glitch Overlay", type: "Video Effect", downloads: "3.5k", image: "https://picsum.photos/seed/glitch/100/100" },
+    { id: 3, title: "Analog Film Grain", type: "Texture", downloads: "8.2k", image: "https://picsum.photos/seed/grain/100/100" },
+    { id: 4, title: "Holographic HUD", type: "UI Kit", downloads: "2.1k", image: "https://picsum.photos/seed/hud/100/100" },
+    { id: 5, title: "Synthwave Audio Loop", type: "Audio", downloads: "5.4k", image: "https://picsum.photos/seed/synth/100/100" },
+    { id: 6, title: "Abstract 3D Shapes", type: "3D Model", downloads: "3.3k", image: "https://picsum.photos/seed/shapes/100/100" },
   ],
   inspiration: [
     { id: 1, title: "Future Interfaces", source: "Pinterest", image: "https://picsum.photos/seed/interface/300/200" },
     { id: 2, title: "Holographic UI Design", source: "Behance", image: "https://picsum.photos/seed/holographic/300/200" },
     { id: 3, title: "Motion Graphics Showreel", source: "Vimeo", image: "https://picsum.photos/seed/motion/300/200" },
     { id: 4, title: "Typography Trends 2024", source: "Medium", image: "https://picsum.photos/seed/type/300/200" },
+    { id: 5, title: "Generative Art Series", source: "ArtStation", image: "https://picsum.photos/seed/genart/300/200" },
+    { id: 6, title: "Cyber Fashion", source: "Instagram", image: "https://picsum.photos/seed/fashion/300/200" },
   ]
 };
 
@@ -205,18 +220,50 @@ export default function SearchPage() {
                 <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
                   <TrendingUp size={12} /> Trending Now
                 </h3>
-                <div className="space-y-2">
+                <div className="flex gap-2 overflow-x-auto no-scrollbar">
                   {TRENDING_TOPICS.map((topic, i) => (
                     <button 
                       key={topic}
                       onClick={() => setQuery(topic)}
-                      className="w-full p-3 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-between hover:bg-white/5 group"
+                      className="whitespace-nowrap px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center gap-2 hover:bg-white/5 group"
                     >
                       <span className="text-sm font-bold text-white">{topic}</span>
                       <span className="text-xs text-gray-500 group-hover:text-accent transition-colors">
-                        {12 - i}k posts
+                        {12 - i}k
                       </span>
                     </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Explore Grid (IG Style) */}
+              <div>
+                <div className="grid grid-cols-3 gap-0.5 md:gap-1 auto-rows-[minmax(100px,auto)] grid-flow-dense">
+                  {EXPLORE_FEED.map((item, i) => (
+                    <div 
+                      key={item.id} 
+                      className={cn(
+                        "relative bg-gray-900 group cursor-pointer overflow-hidden",
+                        item.isReel ? "row-span-2 h-full" : "aspect-square"
+                      )}
+                      style={{ 
+                        gridRow: item.isReel ? "span 2" : "auto",
+                      }}
+                    >
+                      <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Explore content" />
+                      
+                      {/* Type Indicators */}
+                      <div className="absolute top-2 right-2">
+                        {item.type === "video" && <Video size={16} className="text-white drop-shadow-md" />}
+                        {item.isReel && <Play size={16} fill="white" className="text-white drop-shadow-md" />}
+                      </div>
+
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                         <Heart className="text-white fill-white" size={20} />
+                         <span className="text-white font-bold text-sm">{item.likes > 1000 ? (item.likes / 1000).toFixed(1) + 'k' : item.likes}</span>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -250,24 +297,18 @@ export default function SearchPage() {
                 </div>
               )}
 
-              {/* Assets Section */}
+              {/* Assets Section - Grid Layout */}
               {(activeTab === "all" || activeTab === "assets") && (
                 <div>
                   <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
                     <Layers size={12} /> Assets
                   </h3>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-3 gap-0.5 md:gap-1">
                     {RESULTS.assets.map(asset => (
-                      <div key={asset.id} className="rounded-xl bg-[#1E1E1E] border border-white/5 overflow-hidden group cursor-pointer" onClick={() => setLocation("/marketplace")}>
-                        <div className="aspect-square relative">
-                          <img src={asset.image} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt={asset.title} />
-                          <div className="absolute bottom-2 right-2 text-[10px] bg-black/60 backdrop-blur px-1.5 py-0.5 rounded text-white">
-                            {asset.type}
-                          </div>
-                        </div>
-                        <div className="p-2">
-                          <h4 className="text-xs font-bold text-white truncate">{asset.title}</h4>
-                          <p className="text-[10px] text-gray-500">{asset.downloads} downloads</p>
+                      <div key={asset.id} className="relative aspect-square bg-[#1E1E1E] border border-white/5 overflow-hidden group cursor-pointer" onClick={() => setLocation("/marketplace")}>
+                        <img src={asset.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform" alt={asset.title} />
+                        <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-[10px] font-bold text-white truncate">{asset.title}</p>
                         </div>
                       </div>
                     ))}
@@ -275,19 +316,18 @@ export default function SearchPage() {
                 </div>
               )}
 
-              {/* Inspiration Section (Only show if specifically searching or active tab) */}
+              {/* Inspiration Section - Grid Layout */}
               {(activeTab === "all" || activeTab === "inspiration") && (
                  <div>
                    <h3 className="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
                      <Sparkles size={12} /> Inspiration
                    </h3>
-                   <div className="grid grid-cols-2 gap-3">
+                   <div className="grid grid-cols-3 gap-0.5 md:gap-1">
                      {RESULTS.inspiration.map(item => (
-                       <div key={item.id} className="rounded-xl overflow-hidden relative group cursor-pointer" onClick={() => setLocation("/ideas")}>
-                         <img src={item.image} className="w-full aspect-video object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt={item.title} />
-                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-2">
-                           <h4 className="text-xs font-bold text-white">{item.title}</h4>
-                           <p className="text-[10px] text-gray-400">via {item.source}</p>
+                       <div key={item.id} className="relative aspect-square bg-[#1E1E1E] overflow-hidden group cursor-pointer" onClick={() => setLocation("/ideas")}>
+                         <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform" alt={item.title} />
+                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                           <span className="text-[10px] font-bold text-white px-2 text-center">{item.title}</span>
                          </div>
                        </div>
                      ))}
