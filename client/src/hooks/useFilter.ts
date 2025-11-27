@@ -34,7 +34,7 @@ interface UseFilterReturn<T> {
  *   initialCategory: "All"
  * });
  */
-export function useFilter<T extends Record<string, unknown>>({
+export function useFilter<T extends object>({
   items,
   searchFields = [],
   initialCategory = "All",
@@ -93,7 +93,7 @@ export function useFilter<T extends Record<string, unknown>>({
 /**
  * Simple search-only filter (no categories)
  */
-export function useSearch<T extends Record<string, unknown>>(
+export function useSearch<T extends object>(
   items: T[],
   searchFields: (keyof T)[]
 ) {
