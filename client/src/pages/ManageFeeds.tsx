@@ -28,7 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { INITIAL_FEEDS, FEED_CATEGORIES } from "@/lib/mockData";
+import { INITIAL_FEEDS, FEED_CATEGORIES, type Feed } from "@/lib/mockData";
 
 // Enhanced mock data for suggestions
 const SUGGESTED_FEEDS = [
@@ -54,7 +54,7 @@ export default function ManageFeeds() {
     setIsAdding(true);
     // Simulate verification delay
     setTimeout(() => {
-      const newFeed = {
+      const newFeed: Feed = {
         id: Date.now(),
         name: "New Feed Source", // In real app, fetch from XML
         url: targetUrl,

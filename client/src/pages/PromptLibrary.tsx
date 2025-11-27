@@ -1,57 +1,55 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { 
-  Library, 
-  Plus, 
-  Copy, 
-  Trash2, 
-  Edit, 
-  Filter, 
-  Search,
+import { SearchInput, FilterTabs, EmptyState } from "@/components/common";
+import {
+  Library,
+  Plus,
+  Copy,
+  Trash2,
+  Edit,
   Smartphone,
   Monitor,
   Instagram,
   Youtube,
   Linkedin,
   Check,
-  ArrowRight,
-  Bookmark,
   Sparkles,
   Zap,
-  MoreHorizontal,
-  Share2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePrompts, Prompt } from "@/hooks/usePrompts";
+import { useFilter } from "@/hooks/useFilter";
 import { PromptLibraryModal } from "@/components/PromptLibraryModal";
 import { useToast } from "@/hooks/use-toast";
-
-// Mock Data
-const CATEGORIES = ["All", "Product", "Social", "Business", "Art", "Education"];
-const PLATFORMS = ["All", "Instagram", "TikTok", "YouTube", "LinkedIn", "General"];
+import { PROMPT_FILTER_CATEGORIES } from "@/lib/constants";
 
 export default function PromptLibrary() {
   const [, setLocation] = useLocation();
   const { prompts, deletePrompt } = usePrompts();
   const { toast } = useToast();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedPlatform, setSelectedPlatform] = useState("All");
   const [copiedId, setCopiedId] = useState<number | null>(null);
+
+  // Use the useFilter hook for filtering logic
+  const {
+    searchQuery,
+    setSearchQuery,
+    selectedCategory,
+    setSelectedCategory,
+    filteredItems: filteredPrompts,
+    resetFilters,
+    hasResults,
+  } = useFilter({
+    items: prompts,
+    searchFields: ["title", "prompt"],
+    categoryField: "category",
+    initialCategory: "All",
+  });
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalView, setModalView] = useState<"list" | "create" | "edit">("list");
   const [selectedPromptForEdit, setSelectedPromptForEdit] = useState<Prompt | null>(null);
-
-  const filteredPrompts = prompts.filter(p => {
-    const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          p.prompt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
-    const matchesPlatform = selectedPlatform === "All" || p.platform === selectedPlatform;
-    return matchesSearch && matchesCategory && matchesPlatform;
-  });
 
   const handleCopy = (id: number, text: string) => {
     navigator.clipboard.writeText(text);
@@ -138,38 +136,20 @@ export default function PromptLibrary() {
 
             {/* Search and Filters */}
             <div className="flex flex-col md:flex-row gap-4">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
-                <input 
-                  type="text" 
-                  placeholder="Search by keywords, tags..." 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-[#121212] border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 transition-all focus:ring-1 focus:ring-accent/50"
-                />
-              </div>
-              
-              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 md:pb-0">
-                <div className="flex items-center px-3 py-2 rounded-xl bg-[#121212] border border-white/10 shrink-0">
-                  <Filter size={14} className="text-gray-500 mr-2" />
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Filters:</span>
-                </div>
-                
-                {CATEGORIES.map(cat => (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={cn(
-                      "px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap border shrink-0",
-                      selectedCategory === cat
-                        ? "bg-white text-black border-white"
-                        : "bg-[#121212] text-gray-400 border-white/10 hover:border-white/30 hover:text-white"
-                    )}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
+              <SearchInput
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search by keywords, tags..."
+                className="flex-1 max-w-md"
+              />
+
+              <FilterTabs
+                tabs={PROMPT_FILTER_CATEGORIES.map(cat => ({ id: cat.id, label: cat.label }))}
+                activeTab={selectedCategory}
+                onChange={setSelectedCategory}
+                variant="buttons"
+                className="overflow-x-auto no-scrollbar pb-2 md:pb-0"
+              />
             </div>
           </div>
         </div>
@@ -274,25 +254,16 @@ export default function PromptLibrary() {
                 </div>
               ))
             ) : (
-              <div className="col-span-full flex flex-col items-center justify-center py-32 text-center">
-                <div className="w-20 h-20 rounded-full bg-[#1E1E1E] border border-white/5 flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-                  <Search size={32} className="text-gray-600" />
-                </div>
-                <h3 className="text-xl font-display font-bold text-white mb-2">No prompts found</h3>
-                <p className="text-gray-500 max-w-xs mx-auto mb-8">
-                  We couldn't find any prompts matching your search. Try adjusting your filters or create a new one.
-                </p>
-                <button 
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSelectedCategory("All");
-                    setSelectedPlatform("All");
-                  }}
-                  className="px-6 py-2.5 rounded-xl bg-white/5 text-white text-sm font-bold hover:bg-white/10 border border-white/10 transition-all"
-                >
-                  Clear Filters
-                </button>
-              </div>
+              <EmptyState
+                variant="search"
+                title="No prompts found"
+                description="We couldn't find any prompts matching your search. Try adjusting your filters or create a new one."
+                action={{
+                  label: "Clear Filters",
+                  onClick: resetFilters,
+                }}
+                className="col-span-full py-32"
+              />
             )}
           </div>
         </div>

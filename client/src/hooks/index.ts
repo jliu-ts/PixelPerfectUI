@@ -3,7 +3,7 @@
 // UI state hooks
 export { useModal, useModalWithData } from "./useModal";
 export { useFilter, useSearch } from "./useFilter";
-export { useMobile } from "./use-mobile";
+export { useIsMobile } from "./use-mobile";
 
 // Toast notifications
 export { useToast, toast } from "./use-toast";

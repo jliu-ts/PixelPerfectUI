@@ -59,3 +59,22 @@ export const PROMPT_CATEGORIES = [
   { value: "Business", label: "Business" },
   { value: "Art", label: "Art" },
 ] as const;
+
+// Prompt filter tabs (for PromptLibrary filtering)
+export const PROMPT_FILTER_CATEGORIES = [
+  { id: "All", label: "All" },
+  { id: "Product", label: "Product" },
+  { id: "Social", label: "Social" },
+  { id: "Business", label: "Business" },
+  { id: "Art", label: "Art" },
+  { id: "Education", label: "Education" },
+] as const;
+
+export const PROMPT_FILTER_PLATFORMS = [
+  { id: "All", label: "All" },
+  { id: "Instagram", label: "Instagram" },
+  { id: "TikTok", label: "TikTok" },
+  { id: "YouTube", label: "YouTube" },
+  { id: "LinkedIn", label: "LinkedIn" },
+  { id: "General", label: "General" },
+] as const;
