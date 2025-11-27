@@ -1,0 +1,145 @@
+# Cursor Rules - Trending Society
+
+You are an AI assistant helping with the Trending Society codebase. Follow these rules strictly.
+
+## MUST READ FIRST
+
+Before making any changes, read these files:
+- `CONVENTIONS.md` - Coding patterns and standards
+- `ARCHITECTURE.md` - System overview and structure
+
+## Project Context
+
+This is a React + Express full-stack application for AI-powered content creation.
+
+- Frontend: React 19, TypeScript, TailwindCSS, Radix UI
+- Backend: Express.js, Drizzle ORM, PostgreSQL
+- State: React Query for server state, custom hooks for local state
+
+## Import Rules
+
+```typescript
+// ✅ CORRECT imports
+import { CREATION_STYLES } from "@/lib/data";
+import { PROMPT_PLATFORMS } from "@/lib/constants";
+import { apiClient, useApiQuery } from "@/lib/api";
+import { useFilter, useModal } from "@/hooks";
+import { SearchInput, FilterTabs } from "@/components/common";
+
+// ❌ NEVER import from
+import { ... } from "@/lib/mockData";  // DEPRECATED
+```
+
+## Code Patterns
+
+### State Management
+
+For pages with 3+ state values, use a custom hook:
+
+```typescript
+// ✅ Use existing hooks
+const studio = useCreationStudio();
+const filter = useFilter({ items, searchFields: ["title"] });
+const modal = useModal();
+
+// ❌ Don't create state sprawl
+const [a, setA] = useState();
+const [b, setB] = useState();
+const [c, setC] = useState();
+// ... more useState
+```
+
+### API Calls
+
+Always use the API client:
+
+```typescript
+// ✅ CORRECT
+import { apiClient, useApiQuery, queryKeys } from "@/lib/api";
+
+const { data } = useApiQuery<Prompt[]>("/prompts", queryKeys.prompts.all());
+
+// ❌ WRONG
+fetch("/api/prompts")
+```
+
+### Components
+
+Use common components for consistency:
+
+```typescript
+// ✅ Use existing components
+import { PageHeader, SearchInput, FilterTabs, EmptyState } from "@/components/common";
+
+<PageHeader title="Feature" showBack />
+<SearchInput value={query} onChange={setQuery} />
+```
+
+### Data
+
+Never define inline data arrays. Add to lib/data/:
+
+```typescript
+// ✅ Add to lib/data/feature.ts then import
+import { MY_DATA } from "@/lib/data";
+
+// ❌ Never inline
+const MY_DATA = [{ ... }];
+```
+
+## File Structure
+
+When creating new files:
+
+- Components: `components/[Feature].tsx` or `components/common/[Name].tsx`
+- Hooks: `hooks/use[Feature].ts`
+- Data: `lib/data/[feature].ts` (export from index.ts)
+- Pages: `pages/[Feature].tsx`
+
+## Styling
+
+Use TailwindCSS with design tokens:
+
+```typescript
+// Background colors
+bg-background, bg-[#1E1E1E], bg-white/5
+
+// Borders
+border-white/5, border-white/10
+
+// Text
+text-foreground, text-muted-foreground
+
+// Accent
+bg-accent, text-accent
+```
+
+Use `cn()` for conditional classes:
+
+```typescript
+import { cn } from "@/lib/utils";
+
+className={cn("base-class", condition && "conditional-class")}
+```
+
+## TypeScript
+
+Always export types with data:
+
+```typescript
+// lib/data/feature.ts
+export interface Feature {
+  id: number;
+  name: string;
+}
+
+export const FEATURES: Feature[] = [...];
+```
+
+## Before Submitting
+
+1. Check imports use correct paths (@/lib/data, not @/lib/mockData)
+2. No inline data arrays in components
+3. Complex state uses custom hooks
+4. Common components used where applicable
+5. Types exported alongside data
