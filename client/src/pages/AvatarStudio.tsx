@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import avatarImage from "@assets/generated_images/professional_ai_avatar_portrait.png";
+import avatarImage from "@assets/generated_images/candid_avatar_portrait.png";
 import heyGenLogo from "@assets/stock_images/heygen_logo_official_29b26384.jpg";
 import elevenLabsLogo from "@assets/stock_images/elevenlabs_logo_offi_6bae9ee6.jpg";
 

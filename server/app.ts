@@ -83,7 +83,8 @@ export default async function runApp(
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
+    // reusePort is unsupported on macOS (listen throws ENOTSUP); keep it on Linux/Replit
+    ...(process.platform === "linux" ? { reusePort: true } : {}),
   }, () => {
     log(`serving on port ${port}`);
   });

@@ -33,7 +33,7 @@ const SUGGESTIONS = [
 ];
 
 const MOCK_RESPONSE = {
-  answer: "The **'Frutiger Aero'** aesthetic, popular from roughly **2004 to 2013**, is characterized by glossy textures, skepticism, nature themes (tropical fish, water, grass), and skeuomorphism. \n\nIt represents a time of 'techno-optimism' where the future was depicted as clean, eco-friendly, and human-centric. It is currently experiencing a massive resurgence on TikTok and Instagram as Gen Z discovers this 'lost future'.\n\nKey visual elements include:\n- Glossy buttons and glass effects (Windows Aero)\n- High-saturation grassy fields (Windows XP Bliss)\n- Futurism mixed with nature (Eco-Futurism)",
+  answer: "The **'Frutiger Aero'** aesthetic, popular from roughly **2004 to 2013**, is characterized by glossy textures, water and bubble motifs, nature themes (tropical fish, grass, open sky), and skeuomorphism. \n\nIt comes from a stretch of techno-optimism where the future was drawn as clean, eco-friendly, and human-centric. It is resurging on TikTok and Instagram as Gen Z finds this 'lost future'.\n\nKey visual elements include:\n- Glossy buttons and glass effects (Windows Aero)\n- High-saturation grassy fields (Windows XP Bliss)\n- Futurism mixed with nature (Eco-Futurism)",
   sources: [
     { id: 1, title: "Aesthetics Wiki: Frutiger Aero", url: "aesthetics.fandom.com", icon: "https://upload.wikimedia.org/wikipedia/commons/6/6a/External_link_font_awesome.svg" },
     { id: 2, title: "The Verge: Why Gen Z loves 2000s UI", url: "theverge.com", icon: "https://upload.wikimedia.org/wikipedia/commons/a/a2/The_Verge_logo.svg" },
@@ -225,7 +225,11 @@ export default function DeepResearch() {
                         <div className="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed">
                            {msg.content.split('\n').map((line: string, i: number) => (
                              <p key={i} className={cn("mb-3", line.startsWith('-') && "pl-4 text-gray-400")}>
-                               {line}
+                               {line.split(/(\*\*[^*]+\*\*)/g).map((part: string, j: number) =>
+                                 part.startsWith('**') && part.endsWith('**')
+                                   ? <strong key={j} className="text-white font-semibold">{part.slice(2, -2)}</strong>
+                                   : part
+                               )}
                              </p>
                            ))}
                         </div>

@@ -12,11 +12,11 @@ export interface Article {
 export const MOCK_ARTICLES: Article[] = [
   {
     id: 1,
-    title: "The Future of AI in Content Creation: What Creators Need to Know",
+    title: "AI Video Got Cheap. Creator Output Is Up 10x",
     source: "TechCrunch",
     time: "2h ago",
     image: ARTICLE_IMAGES.aiContent,
-    summary: "AI tools are rapidly evolving, offering new ways for creators to generate video, images, and text. The key is to leverage these tools for efficiency while maintaining a unique human voice."
+    summary: "Generation costs dropped roughly 90% in eighteen months. The bottleneck moved from making the video to deciding which one is worth making."
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Social Media Today",
     time: "4h ago",
     image: ARTICLE_IMAGES.socialTrends,
-    summary: "From immersive AR experiences to the return of long-form video, here are the trends that will define the social media landscape in 2025."
+    summary: "Long-form video is back, AR filters are table stakes, and public follower counts are quietly disappearing from profiles."
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "The Verge",
     time: "6h ago",
     image: ARTICLE_IMAGES.spaceX,
-    summary: "A successful launch marks a new era for space travel as SpaceX pushes the boundaries of reusable rocket technology."
+    summary: "The booster landed intact for a fourth consecutive flight, putting reuse economics within range of the company's original projections."
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Behance Blog",
     time: "12h ago",
     image: ARTICLE_IMAGES.minimalism,
-    summary: "After years of maximalism, clean lines and whitespace are making a strong comeback in digital product design."
+    summary: "Whitespace is winning again, mostly because dense dashboards kept testing badly with first-time users."
   },
   {
     id: 5,
@@ -48,15 +48,15 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Wired",
     time: "14h ago",
     image: ARTICLE_IMAGES.virtualInfluencers,
-    summary: "Virtual influencers are gaining traction, with brands partnering with AI-generated personas to reach younger audiences."
+    summary: "Brands are signing AI-generated personas because they don't age, don't tour, and don't post something regrettable at 2am."
   },
   {
     id: 6,
-    title: "Generative Audio: The Next Frontier",
+    title: "Generative Audio Comes for Voiceover Work",
     source: "The Verge",
     time: "1d ago",
     image: ARTICLE_IMAGES.generativeAudio,
-    summary: "From music generation to realistic voice synthesis, AI audio tools are becoming more sophisticated and accessible."
+    summary: "Synthetic voice is cheap enough now that mid-tier audiobook narration is being quoted at a third of last year's rate."
   },
   {
     id: 7,
@@ -72,7 +72,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "TechCrunch",
     time: "2d ago",
     image: ARTICLE_IMAGES.greenTech,
-    summary: "As AI models grow larger, the environmental impact of computing power is coming under scrutiny."
+    summary: "Training runs now draw enough power that utilities are being consulted before a model launch date is set."
   },
   {
     id: 9,
@@ -80,7 +80,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Polygon",
     time: "2d ago",
     image: ARTICLE_IMAGES.metaverse,
-    summary: "While the hype has settled, spatial computing and VR continue to develop in interesting niche directions."
+    summary: "Consumer headset sales flattened. Surgical training and industrial simulation kept writing checks."
   },
   {
     id: 10,
@@ -88,7 +88,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "GitHub Blog",
     time: "3d ago",
     image: ARTICLE_IMAGES.coding,
-    summary: "Developers are reporting significant productivity boosts using AI pair programmers, but is code quality suffering?"
+    summary: "Teams report faster first drafts and more hours in review. Net throughput is harder to measure than either camp admits."
   },
   {
     id: 11,
@@ -96,7 +96,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Vogue Business",
     time: "3d ago",
     image: ARTICLE_IMAGES.fashion,
-    summary: "Top luxury brands are showcasing their latest collections in fully immersive digital environments."
+    summary: "Four houses skipped the physical runway entirely this season and shipped the collection as a playable environment."
   },
   {
     id: 12,
@@ -104,7 +104,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "The Information",
     time: "4d ago",
     image: ARTICLE_IMAGES.creatorEconomy,
-    summary: "As brand deals slow down, creators are diversifying revenue streams through direct-to-consumer products."
+    summary: "Brand deals are down for a second straight quarter. Merch, courses, and paid communities are covering the gap."
   },
   {
     id: 13,
@@ -112,7 +112,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "BBC News",
     time: "5d ago",
     image: ARTICLE_IMAGES.aiRegulation,
-    summary: "A deep dive into the comprehensive AI regulations recently passed by the European Union."
+    summary: "What the tiered risk categories actually require, and which obligations land on smaller developers in 2027."
   },
   {
     id: 14,
@@ -120,7 +120,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "IGN",
     time: "5d ago",
     image: ARTICLE_IMAGES.gaming,
-    summary: "Analyzing the crash of play-to-earn models and the future of blockchain integration in video games."
+    summary: "Play-to-earn collapsed once token rewards stopped outpacing the grind. What survived is smaller and less loud about the chain."
   },
   {
     id: 16,
@@ -128,7 +128,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Medium",
     time: "1w ago",
     image: ARTICLE_IMAGES.slowContent,
-    summary: "Counter to the fast-paced short-form trend, creators are finding success with long, meditative, and highly produced content."
+    summary: "Ninety-minute video essays are beating shorts on total watch time, and ad rates follow watch time."
   },
   {
     id: 17,
@@ -136,7 +136,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "AdAge",
     time: "1w ago",
     image: ARTICLE_IMAGES.authenticity,
-    summary: "Audiences are craving raw, unpolished moments as a reaction to increasingly perfect AI-generated imagery."
+    summary: "Engagement keeps climbing on visibly unedited footage. Agencies have started briefing for 'shot on a phone.'"
   },
   {
     id: 18,
@@ -144,7 +144,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Substack",
     time: "2w ago",
     image: ARTICLE_IMAGES.communities,
-    summary: "Mass appeal is out. Deeply engaged micro-communities are where the real value and connection happen."
+    summary: "A 2,000-person Discord now out-earns a 200,000-follower feed for a good number of creators."
   },
   {
     id: 19,
@@ -152,7 +152,7 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Electronic Frontier Foundation",
     time: "2w ago",
     image: ARTICLE_IMAGES.privacy,
-    summary: "Protecting your digital footprint and understanding platform terms of service is more critical than ever."
+    summary: "Most creator contracts hand over a perpetual license to your likeness. Here's what to strike before you sign."
   },
   {
     id: 20,
@@ -160,6 +160,6 @@ export const MOCK_ARTICLES: Article[] = [
     source: "Marketing Dive",
     time: "2w ago",
     image: ARTICLE_IMAGES.marketing,
-    summary: "Brands are moving away from transactional posts towards long-term partnerships and co-creation."
+    summary: "One-off sponsored posts are losing budget to year-long retainers with creative control written in."
   }
 ];

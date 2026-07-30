@@ -14,7 +14,7 @@ import {
   Ghost
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import cameraFeed from "@assets/generated_images/portrait_for_ar_camera_simulation.png";
+import cameraFeed from "@assets/generated_images/candid_ar_camera_feed.png";
 
 const FILTERS = [
   { id: "none", name: "Normal", icon: Smile },

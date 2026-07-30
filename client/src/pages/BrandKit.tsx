@@ -194,8 +194,8 @@ export default function BrandKit() {
                   <div>
                     <h2 className="text-xl font-bold text-white mb-2">Canva Connect</h2>
                     <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-                      Seamlessly sync your designs, templates, and brand assets. 
-                      Edit in Canva and publish instantly to Trending Society.
+                      Sync your designs, templates, and brand assets.
+                      Edit in Canva, publish straight to Trending Society.
                     </p>
                   </div>
                 </div>
