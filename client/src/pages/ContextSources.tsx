@@ -146,7 +146,7 @@ export default function ContextSources() {
                 <h2 className="text-lg font-bold text-white flex items-center gap-2">
                   <Settings size={18} /> Context Settings
                 </h2>
-                <button onClick={() => setSettingsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+                <button aria-label="Close" onClick={() => setSettingsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
                   <X size={20} />
                 </button>
               </div>
@@ -203,7 +203,7 @@ export default function ContextSources() {
               <div className="p-6 border-b border-white/5 flex justify-between items-center bg-[#161616]">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center shadow-lg">
-                    <img src={selectedSource.icon} alt={selectedSource.name} className="w-full h-full object-contain" />
+                    <img loading="lazy" decoding="async" src={selectedSource.icon} alt={selectedSource.name} className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h2 className="text-lg font-bold text-white">{selectedSource.name} Settings</h2>
@@ -216,7 +216,7 @@ export default function ContextSources() {
                     </div>
                   </div>
                 </div>
-                <button onClick={() => setSelectedSource(null)} className="text-gray-400 hover:text-white transition-colors">
+                <button aria-label="Close" onClick={() => setSelectedSource(null)} className="text-gray-400 hover:text-white transition-colors">
                   <X size={20} />
                 </button>
               </div>
@@ -271,7 +271,7 @@ export default function ContextSources() {
         {/* Header */}
         <div className="flex items-center justify-between p-6 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/create")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
             >
@@ -287,7 +287,7 @@ export default function ContextSources() {
               <p className="text-xs text-gray-400">Manage your AI's knowledge base & tools</p>
             </div>
           </div>
-          <button 
+          <button aria-label="Settings" 
             onClick={() => setSettingsOpen(true)}
             className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
           >
@@ -394,7 +394,7 @@ export default function ContextSources() {
                   {/* Header */}
                   <div className="flex justify-between items-start mb-4 relative z-10">
                     <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center shadow-lg">
-                      <img src={source.icon} alt={source.name} className="w-full h-full object-contain" />
+                      <img loading="lazy" decoding="async" src={source.icon} alt={source.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex items-center gap-2">
                       {source.status === "connected" ? (
@@ -424,7 +424,7 @@ export default function ContextSources() {
                           <Zap size={12} className="text-yellow-400" />
                           {source.activeWorkflows} Workflows
                         </span>
-                        <button 
+                        <button aria-label="Settings" 
                           onClick={() => setSelectedSource(source)}
                           className="p-1.5 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
                         >

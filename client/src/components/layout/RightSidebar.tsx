@@ -66,7 +66,7 @@ export function RightSidebar() {
                <TrendingUp size={14} className="text-accent" />
                Trend Watch
              </h3>
-             <button className="p-1.5 hover:bg-white/5 rounded-lg text-gray-500 hover:text-white transition-colors">
+             <button aria-label="Search" className="p-1.5 hover:bg-white/5 rounded-lg text-gray-500 hover:text-white transition-colors">
                <Search size={14} />
              </button>
            </div>
@@ -102,7 +102,7 @@ export function RightSidebar() {
            <div className="flex-1 flex flex-col min-h-0 px-4 pb-4">
              <div className="flex items-center justify-between mb-3 mt-2">
                <h4 className="text-[10px] font-bold text-gray-500 uppercase">Latest Signals</h4>
-               <button onClick={() => setLocation("/feeds")} className="text-[10px] text-accent hover:underline flex items-center gap-1">
+               <button onClick={() => setLocation("/feeds")} className="text-[10px] text-accent hover:underline inline-flex items-center gap-1 min-h-6">
                  View All <ChevronRight size={10} />
                </button>
              </div>
@@ -116,7 +116,7 @@ export function RightSidebar() {
                  >
                    <div className="flex gap-3 p-2 rounded-xl hover:bg-white/5 transition-all">
                      <div className="w-14 h-14 rounded-lg bg-gray-800 overflow-hidden flex-shrink-0 relative border border-white/5">
-                       <img src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                       <img loading="lazy" decoding="async" src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                      </div>
                      <div className="flex-1 min-w-0 py-0.5">
                        <div className="flex items-center gap-1.5 mb-1">
@@ -134,7 +134,7 @@ export function RightSidebar() {
 
              {/* Compact Pagination */}
              <div className="flex items-center justify-between mt-2 pt-3 border-t border-white/5">
-                <button 
+                <button aria-label="Previous" 
                   onClick={() => setArticlePage(p => Math.max(0, p - 1))}
                   disabled={articlePage === 0}
                   className="p-1.5 rounded-md hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent text-gray-400 transition-colors"
@@ -152,7 +152,7 @@ export function RightSidebar() {
                     />
                   ))}
                 </div>
-                <button 
+                <button aria-label="Next" 
                   onClick={() => setArticlePage(p => Math.min(totalPages - 1, p + 1))}
                   disabled={articlePage === totalPages - 1}
                   className="p-1.5 rounded-md hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent text-gray-400 transition-colors"
@@ -166,7 +166,7 @@ export function RightSidebar() {
 
       {/* Collapsed Floating Button */}
       {!isRightSidebarOpen && (
-         <button 
+         <button aria-label="Open side panel" 
            onClick={() => setIsRightSidebarOpen(true)}
            className="hidden lg:flex absolute right-0 top-6 bg-[#0A0A0A] border border-white/10 border-r-0 rounded-l-md p-2 text-gray-400 hover:text-white transition-colors z-50 shadow-lg group"
          >
@@ -181,10 +181,10 @@ export function RightSidebar() {
              <div className="flex flex-col max-h-[85vh]">
                {/* Sticky Modal Header with Image */}
                <div className="relative w-full h-48 flex-shrink-0">
-                 <img src={selectedArticle.image} className="w-full h-full object-cover" alt={selectedArticle.title} />
+                 <img loading="lazy" decoding="async" src={selectedArticle.image} className="w-full h-full object-cover" alt={selectedArticle.title} />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#1E1E1E] via-[#1E1E1E]/50 to-transparent" />
                  
-                 <button 
+                 <button aria-label="Close" 
                    onClick={() => setSelectedArticle(null)}
                    className="absolute top-4 right-4 p-2 rounded-full bg-black/40 backdrop-blur-md text-white/70 hover:text-white hover:bg-black/60 transition-colors border border-white/5"
                  >

@@ -41,7 +41,7 @@ export function PageHeader({
     >
       <div className="flex items-center gap-3">
         {showBack && (
-          <button
+          <button aria-label="Go back"
             onClick={() => setLocation(backPath)}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
           >

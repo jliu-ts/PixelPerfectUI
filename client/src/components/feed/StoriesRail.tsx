@@ -26,7 +26,7 @@ export function StoriesRail() {
         <div className="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer group" onClick={() => setLocation("/battle")}>
           <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-red-500 to-purple-600 animate-pulse relative">
             <div className="w-full h-full rounded-full border-2 border-black bg-gray-900 overflow-hidden relative">
-              <img src={STORIES[0].avatar} className="w-full h-full object-cover opacity-80" />
+              <img alt="" loading="lazy" decoding="async" src={STORIES[0].avatar} className="w-full h-full object-cover opacity-80" />
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                 <Swords size={20} className="text-white" />
               </div>
@@ -46,7 +46,7 @@ export function StoriesRail() {
               story.hasNew ? "bg-gradient-accent" : "bg-white/20"
             )}>
               <div className="w-full h-full rounded-full border-2 border-black bg-black overflow-hidden p-0.5">
-                <img src={story.avatar} className="w-full h-full rounded-full object-cover bg-white" />
+                <img alt="" loading="lazy" decoding="async" src={story.avatar} className="w-full h-full rounded-full object-cover bg-white" />
               </div>
             </div>
             <span className="text-[10px] text-gray-300 font-medium truncate max-w-[64px]">{story.name}</span>

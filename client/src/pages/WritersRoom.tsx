@@ -57,7 +57,7 @@ export default function WritersRoom() {
         {/* Header */}
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/collab")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -77,7 +77,7 @@ export default function WritersRoom() {
                 <div className="w-8 h-8 rounded-full border-2 border-[#121212] bg-purple-500 flex items-center justify-center text-xs font-bold text-white">FK</div>
                 <div className="w-8 h-8 rounded-full border-2 border-[#121212] bg-green-500 flex items-center justify-center text-xs font-bold text-white">SJ</div>
              </div>
-             <button className="p-2 rounded-full hover:bg-white/10 text-white transition-colors">
+             <button aria-label="Share" className="p-2 rounded-full hover:bg-white/10 text-white transition-colors">
                <Share2 size={20} />
              </button>
           </div>
@@ -86,19 +86,19 @@ export default function WritersRoom() {
         {/* Editor Toolbar */}
         <div className="px-4 py-2 bg-[#1E1E1E] border-b border-white/5 flex items-center gap-4 overflow-x-auto no-scrollbar">
            <div className="flex items-center gap-1 border-r border-white/10 pr-4">
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Bold size={18} /></button>
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Italic size={18} /></button>
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Underline size={18} /></button>
+             <button aria-label="Bold" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Bold size={18} /></button>
+             <button aria-label="Italic" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Italic size={18} /></button>
+             <button aria-label="Underline" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Underline size={18} /></button>
            </div>
            <div className="flex items-center gap-1 border-r border-white/10 pr-4">
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><AlignLeft size={18} /></button>
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><AlignCenter size={18} /></button>
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><AlignRight size={18} /></button>
+             <button aria-label="Align left" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><AlignLeft size={18} /></button>
+             <button aria-label="Align centre" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><AlignCenter size={18} /></button>
+             <button aria-label="Align right" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><AlignRight size={18} /></button>
            </div>
            <div className="flex items-center gap-1">
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><List size={18} /></button>
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Link2 size={18} /></button>
-             <button className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><ImageIcon size={18} /></button>
+             <button aria-label="Bulleted list" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><List size={18} /></button>
+             <button aria-label="Insert link" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Link2 size={18} /></button>
+             <button aria-label="Choose image" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><ImageIcon size={18} /></button>
            </div>
         </div>
 

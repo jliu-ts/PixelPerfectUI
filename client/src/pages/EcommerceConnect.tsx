@@ -80,7 +80,7 @@ export default function EcommerceConnect() {
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5">
           <div className="px-6 pt-6 pb-6 max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <button 
+              <button aria-label="Go back" 
                 onClick={() => setLocation("/create")}
                 className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -100,7 +100,7 @@ export default function EcommerceConnect() {
                  <span className="hidden md:flex items-center gap-2 text-[10px] text-gray-500 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
                    <RefreshCw size={10} /> Auto-sync on
                  </span>
-                 <button className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors">
+                 <button aria-label="Open in new tab" className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors">
                    <ExternalLink size={18} />
                  </button>
               </div>
@@ -131,7 +131,7 @@ export default function EcommerceConnect() {
                     "w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg shrink-0 transition-all",
                     isConnected ? "bg-white p-3" : "bg-white p-3 shadow-[0_0_30px_rgba(149,191,71,0.3)]"
                   )}>
-                     <img 
+                     <img loading="lazy" decoding="async" 
                        src={BRAND_LOGOS.shopify} 
                        alt="Shopify" 
                        className="w-full h-full object-contain" 
@@ -217,13 +217,13 @@ export default function EcommerceConnect() {
                 <div className="flex items-center gap-3 w-full md:w-auto">
                   <div className="relative flex-1 md:w-64">
                      <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-                     <input 
+                     <input aria-label="Search products" 
                       type="text" 
                       placeholder="Search products..." 
                       className="w-full bg-[#121212] border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-gray-600"
                      />
                   </div>
-                  <button className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white transition-colors">
+                  <button aria-label="Refresh" className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white transition-colors">
                     <RefreshCw size={16} />
                   </button>
                 </div>
@@ -237,7 +237,7 @@ export default function EcommerceConnect() {
                     style={{ animationDelay: `${idx * 100}ms` }}
                   >
                     <div className="aspect-square relative overflow-hidden bg-black/20">
-                      <img 
+                      <img loading="lazy" decoding="async" 
                         src={product.image} 
                         alt={product.name} 
                         className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" 

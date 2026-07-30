@@ -26,9 +26,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import sceneOneImage from "@assets/generated_images/cyber_sneaker_scene_1.png";
-import sceneTwoImage from "@assets/generated_images/cyber_sneaker_scene_2.png";
-import thumbnailImage from "@assets/generated_images/cyber_sneaker_thumbnail.png";
+import sceneOneImage from "@assets/generated_images/cyber_sneaker_scene_1.webp";
+import sceneTwoImage from "@assets/generated_images/cyber_sneaker_scene_2.webp";
+import thumbnailImage from "@assets/generated_images/cyber_sneaker_thumbnail.webp";
 
 // Enhanced Mock Data
 const TEAM_MEMBERS = [
@@ -144,7 +144,7 @@ export default function CollabRoom() {
         {/* Header */}
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/create")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -176,7 +176,7 @@ export default function CollabRoom() {
                     "w-9 h-9 rounded-full border-2 border-[#121212] overflow-hidden transition-transform hover:scale-110 hover:z-10 cursor-pointer",
                     status === "generating" ? "ring-2 ring-purple-500 ring-offset-2 ring-offset-black" : ""
                   )} title={`${member.name} - ${status}`}>
-                    <img src={member.avatar} alt={member.name} className="w-full h-full bg-gray-800" />
+                    <img loading="lazy" decoding="async" src={member.avatar} alt={member.name} className="w-full h-full bg-gray-800" />
                   </div>
                   {status === "online" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#121212] rounded-full" />}
                   {status === "editing" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-blue-500 border-2 border-[#121212] rounded-full" />}
@@ -184,14 +184,14 @@ export default function CollabRoom() {
                 </div>
                 );
               })}
-              <button className="w-9 h-9 rounded-full border-2 border-[#121212] bg-[#2A2A2A] flex items-center justify-center text-white hover:bg-[#333] transition-colors z-0">
+              <button aria-label="Add" className="w-9 h-9 rounded-full border-2 border-[#121212] bg-[#2A2A2A] flex items-center justify-center text-white hover:bg-[#333] transition-colors z-0">
                 <Plus size={14} />
               </button>
             </div>
             
             <div className="h-8 w-[1px] bg-white/10 hidden md:block" />
             
-            <button className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors">
+            <button aria-label="Settings" className="p-2 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors">
               <Settings size={20} />
             </button>
             <GradientButton size="sm" className="hidden md:flex gap-2">
@@ -258,8 +258,8 @@ export default function CollabRoom() {
                         </div>
                         
                         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          {line.type === "video" && <button className="p-1 hover:text-white text-gray-500"><Play size={12} /></button>}
-                          {line.type === "audio" && <button className="p-1 hover:text-white text-gray-500"><Mic size={12} /></button>}
+                          {line.type === "video" && <button aria-label="Play" className="p-1.5 hover:text-white text-gray-500 min-h-6 min-w-6 inline-flex items-center justify-center"><Play size={12} /></button>}
+                          {line.type === "audio" && <button aria-label="Record audio" className="p-1.5 hover:text-white text-gray-500 min-h-6 min-w-6 inline-flex items-center justify-center"><Mic size={12} /></button>}
                         </div>
                       </div>
                       
@@ -293,7 +293,7 @@ export default function CollabRoom() {
                 <h3 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
                   <Layers size={14} /> Generated Assets
                 </h3>
-                <button className="text-[10px] text-accent hover:underline">View All</button>
+                <button className="text-[10px] text-accent hover:underline inline-flex items-center min-h-6">View All</button>
               </div>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -307,7 +307,7 @@ export default function CollabRoom() {
                   </div>
                 ) : (
                   <div key={asset.id} className="aspect-video bg-black rounded-xl border border-white/10 relative overflow-hidden group cursor-pointer animate-in fade-in duration-500">
-                    <img src={asset.image} alt={asset.label} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                    <img loading="lazy" decoding="async" src={asset.image} alt={asset.label} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                     {asset.kind === "video" ? (
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all bg-black/40 backdrop-blur-[1px]">
                         <Play size={32} className="text-white drop-shadow-lg scale-90 group-hover:scale-100 transition-transform" />
@@ -347,7 +347,7 @@ export default function CollabRoom() {
                     "w-8 h-8 rounded-full shrink-0 overflow-hidden border border-white/10",
                     msg.isAi ? "bg-purple-500/10 p-1" : "bg-gray-800"
                   )}>
-                     <img src={msg.avatar} className="w-full h-full object-cover rounded-full" />
+                     <img alt="" loading="lazy" decoding="async" src={msg.avatar} className="w-full h-full object-cover rounded-full" />
                   </div>
                   
                   <div className={cn("flex flex-col max-w-[80%]", msg.user === "Felix (Director)" && "items-end")}>
@@ -383,7 +383,7 @@ export default function CollabRoom() {
                 onSubmit={handleSendMessage}
                 className="flex items-center gap-2 bg-[#1A1A1A] border border-white/10 rounded-xl p-1.5 focus-within:border-accent/50 transition-colors"
               >
-                <button type="button" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors">
+                <button aria-label="Attach file" type="button" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors">
                   <Paperclip size={16} />
                 </button>
                 <input 
@@ -393,10 +393,10 @@ export default function CollabRoom() {
                   placeholder="Type a message..." 
                   className="flex-1 bg-transparent text-xs text-white focus:outline-none placeholder:text-gray-600"
                 />
-                <button type="button" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors">
+                <button aria-label="AI assistant" type="button" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors">
                   <Bot size={16} />
                 </button>
-                <button 
+                <button aria-label="Send" 
                   type="submit"
                   disabled={!newMessage.trim()}
                   className="p-2 rounded-lg bg-accent text-black disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-110 transition-all"

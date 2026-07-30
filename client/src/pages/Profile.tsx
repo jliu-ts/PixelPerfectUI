@@ -3,8 +3,8 @@ import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { Settings, Grid, Bookmark, Zap, Wallet, Edit2, Share2, Briefcase, Crown, ChevronRight, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
-import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.png";
-import gridImage from "@assets/generated_images/abstract_digital_art_square.png";
+import profileBg from "@assets/generated_images/abstract_3d_glass_shapes_for_profile_background.webp";
+import gridImage from "@assets/generated_images/abstract_digital_art_square.webp";
 import { CONNECTED_ACCOUNTS } from "@/lib/mockData";
 
 export default function Profile() {
@@ -16,14 +16,14 @@ export default function Profile() {
       <div className="min-h-screen bg-background pb-20">
         {/* Hero / Header */}
         <div className="relative h-48 w-full overflow-hidden">
-          <img 
+          <img loading="lazy" decoding="async" 
             src={profileBg} 
             alt="Cover" 
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#121212]" />
           
-          <button className="absolute top-4 right-4 p-2 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 hover:bg-white/10 transition-colors">
+          <button aria-label="Settings" className="absolute top-4 right-4 p-2 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 hover:bg-white/10 transition-colors">
             <Settings size={20} />
           </button>
         </div>
@@ -32,7 +32,7 @@ export default function Profile() {
         <div className="px-6 -mt-12 relative z-10 mb-6">
           <div className="flex justify-between items-end mb-4">
             <div className="w-24 h-24 rounded-2xl border-4 border-[#121212] overflow-hidden bg-black shadow-xl relative group">
-              <img 
+              <img loading="lazy" decoding="async" 
                 src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
                 alt="Avatar" 
                 className="w-full h-full bg-[#1E1E1E]"
@@ -46,7 +46,7 @@ export default function Profile() {
               <button className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-[#252525] transition-colors">
                 Edit Profile
               </button>
-              <button className="p-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-white hover:bg-[#252525] transition-colors">
+              <button aria-label="Share" className="p-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-white hover:bg-[#252525] transition-colors">
                 <Share2 size={16} />
               </button>
             </div>
@@ -215,7 +215,7 @@ export default function Profile() {
         <div className="px-2 grid grid-cols-2 gap-2">
           {[...Array(6)].map((_, i) => (
             <div key={i} className="aspect-square rounded-xl bg-[#1E1E1E] overflow-hidden relative group cursor-pointer">
-              <img 
+              <img loading="lazy" decoding="async" 
                 src={gridImage} 
                 alt="Creation" 
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"

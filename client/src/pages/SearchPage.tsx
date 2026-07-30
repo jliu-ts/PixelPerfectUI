@@ -137,7 +137,7 @@ export default function SearchPage() {
         {/* Header / Search Bar */}
         <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-white/5 transition-all duration-200">
           <div className="p-4 pt-6 flex items-center gap-3 max-w-5xl mx-auto w-full">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -154,7 +154,7 @@ export default function SearchPage() {
                 autoFocus
               />
               {query && (
-                <button 
+                <button aria-label="Close" 
                   onClick={clearSearch}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white p-1 rounded-full hover:bg-white/10 transition-all"
                 >
@@ -162,7 +162,7 @@ export default function SearchPage() {
                 </button>
               )}
             </div>
-            <button 
+            <button aria-label="Filter" 
               onClick={() => setShowFilters(!showFilters)}
               className={cn(
                 "p-3 rounded-xl border transition-all active:scale-95",
@@ -315,7 +315,7 @@ export default function SearchPage() {
                         gridRow: item.isReel ? "span 2" : "auto",
                       }}
                     >
-                      <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Explore content" />
+                      <img loading="lazy" decoding="async" src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Explore content" />
                       
                       {/* Type Indicators */}
                       <div className="absolute top-2 right-2 z-10">
@@ -363,7 +363,7 @@ export default function SearchPage() {
                         {RESULTS.creators.map(creator => (
                           <div key={creator.id} className="flex items-start gap-3 p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/10 transition-all group cursor-pointer">
                             <div className="relative">
-                              <img src={creator.avatar} className="w-12 h-12 rounded-full bg-gray-800 object-cover" alt={creator.name} />
+                              <img loading="lazy" decoding="async" src={creator.avatar} className="w-12 h-12 rounded-full bg-gray-800 object-cover" alt={creator.name} />
                               <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-black flex items-center justify-center border border-[#1E1E1E]">
                                 {(() => {
                                   const PlatformIcon = creator.platformIcon;
@@ -404,7 +404,7 @@ export default function SearchPage() {
                         {RESULTS.assets.map(asset => (
                           <div key={asset.id} className="group bg-[#1E1E1E] rounded-xl border border-white/5 overflow-hidden hover:border-white/10 transition-all cursor-pointer" onClick={() => setLocation("/marketplace")}>
                             <div className="aspect-square relative overflow-hidden">
-                              <img src={asset.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={asset.title} />
+                              <img loading="lazy" decoding="async" src={asset.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={asset.title} />
                               <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-white border border-white/10">
                                 {asset.price}
                               </div>
@@ -440,7 +440,7 @@ export default function SearchPage() {
                       <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden">
                         {RESULTS.inspiration.map(item => (
                           <div key={item.id} className="relative aspect-square bg-[#1E1E1E] overflow-hidden group cursor-pointer" onClick={() => setLocation("/ideas")}>
-                            <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={item.title} />
+                            <img loading="lazy" decoding="async" src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={item.title} />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-2 text-center">
                               <span className="text-[10px] font-bold text-white line-clamp-2">{item.title}</span>
                               <span className="text-[9px] text-gray-300 mt-1 flex items-center gap-1"><Heart size={8} fill="currentColor" /> {item.likes}</span>

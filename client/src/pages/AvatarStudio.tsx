@@ -23,8 +23,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import avatarImage from "@assets/generated_images/candid_avatar_portrait.png";
-import casualAvatarImage from "@assets/generated_images/candid_casual_avatar.png";
+import avatarImage from "@assets/generated_images/candid_avatar_portrait.webp";
+import casualAvatarImage from "@assets/generated_images/candid_casual_avatar.webp";
 import heyGenLogo from "@assets/brand_logos/heygen-icon.png";
 import elevenLabsLogo from "@assets/brand_logos/elevenlabs-icon.png";
 
@@ -137,7 +137,7 @@ export default function AvatarStudio() {
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5">
           <div className="px-6 pt-6 pb-6 max-w-5xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <button 
+              <button aria-label="Go back" 
                 onClick={() => setLocation("/create")}
                 className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -219,7 +219,7 @@ export default function AvatarStudio() {
               <div className="flex justify-between items-start mb-4 relative z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white rounded-xl p-1.5 flex items-center justify-center shadow-lg">
-                     <img src={heyGenLogo} alt="HeyGen" className="w-full h-full object-contain" />
+                     <img loading="lazy" decoding="async" src={heyGenLogo} alt="HeyGen" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-white">HeyGen</h3>
@@ -255,7 +255,7 @@ export default function AvatarStudio() {
               <div className="flex justify-between items-start mb-4 relative z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white rounded-xl p-1.5 flex items-center justify-center shadow-lg">
-                     <img src={elevenLabsLogo} alt="ElevenLabs" className="w-full h-full object-contain" />
+                     <img loading="lazy" decoding="async" src={elevenLabsLogo} alt="ElevenLabs" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-white">ElevenLabs</h3>
@@ -335,13 +335,13 @@ export default function AvatarStudio() {
                     {avatars.map(avatar => (
                       <div key={avatar.id} className="group bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all hover:shadow-lg relative">
                         <div className="absolute top-3 right-3 z-10">
-                           <button className="p-1.5 rounded-full bg-black/40 backdrop-blur hover:bg-black/60 text-white/80 hover:text-white transition-colors">
+                           <button aria-label="More options" className="p-1.5 rounded-full bg-black/40 backdrop-blur hover:bg-black/60 text-white/80 hover:text-white transition-colors">
                              <MoreHorizontal size={16} />
                            </button>
                         </div>
 
                         <div className="aspect-video bg-black relative overflow-hidden">
-                          <img src={avatar.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={avatar.name} />
+                          <img loading="lazy" decoding="async" src={avatar.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={avatar.name} />
                           {avatar.status === "processing" && (
                             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                               <Loader2 size={24} className="animate-spin text-purple-400" />

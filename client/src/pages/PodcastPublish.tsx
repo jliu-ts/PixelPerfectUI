@@ -5,7 +5,7 @@ import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Check, Upload, Globe, Rss, Podcast, Music, Share2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import podcastCover from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png"; // Reusing asset for demo
+import podcastCover from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.webp"; // Reusing asset for demo
 
 export default function PodcastPublish() {
   const [, setLocation] = useLocation();
@@ -63,7 +63,7 @@ export default function PodcastPublish() {
       <div className="flex flex-col min-h-screen bg-background">
         {/* Header */}
         <div className="flex items-center gap-4 p-4 border-b border-white/5 bg-background/80 backdrop-blur-md sticky top-0 z-20">
-          <button onClick={() => setLocation("/podcast/studio")} className="p-2 -ml-2 hover:bg-white/10 rounded-full transition-colors text-white">
+          <button aria-label="Go back" onClick={() => setLocation("/podcast/studio")} className="p-2 -ml-2 hover:bg-white/10 rounded-full transition-colors text-white">
             <ArrowLeft size={24} />
           </button>
           <h1 className="text-xl font-display font-bold text-white">Distribute Episode</h1>
@@ -74,7 +74,7 @@ export default function PodcastPublish() {
           {/* Episode Details */}
           <div className="flex gap-4">
             <div className="w-32 h-32 rounded-xl bg-[#1E1E1E] border border-white/10 overflow-hidden shrink-0 relative group cursor-pointer">
-              <img src={podcastCover} className="w-full h-full object-cover" alt="Cover Art" />
+              <img loading="lazy" decoding="async" src={podcastCover} className="w-full h-full object-cover" alt="Cover Art" />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                 <Upload size={24} className="text-white" />
               </div>

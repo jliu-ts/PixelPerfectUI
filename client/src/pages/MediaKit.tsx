@@ -104,7 +104,7 @@ export default function MediaKit() {
         {/* Header */}
         <div className="flex items-center gap-4 p-4 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5 justify-between">
           <div className="flex items-center gap-3">
-             <button 
+             <button aria-label="Go back" 
               onClick={() => setLocation("/profile")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
             >
@@ -118,7 +118,7 @@ export default function MediaKit() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button className="p-2 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-white/10 border border-white/10 transition-colors">
+            <button aria-label="Share" className="p-2 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-white/10 border border-white/10 transition-colors">
               <Share2 size={18} />
             </button>
             <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-bold hover:bg-gray-200 transition-colors">
@@ -135,7 +135,7 @@ export default function MediaKit() {
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 bg-gradient-to-t from-background to-transparent z-10">
              <div className="flex flex-col md:flex-row md:items-end gap-6">
                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl border-4 border-background bg-gray-800 overflow-hidden shadow-2xl relative">
-                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" className="w-full h-full object-cover" />
+                 <img loading="lazy" decoding="async" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" className="w-full h-full object-cover" />
                  <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
                </div>
                <div className="flex-1 mb-2">
@@ -221,7 +221,7 @@ export default function MediaKit() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {PAST_COLLABS.map((collab) => (
                     <div key={collab.brand} className="h-24 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all hover:bg-white/10">
-                      <img src={collab.logo} alt={collab.brand} className="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                      <img loading="lazy" decoding="async" src={collab.logo} alt={collab.brand} className="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" />
                     </div>
                   ))}
                 </div>

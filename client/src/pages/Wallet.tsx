@@ -64,7 +64,7 @@ export default function Wallet() {
       <div className="min-h-screen bg-background pb-8">
         {/* Header */}
         <div className="p-4 pt-8 flex items-center gap-3 sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/profile")}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
           >

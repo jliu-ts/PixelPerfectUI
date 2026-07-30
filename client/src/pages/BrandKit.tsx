@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import templateImage from "@assets/generated_images/instagram_story_template_tech.png";
+import templateImage from "@assets/generated_images/instagram_story_template_tech.webp";
 import canvaLogo from "@assets/brand_logos/canva-icon.png";
 import {
   Dialog,
@@ -155,7 +155,7 @@ export default function BrandKit() {
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5">
           <div className="flex items-center justify-between p-4 pt-6">
             <div className="flex items-center gap-4">
-              <button 
+              <button aria-label="Go back" 
                 onClick={() => setLocation("/create")}
                 className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -189,7 +189,7 @@ export default function BrandKit() {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="flex items-start gap-5">
                   <div className="w-16 h-16 rounded-2xl bg-white p-3 shadow-lg shrink-0">
-                    <img src={canvaLogo} className="w-full h-full object-contain" alt="Canva" />
+                    <img loading="lazy" decoding="async" src={canvaLogo} className="w-full h-full object-contain" alt="Canva" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-white mb-2">Canva Connect</h2>
@@ -246,7 +246,7 @@ export default function BrandKit() {
                     {TEMPLATES.map(t => (
                       <div key={t.id} className="group cursor-pointer relative">
                         <div className="aspect-[3/4] rounded-xl overflow-hidden relative border border-white/10 bg-[#1E1E1E] transition-all group-hover:border-[#00C4CC]/50 group-hover:shadow-[0_0_20px_rgba(0,196,204,0.1)]">
-                          <img src={t.image} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all group-hover:scale-105 duration-500" alt={t.name} />
+                          <img loading="lazy" decoding="async" src={t.image} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all group-hover:scale-105 duration-500" alt={t.name} />
                           <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/60 backdrop-blur text-[9px] font-bold text-white border border-white/10">
                             {t.type}
                           </div>
@@ -317,7 +317,7 @@ export default function BrandKit() {
                         </DropdownMenuContent>
                       </DropdownMenu>
                     ))}
-                    <button 
+                    <button aria-label="Add" 
                       onClick={handleAddColor}
                       className="w-16 h-16 rounded-2xl border-2 border-dashed border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:border-accent/50 hover:bg-accent/5 transition-all group"
                     >
@@ -469,7 +469,7 @@ export default function BrandKit() {
                         logo.bg === 'light' ? "bg-[#F5F5F5]" : "bg-[#1E1E1E]"
                       )}>
                         {logo.url ? (
-                          <img src={logo.url} className="w-full h-full object-contain" alt="Logo" />
+                          <img loading="lazy" decoding="async" src={logo.url} className="w-full h-full object-contain" alt="Logo" />
                         ) : (
                           <div className={cn(
                             "text-lg font-bold tracking-widest",

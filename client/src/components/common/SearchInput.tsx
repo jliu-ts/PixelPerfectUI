@@ -62,7 +62,7 @@ export function SearchInput({
         )}
       />
       {showClear && value && (
-        <button
+        <button aria-label="Close"
           onClick={() => onChange("")}
           className={cn(
             "absolute top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors",
