@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { NOISE_TEXTURE } from "@/lib/constants/urls";
 
 // Enhanced Mock Analysis Data
 const MOCK_ANALYSIS = {
@@ -204,7 +205,7 @@ export default function LegalGuard() {
                     </div>
 
                     {/* Background Animation */}
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 pointer-events-none" />
+                    <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("${NOISE_TEXTURE}")` }} />
                     {!file && (
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     )}

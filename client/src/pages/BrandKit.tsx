@@ -22,7 +22,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import templateImage from "@assets/generated_images/instagram_story_template_tech.png";
-import canvaLogo from "@assets/stock_images/canva_logo_icon_37e64db8.jpg";
+import canvaLogo from "@assets/brand_logos/canva-icon.png";
 import {
   Dialog,
   DialogContent,

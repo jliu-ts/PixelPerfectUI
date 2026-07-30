@@ -19,6 +19,7 @@ import {
   Flame
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 
 // Enhanced Mock Data for a Richer Experience
 const CATEGORIES = [
@@ -33,7 +34,7 @@ const ARTICLES = [
   { 
     id: 101, 
     source: "TechCrunch", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/b/b9/TechCrunch_logo.svg",
+    logo: BRAND_LOGOS.techcrunch,
     category: "tech",
     title: "Generative AI models are shrinking to run on your phone", 
     time: "2h ago",
@@ -45,19 +46,19 @@ const ARTICLES = [
   { 
     id: 102, 
     source: "The Verge", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a2/The_Verge_logo.svg",
+    logo: BRAND_LOGOS.theverge,
     category: "tech",
     title: "VR Headsets are finally becoming comfortable enough for work", 
     time: "4h ago",
     summary: "The latest wave of headsets focuses on weight distribution and breathability, making spatial computing viable for 8-hour shifts.",
     trendScore: 85,
-    image: "https://images.unsplash.com/photo-1622979135225-d2ba269fb1a2?w=800&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=800&auto=format&fit=crop&q=60",
     tags: ["#VR", "#FutureOfWork"]
   },
   { 
     id: 103, 
     source: "Wired", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Wired_logo.svg",
+    logo: BRAND_LOGOS.wired,
     category: "culture",
     title: "Why everyone is obsessed with 'Frutiger Aero' aesthetics", 
     time: "6h ago",
@@ -75,7 +76,7 @@ const ARTICLES = [
     time: "1h ago",
     summary: "Major ETFs and sovereign wealth funds are allocating significant capital to digital assets this quarter.",
     trendScore: 94,
-    image: "https://images.unsplash.com/photo-1518546305927-5a455dee42a8?w=800&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800&auto=format&fit=crop&q=60",
     tags: ["#Crypto", "#Finance"]
   },
 ];

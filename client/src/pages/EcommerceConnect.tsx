@@ -31,6 +31,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { ECOMMERCE_PRODUCTS, ECOMMERCE_GENERATION_OPTIONS } from "@/lib/mockData";
 import { useToast } from "@/hooks/use-toast";
+import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 
 export default function EcommerceConnect() {
   const [, setLocation] = useLocation();
@@ -131,7 +132,7 @@ export default function EcommerceConnect() {
                     isConnected ? "bg-white p-3" : "bg-white p-3 shadow-[0_0_30px_rgba(149,191,71,0.3)]"
                   )}>
                      <img 
-                       src="https://cdn.worldvectorlogo.com/logos/shopify.svg" 
+                       src={BRAND_LOGOS.shopify} 
                        alt="Shopify" 
                        className="w-full h-full object-contain" 
                      />

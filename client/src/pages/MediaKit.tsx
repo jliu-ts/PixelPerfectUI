@@ -22,6 +22,7 @@ import {
   Zap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 import { 
   BarChart, 
   Bar, 
@@ -87,10 +88,10 @@ const PRICING_PACKAGES = [
 ];
 
 const PAST_COLLABS = [
-  { brand: "Nike", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" },
-  { brand: "Samsung", logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" },
-  { brand: "Spotify", logo: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" },
-  { brand: "Adobe", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png" },
+  { brand: "Nike", logo: BRAND_LOGOS.nikeWordmark },
+  { brand: "Samsung", logo: BRAND_LOGOS.samsungWordmark },
+  { brand: "Spotify", logo: BRAND_LOGOS.spotify },
+  { brand: "Adobe", logo: BRAND_LOGOS.adobe },
 ];
 
 export default function MediaKit() {

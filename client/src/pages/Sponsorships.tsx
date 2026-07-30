@@ -18,6 +18,7 @@ import {
   Calendar
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 
 // Mock Kanban Data
 const COLUMNS = [
@@ -31,7 +32,7 @@ const DEALS = [
   {
     id: 1,
     brand: "NordVPN",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2d/NordVPN_Logo.svg",
+    logo: BRAND_LOGOS.nordvpn,
     title: "Q4 Integration Campaign",
     value: "$3,500",
     status: "inbox",
@@ -42,7 +43,7 @@ const DEALS = [
   {
     id: 2,
     brand: "Skillshare",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Skillshare_logo_2020.svg",
+    logo: BRAND_LOGOS.skillshare,
     title: "Learning Month Series",
     value: "$2,800",
     status: "inbox",
@@ -53,7 +54,7 @@ const DEALS = [
   {
     id: 3,
     brand: "Squarespace",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Squarespace_logo.svg/2560px-Squarespace_logo.svg.png",
+    logo: BRAND_LOGOS.squarespace,
     title: "Website Builder Showcase",
     value: "$5,000",
     status: "negotiation",
@@ -64,7 +65,7 @@ const DEALS = [
   {
     id: 4,
     brand: "Raycon",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Raycon_Global_Inc._Logo.jpg/800px-Raycon_Global_Inc._Logo.jpg",
+    logo: BRAND_LOGOS.raycon,
     title: "Everyday Earbuds",
     value: "$1,200",
     status: "negotiation",
@@ -75,7 +76,7 @@ const DEALS = [
   {
     id: 5,
     brand: "HelloFresh",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/90/HelloFresh_Logo.svg",
+    logo: BRAND_LOGOS.hellofresh,
     title: "Healthy Eating Challenge",
     value: "$4,200",
     status: "active",
@@ -86,7 +87,7 @@ const DEALS = [
   {
     id: 6,
     brand: "Epidemic Sound",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Epidemic_Sound_logo.svg/2560px-Epidemic_Sound_logo.svg.png",
+    logo: BRAND_LOGOS.epidemicsound,
     title: "Music for Creators",
     value: "$2,000",
     status: "active",
