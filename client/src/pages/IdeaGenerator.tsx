@@ -139,7 +139,7 @@ export default function IdeaGenerator() {
         {/* Standard Sticky Header */}
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -208,14 +208,14 @@ export default function IdeaGenerator() {
                 >
                   {/* Background Image Overlay (Subtle) */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
-                    <img src={article.image} className="w-full h-full object-cover grayscale" />
+                    <img alt="" loading="lazy" decoding="async" src={article.image} className="w-full h-full object-cover grayscale" />
                   </div>
 
                   <div className="p-5 relative z-10">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex items-center gap-2.5">
                         {article.logo ? (
-                          <img src={article.logo} className="h-4 w-auto opacity-80" alt={article.source} />
+                          <img loading="lazy" decoding="async" src={article.logo} className="h-4 w-auto opacity-80" alt={article.source} />
                         ) : (
                           <span className="text-xs font-bold text-gray-300">{article.source}</span>
                         )}
@@ -371,7 +371,7 @@ export default function IdeaGenerator() {
                                >
                                  <Zap size={14} fill="currentColor" /> Create
                                </button>
-                               <button className="px-3 rounded-lg border border-white/10 hover:bg-white/5 text-white transition-colors">
+                               <button aria-label="Share" className="px-3 rounded-lg border border-white/10 hover:bg-white/5 text-white transition-colors">
                                  <Share2 size={14} />
                                </button>
                              </div>

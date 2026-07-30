@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Wand2, Scaling, SlidersHorizontal, Download, Share2 } from "lucide-react";
-import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.png";
+import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.webp";
 
 import { useToast } from "@/hooks/use-toast";
 
@@ -23,7 +23,7 @@ export default function GenerationResult() {
       <div className="p-6 pt-12 flex flex-col h-full min-h-screen bg-background">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/create")}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
           >
@@ -31,7 +31,7 @@ export default function GenerationResult() {
           </button>
           <h1 className="text-xl font-display font-bold text-white">Generation Result</h1>
           <div className="ml-auto flex gap-2">
-             <button 
+             <button aria-label="Download" 
                onClick={() => handleFeatureNotReady("Download")}
                className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
              >
@@ -42,7 +42,7 @@ export default function GenerationResult() {
 
         {/* Result Preview */}
         <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#1E1E1E] border border-white/10 relative shadow-2xl mb-8 group">
-          <img 
+          <img loading="lazy" decoding="async" 
             src={resultImage} 
             alt="Generated Result" 
             className="w-full h-full object-cover"

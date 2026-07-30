@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { ArrowRight, Zap, Shield, Users, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import bgImage from "@assets/generated_images/abstract_digital_brutalism_gateway,_neon_purple_and_cyan,_geometric_shapes,_entering_a_digital_realm.png";
+import bgImage from "@assets/generated_images/abstract_digital_brutalism_gateway,_neon_purple_and_cyan,_geometric_shapes,_entering_a_digital_realm.webp";
 
 const STEPS = [
   {
@@ -41,7 +41,7 @@ export default function Onboarding() {
     <div className="fixed inset-0 bg-black z-50 flex flex-col">
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <img loading="lazy" decoding="async" 
           src={bgImage} 
           alt="Background" 
           className="w-full h-full object-cover opacity-60"

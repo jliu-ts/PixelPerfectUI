@@ -81,7 +81,7 @@ export default function PricingTiers() {
         {/* Header */}
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/profile")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >

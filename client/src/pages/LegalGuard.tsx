@@ -104,7 +104,7 @@ export default function LegalGuard() {
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5">
           <div className="px-6 pt-6 pb-6 max-w-5xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <button 
+              <button aria-label="Go back" 
                 onClick={() => setLocation("/")}
                 className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
               >

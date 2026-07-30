@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
-import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.png";
+import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.webp";
 
 // Mock social platforms
 const PLATFORMS = [
@@ -110,7 +110,7 @@ export default function SocialShare() {
         
         {/* Header */}
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center gap-4">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/result")}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
           >
@@ -124,7 +124,7 @@ export default function SocialShare() {
           {/* Content Preview */}
           <div className="flex gap-4 items-start">
             <div className="w-24 h-24 rounded-xl overflow-hidden bg-gray-800 border border-white/10 shrink-0 shadow-lg">
-              <img src={resultImage} className="w-full h-full object-cover" alt="Preview" />
+              <img loading="lazy" decoding="async" src={resultImage} className="w-full h-full object-cover" alt="Preview" />
             </div>
             <div className="flex-1">
               <label className="text-xs font-medium text-gray-400 uppercase mb-1.5 block">Caption</label>

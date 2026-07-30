@@ -201,7 +201,7 @@ export default function PitchDeck() {
       {/* Header */}
       <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/profile")}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
           >

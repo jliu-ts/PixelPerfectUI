@@ -4,8 +4,8 @@ import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Zap, Trophy, Timer, Swords, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import imageA from "@assets/generated_images/cyberpunk_samurai_for_battle_mode.png";
-import imageB from "@assets/generated_images/ethereal_fantasy_elf_for_battle_mode.png";
+import imageA from "@assets/generated_images/cyberpunk_samurai_for_battle_mode.webp";
+import imageB from "@assets/generated_images/ethereal_fantasy_elf_for_battle_mode.webp";
 
 export default function BattleMode() {
   const [, setLocation] = useLocation();
@@ -41,7 +41,7 @@ export default function BattleMode() {
 
         {/* Header */}
         <div className="relative z-10 px-4 py-4 flex items-center justify-between">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/")}
             className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors"
           >
@@ -81,7 +81,7 @@ export default function BattleMode() {
                 "border-transparent hover:border-white/30 active:scale-95"
               )}
             >
-              <img src={imageA} className="w-full h-full object-cover" alt="Candidate A" />
+              <img loading="lazy" decoding="async" src={imageA} className="w-full h-full object-cover" alt="Candidate A" />
               <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 to-transparent flex justify-center">
                 <span className="text-2xl font-bold text-white font-display">A</span>
               </div>
@@ -115,7 +115,7 @@ export default function BattleMode() {
                 "border-transparent hover:border-white/30 active:scale-95"
               )}
             >
-              <img src={imageB} className="w-full h-full object-cover" alt="Candidate B" />
+              <img loading="lazy" decoding="async" src={imageB} className="w-full h-full object-cover" alt="Candidate B" />
               <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 to-transparent flex justify-center">
                 <span className="text-2xl font-bold text-white font-display">B</span>
               </div>

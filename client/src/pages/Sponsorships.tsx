@@ -108,7 +108,7 @@ export default function Sponsorships() {
         {/* Header */}
         <div className="p-6 border-b border-white/5 bg-[#121212] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
             >
@@ -124,7 +124,7 @@ export default function Sponsorships() {
           <div className="flex items-center gap-3">
             <div className="relative hidden md:block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
-              <input 
+              <input aria-label="Search deals" 
                 type="text" 
                 placeholder="Search deals..." 
                 className="bg-black/30 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500/50 w-64"
@@ -154,7 +154,7 @@ export default function Sponsorships() {
                         {colDeals.length}
                       </span>
                     </div>
-                    <button className="text-gray-500 hover:text-white">
+                    <button aria-label="More options" className="text-gray-500 hover:text-white">
                       <MoreHorizontal size={16} />
                     </button>
                   </div>
@@ -170,7 +170,7 @@ export default function Sponsorships() {
                         <div className="flex items-start justify-between mb-3 relative z-10">
                           <div className="flex items-center gap-3">
                             <div className="w-8 h-8 rounded-md bg-white p-1 flex items-center justify-center">
-                              <img src={deal.logo} alt={deal.brand} className="max-w-full max-h-full object-contain" />
+                              <img loading="lazy" decoding="async" src={deal.logo} alt={deal.brand} className="max-w-full max-h-full object-contain" />
                             </div>
                             <div>
                               <h4 className="text-sm font-bold text-white leading-tight">{deal.brand}</h4>
@@ -222,7 +222,7 @@ export default function Sponsorships() {
               <div className="p-6 border-b border-white/5 flex justify-between items-start bg-[#161616]">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
-                    <img src={selectedDeal.logo} alt={selectedDeal.brand} className="max-w-full max-h-full object-contain" />
+                    <img loading="lazy" decoding="async" src={selectedDeal.logo} alt={selectedDeal.brand} className="max-w-full max-h-full object-contain" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-white">{selectedDeal.title}</h2>
@@ -231,7 +231,7 @@ export default function Sponsorships() {
                     </p>
                   </div>
                 </div>
-                <button onClick={() => setSelectedDeal(null)} className="p-2 hover:bg-white/10 rounded-full text-gray-400">
+                <button aria-label="More options" onClick={() => setSelectedDeal(null)} className="p-2 hover:bg-white/10 rounded-full text-gray-400">
                   <MoreHorizontal size={20} />
                 </button>
               </div>

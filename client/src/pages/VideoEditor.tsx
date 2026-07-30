@@ -23,7 +23,7 @@ import {
 import { cn } from "@/lib/utils";
 import { GradientButton } from "@/components/GradientButton";
 import { useToast } from "@/hooks/use-toast";
-import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.png";
+import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.webp";
 
 // Mock data for tools
 const TOOLS = [
@@ -79,7 +79,7 @@ export default function VideoEditor() {
         
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4 z-10 bg-gradient-to-b from-black/80 to-transparent">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/result")}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors"
           >
@@ -87,10 +87,10 @@ export default function VideoEditor() {
           </button>
           
           <div className="flex gap-4">
-            <button className="p-2 rounded-full hover:bg-white/10 transition-colors">
+            <button aria-label="Undo" className="p-2 rounded-full hover:bg-white/10 transition-colors">
               <Undo2 size={20} className="text-gray-400" />
             </button>
-            <button className="p-2 rounded-full hover:bg-white/10 transition-colors">
+            <button aria-label="Redo" className="p-2 rounded-full hover:bg-white/10 transition-colors">
               <Redo2 size={20} className="text-gray-400" />
             </button>
             <button 
@@ -106,7 +106,7 @@ export default function VideoEditor() {
         <div className="flex-1 relative flex items-center justify-center overflow-hidden group">
           {/* Video Placeholder */}
           <div className="relative w-full h-full max-h-[60vh] aspect-[9/16] bg-black shadow-2xl mx-auto overflow-hidden">
-            <img 
+            <img loading="lazy" decoding="async" 
               src={resultImage} 
               alt="Video Preview" 
               className={cn(
@@ -151,7 +151,7 @@ export default function VideoEditor() {
             <div className="flex items-center gap-1 h-16 px-[50vw] overflow-x-auto no-scrollbar snap-x">
               {[...Array(10)].map((_, i) => (
                 <div key={i} className="flex-shrink-0 w-16 h-16 bg-gray-800 rounded-md overflow-hidden relative group border border-white/5 snap-center">
-                  <img src={resultImage} className="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" />
+                  <img alt="" loading="lazy" decoding="async" src={resultImage} className="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" />
                 </div>
               ))}
             </div>
@@ -160,7 +160,7 @@ export default function VideoEditor() {
           {/* Active Tool Controls (Contextual) */}
           {activeTool ? (
             <div className="h-16 flex items-center px-4 gap-4 bg-[#1A1A1A] animate-in slide-in-from-bottom-4 fade-in duration-200">
-              <button onClick={() => setActiveTool(null)} className="mr-2 text-gray-400 hover:text-white">
+              <button aria-label="Go back" onClick={() => setActiveTool(null)} className="mr-2 text-gray-400 hover:text-white">
                 <ArrowLeft size={20} />
               </button>
               
@@ -205,7 +205,7 @@ export default function VideoEditor() {
 
                 {activeTool === "text" && (
                   <div className="flex items-center gap-2 w-full">
-                    <input 
+                    <input aria-label="Enter text" 
                       type="text" 
                       placeholder="Enter text..." 
                       className="flex-1 bg-[#252525] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-accent"
@@ -225,7 +225,7 @@ export default function VideoEditor() {
                 )}
               </div>
 
-              <button onClick={() => setActiveTool(null)} className="ml-2 p-2 rounded-full bg-white text-black">
+              <button aria-label="Confirm" onClick={() => setActiveTool(null)} className="ml-2 p-2 rounded-full bg-white text-black">
                 <Check size={16} />
               </button>
             </div>

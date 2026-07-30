@@ -58,3 +58,37 @@
                 linear-gradient(to right, #7C3AED, #22D3EE) border-box;
   }
 }
+
+/* Reduced motion. Decorative loops stop outright; progress indicators keep turning,
+   slowly, because they are the only signal that work is still in flight. Transitions
+   narrow to colour and opacity so state changes stay legible without movement.
+   A blanket animation:none would take the loading feedback with it. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  .animate-spin {
+    animation-duration: 1.6s !important;
+  }
+
+  [class*="animate-in"],
+  [class*="slide-in"],
+  [class*="zoom-in"],
+  [class*="fade-in"] {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-property: color, background-color, border-color, fill, stroke, opacity !important;
+    transition-duration: 120ms !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+}

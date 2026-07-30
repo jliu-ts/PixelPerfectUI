@@ -67,7 +67,7 @@ export function Sidebar() {
                <Zap size={16} className="text-yellow-400" fill="currentColor" />
                <span className="text-xs font-bold text-white">320 Credits</span>
              </div>
-             <span className="text-[10px] text-accent hover:underline">Top Up</span>
+             <span className="text-[10px] text-accent hover:underline inline-flex items-center min-h-6">Top Up</span>
            </div>
          </Link>
          

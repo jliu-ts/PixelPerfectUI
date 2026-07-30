@@ -72,7 +72,7 @@ export default function CreationStudio() {
       <div className="flex flex-col h-screen bg-background relative">
         {/* Header */}
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center gap-4">
-          <button 
+          <button aria-label="Go back" 
             onClick={() => setLocation("/")}
             className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
           >
@@ -114,7 +114,7 @@ export default function CreationStudio() {
                           <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center ring-2 ring-white/5 group-hover:ring-white/20 transition-all overflow-hidden">
                               {/* Assuming avatar.image is available from mockData */}
-                              <img src={avatar.image || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"} alt={avatar.name} className="w-full h-full object-cover" />
+                              <img loading="lazy" decoding="async" src={avatar.image || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"} alt={avatar.name} className="w-full h-full object-cover" />
                             </div>
                             <div>
                               <span className="block text-sm font-bold mb-0.5">{avatar.name}</span>
@@ -160,7 +160,7 @@ export default function CreationStudio() {
                     <button 
                       onClick={() => setActiveTab("image")}
                       className={cn(
-                        "px-3 py-1 rounded-md text-[10px] font-bold transition-all flex items-center gap-1.5",
+                        "px-3 py-1.5 rounded-md text-[10px] font-bold transition-all inline-flex items-center gap-1.5 min-h-6",
                         activeTab === "image" ? "bg-white text-black shadow-sm" : "text-gray-400 hover:text-white"
                       )}
                     >
@@ -169,7 +169,7 @@ export default function CreationStudio() {
                     <button 
                       onClick={() => setActiveTab("video")}
                       className={cn(
-                        "px-3 py-1 rounded-md text-[10px] font-bold transition-all flex items-center gap-1.5",
+                        "px-3 py-1.5 rounded-md text-[10px] font-bold transition-all inline-flex items-center gap-1.5 min-h-6",
                         activeTab === "video" ? "bg-white text-black shadow-sm" : "text-gray-400 hover:text-white"
                       )}
                     >
@@ -180,7 +180,7 @@ export default function CreationStudio() {
                  <button 
                    onClick={() => setInputMode(inputMode === "prompt" ? "rss" : "prompt")}
                    className={cn(
-                     "text-[10px] font-medium transition-colors flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/5",
+                     "text-[10px] font-medium transition-colors inline-flex items-center gap-1.5 px-2 py-1.5 rounded-md min-h-6 hover:bg-white/5",
                      inputMode === "rss" ? "text-orange-400 bg-orange-400/10" : "text-gray-500 hover:text-white"
                    )}
                  >
@@ -191,7 +191,7 @@ export default function CreationStudio() {
                    onClick={() => {
                      setIsLibraryOpen(true);
                    }}
-                   className="text-[10px] font-medium transition-colors flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/5 text-accent"
+                   className="text-[10px] font-medium transition-colors inline-flex items-center gap-1.5 px-2 py-1.5 rounded-md min-h-6 hover:bg-white/5 text-accent"
                  >
                    <Library size={10} /> Library
                  </button>
@@ -205,7 +205,7 @@ export default function CreationStudio() {
                     <div className="flex items-center gap-1.5 bg-accent text-black text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-lg cursor-default animate-in fade-in slide-in-from-bottom-2">
                       <Library size={10} />
                       Using: {selectedPromptTitle}
-                      <button 
+                      <button aria-label="Close" 
                         onClick={clearSelectedPrompt}
                         className="ml-1 hover:bg-black/10 rounded-full p-0.5"
                       >
@@ -234,7 +234,7 @@ export default function CreationStudio() {
                             }}
                             className="min-w-[200px] h-16 bg-black/40 rounded-xl p-2 border border-white/5 hover:border-accent/50 text-left flex gap-2 group transition-all"
                           >
-                            <img src={article.image} className="w-12 h-full rounded-lg object-cover opacity-70 group-hover:opacity-100" />
+                            <img alt="" loading="lazy" decoding="async" src={article.image} className="w-12 h-full rounded-lg object-cover opacity-70 group-hover:opacity-100" />
                             <div className="flex-1 overflow-hidden">
                                <div className="text-[9px] text-orange-400 font-bold truncate">{article.category}</div>
                                <div className="text-[10px] text-white font-medium leading-tight line-clamp-2">{article.title}</div>
@@ -375,7 +375,7 @@ export default function CreationStudio() {
                                   )}
                                 >
                                   <div className="absolute inset-0">
-                                    <img src={s.image} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt={s.label} />
+                                    <img loading="lazy" decoding="async" src={s.image} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt={s.label} />
                                     <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-colors" />
                                   </div>
                                   <span className="relative z-10 p-2 font-bold text-white drop-shadow-md">{s.label}</span>
@@ -391,7 +391,7 @@ export default function CreationStudio() {
                     <div className="text-[10px] text-gray-500 font-medium flex items-center gap-1">
                        <Zap size={10} className="text-yellow-400" fill="currentColor" /> 5
                     </div>
-                    <button 
+                    <button aria-label="Launch" 
                        onClick={() => setLocation("/result")}
                        className="w-8 h-8 rounded-full bg-white hover:bg-gray-200 text-black flex items-center justify-center transition-all hover:scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                     >

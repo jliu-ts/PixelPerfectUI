@@ -144,7 +144,7 @@ export default function Notifications() {
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5">
           <div className="flex items-center justify-between p-4 pt-8">
             <div className="flex items-center gap-4">
-              <button 
+              <button aria-label="Go back" 
                 onClick={() => setLocation("/")}
                 className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -166,7 +166,7 @@ export default function Notifications() {
               >
                 Mark all read
               </button>
-              <button className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors">
+              <button aria-label="Settings" className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors">
                 <Settings size={18} />
               </button>
             </div>
@@ -260,7 +260,7 @@ export default function Notifications() {
                     {notif.image && (
                        <div className="mt-3 flex items-center gap-3 p-2 rounded-lg bg-black/20 border border-white/5 hover:border-white/10 transition-colors cursor-pointer group/item">
                          <div className="w-10 h-10 rounded overflow-hidden shrink-0">
-                           <img src={notif.image} className="w-full h-full object-cover" alt="Thumbnail" />
+                           <img loading="lazy" decoding="async" src={notif.image} className="w-full h-full object-cover" alt="Thumbnail" />
                          </div>
                          <div className="flex-1 min-w-0">
                            <p className="text-[10px] font-bold text-gray-300 group-hover/item:text-white transition-colors">View Content</p>

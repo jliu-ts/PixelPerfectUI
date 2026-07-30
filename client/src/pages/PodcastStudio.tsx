@@ -61,13 +61,13 @@ export default function PodcastStudio() {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white/5 bg-background/80 backdrop-blur-md sticky top-0 z-20">
           <div className="flex items-center gap-4">
-            <button onClick={() => setLocation("/create")} className="p-2 -ml-2 hover:bg-white/10 rounded-full transition-colors text-white">
+            <button aria-label="Go back" onClick={() => setLocation("/create")} className="p-2 -ml-2 hover:bg-white/10 rounded-full transition-colors text-white">
               <ArrowLeft size={24} />
             </button>
             <h1 className="text-xl font-display font-bold text-white">Podcast Studio</h1>
           </div>
           <div className="flex gap-2">
-            <button className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
+            <button aria-label="Settings" className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-colors">
               <Settings size={20} />
             </button>
             <GradientButton onClick={handleGenerate} className="px-4">
@@ -142,7 +142,7 @@ export default function PodcastStudio() {
                </div>
                
                <div className="flex items-center gap-6">
-                 <button className="p-4 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+                 <button aria-label="Music" className="p-4 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
                    <Music size={24} />
                  </button>
                  
@@ -162,7 +162,7 @@ export default function PodcastStudio() {
                    )}
                  </button>
 
-                 <button className="p-4 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+                 <button aria-label="Enhance" className="p-4 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
                    <Wand2 size={24} />
                  </button>
                </div>

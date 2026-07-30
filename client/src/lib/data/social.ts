@@ -1,6 +1,6 @@
-import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
-import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
-import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
+import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.webp";
+import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.webp";
+import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.webp";
 import { BRAND_LOGOS } from "../constants/brandLogos";
 import { getAvatarUrl, PLATFORM_LOGOS } from "../constants/urls";
 

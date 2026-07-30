@@ -72,7 +72,7 @@ export default function AssetMarketplace() {
         {/* Standard Sticky Header */}
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -89,7 +89,7 @@ export default function AssetMarketplace() {
               <Coins size={14} className="text-yellow-400" fill="currentColor" />
               <span className="text-xs font-bold text-white">{userCredits}</span>
             </div>
-            <button className="p-2 rounded-full bg-accent text-black hover:bg-accent/90 transition-colors">
+            <button aria-label="Add" className="p-2 rounded-full bg-accent text-black hover:bg-accent/90 transition-colors">
               <Plus size={20} />
             </button>
           </div>
@@ -130,7 +130,7 @@ export default function AssetMarketplace() {
                   className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all placeholder:text-gray-600"
                 />
               </div>
-              <button className="px-4 rounded-xl bg-[#1E1E1E] border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-colors">
+              <button aria-label="Filter" className="px-4 rounded-xl bg-[#1E1E1E] border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-colors">
                 <Filter size={18} />
               </button>
             </div>
@@ -158,7 +158,7 @@ export default function AssetMarketplace() {
           <div>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-white">Popular Assets</h3>
-              <button className="text-xs text-accent hover:underline">View Leaderboard</button>
+              <button className="text-xs text-accent hover:underline inline-flex items-center min-h-6">View Leaderboard</button>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -169,7 +169,7 @@ export default function AssetMarketplace() {
                 >
                   {/* Thumbnail */}
                   <div className="aspect-[4/3] relative overflow-hidden bg-black">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src={item.image} 
                       alt={item.title} 
                       className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 

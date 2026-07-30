@@ -98,7 +98,7 @@ export default function ManageFeeds() {
         <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-white/5">
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-4">
-              <button 
+              <button aria-label="Go back" 
                 onClick={() => setLocation("/")}
                 className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -115,7 +115,7 @@ export default function ManageFeeds() {
             <div className="flex items-center gap-2">
               <div className="relative hidden md:block">
                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input 
+                <input aria-label="Search feeds" 
                   type="text" 
                   placeholder="Search feeds..." 
                   value={searchQuery}
@@ -124,7 +124,7 @@ export default function ManageFeeds() {
                 />
               </div>
               <div className="flex bg-[#1E1E1E] rounded-lg p-1 border border-white/10">
-                <button 
+                <button aria-label="List view" 
                   onClick={() => setViewMode("list")}
                   className={cn(
                     "p-1.5 rounded-md transition-all",
@@ -133,7 +133,7 @@ export default function ManageFeeds() {
                 >
                   <List size={14} />
                 </button>
-                <button 
+                <button aria-label="Grid view" 
                   onClick={() => setViewMode("grid")}
                   className={cn(
                     "p-1.5 rounded-md transition-all",
@@ -189,7 +189,7 @@ export default function ManageFeeds() {
                    <div className="flex gap-2">
                      <div className="relative flex-1 group">
                        <Globe size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-orange-500 transition-colors" />
-                       <input 
+                       <input aria-label="https://website.com/feed.xml" 
                          placeholder="https://website.com/feed.xml" 
                          className="w-full h-10 pl-9 pr-3 rounded-xl bg-black/40 border border-white/10 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-orange-500/50 transition-all"
                          value={newFeedUrl}
@@ -259,7 +259,7 @@ export default function ManageFeeds() {
                              )}
                            </div>
                            <div className="flex items-center gap-2 mt-1">
-                             <a href={feed.url} target="_blank" rel="noreferrer" className="text-xs text-gray-500 hover:text-orange-400 flex items-center gap-1 truncate max-w-[150px] transition-colors">
+                             <a href={feed.url} target="_blank" rel="noreferrer" className="text-xs text-gray-500 hover:text-orange-400 inline-flex items-center gap-1 truncate max-w-[150px] min-h-6 transition-colors">
                                <Globe size={10} /> {new URL(feed.url).hostname}
                              </a>
                            </div>
@@ -329,7 +329,7 @@ export default function ManageFeeds() {
                           </div>
                           <span className="text-xs font-bold text-gray-200">{suggestion.name}</span>
                         </div>
-                        <button 
+                        <button aria-label="Add" 
                           onClick={() => handleAddFeed(suggestion.url)}
                           className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
                         >

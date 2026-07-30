@@ -233,7 +233,7 @@ export default function AffiliateDashboard() {
         {/* Header */}
         <div className="flex items-center gap-4 p-4 pt-8 bg-background/80 backdrop-blur-md sticky top-0 z-20 border-b border-white/5 justify-between">
           <div className="flex items-center gap-3">
-             <button 
+             <button aria-label="Go back" 
               onClick={() => setLocation("/profile")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-white transition-colors"
             >
@@ -513,7 +513,7 @@ export default function AffiliateDashboard() {
                       <h3 className="text-base font-bold text-white">Recent Conversions</h3>
                       <p className="text-xs text-gray-400">Real-time tracking from all channels</p>
                     </div>
-                    <button className="text-xs font-bold text-accent hover:text-white transition-colors">
+                    <button className="text-xs font-bold text-accent hover:text-white transition-colors inline-flex items-center min-h-6">
                       View All
                     </button>
                   </div>
@@ -581,7 +581,7 @@ export default function AffiliateDashboard() {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                       <div className="flex items-start gap-4">
                         <div className="w-14 h-14 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
-                          <img src={campaign.logo} alt={campaign.brand} className="w-full h-full object-contain" />
+                          <img loading="lazy" decoding="async" src={campaign.logo} alt={campaign.brand} className="w-full h-full object-contain" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2 mb-1">
@@ -752,7 +752,7 @@ export default function AffiliateDashboard() {
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold text-gray-500 uppercase">Product URL</label>
                       <div className="relative">
-                        <input 
+                        <input aria-label="https://amazon.com/product" 
                           type="text" 
                           placeholder="https://amazon.com/product..."
                           className="w-full bg-black/30 border border-white/10 rounded-xl pl-4 pr-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"
@@ -762,7 +762,7 @@ export default function AffiliateDashboard() {
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold text-gray-500 uppercase">Campaign Source</label>
                       <div className="relative">
-                        <input 
+                        <input aria-label="e.g. Instagram Story" 
                           type="text" 
                           placeholder="e.g. Instagram Story"
                           className="w-full bg-black/30 border border-white/10 rounded-xl pl-4 pr-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"

@@ -14,7 +14,7 @@ import {
   Ghost
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import cameraFeed from "@assets/generated_images/candid_ar_camera_feed.png";
+import cameraFeed from "@assets/generated_images/candid_ar_camera_feed.webp";
 
 const FILTERS = [
   { id: "none", name: "Normal", icon: Smile },
@@ -84,7 +84,7 @@ export default function ARCamera() {
       <div className="h-[100dvh] bg-black flex flex-col relative overflow-hidden">
         {/* Camera Feed Simulation */}
         <div className="absolute inset-0 z-0">
-          <img 
+          <img loading="lazy" decoding="async" 
             src={cameraFeed} 
             alt="Camera Feed" 
             className={cn(
@@ -113,18 +113,18 @@ export default function ARCamera() {
           
           {/* Top Bar */}
           <div className="flex justify-between items-center">
-            <button onClick={() => setLocation("/create")} className="p-2 rounded-full bg-black/20 backdrop-blur-md text-white">
+            <button aria-label="Go back" onClick={() => setLocation("/create")} className="p-2 rounded-full bg-black/20 backdrop-blur-md text-white">
               <ArrowLeft size={24} />
             </button>
             
             <div className="flex gap-4">
-              <button 
+              <button aria-label="Boost" 
                 onClick={() => setFlash(!flash)}
                 className={cn("p-2 rounded-full backdrop-blur-md transition-colors", flash ? "bg-yellow-500 text-black" : "bg-black/20 text-white")}
               >
                 <Zap size={24} fill={flash ? "currentColor" : "none"} />
               </button>
-              <button className="p-2 rounded-full bg-black/20 backdrop-blur-md text-white">
+              <button aria-label="Reset" className="p-2 rounded-full bg-black/20 backdrop-blur-md text-white">
                 <RotateCcw size={24} />
               </button>
             </div>
@@ -162,7 +162,7 @@ export default function ARCamera() {
 
             {/* Capture Row */}
             <div className="flex items-center justify-between w-full px-8">
-              <button className="w-12 h-12 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+              <button aria-label="Choose image" className="w-12 h-12 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
                 <ImageIcon size={24} />
               </button>
 
@@ -180,7 +180,7 @@ export default function ARCamera() {
                 )} />
               </button>
 
-              <button className="w-12 h-12 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+              <button aria-label="Generate with AI" className="w-12 h-12 rounded-xl bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
                 <Sparkles size={24} />
               </button>
             </div>

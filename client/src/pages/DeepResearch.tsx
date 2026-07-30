@@ -119,7 +119,7 @@ export default function DeepResearch() {
         {/* Standard Sticky Header */}
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button 
+            <button aria-label="Go back" 
               onClick={() => setLocation("/")}
               className="p-2 -ml-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
             >
@@ -133,10 +133,10 @@ export default function DeepResearch() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors">
+            <button aria-label="History" className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors">
               <History size={20} />
             </button>
-            <button className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors">
+            <button aria-label="More options" className="p-2 rounded-full hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors">
               <MoreHorizontal size={20} />
             </button>
           </div>
@@ -205,7 +205,7 @@ export default function DeepResearch() {
                                 className="flex-shrink-0 w-64 p-3 rounded-xl bg-[#151515] border border-white/10 hover:border-cyan-500/30 hover:bg-[#1A1A1A] transition-all group flex items-start gap-3"
                               >
                                 <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center shrink-0">
-                                  <img src={source.icon} className="w-4 h-4 opacity-70 group-hover:opacity-100" alt="" />
+                                  <img loading="lazy" decoding="async" src={source.icon} className="w-4 h-4 opacity-70 group-hover:opacity-100" alt="" />
                                 </div>
                                 <div className="min-w-0">
                                   <p className="text-xs font-bold text-gray-200 group-hover:text-cyan-400 truncate leading-tight mb-1">{source.title}</p>
@@ -242,15 +242,15 @@ export default function DeepResearch() {
                           <button className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors" title="Copy">
                             <Copy size={16} />
                           </button>
-                          <button className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
+                          <button aria-label="Share" className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
                             <Share2 size={16} />
                           </button>
                         </div>
                         <div className="flex gap-2">
-                          <button className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
+                          <button aria-label="Helpful" className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
                             <ThumbsUp size={16} />
                           </button>
-                          <button className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
+                          <button aria-label="Not helpful" className="p-2 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
                             <ThumbsDown size={16} />
                           </button>
                         </div>
@@ -368,7 +368,7 @@ export default function DeepResearch() {
                        return (
                          <>
                            {ctx.type === "img" ? (
-                             <img src={ctx.icon as string} className="w-3.5 h-3.5 object-contain" alt="" />
+                             <img loading="lazy" decoding="async" src={ctx.icon as string} className="w-3.5 h-3.5 object-contain" alt="" />
                            ) : (
                              <ctx.icon size={14} className={ctx.color} />
                            )}
@@ -394,7 +394,7 @@ export default function DeepResearch() {
                              )}
                            >
                              {ctx.type === "img" ? (
-                               <img src={ctx.icon as string} className="w-4 h-4 object-contain" alt="" />
+                               <img loading="lazy" decoding="async" src={ctx.icon as string} className="w-4 h-4 object-contain" alt="" />
                              ) : (
                                <ctx.icon size={14} className={ctx.color} />
                              )}
@@ -415,7 +415,7 @@ export default function DeepResearch() {
                    )}
                  </div>
 
-                 <button className="p-1.5 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
+                 <button aria-label="Attach file" className="p-1.5 rounded-lg hover:bg-white/10 text-gray-500 hover:text-white transition-colors">
                    <Paperclip size={16} />
                  </button>
               </div>
@@ -429,7 +429,7 @@ export default function DeepResearch() {
                     <StopCircle size={18} />
                   </button>
                 ) : (
-                  <button 
+                  <button aria-label="Open" 
                     onClick={() => handleSend(query)}
                     disabled={!query.trim()}
                     className="p-2 rounded-xl bg-white text-black hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg transform active:scale-95"
