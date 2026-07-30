@@ -236,7 +236,7 @@ export default function CreationStudio() {
                           >
                             <img src={article.image} className="w-12 h-full rounded-lg object-cover opacity-70 group-hover:opacity-100" />
                             <div className="flex-1 overflow-hidden">
-                               <div className="text-[9px] text-orange-400 font-bold truncate">{article.source}</div>
+                               <div className="text-[9px] text-orange-400 font-bold truncate">{article.category}</div>
                                <div className="text-[10px] text-white font-medium leading-tight line-clamp-2">{article.title}</div>
                             </div>
                           </button>
