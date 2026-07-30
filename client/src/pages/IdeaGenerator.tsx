@@ -37,7 +37,7 @@ const ARTICLES = [
     category: "tech",
     title: "Generative AI models are shrinking to run on your phone", 
     time: "2h ago",
-    summary: "New quantization techniques allow powerful LLMs to run locally on edge devices, changing the landscape of mobile AI privacy and speed.",
+    summary: "New quantization techniques let capable LLMs run on-device, keeping prompts off the network and cutting response latency to near-zero.",
     trendScore: 98,
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60",
     tags: ["#AI", "#Mobile", "#Tech"]

@@ -14,13 +14,13 @@ const SLIDES = [
         <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 backdrop-blur-md">
           <h3 className="text-xl font-display font-bold text-white mb-2">The Problem: Fragmentation</h3>
           <p className="text-gray-400">
-            Creators today juggle 10+ isolated apps: CapCut for editing, Midjourney for assets, Linktree for bio, Instagram/TikTok for distribution, and separate affiliate dashboards. The workflow is broken and inefficient.
+            Creators today juggle 10+ isolated apps: CapCut for editing, Midjourney for assets, Linktree for bio, Instagram/TikTok for distribution, and separate affiliate dashboards. None of it talks to each other.
           </p>
         </div>
         <div className="p-6 rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-white/10 backdrop-blur-md">
           <h3 className="text-xl font-display font-bold text-white mb-2">The Solution: One Super App</h3>
           <p className="text-gray-400">
-            **Trending Society** unifies the entire lifecycle. From AI generation & editing to cross-platform social management and direct monetization. A single, mobile-first OS for the modern creator.
+            <strong className="text-white font-semibold">Trending Society</strong> is one app: generate the asset, cut it, push it to every platform, and collect the affiliate revenue without leaving the tab. Mobile-first.
           </p>
         </div>
       </div>

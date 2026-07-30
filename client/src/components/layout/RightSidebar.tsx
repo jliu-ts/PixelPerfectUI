@@ -226,7 +226,7 @@ export function RightSidebar() {
 
                  <div className="space-y-4 text-sm text-gray-400 leading-relaxed">
                    <p>
-                     As the landscape evolves, we are seeing a fundamental shift in how creators interact with technology. The integration of {selectedArticle.source} into daily workflows is just the beginning.
+                     {selectedArticle.source} broke this first, and the follow-on coverage has mostly repeated the framing rather than testing it. The numbers below are worth checking yourself.
                    </p>
                    
                    <div className="p-4 rounded-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/20 my-4">
@@ -234,12 +234,12 @@ export function RightSidebar() {
                        <Sparkles size={12} /> AI Insight
                      </h4>
                      <p className="text-xs text-gray-300 italic">
-                       "This topic is currently trending in the top 5% of tech discussions. Creators leveraging this angle are seeing a 3x boost in engagement."
+                       "Top 5% of tech discussion volume this week. Creators posting on this angle are averaging 3x their usual engagement."
                      </p>
                    </div>
 
                    <p>
-                     Experts suggest that early adoption of these tools could provide a significant competitive advantage. The key will be balancing automation with authentic human connection.
+                     Early movers get about a two-month window before the format saturates. After that it reads as a trend you joined late.
                    </p>
                  </div>
                </div>
