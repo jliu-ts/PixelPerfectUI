@@ -16,7 +16,7 @@ import {
   Loader2,
   ShoppingBag
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.webp";
 
@@ -131,18 +131,18 @@ export default function SocialShare() {
               <textarea 
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="w-full bg-[#1E1E1E] border border-white/10 rounded-lg p-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 min-h-[96px] resize-none"
+                className="w-full bg-card border border-white/10 rounded-lg p-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 min-h-[96px] resize-none"
               />
             </div>
           </div>
 
           {/* Link Injection (New) */}
-          <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
+          <div className="p-4 rounded-xl bg-card border border-white/5">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-400 uppercase flex items-center gap-2">
+              <h2 className="text-sm font-medium text-gray-400 uppercase flex items-center gap-2">
                 <ShoppingBag size={14} />
                 Affiliate Link Injection
-              </h3>
+              </h2>
               <span className="text-[10px] text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">
                 AUTO-GENERATED
               </span>
@@ -170,13 +170,13 @@ export default function SocialShare() {
 
           {/* Platforms List */}
           <div>
-            <h3 className="text-sm font-medium text-gray-400 uppercase mb-4 flex items-center justify-between">
+            <h2 className="text-sm font-medium text-gray-400 uppercase mb-4 flex items-center justify-between">
               <span>Destinations</span>
               <button className="text-xs text-primary flex items-center gap-1 hover:underline">
                 <Globe size={12} />
                 Manage Accounts
               </button>
-            </h3>
+            </h2>
 
             <div className="space-y-3">
               {PLATFORMS.map((platform) => {
@@ -189,11 +189,11 @@ export default function SocialShare() {
                     className={cn(
                       "flex items-center justify-between p-4 rounded-xl border transition-all",
                       isSelected 
-                        ? "bg-[#1E1E1E] border-primary/50 shadow-[0_0_15px_-5px_rgba(124,58,237,0.2)]" 
-                        : "bg-[#121212] border-white/5 hover:border-white/10"
+                        ? "bg-card border-primary/50 shadow-[0_0_15px_-5px_rgba(124,58,237,0.2)]" 
+                        : "bg-background border-white/5 hover:border-white/10"
                     )}
                   >
-                    <div className="flex items-center gap-4 cursor-pointer flex-1" onClick={() => toggleSelect(platform.id)}>
+                    <div className="flex items-center gap-4 cursor-pointer flex-1" {...clickable(() => toggleSelect(platform.id))}>
                       <div 
                         className={cn("w-10 h-10 rounded-full flex items-center justify-center transition-colors", isSelected ? "bg-white text-black" : "bg-gray-800 text-gray-400")}
                         style={{ color: isSelected ? platform.color : undefined }}
@@ -212,7 +212,7 @@ export default function SocialShare() {
 
                     {isConnected ? (
                       <div 
-                        onClick={() => toggleSelect(platform.id)}
+                        {...clickable(() => toggleSelect(platform.id))}
                         className={cn(
                           "w-6 h-6 rounded-full border-2 flex items-center justify-center cursor-pointer transition-all",
                           isSelected ? "bg-primary border-primary" : "border-gray-600"
@@ -237,7 +237,7 @@ export default function SocialShare() {
         </div>
 
         {/* Footer Action */}
-        <div className="mt-auto p-6 border-t border-white/5 bg-[#121212]/80 backdrop-blur-md sticky bottom-0 z-20">
+        <div className="mt-auto p-6 border-t border-white/5 bg-background/80 backdrop-blur-md sticky bottom-0 z-20">
           <GradientButton onClick={handlePost} disabled={isPosting} className="flex items-center justify-center gap-2">
             {isPosting ? (
               <>

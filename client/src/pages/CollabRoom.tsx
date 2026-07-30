@@ -24,7 +24,7 @@ import {
   Settings,
   Share2
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import sceneOneImage from "@assets/generated_images/cyber_sneaker_scene_1.webp";
 import sceneTwoImage from "@assets/generated_images/cyber_sneaker_scene_2.webp";
@@ -173,18 +173,18 @@ export default function CollabRoom() {
                 return (
                 <div key={member.id} className="group relative">
                   <div className={cn(
-                    "w-9 h-9 rounded-full border-2 border-[#121212] overflow-hidden transition-transform hover:scale-110 hover:z-10 cursor-pointer",
+                    "w-9 h-9 rounded-full border-2 border-background overflow-hidden transition-transform hover:scale-110 hover:z-10 cursor-pointer",
                     status === "generating" ? "ring-2 ring-purple-500 ring-offset-2 ring-offset-black" : ""
                   )} title={`${member.name} - ${status}`}>
                     <img loading="lazy" decoding="async" src={member.avatar} alt={member.name} className="w-full h-full bg-gray-800" />
                   </div>
-                  {status === "online" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#121212] rounded-full" />}
-                  {status === "editing" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-blue-500 border-2 border-[#121212] rounded-full" />}
-                  {status === "generating" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-purple-500 border-2 border-[#121212] rounded-full animate-pulse" />}
+                  {status === "online" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-background rounded-full" />}
+                  {status === "editing" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-blue-500 border-2 border-background rounded-full" />}
+                  {status === "generating" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-purple-500 border-2 border-background rounded-full animate-pulse" />}
                 </div>
                 );
               })}
-              <button aria-label="Add" className="w-9 h-9 rounded-full border-2 border-[#121212] bg-[#2A2A2A] flex items-center justify-center text-white hover:bg-[#333] transition-colors z-0">
+              <button aria-label="Add" className="w-9 h-9 rounded-full border-2 border-background bg-muted flex items-center justify-center text-white hover:bg-[#333] transition-colors z-0">
                 <Plus size={14} />
               </button>
             </div>
@@ -207,14 +207,14 @@ export default function CollabRoom() {
           <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
             
             {/* Script Editor */}
-            <div className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
-              <div className="p-4 bg-[#1A1A1A] border-b border-white/5 flex justify-between items-center">
+            <div className="bg-background border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="p-4 bg-surface-2 border-b border-white/5 flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
                     <Video size={16} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-white">Script & Storyboard</h3>
+                    <h2 className="text-sm font-bold text-white">Script & Storyboard</h2>
                     <p className="text-[10px] text-gray-500">Last edited by Mike • 2m ago</p>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function CollabRoom() {
                 {SCRIPT_LINES.map((line, index) => (
                   <div 
                     key={line.id} 
-                    onClick={() => setActiveScriptLine(line.id)}
+                    {...clickable(() => setActiveScriptLine(line.id))}
                     className={cn(
                       "p-4 rounded-xl border transition-all cursor-pointer group relative flex gap-4 items-start",
                       activeScriptLine === line.id 
@@ -290,15 +290,15 @@ export default function CollabRoom() {
             {/* Generated Assets */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
+                <h2 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
                   <Layers size={14} /> Generated Assets
-                </h3>
+                </h2>
                 <button className="text-[10px] text-accent hover:underline inline-flex items-center min-h-6">View All</button>
               </div>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {assets.map(asset => asset.status === "generating" ? (
-                  <div key={asset.id} className="aspect-video bg-[#121212] rounded-xl border border-dashed border-white/10 relative overflow-hidden flex flex-col items-center justify-center gap-2 cursor-wait">
+                  <div key={asset.id} className="aspect-video bg-background rounded-xl border border-dashed border-white/10 relative overflow-hidden flex flex-col items-center justify-center gap-2 cursor-wait">
                     <div className="relative">
                       <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full animate-pulse" />
                       <Loader2 size={24} className="text-accent animate-spin relative z-10" />
@@ -328,8 +328,8 @@ export default function CollabRoom() {
           </div>
 
           {/* Right Panel: Live Chat */}
-          <div className="w-full lg:w-96 border-t lg:border-t-0 lg:border-l border-white/10 bg-[#0F0F0F] flex flex-col h-[40vh] lg:h-auto shrink-0">
-            <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between bg-[#121212]">
+          <div className="w-full lg:w-96 border-t lg:border-t-0 lg:border-l border-white/10 bg-well flex flex-col h-[40vh] lg:h-auto shrink-0">
+            <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between bg-background">
               <div className="flex items-center gap-2">
                 <MessageSquare size={14} className="text-gray-400" />
                 <span className="text-xs font-bold text-white">Team Chat</span>
@@ -368,7 +368,7 @@ export default function CollabRoom() {
                         ? "bg-purple-500/10 text-purple-100 border border-purple-500/20 rounded-tl-none" 
                         : msg.user === "Felix (Director)"
                           ? "bg-accent text-black font-medium rounded-tr-none"
-                          : "bg-[#1E1E1E] text-gray-300 border border-white/5 rounded-tl-none"
+                          : "bg-card text-gray-300 border border-white/5 rounded-tl-none"
                     )}>
                       {msg.text}
                     </div>
@@ -378,10 +378,10 @@ export default function CollabRoom() {
               <div ref={chatEndRef} />
             </div>
             
-            <div className="p-4 border-t border-white/5 bg-[#121212]">
+            <div className="p-4 border-t border-white/5 bg-background">
               <form 
                 onSubmit={handleSendMessage}
-                className="flex items-center gap-2 bg-[#1A1A1A] border border-white/10 rounded-xl p-1.5 focus-within:border-accent/50 transition-colors"
+                className="flex items-center gap-2 bg-surface-2 border border-white/10 rounded-xl p-1.5 focus-within:border-accent/50 transition-colors"
               >
                 <button aria-label="Attach file" type="button" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors">
                   <Paperclip size={16} />

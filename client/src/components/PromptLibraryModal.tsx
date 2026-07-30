@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Library, Plus, ChevronLeft, Edit2, Trash2, Save } from "lucide-react";
 import { usePrompts, Prompt } from "@/hooks/usePrompts";
+import { clickable } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -127,7 +128,7 @@ export function PromptLibraryModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#1E1E1E] border-white/10 text-white max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="bg-card border-white/10 text-white max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display text-xl flex items-center justify-between w-full">
             <div className="flex items-center gap-2">
@@ -171,15 +172,15 @@ export function PromptLibraryModal({
                   {category.items.map((item) => (
                     <div
                       key={item.id}
-                      onClick={() => {
+                      {...clickable(() => {
                         if (onSelectPrompt) {
                           onSelectPrompt(item);
                           onOpenChange(false);
                         }
-                      }}
+                      })}
                       className="relative text-left p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 transition-all group h-full flex flex-col cursor-pointer"
                     >
-                      <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-[#1E1E1E] rounded-lg p-1 shadow-lg border border-white/5 z-10">
+                      <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-card rounded-lg p-1 shadow-lg border border-white/5 z-10">
                          <button 
                            onClick={(e) => handleEditClick(item, e)}
                            className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white transition-colors"
@@ -255,7 +256,7 @@ export function PromptLibraryModal({
                   <SelectTrigger className="w-full bg-black/20 border border-white/10 rounded-lg h-[46px] text-sm text-white focus:ring-accent focus:ring-offset-0">
                     <SelectValue placeholder="Select Platform" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#1E1E1E] border-white/10 text-white">
+                  <SelectContent className="bg-card border-white/10 text-white">
                     {PLATFORM_OPTIONS.map((platform) => (
                       <SelectItem 
                         key={platform} 

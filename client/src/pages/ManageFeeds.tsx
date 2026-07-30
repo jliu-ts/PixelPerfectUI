@@ -120,10 +120,10 @@ export default function ManageFeeds() {
                   placeholder="Search feeds..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="h-9 w-48 rounded-xl bg-[#1E1E1E] border border-white/10 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-orange-500/50 transition-all"
+                  className="h-9 w-48 rounded-xl bg-card border border-white/10 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-orange-500/50 transition-all"
                 />
               </div>
-              <div className="flex bg-[#1E1E1E] rounded-lg p-1 border border-white/10">
+              <div className="flex bg-card rounded-lg p-1 border border-white/10">
                 <button aria-label="List view" 
                   onClick={() => setViewMode("list")}
                   className={cn(
@@ -156,7 +156,7 @@ export default function ManageFeeds() {
                   "px-3 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap border flex items-center gap-2",
                   selectedCategory === cat.id
                     ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.2)]"
-                    : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:text-white hover:border-white/20"
+                    : "bg-card text-gray-400 border-white/5 hover:text-white hover:border-white/20"
                 )}
               >
                 {cat.id === "all" && <Filter size={12} />}
@@ -172,7 +172,7 @@ export default function ManageFeeds() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2 space-y-6">
                {/* Add Card */}
-               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1E1E1E] to-[#151515] border border-white/10 p-1">
+               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-card to-surface border border-white/10 p-1">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 blur-[60px] rounded-full pointer-events-none" />
                  
                  <div className="p-5">
@@ -181,7 +181,7 @@ export default function ManageFeeds() {
                        <Plus size={18} />
                      </div>
                      <div>
-                       <h3 className="text-sm font-bold text-white">Connect New Source</h3>
+                       <h2 className="text-sm font-bold text-white">Connect New Source</h2>
                        <p className="text-xs text-gray-400">Add any RSS, Atom, or JSON feed URL</p>
                      </div>
                    </div>
@@ -209,15 +209,15 @@ export default function ManageFeeds() {
 
                {/* Stats Overview */}
                <div className="grid grid-cols-3 gap-3">
-                 <div className="p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col items-center justify-center text-center group hover:border-white/10 transition-colors">
+                 <div className="p-4 rounded-2xl bg-card border border-white/5 flex flex-col items-center justify-center text-center group hover:border-white/10 transition-colors">
                    <span className="text-2xl font-display font-bold text-white mb-1 group-hover:scale-110 transition-transform">{feeds.length}</span>
                    <span className="text-[10px] text-gray-500 uppercase tracking-wider">Active Feeds</span>
                  </div>
-                 <div className="p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col items-center justify-center text-center group hover:border-white/10 transition-colors">
+                 <div className="p-4 rounded-2xl bg-card border border-white/5 flex flex-col items-center justify-center text-center group hover:border-white/10 transition-colors">
                    <span className="text-2xl font-display font-bold text-white mb-1 group-hover:scale-110 transition-transform">142</span>
                    <span className="text-[10px] text-gray-500 uppercase tracking-wider">Articles Today</span>
                  </div>
-                 <div className="p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col items-center justify-center text-center group hover:border-white/10 transition-colors">
+                 <div className="p-4 rounded-2xl bg-card border border-white/5 flex flex-col items-center justify-center text-center group hover:border-white/10 transition-colors">
                    <span className="text-2xl font-display font-bold text-green-400 mb-1 group-hover:scale-110 transition-transform">98%</span>
                    <span className="text-[10px] text-gray-500 uppercase tracking-wider">Health Score</span>
                  </div>
@@ -226,9 +226,9 @@ export default function ManageFeeds() {
                {/* Feed List */}
                <div className="space-y-4">
                  <div className="flex items-center justify-between px-1">
-                   <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                   <h2 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
                      <Check size={12} className="text-green-500" /> Connected Sources
-                   </h3>
+                   </h2>
                    <span className="text-[10px] text-gray-600">Last synced 2 mins ago</span>
                  </div>
                  
@@ -240,18 +240,18 @@ export default function ManageFeeds() {
                      <div 
                        key={feed.id}
                        className={cn(
-                         "group relative bg-[#151515] border border-white/5 hover:border-white/10 rounded-xl transition-all hover:bg-[#1A1A1A] animate-in fade-in slide-in-from-bottom-2",
+                         "group relative bg-surface border border-white/5 hover:border-white/10 rounded-xl transition-all hover:bg-surface-2 animate-in fade-in slide-in-from-bottom-2",
                          viewMode === "list" ? "p-4 flex items-center justify-between" : "p-5 flex flex-col"
                        )}
                        style={{ animationDelay: `${idx * 50}ms` }}
                      >
                        <div className={cn("flex items-center gap-4", viewMode === "grid" && "mb-4")}>
-                         <div className="w-10 h-10 rounded-xl bg-[#1E1E1E] flex items-center justify-center text-gray-400 group-hover:text-white group-hover:scale-110 transition-all border border-white/5 shrink-0">
+                         <div className="w-10 h-10 rounded-xl bg-card flex items-center justify-center text-gray-400 group-hover:text-white group-hover:scale-110 transition-all border border-white/5 shrink-0">
                            <feed.icon size={20} />
                          </div>
                          <div className="min-w-0">
                            <div className="flex items-center gap-2">
-                             <h3 className="font-bold text-white text-sm truncate">{feed.name}</h3>
+                             <h2 className="font-bold text-white text-sm truncate">{feed.name}</h2>
                              {viewMode === "list" && (
                                <Badge variant="outline" className="text-[9px] h-4 px-1 border-white/10 text-gray-500 uppercase">
                                  {feed.category}
@@ -290,7 +290,7 @@ export default function ManageFeeds() {
                          </button>
                          <button 
                            onClick={() => handleDelete(feed.id)}
-                           className="p-2 rounded-lg hover:bg-red-500/10 text-gray-500 hover:text-red-500 transition-colors" 
+                           className="p-2 rounded-lg hover:bg-red-500/10 text-gray-400 hover:text-red-500 transition-colors" 
                            title="Disconnect"
                          >
                            <Trash2 size={14} />
@@ -314,10 +314,10 @@ export default function ManageFeeds() {
 
             {/* Sidebar: Suggestions */}
             <div className="space-y-6">
-              <div className="bg-[#1E1E1E] rounded-2xl border border-white/5 p-5 sticky top-24">
-                <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
+              <div className="bg-card rounded-2xl border border-white/5 p-5 sticky top-24">
+                <h2 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
                   <Sparkles size={14} className="text-yellow-400" /> Suggested
-                </h3>
+                </h2>
                 
                 <div className="space-y-3">
                   {SUGGESTED_FEEDS.map((suggestion, i) => (
@@ -342,7 +342,7 @@ export default function ManageFeeds() {
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-white/5">
-                  <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Import</h3>
+                  <h2 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Import</h2>
                   <button className="w-full py-2 rounded-xl border border-dashed border-white/20 text-xs font-medium text-gray-400 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all flex items-center justify-center gap-2">
                      <Code size={12} /> Upload OPML
                   </button>

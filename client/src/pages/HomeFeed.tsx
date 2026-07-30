@@ -87,6 +87,7 @@ export default function HomeFeed() {
 
   return (
     <Layout>
+      <h1 className="sr-only">Home feed</h1>
       {/* Top Stories Rail */}
       <StoriesRail />
 
@@ -109,9 +110,9 @@ export default function HomeFeed() {
 
       {/* Comments Sheet / Modal */}
       <Dialog open={activeCommentPost !== null} onOpenChange={(open) => !open && setActiveCommentPost(null)}>
-        <DialogContent hideCloseButton className="bg-[#1E1E1E] border-t border-white/10 text-white w-full max-w-md h-[70vh] fixed bottom-0 top-auto left-1/2 -translate-x-1/2 translate-y-0 rounded-t-3xl p-0 gap-0 shadow-2xl overflow-hidden md:rounded-2xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:h-[600px]">
-          <div className="p-4 border-b border-white/10 flex items-center justify-between sticky top-0 bg-[#1E1E1E] z-10">
-            <h3 className="font-bold text-center flex-1">Comments ({formatNumber(activeCommentPost ? likeCounts[activeCommentPost] : 0)})</h3>
+        <DialogContent hideCloseButton className="bg-card border-t border-white/10 text-white w-full max-w-md h-[70vh] fixed bottom-0 top-auto left-1/2 -translate-x-1/2 translate-y-0 rounded-t-3xl p-0 gap-0 shadow-2xl overflow-hidden md:rounded-2xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:h-[600px]">
+          <div className="p-4 border-b border-white/10 flex items-center justify-between sticky top-0 bg-card z-10">
+            <h2 className="font-bold text-center flex-1">Comments ({formatNumber(activeCommentPost ? likeCounts[activeCommentPost] : 0)})</h2>
             <button aria-label="Close" onClick={() => setActiveCommentPost(null)} className="absolute right-4 text-gray-400 hover:text-white">
               <X size={20} />
             </button>
@@ -137,7 +138,7 @@ export default function HomeFeed() {
             ))}
           </div>
 
-          <div className="p-4 border-t border-white/10 bg-[#1E1E1E] absolute bottom-0 w-full">
+          <div className="p-4 border-t border-white/10 bg-card absolute bottom-0 w-full">
             <div className="flex items-center gap-2 bg-black/30 rounded-full px-4 py-2 border border-white/10 focus-within:border-white/30 transition-colors">
               <input 
                 type="text" 

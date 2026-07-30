@@ -81,15 +81,15 @@ export default function PodcastStudio() {
           {/* Script Editor Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-               <h3 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
+               <h2 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
                  <Type size={14} /> Script & Voices
-               </h3>
+               </h2>
                <button className="text-xs text-accent flex items-center gap-1 hover:underline">
                  <Sparkles size={12} /> AI Auto-Write
                </button>
             </div>
             
-            <div className="bg-[#1E1E1E] border border-white/10 rounded-xl p-4 space-y-4">
+            <div className="bg-card border border-white/10 rounded-xl p-4 space-y-4">
               <div className="flex gap-4">
                 <div className="flex-1">
                   <label className="text-xs text-gray-500 mb-1 block">Host Voice</label>
@@ -128,11 +128,11 @@ export default function PodcastStudio() {
 
           {/* Recording Section */}
           <div className="space-y-4">
-             <h3 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
+             <h2 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
                <Mic size={14} /> Studio Recording
-             </h3>
+             </h2>
              
-             <div className="bg-[#1E1E1E] border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center gap-6 relative overflow-hidden">
+             <div className="bg-card border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center gap-6 relative overflow-hidden">
                {isRecording && (
                  <div className="absolute inset-0 bg-red-500/5 animate-pulse pointer-events-none" />
                )}
@@ -174,7 +174,7 @@ export default function PodcastStudio() {
           </div>
 
           {/* Timeline Preview (Visual Only) */}
-          <div className="h-24 bg-[#1E1E1E] rounded-xl border border-white/10 relative overflow-hidden flex items-center px-4">
+          <div className="h-24 bg-card rounded-xl border border-white/10 relative overflow-hidden flex items-center px-4">
             <div className="absolute left-0 right-0 top-1/2 h-[1px] bg-white/10" />
             <div className="flex gap-1 w-full items-center justify-center opacity-40">
               {[...Array(40)].map((_, i) => (

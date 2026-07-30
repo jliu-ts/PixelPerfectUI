@@ -28,7 +28,7 @@ import {
   List,
   Zap
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 
 // Mock Data
 const RECENT_SEARCHES = [
@@ -133,6 +133,7 @@ export default function SearchPage() {
 
   return (
     <Layout hideTabs>
+      <h1 className="sr-only">Search</h1>
       <div className="min-h-screen bg-background pb-24 md:pb-8">
         {/* Header / Search Bar */}
         <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-white/5 transition-all duration-200">
@@ -150,7 +151,7 @@ export default function SearchPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search creators, assets, trends..." 
-                className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl pl-10 pr-10 py-3 text-sm text-white focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-gray-600 shadow-sm"
+                className="w-full bg-card border border-white/10 rounded-xl pl-10 pr-10 py-3 text-sm text-white focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-gray-600 shadow-sm"
                 autoFocus
               />
               {query && (
@@ -168,7 +169,7 @@ export default function SearchPage() {
                 "p-3 rounded-xl border transition-all active:scale-95",
                 showFilters || selectedPlatform || selectedFormat
                   ? "bg-accent text-black border-accent shadow-[0_0_15px_-3px_rgba(124,58,237,0.4)]"
-                  : "bg-[#1E1E1E] border-white/10 text-gray-400 hover:text-white hover:border-white/20"
+                  : "bg-card border-white/10 text-gray-400 hover:text-white hover:border-white/20"
               )}
             >
               <Filter size={18} />
@@ -177,11 +178,11 @@ export default function SearchPage() {
           
           {/* Advanced Filters Panel */}
           {showFilters && (
-            <div className="px-4 pb-4 animate-in slide-in-from-top-2 fade-in duration-200 border-b border-white/5 bg-[#151515]">
+            <div className="px-4 pb-4 animate-in slide-in-from-top-2 fade-in duration-200 border-b border-white/5 bg-surface">
               <div className="max-w-5xl mx-auto w-full space-y-4 pt-2">
                 {/* Platforms */}
                 <div>
-                  <h3 className="text-[10px] font-bold text-gray-500 uppercase mb-2 tracking-wider">Platforms</h3>
+                  <h2 className="text-[10px] font-bold text-gray-500 uppercase mb-2 tracking-wider">Platforms</h2>
                   <div className="flex flex-wrap gap-2">
                     {PLATFORMS.map(platform => (
                       <button
@@ -191,7 +192,7 @@ export default function SearchPage() {
                           "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all active:scale-95",
                           selectedPlatform === platform.id
                             ? "bg-white text-black border-white shadow-sm"
-                            : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
+                            : "bg-card text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
                         )}
                       >
                         <platform.icon size={12} />
@@ -203,7 +204,7 @@ export default function SearchPage() {
 
                 {/* Content Formats */}
                 <div>
-                  <h3 className="text-[10px] font-bold text-gray-500 uppercase mb-2 tracking-wider">Format</h3>
+                  <h2 className="text-[10px] font-bold text-gray-500 uppercase mb-2 tracking-wider">Format</h2>
                   <div className="flex flex-wrap gap-2">
                     {FORMATS.map(format => (
                       <button
@@ -213,7 +214,7 @@ export default function SearchPage() {
                           "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all active:scale-95",
                           selectedFormat === format.id
                             ? "bg-white text-black border-white shadow-sm"
-                            : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
+                            : "bg-card text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
                         )}
                       >
                         <format.icon size={12} />
@@ -256,15 +257,15 @@ export default function SearchPage() {
             <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {/* Recent Searches */}
               <div className="space-y-3">
-                <h3 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2 px-1">
+                <h2 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2 px-1">
                   <Clock size={12} /> Recent
-                </h3>
+                </h2>
                 <div className="flex flex-wrap gap-2">
                   {RECENT_SEARCHES.map((item, i) => (
                     <button 
                       key={i}
                       onClick={() => setQuery(item.term)}
-                      className="group flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/5 text-sm text-gray-300 hover:bg-white/5 hover:border-white/10 hover:text-white transition-all"
+                      className="group flex items-center gap-2 px-4 py-2 rounded-xl bg-card border border-white/5 text-sm text-gray-300 hover:bg-white/5 hover:border-white/10 hover:text-white transition-all"
                     >
                       <span>{item.term}</span>
                       <span className="text-[10px] text-gray-600 group-hover:text-gray-500">{item.time}</span>
@@ -275,15 +276,15 @@ export default function SearchPage() {
 
               {/* Trending Topics */}
               <div className="space-y-3">
-                <h3 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2 px-1">
+                <h2 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2 px-1">
                   <TrendingUp size={12} className="text-accent" /> Trending Now
-                </h3>
+                </h2>
                 <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
                   {TRENDING_TOPICS.map((topic, i) => (
                     <button 
                       key={i}
                       onClick={() => setQuery(topic.tag)}
-                      className="min-w-[160px] p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col gap-2 hover:bg-[#252525] hover:border-white/10 hover:translate-y-[-2px] transition-all group"
+                      className="min-w-[160px] p-4 rounded-2xl bg-card border border-white/5 flex flex-col gap-2 hover:bg-surface-3 hover:border-white/10 hover:translate-y-[-2px] transition-all group"
                     >
                       <div className="flex items-center justify-between w-full">
                         <span className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-gray-400 text-xs font-bold">#{i+1}</span>
@@ -300,9 +301,9 @@ export default function SearchPage() {
 
               {/* Explore Grid (IG Style) */}
               <div className="space-y-3">
-                <h3 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2 px-1">
+                <h2 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2 px-1">
                   <Grid size={12} /> Explore
-                </h3>
+                </h2>
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-0.5 md:gap-1 auto-rows-[minmax(120px,auto)] md:auto-rows-[minmax(200px,auto)] grid-flow-dense rounded-xl overflow-hidden">
                   {EXPLORE_FEED.map((item, i) => (
                     <div 
@@ -350,9 +351,9 @@ export default function SearchPage() {
                   {(activeTab === "all" || activeTab === "creators") && (
                     <div className="space-y-3">
                       <div className="flex items-center justify-between px-1">
-                        <h3 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
+                        <h2 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
                           <User size={12} /> Creators
-                        </h3>
+                        </h2>
                         {activeTab === "all" && (
                           <button onClick={() => setActiveTab("creators")} className="text-[10px] font-bold text-accent hover:underline flex items-center gap-1">
                             View All <ArrowUpRight size={10} />
@@ -361,10 +362,10 @@ export default function SearchPage() {
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {RESULTS.creators.map(creator => (
-                          <div key={creator.id} className="flex items-start gap-3 p-3 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-white/10 transition-all group cursor-pointer">
+                          <div key={creator.id} className="flex items-start gap-3 p-3 rounded-xl bg-card border border-white/5 hover:border-white/10 transition-all group cursor-pointer">
                             <div className="relative">
                               <img loading="lazy" decoding="async" src={creator.avatar} className="w-12 h-12 rounded-full bg-gray-800 object-cover" alt={creator.name} />
-                              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-black flex items-center justify-center border border-[#1E1E1E]">
+                              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-black flex items-center justify-center border border-card">
                                 {(() => {
                                   const PlatformIcon = creator.platformIcon;
                                   return <PlatformIcon size={12} className="text-white w-3 h-3" />;
@@ -373,7 +374,7 @@ export default function SearchPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <h4 className="text-sm font-bold text-white truncate group-hover:text-accent transition-colors">{creator.name}</h4>
+                                <h3 className="text-sm font-bold text-white truncate group-hover:text-accent transition-colors">{creator.name}</h3>
                                 <button className="px-3 py-1 rounded-full bg-white/10 text-white text-[10px] font-bold hover:bg-white hover:text-black transition-colors">
                                   Follow
                                 </button>
@@ -391,9 +392,9 @@ export default function SearchPage() {
                   {(activeTab === "all" || activeTab === "assets") && (
                     <div className="space-y-3">
                       <div className="flex items-center justify-between px-1">
-                        <h3 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
+                        <h2 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
                           <Layers size={12} /> Assets
-                        </h3>
+                        </h2>
                         {activeTab === "all" && (
                           <button onClick={() => setActiveTab("assets")} className="text-[10px] font-bold text-accent hover:underline flex items-center gap-1">
                             View All <ArrowUpRight size={10} />
@@ -402,7 +403,7 @@ export default function SearchPage() {
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {RESULTS.assets.map(asset => (
-                          <div key={asset.id} className="group bg-[#1E1E1E] rounded-xl border border-white/5 overflow-hidden hover:border-white/10 transition-all cursor-pointer" onClick={() => setLocation("/marketplace")}>
+                          <div key={asset.id} className="group bg-card rounded-xl border border-white/5 overflow-hidden hover:border-white/10 transition-all cursor-pointer" {...clickable(() => setLocation("/marketplace"))}>
                             <div className="aspect-square relative overflow-hidden">
                               <img loading="lazy" decoding="async" src={asset.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={asset.title} />
                               <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-white border border-white/10">
@@ -410,7 +411,7 @@ export default function SearchPage() {
                               </div>
                             </div>
                             <div className="p-3">
-                              <h4 className="text-xs font-bold text-white truncate mb-1 group-hover:text-accent transition-colors">{asset.title}</h4>
+                              <h3 className="text-xs font-bold text-white truncate mb-1 group-hover:text-accent transition-colors">{asset.title}</h3>
                               <div className="flex items-center justify-between text-[10px] text-gray-500">
                                 <span>{asset.type}</span>
                                 <div className="flex items-center gap-1">
@@ -428,9 +429,9 @@ export default function SearchPage() {
                   {(activeTab === "all" || activeTab === "inspiration") && (
                     <div className="space-y-3">
                        <div className="flex items-center justify-between px-1">
-                        <h3 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
+                        <h2 className="text-xs font-bold text-gray-500 uppercase flex items-center gap-2">
                           <Sparkles size={12} /> Inspiration
-                        </h3>
+                        </h2>
                         {activeTab === "all" && (
                           <button onClick={() => setActiveTab("inspiration")} className="text-[10px] font-bold text-accent hover:underline flex items-center gap-1">
                             View All <ArrowUpRight size={10} />
@@ -439,7 +440,7 @@ export default function SearchPage() {
                       </div>
                       <div className="grid grid-cols-3 gap-1 rounded-xl overflow-hidden">
                         {RESULTS.inspiration.map(item => (
-                          <div key={item.id} className="relative aspect-square bg-[#1E1E1E] overflow-hidden group cursor-pointer" onClick={() => setLocation("/ideas")}>
+                          <div key={item.id} className="relative aspect-square bg-card overflow-hidden group cursor-pointer" {...clickable(() => setLocation("/ideas"))}>
                             <img loading="lazy" decoding="async" src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={item.title} />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-2 text-center">
                               <span className="text-[10px] font-bold text-white line-clamp-2">{item.title}</span>

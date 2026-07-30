@@ -20,7 +20,7 @@ import {
   Palette,
   Download
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { GradientButton } from "@/components/GradientButton";
 import { useToast } from "@/hooks/use-toast";
 import resultImage from "@assets/generated_images/cyberpunk_anime_character_for_generation_result.webp";
@@ -75,7 +75,8 @@ export default function VideoEditor() {
 
   return (
     <Layout hideTabs>
-      <div className="flex flex-col h-[100dvh] bg-[#090909] text-white overflow-hidden">
+      <h1 className="sr-only">Video editor</h1>
+      <div className="flex flex-col h-[100dvh] bg-stage text-white overflow-hidden">
         
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4 z-10 bg-gradient-to-b from-black/80 to-transparent">
@@ -129,7 +130,11 @@ export default function VideoEditor() {
             )}
 
             {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors cursor-pointer" onClick={togglePlay}>
+            <div
+              {...clickable(() => togglePlay())}
+              aria-label={isPlaying ? "Pause preview" : "Play preview"}
+              className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors cursor-pointer"
+            >
               {!isPlaying && (
                 <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
                   <Play size={32} className="ml-1 fill-white text-white" />
@@ -140,10 +145,10 @@ export default function VideoEditor() {
         </div>
 
         {/* Editor Controls Area */}
-        <div className="bg-[#121212] border-t border-white/5 flex flex-col pb-safe">
+        <div className="bg-background border-t border-white/5 flex flex-col pb-safe">
           
           {/* Timeline (Always visible unless a complex tool is open) */}
-          <div className="h-24 bg-[#0F0F0F] relative overflow-hidden py-4 px-2 border-b border-white/5">
+          <div className="h-24 bg-well relative overflow-hidden py-4 px-2 border-b border-white/5">
             {/* Playhead */}
             <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-white z-20 shadow-[0_0_10px_white]" />
             
@@ -159,7 +164,7 @@ export default function VideoEditor() {
 
           {/* Active Tool Controls (Contextual) */}
           {activeTool ? (
-            <div className="h-16 flex items-center px-4 gap-4 bg-[#1A1A1A] animate-in slide-in-from-bottom-4 fade-in duration-200">
+            <div className="h-16 flex items-center px-4 gap-4 bg-surface-2 animate-in slide-in-from-bottom-4 fade-in duration-200">
               <button aria-label="Go back" onClick={() => setActiveTool(null)} className="mr-2 text-gray-400 hover:text-white">
                 <ArrowLeft size={20} />
               </button>
@@ -208,7 +213,7 @@ export default function VideoEditor() {
                     <input aria-label="Enter text" 
                       type="text" 
                       placeholder="Enter text..." 
-                      className="flex-1 bg-[#252525] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-accent"
+                      className="flex-1 bg-surface-3 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-accent"
                     />
                     <button className="p-2 rounded-lg bg-white text-black font-bold text-xs hover:bg-gray-200">ADD</button>
                   </div>
@@ -217,7 +222,7 @@ export default function VideoEditor() {
                 {activeTool === "music" && (
                   <div className="flex gap-2 overflow-x-auto no-scrollbar w-full">
                     {["LoFi Chill", "Cyber Punk", "Epic Trap", "Cinematic"].map(track => (
-                      <button key={track} className="px-3 py-1.5 rounded-lg bg-[#252525] border border-white/5 hover:bg-[#333] text-xs whitespace-nowrap flex items-center gap-2">
+                      <button key={track} className="px-3 py-1.5 rounded-lg bg-surface-3 border border-white/5 hover:bg-[#333] text-xs whitespace-nowrap flex items-center gap-2">
                         <Music size={12} /> {track}
                       </button>
                     ))}
@@ -238,7 +243,7 @@ export default function VideoEditor() {
                   onClick={() => setActiveTool(tool.id)}
                   className="flex flex-col items-center justify-center w-16 h-full gap-1.5 text-gray-400 hover:text-white active:scale-95 transition-all group flex-shrink-0"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center justify-center group-hover:border-white/20 group-hover:bg-[#252525] transition-all">
+                  <div className="w-10 h-10 rounded-xl bg-card border border-white/5 flex items-center justify-center group-hover:border-white/20 group-hover:bg-surface-3 transition-all">
                     <tool.icon size={20} className="group-hover:text-accent transition-colors" />
                   </div>
                   <span className="text-[10px] font-medium tracking-wide">{tool.label}</span>

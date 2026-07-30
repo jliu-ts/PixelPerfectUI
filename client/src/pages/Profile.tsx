@@ -21,7 +21,7 @@ export default function Profile() {
             alt="Cover" 
             className="w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#121212]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
           
           <button aria-label="Settings" className="absolute top-4 right-4 p-2 rounded-full bg-black/20 backdrop-blur-md text-white border border-white/10 hover:bg-white/10 transition-colors">
             <Settings size={20} />
@@ -31,11 +31,11 @@ export default function Profile() {
         {/* Profile Info */}
         <div className="px-6 -mt-12 relative z-10 mb-6">
           <div className="flex justify-between items-end mb-4">
-            <div className="w-24 h-24 rounded-2xl border-4 border-[#121212] overflow-hidden bg-black shadow-xl relative group">
+            <div className="w-24 h-24 rounded-2xl border-4 border-background overflow-hidden bg-black shadow-xl relative group">
               <img loading="lazy" decoding="async" 
                 src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
                 alt="Avatar" 
-                className="w-full h-full bg-[#1E1E1E]"
+                className="w-full h-full bg-card"
               />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
                 <Edit2 size={16} className="text-white" />
@@ -43,10 +43,10 @@ export default function Profile() {
             </div>
             
             <div className="flex gap-2 mb-2">
-              <button className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-[#252525] transition-colors">
+              <button className="px-4 py-2 rounded-xl bg-card border border-white/10 text-xs font-bold text-white hover:bg-surface-3 transition-colors">
                 Edit Profile
               </button>
-              <button aria-label="Share" className="p-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-white hover:bg-[#252525] transition-colors">
+              <button aria-label="Share" className="p-2 rounded-xl bg-card border border-white/10 text-white hover:bg-surface-3 transition-colors">
                 <Share2 size={16} />
               </button>
             </div>
@@ -79,9 +79,9 @@ export default function Profile() {
 
         {/* Connected Accounts (Super App Feature) */}
         <div className="px-6 mb-8">
-          <h3 className="text-xs font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
+          <h2 className="text-xs font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
             <Globe size={12} /> Connected Socials
-          </h3>
+          </h2>
           <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
             {CONNECTED_ACCOUNTS.map((account) => (
               <div 
@@ -89,7 +89,7 @@ export default function Profile() {
                 className={cn(
                   "min-w-[100px] p-3 rounded-xl border flex flex-col items-center gap-2 transition-all cursor-pointer",
                   account.connected 
-                    ? "bg-[#1E1E1E] border-white/10 hover:border-white/30" 
+                    ? "bg-card border-white/10 hover:border-white/30" 
                     : "bg-transparent border-dashed border-white/10 opacity-60 hover:opacity-100 hover:bg-white/5"
                 )}
               >
@@ -125,7 +125,7 @@ export default function Profile() {
         {/* Dashboard Grid (Responsive) */}
         <div className="px-6 mb-8 grid grid-cols-1 md:grid-cols-3 gap-3">
           {/* Credits Wallet Card */}
-          <div className="w-full p-4 rounded-2xl bg-gradient-to-r from-[#1E1E1E] to-[#252525] border border-white/10 flex flex-col justify-between relative overflow-hidden group min-h-[120px]">
+          <div className="w-full p-4 rounded-2xl bg-gradient-to-r from-card to-surface-3 border border-white/10 flex flex-col justify-between relative overflow-hidden group min-h-[120px]">
             <div className="absolute inset-0 bg-gradient-accent opacity-5 group-hover:opacity-10 transition-opacity" />
             
             <div className="relative z-10">
@@ -150,7 +150,7 @@ export default function Profile() {
           {/* Upgrade Banner */}
           <button 
             onClick={() => setLocation("/pricing")}
-            className="w-full h-full min-h-[120px] rounded-2xl bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 p-4 flex flex-col justify-between group hover:border-purple-500/50 transition-all"
+            className="w-full h-full min-h-[120px] rounded-2xl bg-primary/12 border border-primary/30 p-4 flex flex-col justify-between group hover:border-purple-500/50 transition-all"
           >
             <div className="flex items-start justify-between w-full">
               <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-500 transition-colors">
@@ -159,7 +159,7 @@ export default function Profile() {
               <span className="px-2 py-1 rounded-md bg-purple-500/20 text-purple-300 text-[10px] font-bold">PRO</span>
             </div>
             <div className="text-left">
-              <h3 className="text-sm font-bold text-white group-hover:text-purple-200 transition-colors">Syndicate Plan</h3>
+              <h2 className="text-sm font-bold text-white group-hover:text-foreground transition-colors">Syndicate Plan</h2>
               <p className="text-[10px] text-gray-400">Unlock Analytics & 0% Fees</p>
             </div>
           </button>
@@ -167,7 +167,7 @@ export default function Profile() {
           {/* Creator Program Button */}
           <button 
             onClick={() => setLocation("/affiliate")}
-            className="w-full h-full min-h-[120px] rounded-2xl bg-[#1E1E1E] border border-white/5 p-4 flex flex-col justify-between hover:bg-white/5 transition-colors group"
+            className="w-full h-full min-h-[120px] rounded-2xl bg-card border border-white/5 p-4 flex flex-col justify-between hover:bg-white/5 transition-colors group"
           >
             <div className="flex items-start justify-between w-full">
               <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
@@ -178,7 +178,7 @@ export default function Profile() {
             <div className="text-left">
               <div className="flex justify-between items-end">
                 <div>
-                   <h3 className="text-sm font-bold text-white">Creator Hub</h3>
+                   <h2 className="text-sm font-bold text-white">Creator Hub</h2>
                    <p className="text-[10px] text-gray-400">Brand deals & Earnings</p>
                 </div>
                 <span className="text-xs font-bold text-white bg-white/10 px-2 py-1 rounded">$1,240.50</span>
@@ -214,7 +214,7 @@ export default function Profile() {
         {/* Masonry Grid (Simulated) */}
         <div className="px-2 grid grid-cols-2 gap-2">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="aspect-square rounded-xl bg-[#1E1E1E] overflow-hidden relative group cursor-pointer">
+            <div key={i} className="aspect-square rounded-xl bg-card overflow-hidden relative group cursor-pointer">
               <img loading="lazy" decoding="async" 
                 src={gridImage} 
                 alt="Creation" 

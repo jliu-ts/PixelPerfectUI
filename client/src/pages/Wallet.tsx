@@ -75,7 +75,7 @@ export default function Wallet() {
 
         <div className="p-6 space-y-8">
           {/* Balance Card */}
-          <div className="w-full p-6 rounded-2xl bg-gradient-to-br from-[#1E1E1E] to-[#252525] border border-white/10 relative overflow-hidden">
+          <div className="w-full p-6 rounded-2xl bg-gradient-to-br from-card to-surface-3 border border-white/10 relative overflow-hidden">
              <div className="absolute top-0 right-0 p-4 opacity-10">
                <WalletIcon size={80} className="text-white" />
              </div>
@@ -115,7 +115,7 @@ export default function Wallet() {
                 type="number" 
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl pl-12 pr-4 py-4 text-2xl font-bold text-white focus:outline-none focus:border-accent/50 transition-colors placeholder:text-gray-600"
+                className="w-full bg-card border border-white/10 rounded-xl pl-12 pr-4 py-4 text-2xl font-bold text-white focus:outline-none focus:border-accent/50 transition-colors placeholder:text-gray-600"
               />
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function Wallet() {
                      "w-full p-4 rounded-xl border flex items-center justify-between transition-all group",
                      selectedMethod === method.id 
                        ? "bg-white/10 border-accent shadow-[0_0_15px_rgba(124,58,237,0.2)]" 
-                       : "bg-[#1E1E1E] border-white/5 hover:bg-white/5"
+                       : "bg-card border-white/5 hover:bg-white/5"
                    )}
                  >
                    <div className="flex items-center gap-4">

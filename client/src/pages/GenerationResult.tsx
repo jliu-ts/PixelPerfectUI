@@ -41,7 +41,7 @@ export default function GenerationResult() {
         </div>
 
         {/* Result Preview */}
-        <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#1E1E1E] border border-white/10 relative shadow-2xl mb-8 group">
+        <div className="aspect-square w-full rounded-2xl overflow-hidden bg-card border border-white/10 relative shadow-2xl mb-8 group">
           <img loading="lazy" decoding="async" 
             src={resultImage} 
             alt="Generated Result" 
@@ -54,7 +54,7 @@ export default function GenerationResult() {
         <div className="grid grid-cols-3 gap-4 mb-8">
           <button 
             onClick={() => handleFeatureNotReady("Variation")}
-            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group"
+            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-card border border-white/5 hover:bg-surface-3 hover:border-white/10 transition-all group"
           >
             <Wand2 size={20} className="text-gray-400 group-hover:text-accent transition-colors" />
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Vary</span>
@@ -62,7 +62,7 @@ export default function GenerationResult() {
           
           <button 
             onClick={() => handleFeatureNotReady("Upscale")}
-            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group"
+            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-card border border-white/5 hover:bg-surface-3 hover:border-white/10 transition-all group"
           >
             <Scaling size={20} className="text-gray-400 group-hover:text-accent transition-colors" />
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Upscale</span>
@@ -70,7 +70,7 @@ export default function GenerationResult() {
 
           <button 
             onClick={() => setLocation("/editor")}
-            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:bg-[#252525] hover:border-white/10 transition-all group"
+            className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-card border border-white/5 hover:bg-surface-3 hover:border-white/10 transition-all group"
           >
             <SlidersHorizontal size={20} className="text-gray-400 group-hover:text-accent transition-colors" />
             <span className="text-xs font-medium text-gray-400 group-hover:text-white">Edit</span>

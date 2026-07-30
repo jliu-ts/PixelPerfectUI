@@ -21,6 +21,16 @@
   --color-border: #2A2A2A;
   --color-input: #2A2A2A;
   --color-ring: #7C3AED;
+
+  /* Elevation ladder. These were nine near-black hex literals scattered across 36 files;
+     each value is preserved exactly so tokenising changed nothing on screen. #161616 folded
+     into --color-surface (#151515) — one step in 255, indistinguishable. */
+  --color-shell: #0A0A0A;
+  --color-stage: #090909;
+  --color-well: #0F0F0F;
+  --color-surface: #151515;
+  --color-surface-2: #1A1A1A;
+  --color-surface-3: #252525;
   
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Outfit', sans-serif;
