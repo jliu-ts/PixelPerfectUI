@@ -120,7 +120,7 @@ export function RightSidebar() {
                      </div>
                      <div className="flex-1 min-w-0 py-0.5">
                        <div className="flex items-center gap-1.5 mb-1">
-                         <span className="text-[9px] font-bold text-blue-400 truncate max-w-[80px]">{article.source}</span>
+                         <span className="text-[9px] font-bold text-blue-400 truncate max-w-[80px]">{article.category}</span>
                          <span className="text-[9px] text-gray-600">• {article.time}</span>
                        </div>
                        <h4 className="text-[11px] font-bold text-gray-200 leading-snug line-clamp-2 group-hover:text-white transition-colors">
@@ -226,7 +226,7 @@ export function RightSidebar() {
 
                  <div className="space-y-4 text-sm text-gray-400 leading-relaxed">
                    <p>
-                     {selectedArticle.source} broke this first, and the follow-on coverage has mostly repeated the framing rather than testing it. The numbers below are worth checking yourself.
+                     Published on {selectedArticle.source} under {selectedArticle.category}. The summary above is the top line; the full piece works through the numbers.
                    </p>
                    
                    <div className="p-4 rounded-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/20 my-4">
@@ -256,10 +256,15 @@ export function RightSidebar() {
                    <Zap size={16} fill="currentColor" />
                    Remix with AI
                  </button>
-                 <button className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
+                 <a
+                   href={selectedArticle.url}
+                   target="_blank"
+                   rel="noreferrer"
+                   className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-white/10 transition-colors flex items-center gap-2"
+                 >
                    <ExternalLink size={16} />
                    Read Source
-                 </button>
+                 </a>
                </div>
              </div>
            )}
