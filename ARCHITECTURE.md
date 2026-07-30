@@ -2,21 +2,24 @@
 
 ## System Overview
 
-Trending Society is a full-stack web application serving as "The Operating System for the AI Creator Economy." This document provides a technical overview for developers and AI agents.
+Trending Society is "The Operating System for the AI Creator Economy." This document provides a technical overview for developers and AI agents.
+
+**Current state: the shipped app is client-only.** Every screen reads from `client/src/lib/data/`. `server/` builds and serves the static client and nothing else — `server/routes.ts` registers no API routes. The backend rows below are installed scaffolding, not running infrastructure; sections marked *planned* describe the intended shape, not what exists.
 
 ## Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| **Frontend** | React 19 + TypeScript | UI components and state |
-| **Routing** | Wouter | Lightweight client-side routing |
-| **Styling** | TailwindCSS 4 | Utility-first CSS |
-| **Components** | Radix UI + Shadcn | Accessible UI primitives |
-| **State** | React Query + Custom Hooks | Server + local state |
-| **Backend** | Express.js | REST API server |
-| **Database** | PostgreSQL (Neon) | Persistent storage |
-| **ORM** | Drizzle | Type-safe database queries |
-| **Validation** | Zod | Runtime type checking |
+| Layer | Technology | Purpose | Status |
+|-------|------------|---------|--------|
+| **Frontend** | React 19 + TypeScript | UI components and state | Shipped |
+| **Routing** | Wouter | Lightweight client-side routing | Shipped |
+| **Styling** | TailwindCSS 4 | Utility-first CSS | Shipped |
+| **Components** | Radix UI + Shadcn | Accessible UI primitives | Shipped |
+| **State** | Custom Hooks | Local and page state | Shipped |
+| **Async state** | React Query | Server state | Wired, no endpoints yet |
+| **Backend** | Express.js | Serves static client | No API routes |
+| **Database** | PostgreSQL (Neon) | Persistent storage | Planned, not connected |
+| **ORM** | Drizzle | Type-safe database queries | `users` schema only |
+| **Validation** | Zod | Runtime type checking | Planned |
 
 ---
 
@@ -52,7 +55,9 @@ Trending Society is a full-stack web application serving as "The Operating Syste
 
 ---
 
-## Data Flow
+## Data Flow (planned)
+
+Today a page imports fixtures from `lib/data/` directly. The client half of the diagram below exists; nothing past `API Client` is wired.
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -318,12 +323,14 @@ export function usePrompts() {
 
 ---
 
-## Security Notes
+## Security Notes (planned)
+
+No authentication or authorization exists yet. `express-session` and `passport` are installed but not configured, and there is no login flow, session store, or protected route. Intended shape:
 
 - Session-based authentication via `express-session`
-- CSRF protection (to be implemented)
+- CSRF protection
 - Input validation with Zod on both client and server
-- Password hashing with bcrypt (when auth is implemented)
+- Password hashing with bcrypt
 
 ---
 
@@ -346,6 +353,8 @@ npm run db:push
 ---
 
 ## Environment Variables
+
+The app currently reads none. `PORT` is optional and defaults to 5000. The variables below apply once the backend exists.
 
 ```env
 DATABASE_URL=postgresql://...    # Neon PostgreSQL connection
