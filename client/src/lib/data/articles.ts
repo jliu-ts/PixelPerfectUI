@@ -26,6 +26,16 @@ export interface Article {
 export const MOCK_ARTICLES: Article[] = [
   {
     id: 1,
+    title: "Zuckerberg Projects Billions Using AI Agents in 5 Years",
+    source: "Trending Society",
+    category: "AI Agents",
+    publishedAt: "2026-07-30T02:23:24Z",
+    image: `${CDN}/v1785378074/trendingsociety/og-images/2026-07/zuckerberg-projects-billions-using-ai-agents-in-5.png`,
+    summary: "Meta is nearly doubling capital expenditure to $135B on that bet, while Q2 free cash flow fell 91% to $784 million.",
+    url: "https://trendingsociety.com/articles/zuckerberg-projects-billions-using-ai-agents-in-5-years"
+  },
+  {
+    id: 2,
     title: "OpenAI Breach Fuels AI Alignment, Control Debate",
     source: "Trending Society",
     category: "AI",
@@ -35,7 +45,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/openai-breach-fuels-ai-alignment-control-debate"
   },
   {
-    id: 2,
+    id: 3,
     title: "deepeval brings unit testing to LLMs",
     source: "Trending Society",
     category: "AI Evaluation",
@@ -45,7 +55,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/confident-ai-s-deepeval-brings-unit-testing-to-llms"
   },
   {
-    id: 3,
+    id: 4,
     title: "Circle Secures 1,000 IBM Blockchain Patents",
     source: "Trending Society",
     category: "Blockchain",
@@ -55,7 +65,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/circle-secures-1-000-ibm-blockchain-patents"
   },
   {
-    id: 4,
+    id: 5,
     title: "SBET, BMNR Follow MSTR's Playbook to Russell 3000",
     source: "Trending Society",
     category: "Crypto",
@@ -65,7 +75,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/sbet-bmnr-follow-mstrs-playbook-to-russell-3000"
   },
   {
-    id: 5,
+    id: 6,
     title: "Robinhood's Tokenized Stocks Fuel 5x Asset Surge",
     source: "Trending Society",
     category: "Crypto",
@@ -75,7 +85,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/robinhoods-tokenized-stocks-fuel-5x-asset-surge"
   },
   {
-    id: 6,
+    id: 7,
     title: "Devin Outposts Launches on Modal",
     source: "Trending Society",
     category: "AI Agents",
@@ -85,7 +95,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/devin-outposts-launches-on-modal"
   },
   {
-    id: 7,
+    id: 8,
     title: "B. Riley Backs BitMine's $200M MrBeast Deal",
     source: "Trending Society",
     category: "Finance",
@@ -95,7 +105,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/b-riley-backs-bitmines-200m-mrbeast-diversification-bmnr"
   },
   {
-    id: 8,
+    id: 9,
     title: "Anthropic Scales Claude Science via Modal",
     source: "Trending Society",
     category: "AI",
@@ -105,7 +115,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/anthropic-unlocks-claude-science-scalability-via-modal"
   },
   {
-    id: 9,
+    id: 10,
     title: "Robinhood Turns AI Loose on Stock Trading",
     source: "Trending Society",
     category: "AI Agents",
@@ -115,7 +125,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/robinhood-unleashes-ai-for-stock-trading"
   },
   {
-    id: 10,
+    id: 11,
     title: "Littlebird AI Remembers Your Work",
     source: "Trending Society",
     category: "Agentic AI",
@@ -125,7 +135,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/littlebird-ai-remembers-your-work-delivers-smarter-help"
   },
   {
-    id: 11,
+    id: 12,
     title: "LingBot-Map Builds 3D Scenes From Streaming Data",
     source: "Trending Society",
     category: "3D Reconstruction",
@@ -135,7 +145,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/can-lingbot-map-build-3d-scenes-from-streaming-data"
   },
   {
-    id: 12,
+    id: 13,
     title: "Microsoft SkillOpt Adds Skills to Frozen LLMs",
     source: "Trending Society",
     category: "Open Source",
@@ -145,7 +155,7 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/microsoft-skillopt-unlocks-new-skills-in-frozen-llms"
   },
   {
-    id: 13,
+    id: 14,
     title: "Worldmonitor Fuses 500+ Live Feeds Into One OSINT Map",
     source: "Trending Society",
     category: "Artificial Intelligence",
@@ -155,11 +165,11 @@ export const MOCK_ARTICLES: Article[] = [
     url: "https://trendingsociety.com/articles/what-can-worldmonitors-ai-intelligence-reveal"
   },
   {
-    id: 14,
+    id: 15,
     title: "Baidu's 3B OCR Model Hits 86.8% on Complex Docs",
     source: "Trending Society",
     category: "Open Source",
-    publishedAt: "2026-07-21T00:00:00Z",
+    publishedAt: "2026-07-21T18:34:50Z",
     image: `${CDN}/v1784572551/trendingsociety/og-images/2026-07/how-baidu-s-unlimited-ocr-changes-ai-on-hugging-fa.png`,
     summary: "A 3B-parameter model parsing dense documents at 86.8% accuracy, published on Hugging Face.",
     url: "https://trendingsociety.com/articles/how-baidus-unlimited-ocr-changes-ai-on-hugging-face"
