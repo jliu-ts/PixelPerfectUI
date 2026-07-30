@@ -176,7 +176,7 @@ export function RightSidebar() {
 
       {/* Enhanced Article Modal */}
       <Dialog open={!!selectedArticle} onOpenChange={(open) => !open && setSelectedArticle(null)}>
-        <DialogContent className="bg-[#1E1E1E] border-white/10 text-white max-w-2xl p-0 gap-0 overflow-hidden shadow-2xl">
+        <DialogContent hideCloseButton className="bg-[#1E1E1E] border-white/10 text-white max-w-2xl p-0 gap-0 overflow-hidden shadow-2xl">
            {selectedArticle && (
              <div className="flex flex-col max-h-[85vh]">
                {/* Sticky Modal Header with Image */}

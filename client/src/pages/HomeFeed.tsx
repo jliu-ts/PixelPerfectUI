@@ -99,7 +99,7 @@ export default function HomeFeed() {
 
       {/* Comments Sheet / Modal */}
       <Dialog open={activeCommentPost !== null} onOpenChange={(open) => !open && setActiveCommentPost(null)}>
-        <DialogContent className="bg-[#1E1E1E] border-t border-white/10 text-white w-full max-w-md h-[70vh] fixed bottom-0 top-auto left-1/2 -translate-x-1/2 translate-y-0 rounded-t-3xl p-0 gap-0 shadow-2xl overflow-hidden md:rounded-2xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:h-[600px]">
+        <DialogContent hideCloseButton className="bg-[#1E1E1E] border-t border-white/10 text-white w-full max-w-md h-[70vh] fixed bottom-0 top-auto left-1/2 -translate-x-1/2 translate-y-0 rounded-t-3xl p-0 gap-0 shadow-2xl overflow-hidden md:rounded-2xl md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:h-[600px]">
           <div className="p-4 border-b border-white/10 flex items-center justify-between sticky top-0 bg-[#1E1E1E] z-10">
             <h3 className="font-bold text-center flex-1">Comments ({formatNumber(activeCommentPost ? likeCounts[activeCommentPost] : 0)})</h3>
             <button onClick={() => setActiveCommentPost(null)} className="absolute right-4 text-gray-400 hover:text-white">
