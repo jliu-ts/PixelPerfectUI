@@ -25,6 +25,8 @@ import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GradientButton } from "@/components/GradientButton";
+import { NOISE_TEXTURE } from "@/lib/constants/urls";
+import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 
 const INTEGRATION_CATEGORIES = ["All", "Productivity", "Creative", "Data", "Communication"];
 
@@ -34,7 +36,7 @@ const SOURCES = [
     name: "Airtable", 
     category: "Data",
     description: "Sync bases for content calendars & CRM.",
-    icon: "https://cdn.simpleicons.org/airtable/18BFFF", 
+    icon: BRAND_LOGOS.airtable, 
     status: "connected", 
     lastSync: "5m ago",
     activeWorkflows: 3
@@ -44,7 +46,7 @@ const SOURCES = [
     name: "Slack", 
     category: "Communication",
     description: "Monitor channels for trends & alerts.",
-    icon: "https://cdn.simpleicons.org/slack/4A154B", 
+    icon: BRAND_LOGOS.slack, 
     status: "connected", 
     lastSync: "Live",
     activeWorkflows: 12
@@ -54,7 +56,7 @@ const SOURCES = [
     name: "n8n Workflows", 
     category: "Productivity",
     description: "Orchestrate complex AI automation pipelines.",
-    icon: "https://cdn.simpleicons.org/n8n/FF6584", 
+    icon: BRAND_LOGOS.n8n, 
     status: "connected", 
     lastSync: "1h ago",
     activeWorkflows: 8
@@ -64,7 +66,7 @@ const SOURCES = [
     name: "PandaDoc", 
     category: "Productivity",
     description: "Auto-generate contracts and proposals.",
-    icon: "https://cdn.simpleicons.org/pandadoc/43A047", 
+    icon: BRAND_LOGOS.pandadoc, 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -74,7 +76,7 @@ const SOURCES = [
     name: "Google Workspace", 
     category: "Productivity",
     description: "Access Drive, Docs, and Calendar context.",
-    icon: "https://cdn.simpleicons.org/google/4285F4", 
+    icon: BRAND_LOGOS.google, 
     status: "connected", 
     lastSync: "10m ago",
     activeWorkflows: 5
@@ -84,7 +86,7 @@ const SOURCES = [
     name: "Canva", 
     category: "Creative",
     description: "Generate and edit visual assets directly.",
-    icon: "https://cdn.simpleicons.org/canva/00C4CC", 
+    icon: BRAND_LOGOS.canva, 
     status: "connected", 
     lastSync: "30m ago",
     activeWorkflows: 2
@@ -94,7 +96,7 @@ const SOURCES = [
     name: "Notion", 
     category: "Productivity",
     description: "Sync wikis and project databases.",
-    icon: "https://cdn.simpleicons.org/notion/FFFFFF", 
+    icon: BRAND_LOGOS.notion, 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -104,7 +106,7 @@ const SOURCES = [
     name: "Figma", 
     category: "Creative",
     description: "Read design tokens and asset libraries.",
-    icon: "https://cdn.simpleicons.org/figma/F24E1E", 
+    icon: BRAND_LOGOS.figma, 
     status: "disconnected", 
     lastSync: null,
     activeWorkflows: 0
@@ -297,7 +299,7 @@ export default function ContextSources() {
           
           {/* Visual Context Graph (Abstract Representation) */}
           <div className="relative h-48 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 overflow-hidden flex items-center justify-center">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("${NOISE_TEXTURE}")` }} />
             
             <div className="relative z-10 text-center">
               <div className="w-16 h-16 mx-auto bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 mb-4 shadow-[0_0_30px_rgba(255,255,255,0.1)]">

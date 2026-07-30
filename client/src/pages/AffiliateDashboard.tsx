@@ -26,6 +26,7 @@ import {
   Copy
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 import { 
   Line, 
   LineChart, 
@@ -61,7 +62,7 @@ const CAMPAIGNS = [
   { 
     id: 1, 
     brand: "Nike", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg", 
+    logo: BRAND_LOGOS.nike, 
     title: "Future of Sport", 
     reward: "$500", 
     status: "open", 
@@ -76,7 +77,7 @@ const CAMPAIGNS = [
   { 
     id: 2, 
     brand: "Samsung", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg", 
+    logo: BRAND_LOGOS.samsung, 
     title: "Galaxy AI Review", 
     reward: "$1,200", 
     status: "applied", 
@@ -91,7 +92,7 @@ const CAMPAIGNS = [
   { 
     id: 3, 
     brand: "Notion", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png", 
+    logo: BRAND_LOGOS.notion, 
     title: "Productivity Setup", 
     reward: "$300", 
     status: "active", 

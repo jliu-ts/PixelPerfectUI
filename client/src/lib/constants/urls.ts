@@ -1,6 +1,8 @@
 // Centralized URL management for all external images
 // This makes it easy to swap CDNs, update broken links, or add caching
 
+import { BRAND_LOGOS } from "./brandLogos";
+
 // Style preview images (Unsplash)
 export const STYLE_IMAGES = {
   cinematic: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=60",
@@ -53,14 +55,20 @@ export const ECOMMERCE_IMAGES = {
   bottle: "https://picsum.photos/seed/bottle/300/300",
 };
 
+// Grain overlay, inlined as SVG so it has no network dependency. The previous source
+// (grainy-gradients.vercel.app) now 404s.
+export const NOISE_TEXTURE =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
+
 // Avatar generator (DiceBear)
 export const getAvatarUrl = (seed: string, style: "avataaars" | "bottts" | "identicon" = "avataaars") =>
   `https://api.dicebear.com/7.x/${style}/svg?seed=${seed}`;
 
-// Platform logos (Wikipedia commons - stable URLs)
+// Platform logos resolve to vendored Brandfetch marks; see brandLogos.ts for why they
+// are local files rather than hotlinked URLs.
 export const PLATFORM_LOGOS = {
-  instagram: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png",
-  tiktok: "https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg",
-  youtube: "https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg",
-  openai: "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg",
+  instagram: BRAND_LOGOS.instagram,
+  tiktok: BRAND_LOGOS.tiktok,
+  youtube: BRAND_LOGOS.youtube,
+  openai: BRAND_LOGOS.openai,
 };

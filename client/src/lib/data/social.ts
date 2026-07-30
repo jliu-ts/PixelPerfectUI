@@ -1,6 +1,7 @@
 import bgImage from "@assets/generated_images/cosmic_space_nebula_background_for_video_placeholder.png";
 import cyberpunkImage from "@assets/generated_images/cyberpunk_city_vertical_video_thumbnail.png";
 import natureImage from "@assets/generated_images/nature_waterfall_vertical_video_thumbnail.png";
+import { BRAND_LOGOS } from "../constants/brandLogos";
 import { getAvatarUrl, PLATFORM_LOGOS } from "../constants/urls";
 
 export interface FeedItem {
@@ -65,13 +66,13 @@ export const STORIES: Story[] = [
   { id: 2, type: "story", name: "TikTok", avatar: PLATFORM_LOGOS.tiktok, hasNew: true },
   { id: 3, type: "story", name: "YouTube", avatar: PLATFORM_LOGOS.youtube, hasNew: false },
   { id: 4, type: "story", name: "OpenAI", avatar: PLATFORM_LOGOS.openai, hasNew: true },
-  { id: 5, type: "story", name: "Midjourney", avatar: getAvatarUrl("Midjourney", "identicon"), hasNew: true },
-  { id: 6, type: "story", name: "Runway", avatar: getAvatarUrl("Runway", "identicon"), hasNew: false },
-  { id: 7, type: "story", name: "Stable Diff", avatar: getAvatarUrl("Stable", "identicon"), hasNew: true },
-  { id: 8, type: "story", name: "Pika Labs", avatar: getAvatarUrl("Pika", "identicon"), hasNew: true },
-  { id: 9, type: "story", name: "ElevenLabs", avatar: getAvatarUrl("Eleven", "identicon"), hasNew: false },
-  { id: 10, type: "story", name: "HuggingFace", avatar: getAvatarUrl("Hugging", "identicon"), hasNew: true },
-  { id: 11, type: "story", name: "Leonardo", avatar: getAvatarUrl("Leonardo", "identicon"), hasNew: false },
+  { id: 5, type: "story", name: "Midjourney", avatar: BRAND_LOGOS.midjourney, hasNew: true },
+  { id: 6, type: "story", name: "Runway", avatar: BRAND_LOGOS.runway, hasNew: false },
+  { id: 7, type: "story", name: "Stable Diff", avatar: BRAND_LOGOS.stability, hasNew: true },
+  { id: 8, type: "story", name: "Pika Labs", avatar: BRAND_LOGOS.pika, hasNew: true },
+  { id: 9, type: "story", name: "ElevenLabs", avatar: BRAND_LOGOS.elevenlabs, hasNew: false },
+  { id: 10, type: "story", name: "HuggingFace", avatar: BRAND_LOGOS.huggingface, hasNew: true },
+  { id: 11, type: "story", name: "Leonardo", avatar: BRAND_LOGOS.leonardo, hasNew: false },
 ];
 
 export interface Comment {
