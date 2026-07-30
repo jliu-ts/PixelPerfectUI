@@ -16,7 +16,7 @@ import {
   Bookmark,
   Share2
 } from "lucide-react";
-import { clickable, cn } from "@/lib/utils";
+import { clickable, cn, relativeTime } from "@/lib/utils";
 import { MOCK_ARTICLES } from "@/lib/mockData";
 import {
   Dialog,
@@ -121,7 +121,7 @@ export function RightSidebar() {
                      <div className="flex-1 min-w-0 py-0.5">
                        <div className="flex items-center gap-1.5 mb-1">
                          <span className="text-[9px] font-bold text-blue-400 truncate max-w-[80px]">{article.category}</span>
-                         <span className="text-[9px] text-gray-600">• {article.time}</span>
+                         <span className="text-[9px] text-gray-600">• {relativeTime(article.publishedAt)}</span>
                        </div>
                        <h4 className="text-[11px] font-bold text-gray-200 leading-snug line-clamp-2 group-hover:text-white transition-colors">
                          {article.title}
@@ -197,7 +197,7 @@ export function RightSidebar() {
                        {selectedArticle.source}
                      </span>
                      <span className="text-[10px] text-gray-300 flex items-center gap-1 bg-black/30 px-2 py-0.5 rounded backdrop-blur-sm">
-                       <Clock size={10} /> {selectedArticle.time}
+                       <Clock size={10} /> {relativeTime(selectedArticle.publishedAt)}
                      </span>
                    </div>
                    <DialogTitle className="text-xl md:text-2xl font-display font-bold text-white leading-tight shadow-black drop-shadow-lg">
