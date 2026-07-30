@@ -26,6 +26,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import sceneOneImage from "@assets/generated_images/cyber_sneaker_scene_1.png";
+import sceneTwoImage from "@assets/generated_images/cyber_sneaker_scene_2.png";
+import thumbnailImage from "@assets/generated_images/cyber_sneaker_thumbnail.png";
 
 // Enhanced Mock Data
 const TEAM_MEMBERS = [
@@ -47,13 +50,52 @@ const SCRIPT_LINES = [
   { id: 3, role: "CTA", text: "Link in bio to cop the drop.", type: "audio", duration: "0:03" },
 ];
 
+interface Asset {
+  id: number;
+  label: string;
+  image: string;
+  status: "ready" | "generating";
+  kind: "video" | "image";
+}
+
+// Scene 2 starts in flight so the live-session fiction is visible on load, then lands via
+// GENERATING_MS. Held in state because a hardcoded generating card can never finish.
+const INITIAL_ASSETS: Asset[] = [
+  { id: 1, label: "Scene 1 v2", image: sceneOneImage, status: "ready", kind: "video" },
+  { id: 2, label: "Thumbnail", image: thumbnailImage, status: "ready", kind: "image" },
+  { id: 3, label: "Scene 2", image: sceneTwoImage, status: "generating", kind: "video" },
+];
+
+const GENERATING_MS = 5000;
+
 export default function CollabRoom() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [activeScriptLine, setActiveScriptLine] = useState(2);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [newMessage, setNewMessage] = useState("");
+  const [assets, setAssets] = useState<Asset[]>(INITIAL_ASSETS);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const isAgentGenerating = assets.some(a => a.status === "generating");
+
+  useEffect(() => {
+    if (!isAgentGenerating) return;
+    const timer = setTimeout(() => {
+      const landed = assets.filter(a => a.status === "generating").map(a => a.label);
+      setAssets(prev => prev.map(a => a.status === "generating" ? { ...a, status: "ready" } : a));
+      setMessages(prev => [...prev, {
+        id: Date.now(),
+        user: "AI Agent",
+        avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=AI",
+        text: `${landed.join(" and ")} finished rendering. Ready for review.`,
+        time: "Just now",
+        isAi: true,
+      }]);
+      toast({ title: "Render Complete", description: `${landed.join(", ")} added to Generated Assets.` });
+    }, GENERATING_MS);
+    return () => clearTimeout(timer);
+  }, [assets, isAgentGenerating, toast]);
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -125,19 +167,23 @@ export default function CollabRoom() {
           
           <div className="flex items-center gap-4">
             <div className="flex -space-x-3">
-              {TEAM_MEMBERS.map(member => (
+              {TEAM_MEMBERS.map(member => {
+                // The agent's badge tracks the render queue, so it stops pulsing when work lands.
+                const status = member.status === "generating" && !isAgentGenerating ? "online" : member.status;
+                return (
                 <div key={member.id} className="group relative">
                   <div className={cn(
                     "w-9 h-9 rounded-full border-2 border-[#121212] overflow-hidden transition-transform hover:scale-110 hover:z-10 cursor-pointer",
-                    member.status === "generating" ? "ring-2 ring-purple-500 ring-offset-2 ring-offset-black" : ""
-                  )} title={`${member.name} - ${member.status}`}>
+                    status === "generating" ? "ring-2 ring-purple-500 ring-offset-2 ring-offset-black" : ""
+                  )} title={`${member.name} - ${status}`}>
                     <img src={member.avatar} alt={member.name} className="w-full h-full bg-gray-800" />
                   </div>
-                  {member.status === "online" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#121212] rounded-full" />}
-                  {member.status === "editing" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-blue-500 border-2 border-[#121212] rounded-full" />}
-                  {member.status === "generating" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-purple-500 border-2 border-[#121212] rounded-full animate-pulse" />}
+                  {status === "online" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#121212] rounded-full" />}
+                  {status === "editing" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-blue-500 border-2 border-[#121212] rounded-full" />}
+                  {status === "generating" && <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-purple-500 border-2 border-[#121212] rounded-full animate-pulse" />}
                 </div>
-              ))}
+                );
+              })}
               <button className="w-9 h-9 rounded-full border-2 border-[#121212] bg-[#2A2A2A] flex items-center justify-center text-white hover:bg-[#333] transition-colors z-0">
                 <Plus size={14} />
               </button>
@@ -251,33 +297,31 @@ export default function CollabRoom() {
               </div>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div className="aspect-video bg-black rounded-xl border border-white/10 relative overflow-hidden group cursor-pointer">
-                  <img src="https://picsum.photos/seed/shoe1/300/169" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all bg-black/40 backdrop-blur-[1px]">
-                    <Play size={32} className="text-white drop-shadow-lg scale-90 group-hover:scale-100 transition-transform" />
+                {assets.map(asset => asset.status === "generating" ? (
+                  <div key={asset.id} className="aspect-video bg-[#121212] rounded-xl border border-dashed border-white/10 relative overflow-hidden flex flex-col items-center justify-center gap-2 cursor-wait">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full animate-pulse" />
+                      <Loader2 size={24} className="text-accent animate-spin relative z-10" />
+                    </div>
+                    <span className="text-[10px] font-bold text-accent/80 animate-pulse">Generating {asset.label}...</span>
                   </div>
-                  <div className="absolute bottom-2 left-2 right-2 flex justify-between items-end">
-                    <span className="text-[10px] font-bold bg-black/60 backdrop-blur-md px-2 py-1 rounded text-white border border-white/10">Scene 1 v2</span>
+                ) : (
+                  <div key={asset.id} className="aspect-video bg-black rounded-xl border border-white/10 relative overflow-hidden group cursor-pointer animate-in fade-in duration-500">
+                    <img src={asset.image} alt={asset.label} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                    {asset.kind === "video" ? (
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all bg-black/40 backdrop-blur-[1px]">
+                        <Play size={32} className="text-white drop-shadow-lg scale-90 group-hover:scale-100 transition-transform" />
+                      </div>
+                    ) : (
+                      <div className="absolute top-2 right-2">
+                        <div className="p-1 rounded-md bg-black/60 text-white"><ImageIcon size={12} /></div>
+                      </div>
+                    )}
+                    <div className="absolute bottom-2 left-2 right-2 flex justify-between items-end">
+                      <span className="text-[10px] font-bold bg-black/60 backdrop-blur-md px-2 py-1 rounded text-white border border-white/10">{asset.label}</span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="aspect-video bg-black rounded-xl border border-white/10 relative overflow-hidden group cursor-pointer">
-                  <img src="https://picsum.photos/seed/shoe2/300/169" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute top-2 right-2">
-                    <div className="p-1 rounded-md bg-black/60 text-white"><ImageIcon size={12} /></div>
-                  </div>
-                   <div className="absolute bottom-2 left-2 right-2 flex justify-between items-end">
-                    <span className="text-[10px] font-bold bg-black/60 backdrop-blur-md px-2 py-1 rounded text-white border border-white/10">Thumbnail</span>
-                  </div>
-                </div>
-
-                <div className="aspect-video bg-[#121212] rounded-xl border border-dashed border-white/10 relative overflow-hidden flex flex-col items-center justify-center gap-2 group cursor-wait">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full animate-pulse" />
-                    <Loader2 size={24} className="text-accent animate-spin relative z-10" />
-                  </div>
-                  <span className="text-[10px] font-bold text-accent/80 animate-pulse">Generating Scene 2...</span>
-                </div>
+                ))}
               </div>
             </div>
 

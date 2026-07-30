@@ -16,7 +16,6 @@ import {
   Sparkles, 
   Languages, 
   Globe,
-  ScanFace,
   Fingerprint,
   MoreHorizontal,
   Settings,
@@ -78,8 +77,8 @@ export default function AvatarStudio() {
   const [isConnectingHeyGen, setIsConnectingHeyGen] = useState(false);
   const [isConnectingEleven, setIsConnectingEleven] = useState(false);
   const [connectedServices, setConnectedServices] = useState({ heygen: true, elevenlabs: false });
-  const [isIrisVerified, setIsIrisVerified] = useState(false);
-  const [isVerifyingIris, setIsVerifyingIris] = useState(false);
+  const [isBiometricVerified, setIsBiometricVerified] = useState(false);
+  const [isVerifyingBiometric, setIsVerifyingBiometric] = useState(false);
   const [avatars, setAvatars] = useState<AvatarEntry[]>(AVATARS);
 
   useEffect(() => {
@@ -107,14 +106,14 @@ export default function AvatarStudio() {
     }, 1500);
   };
 
-  const handleIrisVerification = () => {
-    setIsVerifyingIris(true);
+  const handleBiometricVerification = () => {
+    setIsVerifyingBiometric(true);
     setTimeout(() => {
-      setIsVerifyingIris(false);
-      setIsIrisVerified(true);
+      setIsVerifyingBiometric(false);
+      setIsBiometricVerified(true);
       toast({
         title: "Identity Verified",
-        description: "Iris ID confirmed. Secure cloning features unlocked.",
+        description: "Biometric identity confirmed. Secure cloning features unlocked.",
       });
     }, 2000);
   };
@@ -155,9 +154,9 @@ export default function AvatarStudio() {
             
             {/* Quick Actions */}
             <div className="flex gap-2">
-              {isIrisVerified && (
+              {isBiometricVerified && (
                 <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-[10px] font-bold text-green-400">
-                  <ScanFace size={12} /> ID Verified
+                  <Fingerprint size={12} /> ID Verified
                 </div>
               )}
             </div>
@@ -166,7 +165,7 @@ export default function AvatarStudio() {
 
         <div className="p-4 md:p-6 max-w-5xl mx-auto space-y-8">
           
-          {/* Hero: Iris ID Verification (Conditional) */}
+          {/* Hero: Biometric Verification (Conditional) */}
           <div className="relative overflow-hidden rounded-3xl border border-blue-500/20 p-1">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-purple-900/10" />
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
@@ -175,10 +174,10 @@ export default function AvatarStudio() {
               <div className="flex items-center gap-5">
                 <div className={cn(
                   "w-16 h-16 rounded-2xl flex items-center justify-center border shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0 relative",
-                  isIrisVerified ? "bg-green-500/10 border-green-500/30 text-green-400" : "bg-blue-500/10 border-blue-500/30 text-blue-400"
+                  isBiometricVerified ? "bg-green-500/10 border-green-500/30 text-green-400" : "bg-blue-500/10 border-blue-500/30 text-blue-400"
                 )}>
-                  {isIrisVerified ? <ShieldCheck size={32} /> : <ScanFace size={32} />}
-                  {isVerifyingIris && (
+                  {isBiometricVerified ? <ShieldCheck size={32} /> : <Fingerprint size={32} />}
+                  {isVerifyingBiometric && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-2xl backdrop-blur-[1px]">
                       <Loader2 size={20} className="animate-spin text-white" />
                     </div>
@@ -186,25 +185,25 @@ export default function AvatarStudio() {
                 </div>
                 <div>
                   <h2 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
-                    Iris ID Verification
-                    {isIrisVerified && <CheckCircle2 size={16} className="text-green-400" />}
+                    Biometric Verification
+                    {isBiometricVerified && <CheckCircle2 size={16} className="text-green-400" />}
                   </h2>
                   <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-                    {isIrisVerified 
+                    {isBiometricVerified 
                       ? "Your biometric identity is confirmed. You have full access to create and use deepfake clones securely." 
                       : "Verify your identity to unlock advanced voice cloning and instant avatar creation features. This ensures ethical AI usage."}
                   </p>
                 </div>
               </div>
 
-              {!isIrisVerified && (
+              {!isBiometricVerified && (
                 <button 
-                  onClick={handleIrisVerification}
-                  disabled={isVerifyingIris}
+                  onClick={handleBiometricVerification}
+                  disabled={isVerifyingBiometric}
                   className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold transition-all shadow-lg shadow-blue-900/20 flex items-center gap-2 whitespace-nowrap"
                 >
-                  {isVerifyingIris ? "Scanning Biometrics..." : "Verify Identity Now"}
-                  {!isVerifyingIris && <ArrowLeft className="rotate-180" size={16} />}
+                  {isVerifyingBiometric ? "Scanning Biometrics..." : "Verify Identity Now"}
+                  {!isVerifyingBiometric && <ArrowLeft className="rotate-180" size={16} />}
                 </button>
               )}
             </div>
@@ -408,23 +407,23 @@ export default function AvatarStudio() {
                     <div className="grid grid-cols-1 gap-4">
                       {/* Create Voice Button */}
                       <button 
-                        disabled={!isIrisVerified}
+                        disabled={!isBiometricVerified}
                         className={cn(
                           "w-full p-4 rounded-2xl border border-dashed flex items-center justify-center gap-3 transition-all group",
-                          isIrisVerified 
+                          isBiometricVerified 
                             ? "border-white/10 hover:border-orange-500/50 hover:bg-orange-500/5 cursor-pointer" 
                             : "border-white/5 bg-[#121212] cursor-not-allowed opacity-60"
                         )}
                       >
                         <div className={cn(
                           "w-10 h-10 rounded-full flex items-center justify-center transition-colors",
-                          isIrisVerified ? "bg-white/5 group-hover:bg-orange-500/20 text-gray-400 group-hover:text-orange-500" : "bg-white/5 text-gray-600"
+                          isBiometricVerified ? "bg-white/5 group-hover:bg-orange-500/20 text-gray-400 group-hover:text-orange-500" : "bg-white/5 text-gray-600"
                         )}>
                            <Plus size={20} />
                         </div>
                         <div className="text-left">
-                           <span className={cn("block text-sm font-bold", isIrisVerified ? "text-white" : "text-gray-500")}>Clone New Voice</span>
-                           {!isIrisVerified && <span className="block text-[10px] text-red-400 flex items-center gap-1"><ScanFace size={10} /> Requires Iris Verification</span>}
+                           <span className={cn("block text-sm font-bold", isBiometricVerified ? "text-white" : "text-gray-500")}>Clone New Voice</span>
+                           {!isBiometricVerified && <span className="block text-[10px] text-red-400 flex items-center gap-1"><Fingerprint size={10} /> Requires Biometric Verification</span>}
                         </div>
                       </button>
 
@@ -437,7 +436,7 @@ export default function AvatarStudio() {
                             <div>
                               <div className="flex items-center gap-2">
                                 <h3 className="text-sm font-bold text-white">{voice.name}</h3>
-                                {voice.type === "Cloned" && isIrisVerified && <ShieldCheck size={14} className="text-green-400" />}
+                                {voice.type === "Cloned" && isBiometricVerified && <ShieldCheck size={14} className="text-green-400" />}
                               </div>
                               <div className="flex items-center gap-3 mt-1">
                                  <span className="text-[10px] text-gray-500 flex items-center gap-1"><Fingerprint size={10} /> {voice.type}</span>
