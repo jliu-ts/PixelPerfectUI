@@ -22,7 +22,7 @@ import {
   ChevronRight,
   CheckCircle2
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { NOISE_TEXTURE } from "@/lib/constants/urls";
 
@@ -139,7 +139,7 @@ export default function LegalGuard() {
                 {/* Main Upload Area */}
                 <div className="md:col-span-2 space-y-6">
                   <div 
-                    onClick={() => fileInputRef.current?.click()}
+                    {...clickable(() => fileInputRef.current?.click())}
                     className={cn(
                       "border-2 border-dashed rounded-3xl p-12 text-center transition-all cursor-pointer group relative overflow-hidden min-h-[400px] flex flex-col items-center justify-center",
                       file 
@@ -158,7 +158,7 @@ export default function LegalGuard() {
                     <div className="relative z-10 flex flex-col items-center justify-center max-w-md mx-auto">
                       <div className={cn(
                         "w-24 h-24 rounded-3xl flex items-center justify-center mb-8 transition-all shadow-2xl group-hover:scale-110 duration-500",
-                        file ? "bg-green-500 text-black" : "bg-[#1E1E1E] text-gray-400 group-hover:text-blue-400 border border-white/5"
+                        file ? "bg-green-500 text-black" : "bg-card text-gray-400 group-hover:text-blue-400 border border-white/5"
                       )}>
                         {file ? <FileText size={48} /> : <UploadCloud size={48} />}
                       </div>
@@ -214,13 +214,13 @@ export default function LegalGuard() {
 
                 {/* Sidebar: Recent Scans & Tools */}
                 <div className="space-y-6">
-                  <div className="bg-[#121212] border border-white/5 rounded-3xl p-6 h-full">
+                  <div className="bg-background border border-white/5 rounded-3xl p-6 h-full">
                     <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-6 flex items-center gap-2">
                       <History size={14} /> Recent Scans
                     </h3>
                     <div className="space-y-4">
                       {RECENT_SCANS.map(scan => (
-                        <div key={scan.id} className="group p-4 rounded-2xl bg-[#1E1E1E] border border-white/5 hover:border-white/10 transition-all cursor-pointer">
+                        <div key={scan.id} className="group p-4 rounded-2xl bg-card border border-white/5 hover:border-white/10 transition-all cursor-pointer">
                           <div className="flex justify-between items-start mb-2">
                             <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:bg-white/10 transition-colors">
                               <FileText size={16} />
@@ -265,7 +265,7 @@ export default function LegalGuard() {
             <div className="space-y-6 animate-in fade-in zoom-in-95 duration-500">
               
               {/* Score Card */}
-              <div className="p-8 rounded-3xl bg-[#121212] border border-white/10 relative overflow-hidden">
+              <div className="p-8 rounded-3xl bg-background border border-white/10 relative overflow-hidden">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative z-10">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
@@ -297,7 +297,7 @@ export default function LegalGuard() {
                     <button className="px-6 py-3 rounded-xl bg-white text-black text-sm font-bold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 shadow-lg">
                       <FileSignature size={16} /> Negotiate with AI
                     </button>
-                    <button className="px-6 py-3 rounded-xl bg-[#1E1E1E] text-white text-sm font-bold border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+                    <button className="px-6 py-3 rounded-xl bg-card text-white text-sm font-bold border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
                       <Download size={16} /> Export Report
                     </button>
                   </div>
@@ -351,7 +351,7 @@ export default function LegalGuard() {
                               </span>
                             </div>
                             
-                            <div className="p-4 bg-[#121212] rounded-xl border border-white/5 mb-4 relative group/code">
+                            <div className="p-4 bg-background rounded-xl border border-white/5 mb-4 relative group/code">
                               <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/10 rounded-l-xl group-hover/code:bg-white/20 transition-colors" />
                               <p className="text-xs font-mono text-gray-300 italic leading-relaxed pl-2">
                                 "{clause.text}"
@@ -381,11 +381,11 @@ export default function LegalGuard() {
 
                 {/* Right Sidebar: Resources */}
                 <div className="space-y-6">
-                   <div className="bg-[#121212] border border-white/5 rounded-3xl p-6 sticky top-24">
+                   <div className="bg-background border border-white/5 rounded-3xl p-6 sticky top-24">
                       <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
                         <Shield size={14} /> Protection Plan
                       </h3>
-                      <div className="p-4 rounded-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/20 mb-6">
+                      <div className="p-4 rounded-xl bg-surface-2 border border-primary/20 mb-6">
                          <p className="text-xs font-bold text-white mb-1">Legal Guard Pro</p>
                          <p className="text-[10px] text-gray-400 mb-3">Unlimited contract scans + attorney consultation.</p>
                          <button className="w-full py-2 rounded-lg bg-white text-black text-xs font-bold hover:bg-gray-200 transition-colors">

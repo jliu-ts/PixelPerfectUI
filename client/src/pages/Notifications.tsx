@@ -198,10 +198,10 @@ export default function Notifications() {
               <div 
                 key={notif.id} 
                 className={cn(
-                  "group relative p-4 rounded-2xl border transition-all animate-in fade-in slide-in-from-bottom-2 hover:bg-[#1A1A1A]",
+                  "group relative p-4 rounded-2xl border transition-all animate-in fade-in slide-in-from-bottom-2 hover:bg-surface-2",
                   notif.read 
                     ? "bg-transparent border-white/5 opacity-70 hover:opacity-100" 
-                    : "bg-[#1E1E1E] border-white/10 shadow-lg"
+                    : "bg-card border-white/10 shadow-lg"
                 )}
                 style={{ animationDelay: `${idx * 50}ms` }}
               >
@@ -218,9 +218,9 @@ export default function Notifications() {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start mb-1">
-                      <h3 className={cn("text-sm font-bold truncate pr-4", notif.read ? "text-gray-300" : "text-white")}>
+                      <h2 className={cn("text-sm font-bold truncate pr-4", notif.read ? "text-gray-300" : "text-white")}>
                         {notif.title}
-                      </h3>
+                      </h2>
                       <span className="text-[10px] text-gray-500 shrink-0 flex items-center gap-1">
                         <Clock size={10} /> {notif.time}
                       </span>
@@ -293,10 +293,10 @@ export default function Notifications() {
           ) : (
             /* Empty State */
             <div className="flex flex-col items-center justify-center py-20 text-center animate-in fade-in zoom-in-95">
-              <div className="w-16 h-16 rounded-full bg-[#1E1E1E] flex items-center justify-center mb-4 border border-white/5">
+              <div className="w-16 h-16 rounded-full bg-card flex items-center justify-center mb-4 border border-white/5">
                 <Bell size={24} className="text-gray-600" />
               </div>
-              <h3 className="text-sm font-bold text-white mb-1">All caught up!</h3>
+              <h2 className="text-sm font-bold text-white mb-1">All caught up!</h2>
               <p className="text-xs text-gray-500 max-w-[200px]">
                 No new notifications in this category. Check back later for updates.
               </p>

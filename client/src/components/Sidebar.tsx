@@ -21,9 +21,12 @@ export function Sidebar() {
       {/* Navigation Groups */}
       <div className="flex flex-col gap-6 flex-1 overflow-y-auto no-scrollbar">
         
+        {/* Group titles label a nav region, they are not document headings. As h3 they came
+            first in DOM order on every route, so each page's real h1 registered as a skipped
+            level. role=group + aria-labelledby keeps the grouping for assistive tech. */}
         {SIDEBAR_NAVIGATION.map((group, index) => (
-          <div key={index} className="space-y-1">
-            <h3 className="px-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">{group.title}</h3>
+          <div key={index} className="space-y-1" role="group" aria-labelledby={`nav-group-${index}`}>
+            <span id={`nav-group-${index}`} className="block px-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">{group.title}</span>
             {group.items.map((item: any) => (
               <Link key={item.href} href={item.href}>
                 <div className={cn(
@@ -50,7 +53,7 @@ export function Sidebar() {
       {/* Pro Upgrade Card (Moved from Right Sidebar) */}
       <div className="mt-4 mb-4 p-4 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity" />
-        <h3 className="text-xs font-bold text-white mb-1 relative z-10">Unlock Creator Pro</h3>
+        <p className="text-xs font-bold text-white mb-1 relative z-10">Unlock Creator Pro</p>
         <p className="text-[10px] text-gray-400 mb-3 relative z-10 leading-relaxed">
           Get advanced analytics & 0% platform fees.
         </p>

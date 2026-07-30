@@ -81,6 +81,7 @@ export default function ARCamera() {
 
   return (
     <Layout hideTabs>
+      <h1 className="sr-only">AR camera</h1>
       <div className="h-[100dvh] bg-black flex flex-col relative overflow-hidden">
         {/* Camera Feed Simulation */}
         <div className="absolute inset-0 z-0">

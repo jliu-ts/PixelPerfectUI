@@ -73,7 +73,7 @@ export default function PodcastPublish() {
           
           {/* Episode Details */}
           <div className="flex gap-4">
-            <div className="w-32 h-32 rounded-xl bg-[#1E1E1E] border border-white/10 overflow-hidden shrink-0 relative group cursor-pointer">
+            <div className="w-32 h-32 rounded-xl bg-card border border-white/10 overflow-hidden shrink-0 relative group cursor-pointer">
               <img loading="lazy" decoding="async" src={podcastCover} className="w-full h-full object-cover" alt="Cover Art" />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                 <Upload size={24} className="text-white" />
@@ -101,9 +101,9 @@ export default function PodcastPublish() {
 
           {/* Distribution Channels */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
+            <h2 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2">
               <Globe size={14} /> Distribution Channels
-            </h3>
+            </h2>
 
             <div className="space-y-3">
               {PLATFORMS.map((platform) => {
@@ -115,8 +115,8 @@ export default function PodcastPublish() {
                     className={cn(
                       "flex items-center justify-between p-4 rounded-xl border transition-all",
                       isConnected
-                        ? "bg-[#1E1E1E] border-white/20 shadow-lg" 
-                        : "bg-[#121212] border-white/5 hover:border-white/10"
+                        ? "bg-card border-white/20 shadow-lg" 
+                        : "bg-background border-white/5 hover:border-white/10"
                     )}
                   >
                     <div className="flex items-center gap-4">
@@ -161,7 +161,7 @@ export default function PodcastPublish() {
           <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-start gap-3">
             <Rss size={20} className="text-blue-400 mt-1" />
             <div>
-              <h4 className="text-sm font-bold text-blue-400">RSS Feed Hosting Included</h4>
+              <h3 className="text-sm font-bold text-blue-400">RSS Feed Hosting Included</h3>
               <p className="text-xs text-gray-400 mt-1">
                 We automatically generate and host your RSS feed. Use this URL to submit to other directories manually.
               </p>
@@ -171,7 +171,7 @@ export default function PodcastPublish() {
         </div>
 
         {/* Footer */}
-        <div className="p-6 border-t border-white/5 bg-[#121212]/80 backdrop-blur-md sticky bottom-0 z-20">
+        <div className="p-6 border-t border-white/5 bg-background/80 backdrop-blur-md sticky bottom-0 z-20">
           <GradientButton onClick={handlePublish} disabled={isPublishing} className="w-full py-4 text-lg">
             {isPublishing ? (
                <span className="flex items-center gap-2">

@@ -20,13 +20,13 @@ export function GradientButton({ children, className, variant = "primary", size 
         className={cn(
           baseStyles,
           sizeStyles,
-          "text-white group bg-[#1E1E1E] border border-white/10",
+          "text-white group bg-card border border-white/10",
           className
         )}
         {...props}
       >
         {/* Subtle gradient glow on hover/active */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/10 to-[#22D3EE]/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
         <span className="relative z-10 text-gradient">{children}</span>
       </button>
     );

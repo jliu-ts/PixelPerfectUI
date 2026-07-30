@@ -114,7 +114,7 @@ export default function EcommerceConnect() {
           <div className={cn(
             "rounded-3xl border relative overflow-hidden transition-all duration-500",
             isConnected 
-              ? "bg-[#121212] border-white/5 p-6 md:p-8" 
+              ? "bg-background border-white/5 p-6 md:p-8" 
               : "bg-gradient-to-br from-[#95BF47]/10 to-[#5E8E3E]/5 border-[#95BF47]/20 p-8 md:p-12"
           )}>
             {/* Ambient Background */}
@@ -220,7 +220,7 @@ export default function EcommerceConnect() {
                      <input aria-label="Search products" 
                       type="text" 
                       placeholder="Search products..." 
-                      className="w-full bg-[#121212] border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-gray-600"
+                      className="w-full bg-background border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-gray-600"
                      />
                   </div>
                   <button aria-label="Refresh" className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white transition-colors">
@@ -233,7 +233,7 @@ export default function EcommerceConnect() {
                 {ECOMMERCE_PRODUCTS.map((product, idx) => (
                   <div 
                     key={product.id} 
-                    className="bg-[#121212] border border-white/5 rounded-2xl overflow-hidden group relative hover:border-white/20 hover:shadow-lg transition-all hover:-translate-y-1"
+                    className="bg-background border border-white/5 rounded-2xl overflow-hidden group relative hover:border-white/20 hover:shadow-lg transition-all hover:-translate-y-1"
                     style={{ animationDelay: `${idx * 100}ms` }}
                   >
                     <div className="aspect-square relative overflow-hidden bg-black/20">
@@ -274,7 +274,7 @@ export default function EcommerceConnect() {
                 ))}
                 
                 {/* Import Placeholder */}
-                <button className="bg-[#121212] border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center aspect-[3/4] sm:aspect-auto gap-4 hover:bg-white/5 hover:border-white/20 transition-all group">
+                <button className="bg-background border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center aspect-[3/4] sm:aspect-auto gap-4 hover:bg-white/5 hover:border-white/20 transition-all group">
                   <div className="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform border border-white/5 group-hover:border-white/20">
                     <Plus size={24} className="text-gray-500 group-hover:text-white" />
                   </div>
@@ -289,7 +289,7 @@ export default function EcommerceConnect() {
             /* Empty State / Teaser Skeletons */
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 opacity-20 pointer-events-none select-none filter blur-[1px]">
                {[1,2,3,4].map(i => (
-                 <div key={i} className="bg-[#1E1E1E] rounded-2xl aspect-[3/4] border border-white/5 flex flex-col">
+                 <div key={i} className="bg-card rounded-2xl aspect-[3/4] border border-white/5 flex flex-col">
                     <div className="flex-1 bg-white/5 m-4 rounded-xl"></div>
                     <div className="h-8 bg-white/5 mx-4 mb-4 rounded-lg"></div>
                  </div>
@@ -301,8 +301,8 @@ export default function EcommerceConnect() {
 
         {/* Generation Dialog */}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="bg-[#1E1E1E] border-white/10 text-white sm:max-w-md p-0 overflow-hidden rounded-2xl gap-0">
-            <div className="p-6 border-b border-white/5 bg-[#1A1A1A]">
+          <DialogContent className="bg-card border-white/10 text-white sm:max-w-md p-0 overflow-hidden rounded-2xl gap-0">
+            <div className="p-6 border-b border-white/5 bg-surface-2">
               <DialogHeader>
                 <DialogTitle className="text-xl font-display flex items-center gap-2">
                   <Sparkles size={20} className="text-accent" /> 
@@ -319,7 +319,7 @@ export default function EcommerceConnect() {
                 <button
                   key={option.id}
                   onClick={() => handleSelectOption(option)}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[#121212] border border-white/5 hover:bg-white/5 hover:border-accent/50 transition-all text-left group relative overflow-hidden"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-background border border-white/5 hover:bg-white/5 hover:border-accent/50 transition-all text-left group relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:to-transparent transition-all" />
                   

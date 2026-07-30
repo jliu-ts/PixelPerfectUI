@@ -11,14 +11,14 @@ const SLIDES = [
     subtitle: "The AI Content Super App for the Creator Economy",
     content: (
       <div className="space-y-6">
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 backdrop-blur-md">
-          <h3 className="text-xl font-display font-bold text-white mb-2">The Problem: Fragmentation</h3>
+        <div className="p-6 rounded-2xl bg-surface-2 border border-primary/15 backdrop-blur-md">
+          <h2 className="text-xl font-display font-bold text-white mb-2">The Problem: Fragmentation</h2>
           <p className="text-gray-400">
             Creators today juggle 10+ isolated apps: CapCut for editing, Midjourney for assets, Linktree for bio, Instagram/TikTok for distribution, and separate affiliate dashboards. None of it talks to each other.
           </p>
         </div>
         <div className="p-6 rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-white/10 backdrop-blur-md">
-          <h3 className="text-xl font-display font-bold text-white mb-2">The Solution: One Super App</h3>
+          <h2 className="text-xl font-display font-bold text-white mb-2">The Solution: One Super App</h2>
           <p className="text-gray-400">
             <strong className="text-white font-semibold">Trending Society</strong> is one app: generate the asset, cut it, push it to every platform, and collect the affiliate revenue without leaving the tab. Mobile-first.
           </p>
@@ -32,12 +32,12 @@ const SLIDES = [
     subtitle: "Unified Identity & Cross-Platform Discovery",
     content: (
       <div className="grid grid-cols-2 gap-3">
-        <div className="col-span-2 p-4 rounded-xl bg-[#1E1E1E] border border-white/5 flex items-center gap-4">
+        <div className="col-span-2 p-4 rounded-xl bg-card border border-white/5 flex items-center gap-4">
           <div className="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
             <Globe size={24} />
           </div>
           <div>
-            <h4 className="font-bold text-white">Universal Profile</h4>
+            <h3 className="font-bold text-white">Universal Profile</h3>
             <p className="text-xs text-gray-400">One identity connecting Instagram, TikTok, YouTube, and X.</p>
           </div>
         </div>
@@ -47,11 +47,11 @@ const SLIDES = [
           { icon: <Zap />, title: "1-Click Re-Style", desc: "Remix any viral post style instantly with AI." },
           { icon: <Smartphone />, title: "Mobile First", desc: "Native experiences for the vertical video era." },
         ].map((item, i) => (
-          <div key={i} className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
+          <div key={i} className="p-4 rounded-xl bg-card border border-white/5">
             <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white mb-3">
               {item.icon}
             </div>
-            <h4 className="font-bold text-white text-sm mb-1">{item.title}</h4>
+            <h3 className="font-bold text-white text-sm mb-1">{item.title}</h3>
             <p className="text-[10px] text-gray-400 leading-relaxed">{item.desc}</p>
           </div>
         ))}
@@ -64,14 +64,14 @@ const SLIDES = [
     subtitle: "Embedded Finance for Creators",
     content: (
       <div className="space-y-4">
-        <div className="p-4 rounded-xl bg-gradient-to-r from-[#1E1E1E] to-[#252525] border border-white/10">
+        <div className="p-4 rounded-xl bg-gradient-to-r from-card to-surface-3 border border-white/10">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
                <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
                  <Coins size={20} />
                </div>
                <div>
-                 <h4 className="font-bold text-white">Affiliate Engine</h4>
+                 <h3 className="font-bold text-white">Affiliate Engine</h3>
                  <p className="text-xs text-gray-400">Integrated CJ & Impact Radius</p>
                </div>
             </div>
@@ -81,18 +81,18 @@ const SLIDES = [
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-           <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/10">
+           <div className="p-4 rounded-xl bg-card border border-white/10">
              <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 mb-2">
                <Plane size={16} />
              </div>
-             <h4 className="font-bold text-white text-sm">Viator Rewards</h4>
+             <h3 className="font-bold text-white text-sm">Viator Rewards</h3>
              <p className="text-[10px] text-gray-400 mt-1">Redeem earnings for real-world travel experiences.</p>
            </div>
-           <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/10">
+           <div className="p-4 rounded-xl bg-card border border-white/10">
              <div className="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400 mb-2">
                <BarChart3 size={16} />
              </div>
-             <h4 className="font-bold text-white text-sm">Gamified Scoreboard</h4>
+             <h3 className="font-bold text-white text-sm">Gamified Scoreboard</h3>
              <p className="text-[10px] text-gray-400 mt-1">Generation Credits (⚡) vs Reward Gems (💎).</p>
            </div>
         </div>
@@ -110,7 +110,7 @@ const SLIDES = [
             <Coins size={20} />
           </div>
           <div>
-            <h4 className="font-bold text-white">Economic Lock-in</h4>
+            <h3 className="font-bold text-white">Economic Lock-in</h3>
             <p className="text-xs text-gray-400 mt-1">
               Creators earn credits by selling assets in our Marketplace. These credits are stuck in our ecosystem, incentivizing them to stay and spend on our tools.
             </p>
@@ -121,7 +121,7 @@ const SLIDES = [
             <Cpu size={20} />
           </div>
           <div>
-            <h4 className="font-bold text-white">Data Gravity</h4>
+            <h3 className="font-bold text-white">Data Gravity</h3>
             <p className="text-xs text-gray-400 mt-1">
               By owning the "Writer's Room" (pre-production) and "Editor" (post-production), we capture the entire creative metadata pipeline, training our "Viral Prediction Engine."
             </p>
@@ -132,7 +132,7 @@ const SLIDES = [
             <Globe size={20} />
           </div>
           <div>
-            <h4 className="font-bold text-white">Platform Agnostic</h4>
+            <h3 className="font-bold text-white">Platform Agnostic</h3>
             <p className="text-xs text-gray-400 mt-1">
               We are the neutral layer above the "Walled Gardens" (TikTok, IG). We aggregate the audience, owning the relationship regardless of which platform is trending.
             </p>
@@ -149,28 +149,28 @@ const SLIDES = [
       <div className="space-y-3">
         <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
           <div>
-            <h4 className="font-bold text-white text-sm">Architect Tier</h4>
+            <h3 className="font-bold text-white text-sm">Architect Tier</h3>
             <p className="text-[10px] text-gray-400">Pro Creators</p>
           </div>
           <span className="text-lg font-bold text-white">$29<span className="text-xs text-gray-500">/mo</span></span>
         </div>
-        <div className="p-3 rounded-xl bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-purple-500/30 flex justify-between items-center">
+        <div className="p-3 rounded-xl bg-surface-2 border border-purple-500/30 flex justify-between items-center">
           <div>
-            <h4 className="font-bold text-white text-sm">Syndicate Tier</h4>
+            <h3 className="font-bold text-white text-sm">Syndicate Tier</h3>
             <p className="text-[10px] text-gray-400">Agencies & Teams</p>
           </div>
           <span className="text-lg font-bold text-white">$99<span className="text-xs text-gray-500">/mo</span></span>
         </div>
         <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
           <div>
-            <h4 className="font-bold text-white text-sm">Marketplace Fee</h4>
+            <h3 className="font-bold text-white text-sm">Marketplace Fee</h3>
             <p className="text-[10px] text-gray-400">On Asset Sales</p>
           </div>
           <span className="text-lg font-bold text-white">15-30<span className="text-xs text-gray-500">%</span></span>
         </div>
         <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
           <div>
-            <h4 className="font-bold text-white text-sm">Affiliate Revenue</h4>
+            <h3 className="font-bold text-white text-sm">Affiliate Revenue</h3>
             <p className="text-[10px] text-gray-400">Commission on Sales</p>
           </div>
           <span className="text-lg font-bold text-white">5-10<span className="text-xs text-gray-500">%</span></span>
@@ -217,9 +217,9 @@ export default function PitchDeck() {
       {/* Slide Content */}
       <div className="flex-1 flex flex-col justify-center px-6 pb-12">
         <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500 key={currentSlide}">
-          <h1 className="text-3xl font-display font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+          <h2 className="text-3xl font-display font-bold mb-2 text-foreground">
             {SLIDES[currentSlide].title}
-          </h1>
+          </h2>
           <p className="text-sm text-accent font-medium uppercase tracking-wide mb-8">
             {SLIDES[currentSlide].subtitle}
           </p>
@@ -229,7 +229,7 @@ export default function PitchDeck() {
       </div>
 
       {/* Navigation */}
-      <div className="p-6 bg-[#121212] border-t border-white/5 flex justify-between items-center">
+      <div className="p-6 bg-background border-t border-white/5 flex justify-between items-center">
         <button 
           onClick={prevSlide}
           disabled={currentSlide === 0}

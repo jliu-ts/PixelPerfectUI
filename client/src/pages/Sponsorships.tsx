@@ -17,7 +17,7 @@ import {
   Send,
   Calendar
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 
 // Mock Kanban Data
@@ -106,7 +106,7 @@ export default function Sponsorships() {
       <div className="min-h-screen bg-background pb-20 flex flex-col h-screen overflow-hidden">
         
         {/* Header */}
-        <div className="p-6 border-b border-white/5 bg-[#121212] flex items-center justify-between shrink-0">
+        <div className="p-6 border-b border-white/5 bg-background flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
             <button aria-label="Go back" 
               onClick={() => setLocation("/")}
@@ -160,12 +160,12 @@ export default function Sponsorships() {
                   </div>
 
                   {/* Deals List */}
-                  <div className="flex-1 bg-[#161616] rounded-xl border border-white/5 p-2 space-y-3 overflow-y-auto">
+                  <div className="flex-1 bg-surface rounded-xl border border-white/5 p-2 space-y-3 overflow-y-auto">
                     {colDeals.map((deal) => (
                       <div 
                         key={deal.id}
-                        onClick={() => setSelectedDeal(deal)}
-                        className="p-4 rounded-lg bg-[#1E1E1E] border border-white/5 hover:border-white/20 cursor-pointer transition-all group shadow-sm hover:shadow-md relative overflow-hidden"
+                        {...clickable(() => setSelectedDeal(deal))}
+                        className="p-4 rounded-lg bg-card border border-white/5 hover:border-white/20 cursor-pointer transition-all group shadow-sm hover:shadow-md relative overflow-hidden"
                       >
                         <div className="flex items-start justify-between mb-3 relative z-10">
                           <div className="flex items-center gap-3">
@@ -215,11 +215,11 @@ export default function Sponsorships() {
 
         {/* Deal Detail Modal (Simulated) */}
         {selectedDeal && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedDeal(null)}>
-            <div className="bg-[#1E1E1E] w-full max-w-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" {...clickable(() => setSelectedDeal(null))}>
+            <div className="bg-card w-full max-w-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
               
               {/* Modal Header */}
-              <div className="p-6 border-b border-white/5 flex justify-between items-start bg-[#161616]">
+              <div className="p-6 border-b border-white/5 flex justify-between items-start bg-surface">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
                     <img loading="lazy" decoding="async" src={selectedDeal.logo} alt={selectedDeal.brand} className="max-w-full max-h-full object-contain" />
@@ -240,7 +240,7 @@ export default function Sponsorships() {
               <div className="p-6 overflow-y-auto flex-1 space-y-6">
                 
                 {/* AI Reply Generator */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-purple-900/20 to-blue-900/20 border border-blue-500/20">
+                <div className="p-4 rounded-xl bg-surface-2 border border-blue-500/20">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
                       <Sparkles size={18} />
@@ -303,7 +303,7 @@ export default function Sponsorships() {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 border-t border-white/5 bg-[#161616] flex justify-between items-center">
+              <div className="p-4 border-t border-white/5 bg-surface flex justify-between items-center">
                  <div className="flex items-center gap-2 text-xs text-gray-400">
                    <Calendar size={14} /> Due: Nov 30, 2025
                  </div>

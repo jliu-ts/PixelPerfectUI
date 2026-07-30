@@ -93,8 +93,8 @@ export default function CreationStudio() {
               </div>
 
               {activeTab === "video" && selectedModel.includes("Avatar") ? (
-                <div className="w-full h-full bg-[#151515] rounded-2xl border border-white/10 p-6 overflow-y-auto relative z-10">
-                   <div className="flex items-center justify-between mb-4 sticky top-0 bg-[#151515]/80 backdrop-blur z-10 py-2">
+                <div className="w-full h-full bg-surface rounded-2xl border border-white/10 p-6 overflow-y-auto relative z-10">
+                   <div className="flex items-center justify-between mb-4 sticky top-0 bg-surface/80 backdrop-blur z-10 py-2">
                      <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Select Digital Avatar</label>
                      <span className="text-[10px] text-accent bg-accent/10 px-2 py-1 rounded-full">Avatar Mode Active</span>
                    </div>
@@ -129,7 +129,7 @@ export default function CreationStudio() {
                    </div>
                 </div>
               ) : (
-                <div className="text-center relative z-10 bg-[#151515] rounded-2xl border border-white/10 w-full h-full flex flex-col items-center justify-center">
+                <div className="text-center relative z-10 bg-surface rounded-2xl border border-white/10 w-full h-full flex flex-col items-center justify-center">
                   <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center border border-white/5 shadow-inner">
                     <Sparkles size={32} className="text-white/50" />
                   </div>
@@ -152,7 +152,7 @@ export default function CreationStudio() {
 
         {/* Floating Input Bar (Bottom Fixed) */}
         <div className="fixed bottom-8 left-0 right-0 z-50 px-4 flex justify-center pointer-events-none">
-           <div className="w-full max-w-3xl bg-[#1E1E1E]/90 backdrop-blur-xl border border-white/10 rounded-[32px] p-2 shadow-2xl pointer-events-auto transition-all duration-300 ring-1 ring-white/5 hover:ring-white/10 flex flex-col gap-2">
+           <div className="w-full max-w-3xl bg-card/90 backdrop-blur-xl border border-white/10 rounded-[32px] p-2 shadow-2xl pointer-events-auto transition-all duration-300 ring-1 ring-white/5 hover:ring-white/10 flex flex-col gap-2">
               
               {/* Context / Mode Tabs (Integrated Top) */}
               <div className="flex items-center px-4 pt-2 gap-2">
@@ -258,7 +258,7 @@ export default function CreationStudio() {
                            <ChevronDown size={10} className="opacity-50" />
                         </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="bg-[#1E1E1E]/95 backdrop-blur-xl border-white/10 text-white w-[340px] p-2 rounded-xl shadow-2xl mb-2" sideOffset={10}>
+                      <DropdownMenuContent className="bg-card/95 backdrop-blur-xl border-white/10 text-white w-[340px] p-2 rounded-xl shadow-2xl mb-2" sideOffset={10}>
                          <div className="px-2 py-1.5 text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Recommended Models</div>
                          {currentModels.map(m => (
                            <DropdownMenuItem
@@ -298,7 +298,7 @@ export default function CreationStudio() {
                              <ChevronDown size={10} className="opacity-50" />
                           </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="bg-[#1E1E1E]/95 backdrop-blur-xl border-white/10 text-white w-[280px] p-2 rounded-xl shadow-2xl mb-2" sideOffset={10}>
+                        <DropdownMenuContent className="bg-card/95 backdrop-blur-xl border-white/10 text-white w-[280px] p-2 rounded-xl shadow-2xl mb-2" sideOffset={10}>
                            <div className="px-2 py-1.5 text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Select Voice</div>
                            {VOICES.map(v => (
                              <DropdownMenuItem
@@ -337,7 +337,7 @@ export default function CreationStudio() {
                              {selectedRatio}
                           </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="bg-[#1E1E1E] border-white/10 text-white w-40 mb-2" sideOffset={10}>
+                        <DropdownMenuContent className="bg-card border-white/10 text-white w-40 mb-2" sideOffset={10}>
                           {ASPECT_RATIOS.map((ratio) => (
                             <DropdownMenuItem
                               key={ratio.id}
@@ -363,7 +363,7 @@ export default function CreationStudio() {
                              {CREATION_STYLES.find(s => s.id === selectedStyle)?.label || "Style"}
                           </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="bg-[#1E1E1E] border-white/10 text-white w-64 p-2 mb-2" sideOffset={10}>
+                        <DropdownMenuContent className="bg-card border-white/10 text-white w-64 p-2 mb-2" sideOffset={10}>
                            <div className="grid grid-cols-2 gap-2">
                               {CREATION_STYLES.map(s => (
                                 <DropdownMenuItem

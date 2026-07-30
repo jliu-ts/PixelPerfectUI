@@ -148,9 +148,9 @@ export default function DeepResearch() {
             <div className="h-full flex flex-col items-center justify-center text-center animate-in fade-in duration-700 px-4">
               <div className="mb-8 relative group">
                 <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full group-hover:bg-cyan-500/30 transition-all duration-1000" />
-                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#1E1E1E] to-black border border-white/10 flex items-center justify-center relative z-10 shadow-2xl group-hover:scale-105 transition-transform duration-500">
+                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-card to-black border border-white/10 flex items-center justify-center relative z-10 shadow-2xl group-hover:scale-105 transition-transform duration-500">
                   <Bot size={48} className="text-cyan-400" />
-                  <div className="absolute top-2 right-2 w-3 h-3 bg-green-500 rounded-full border-2 border-[#1E1E1E]" />
+                  <div className="absolute top-2 right-2 w-3 h-3 bg-green-500 rounded-full border-2 border-card" />
                 </div>
               </div>
               
@@ -166,7 +166,7 @@ export default function DeepResearch() {
                   <button 
                     key={i}
                     onClick={() => handleSend(s.text)}
-                    className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5 hover:border-cyan-500/30 hover:bg-white/5 text-left transition-all group relative overflow-hidden hover:shadow-lg"
+                    className="p-4 rounded-xl bg-card border border-white/5 hover:border-cyan-500/30 hover:bg-white/5 text-left transition-all group relative overflow-hidden hover:shadow-lg"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <span className="text-xl">{s.icon}</span>
@@ -184,7 +184,7 @@ export default function DeepResearch() {
                 <div key={msg.id} className={cn("animate-in fade-in slide-in-from-bottom-4 duration-500", msg.role === "user" ? "flex justify-end" : "")}>
                   
                   {msg.role === "user" ? (
-                    <div className="max-w-[85%] bg-[#1E1E1E] text-white px-6 py-4 rounded-3xl rounded-tr-sm border border-white/10 text-base leading-relaxed shadow-lg">
+                    <div className="max-w-[85%] bg-card text-white px-6 py-4 rounded-3xl rounded-tr-sm border border-white/10 text-base leading-relaxed shadow-lg">
                       {msg.content}
                     </div>
                   ) : (
@@ -202,7 +202,7 @@ export default function DeepResearch() {
                               <a 
                                 key={source.id} 
                                 href="#" 
-                                className="flex-shrink-0 w-64 p-3 rounded-xl bg-[#151515] border border-white/10 hover:border-cyan-500/30 hover:bg-[#1A1A1A] transition-all group flex items-start gap-3"
+                                className="flex-shrink-0 w-64 p-3 rounded-xl bg-surface border border-white/10 hover:border-cyan-500/30 hover:bg-surface-2 transition-all group flex items-start gap-3"
                               >
                                 <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center shrink-0">
                                   <img loading="lazy" decoding="async" src={source.icon} className="w-4 h-4 opacity-70 group-hover:opacity-100" alt="" />
@@ -267,7 +267,7 @@ export default function DeepResearch() {
                                <button 
                                  key={i} 
                                  onClick={() => handleSend(q)}
-                                 className="flex items-center justify-between w-full p-3 text-left text-sm text-gray-300 bg-[#151515] border border-white/5 rounded-xl hover:bg-[#1E1E1E] hover:border-cyan-500/30 hover:text-cyan-400 transition-all group"
+                                 className="flex items-center justify-between w-full p-3 text-left text-sm text-gray-300 bg-surface border border-white/5 rounded-xl hover:bg-card hover:border-cyan-500/30 hover:text-cyan-400 transition-all group"
                                >
                                  {q}
                                  <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 text-cyan-400 transition-opacity" />
@@ -284,7 +284,7 @@ export default function DeepResearch() {
               {/* Thinking Process Animation */}
               {isTyping && (
                 <div className="w-full animate-in fade-in duration-500 max-w-3xl mx-auto">
-                  <div className="bg-[#151515] border border-white/5 rounded-xl overflow-hidden shadow-lg">
+                  <div className="bg-surface border border-white/5 rounded-xl overflow-hidden shadow-lg">
                     <button 
                       onClick={() => setIsThinkingExpanded(!isThinkingExpanded)}
                       className="w-full p-4 flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors"
@@ -338,8 +338,8 @@ export default function DeepResearch() {
         <div className="p-4 bg-background border-t border-white/5">
           <div className="max-w-3xl mx-auto relative">
             <div className={cn(
-              "relative transition-all duration-300 rounded-2xl bg-[#1E1E1E] border group shadow-xl",
-              isTyping ? "border-cyan-500/30 shadow-[0_0_20px_-5px_rgba(6,182,212,0.1)]" : "border-white/10 focus-within:border-cyan-500/50 focus-within:bg-[#252525]"
+              "relative transition-all duration-300 rounded-2xl bg-card border group shadow-xl",
+              isTyping ? "border-cyan-500/30 shadow-[0_0_20px_-5px_rgba(6,182,212,0.1)]" : "border-white/10 focus-within:border-cyan-500/50 focus-within:bg-surface-3"
             )}>
               <textarea 
                 value={query}
@@ -381,7 +381,7 @@ export default function DeepResearch() {
 
                    {/* Context Dropdown */}
                    {isContextOpen && (
-                     <div className="absolute bottom-full left-0 mb-2 w-56 bg-[#1E1E1E] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-bottom-2 ring-1 ring-black">
+                     <div className="absolute bottom-full left-0 mb-2 w-56 bg-card border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-bottom-2 ring-1 ring-black">
                        <div className="p-2">
                          <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider px-2 py-1">Data Sources</div>
                          {CONTEXT_OPTIONS.map((ctx) => (

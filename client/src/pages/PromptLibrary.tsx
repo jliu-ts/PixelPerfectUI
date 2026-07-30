@@ -161,11 +161,11 @@ export default function PromptLibrary() {
               filteredPrompts.map((prompt, idx) => (
                 <div 
                   key={prompt.id} 
-                  className="group relative flex flex-col bg-[#121212] border border-white/5 rounded-2xl hover:border-accent/30 transition-all hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] hover:-translate-y-1 overflow-hidden"
+                  className="group relative flex flex-col bg-background border border-white/5 rounded-2xl hover:border-accent/30 transition-all hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] hover:-translate-y-1 overflow-hidden"
                   style={{ animationDelay: `${idx * 50}ms` }}
                 >
                   {/* Card Header */}
-                  <div className="p-5 border-b border-white/5 bg-[#1A1A1A]/50">
+                  <div className="p-5 border-b border-white/5 bg-surface-2/50">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex flex-wrap gap-2">
                         <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 text-[10px] font-bold text-gray-300 border border-white/5 group-hover:border-accent/20 group-hover:text-white transition-colors">
@@ -195,15 +195,15 @@ export default function PromptLibrary() {
                       </div>
                     </div>
                     
-                    <h3 className="text-lg font-display font-bold text-white leading-tight group-hover:text-accent transition-colors line-clamp-1">
+                    <h2 className="text-lg font-display font-bold text-white leading-tight group-hover:text-accent transition-colors line-clamp-1">
                       {prompt.title}
-                    </h3>
+                    </h2>
                   </div>
 
                   {/* Prompt Content */}
                   <div className="p-5 flex-1 flex flex-col">
                     <div className="relative flex-1 mb-4 group/code">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#121212] pointer-events-none opacity-50" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background pointer-events-none opacity-50" />
                       <p className="text-sm text-gray-400 font-mono leading-relaxed line-clamp-4 group-hover:text-gray-300 transition-colors">
                         {prompt.prompt}
                       </p>
@@ -214,7 +214,7 @@ export default function PromptLibrary() {
                           "absolute bottom-0 right-0 p-2 rounded-lg text-xs font-bold flex items-center gap-2 transition-all shadow-lg backdrop-blur-md border",
                           copiedId === prompt.id 
                             ? "bg-green-500/20 text-green-400 border-green-500/30" 
-                            : "bg-[#1E1E1E] text-white border-white/10 opacity-0 group-hover/code:opacity-100 hover:bg-white/10"
+                            : "bg-card text-white border-white/10 opacity-0 group-hover/code:opacity-100 hover:bg-white/10"
                         )}
                       >
                         {copiedId === prompt.id ? (

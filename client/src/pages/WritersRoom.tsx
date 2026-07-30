@@ -74,8 +74,8 @@ export default function WritersRoom() {
           </div>
           <div className="flex items-center gap-2">
              <div className="flex -space-x-2">
-                <div className="w-8 h-8 rounded-full border-2 border-[#121212] bg-purple-500 flex items-center justify-center text-xs font-bold text-white">FK</div>
-                <div className="w-8 h-8 rounded-full border-2 border-[#121212] bg-green-500 flex items-center justify-center text-xs font-bold text-white">SJ</div>
+                <div className="w-8 h-8 rounded-full border-2 border-background bg-purple-500 flex items-center justify-center text-xs font-bold text-white">FK</div>
+                <div className="w-8 h-8 rounded-full border-2 border-background bg-green-500 flex items-center justify-center text-xs font-bold text-white">SJ</div>
              </div>
              <button aria-label="Share" className="p-2 rounded-full hover:bg-white/10 text-white transition-colors">
                <Share2 size={20} />
@@ -84,7 +84,7 @@ export default function WritersRoom() {
         </div>
 
         {/* Editor Toolbar */}
-        <div className="px-4 py-2 bg-[#1E1E1E] border-b border-white/5 flex items-center gap-4 overflow-x-auto no-scrollbar">
+        <div className="px-4 py-2 bg-card border-b border-white/5 flex items-center gap-4 overflow-x-auto no-scrollbar">
            <div className="flex items-center gap-1 border-r border-white/10 pr-4">
              <button aria-label="Bold" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Bold size={18} /></button>
              <button aria-label="Italic" className="p-2 rounded hover:bg-white/5 text-gray-400 hover:text-white"><Italic size={18} /></button>
@@ -133,7 +133,7 @@ export default function WritersRoom() {
         {/* AI Floating Action Bar */}
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md">
            {isAIActive ? (
-             <Card className="p-4 bg-[#1E1E1E] border-accent/50 shadow-[0_0_30px_-10px_rgba(34,211,238,0.3)] flex items-center gap-3 animate-in slide-in-from-bottom-4">
+             <Card className="p-4 bg-card border-accent/50 shadow-[0_0_30px_-10px_rgba(34,211,238,0.3)] flex items-center gap-3 animate-in slide-in-from-bottom-4">
                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center animate-spin">
                  <Bot size={16} className="text-accent" />
                </div>
@@ -146,7 +146,7 @@ export default function WritersRoom() {
              <div className="flex justify-center">
                <button 
                  onClick={handleAIImprove}
-                 className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#1E1E1E] border border-white/10 shadow-xl hover:bg-[#252525] transition-all group"
+                 className="flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-white/10 shadow-xl hover:bg-surface-3 transition-all group"
                >
                  <Sparkles size={16} className="text-accent group-hover:rotate-12 transition-transform" />
                  <span className="text-sm font-bold text-white">Ask Society AI to edit</span>

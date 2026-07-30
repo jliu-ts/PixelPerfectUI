@@ -18,7 +18,7 @@ import {
   Share2,
   Flame
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { BRAND_LOGOS } from "@/lib/constants/brandLogos";
 
 // Enhanced Mock Data for a Richer Experience
@@ -152,7 +152,7 @@ export default function IdeaGenerator() {
           </div>
           <button 
             onClick={() => setLocation("/feeds")}
-            className="px-4 py-2 rounded-xl bg-[#1E1E1E] border border-white/10 text-xs font-bold text-white hover:bg-white/5 transition-colors flex items-center gap-2"
+            className="px-4 py-2 rounded-xl bg-card border border-white/10 text-xs font-bold text-white hover:bg-white/5 transition-colors flex items-center gap-2"
           >
             <Rss size={14} /> Manage Feeds
           </button>
@@ -161,7 +161,7 @@ export default function IdeaGenerator() {
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden h-[calc(100vh-64px)]">
           
           {/* Left Panel: Trending Signals (Scrollable) */}
-          <div className="flex-1 flex flex-col border-r border-white/5 bg-[#0A0A0A] overflow-hidden relative">
+          <div className="flex-1 flex flex-col border-r border-white/5 bg-shell overflow-hidden relative">
             
             {/* Sub-header: Categories */}
             <div className="p-4 border-b border-white/5 bg-background/50 backdrop-blur-sm z-10">
@@ -174,7 +174,7 @@ export default function IdeaGenerator() {
                       "px-4 py-2 rounded-full text-xs font-bold transition-all whitespace-nowrap border flex items-center gap-2",
                       selectedCategory === cat.id
                         ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.2)]"
-                        : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:text-white hover:border-white/20"
+                        : "bg-card text-gray-400 border-white/5 hover:text-white hover:border-white/20"
                     )}
                   >
                     {cat.id === "all" && <TrendingUp size={12} />}
@@ -187,9 +187,9 @@ export default function IdeaGenerator() {
             {/* Articles List */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-24 md:pb-4">
               <div className="flex items-center justify-between px-2 mb-2">
-                 <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                 <h2 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
                     <Flame size={14} className="text-orange-500" fill="currentColor" /> Viral Signals
-                 </h3>
+                 </h2>
                  <span className="text-[10px] text-accent bg-accent/10 px-2 py-0.5 rounded-full border border-accent/20 animate-pulse">
                    Live Updates
                  </span>
@@ -198,12 +198,12 @@ export default function IdeaGenerator() {
               {filteredArticles.map((article) => (
                 <div 
                   key={article.id} 
-                  onClick={() => handleGenerate(article.id)}
+                  {...clickable(() => handleGenerate(article.id))}
                   className={cn(
                     "group relative rounded-2xl border overflow-hidden transition-all cursor-pointer",
                     selectedArticle === article.id 
-                      ? "bg-[#1E1E1E] border-accent shadow-[0_0_30px_-10px_rgba(34,211,238,0.15)] ring-1 ring-accent/50" 
-                      : "bg-[#121212] border-white/5 hover:bg-[#1A1A1A] hover:border-white/10"
+                      ? "bg-card border-accent shadow-[0_0_30px_-10px_rgba(34,211,238,0.15)] ring-1 ring-accent/50" 
+                      : "bg-background border-white/5 hover:bg-surface-2 hover:border-white/10"
                   )}
                 >
                   {/* Background Image Overlay (Subtle) */}
@@ -231,9 +231,9 @@ export default function IdeaGenerator() {
                       </div>
                     </div>
                     
-                    <h4 className="text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-accent transition-colors pr-8">
+                    <h3 className="text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-accent transition-colors pr-8">
                       {article.title}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-gray-400 line-clamp-2 mb-4 leading-relaxed">
                       {article.summary}
                     </p>
@@ -279,16 +279,16 @@ export default function IdeaGenerator() {
             selectedArticle ? "translate-y-0" : "translate-y-full md:translate-y-0"
           )}>
             {/* Mobile Close Handle */}
-            <div className="md:hidden flex justify-center pt-2 pb-1" onClick={() => setSelectedArticle(null)}>
+            <div className="md:hidden flex justify-center pt-2 pb-1" {...clickable(() => setSelectedArticle(null))}>
                <div className="w-12 h-1.5 rounded-full bg-gray-800" />
             </div>
 
-            <div className="flex-1 flex flex-col bg-[#121212] md:bg-transparent">
-              <div className="p-6 border-b border-white/5 bg-[#121212]">
-                <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <div className="flex-1 flex flex-col bg-background md:bg-transparent">
+              <div className="p-6 border-b border-white/5 bg-background">
+                <h2 className="text-sm font-bold text-white flex items-center gap-2">
                   <Bot size={18} className="text-accent" /> 
                   AI Strategy Engine
-                </h3>
+                </h2>
                 <p className="text-xs text-gray-500 mt-1">
                   Generating cross-platform content angles based on viral formats.
                 </p>
@@ -300,7 +300,7 @@ export default function IdeaGenerator() {
                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-800 to-black flex items-center justify-center mb-6 shadow-inner border border-white/5">
                        <Lightbulb size={32} className="text-gray-500" />
                      </div>
-                     <h4 className="text-lg font-bold text-white mb-2">Ready to Ideate</h4>
+                     <h3 className="text-lg font-bold text-white mb-2">Ready to Ideate</h3>
                      <p className="text-sm text-gray-400 max-w-[240px]">
                        Select a trending signal from the feed to generate tailored content concepts.
                      </p>
@@ -338,7 +338,7 @@ export default function IdeaGenerator() {
                       {generatedResults?.map((idea, idx) => (
                         <div 
                           key={idx}
-                          className="bg-[#1E1E1E] rounded-xl border border-white/10 p-1 overflow-hidden group hover:border-accent/40 transition-all hover:shadow-xl"
+                          className="bg-card rounded-xl border border-white/10 p-1 overflow-hidden group hover:border-accent/40 transition-all hover:shadow-xl"
                         >
                           {/* Platform Header */}
                           <div className="px-4 py-3 flex items-center justify-between border-b border-white/5 bg-white/5">
@@ -359,7 +359,7 @@ export default function IdeaGenerator() {
 
                           {/* Content Body */}
                           <div className="p-4">
-                             <h5 className="text-sm font-bold text-white mb-2 leading-tight">{idea.title}</h5>
+                             <h4 className="text-sm font-bold text-white mb-2 leading-tight">{idea.title}</h4>
                              <p className="text-xs text-gray-400 mb-4 leading-relaxed border-l-2 border-white/10 pl-3 py-1 italic">
                                "{idea.prompt}"
                              </p>

@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { GradientButton } from "@/components/GradientButton";
 import { ArrowLeft, Zap, Trophy, Timer, Swords, CheckCircle2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import imageA from "@assets/generated_images/cyberpunk_samurai_for_battle_mode.webp";
 import imageB from "@assets/generated_images/ethereal_fantasy_elf_for_battle_mode.webp";
 
@@ -32,7 +32,7 @@ export default function BattleMode() {
 
   return (
     <Layout hideTabs>
-      <div className="min-h-screen bg-[#090909] text-white flex flex-col relative overflow-hidden">
+      <div className="min-h-screen bg-stage text-white flex flex-col relative overflow-hidden">
         {/* Background Ambient Glow */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute -top-[20%] -left-[20%] w-[70%] h-[70%] bg-purple-600/20 blur-[120px] rounded-full mix-blend-screen" />
@@ -73,7 +73,7 @@ export default function BattleMode() {
           <div className="flex w-full gap-2 h-[45vh] mb-8">
             {/* Image A */}
             <div 
-              onClick={() => !voted && handleVote("A")}
+              {...clickable(() => !voted && handleVote("A"))}
               className={cn(
                 "flex-1 h-full rounded-2xl overflow-hidden relative cursor-pointer transition-all duration-500 group border-2",
                 voted === "A" ? "border-accent flex-[1.5] z-10 shadow-[0_0_30px_rgba(34,211,238,0.4)]" : 
@@ -107,7 +107,7 @@ export default function BattleMode() {
 
             {/* Image B */}
             <div 
-              onClick={() => !voted && handleVote("B")}
+              {...clickable(() => !voted && handleVote("B"))}
               className={cn(
                 "flex-1 h-full rounded-2xl overflow-hidden relative cursor-pointer transition-all duration-500 group border-2",
                 voted === "B" ? "border-accent flex-[1.5] z-10 shadow-[0_0_30px_rgba(34,211,238,0.4)]" : 

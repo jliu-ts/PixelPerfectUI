@@ -171,7 +171,7 @@ export default function BrandKit() {
             <button 
               onClick={handleGenerateBrand}
               disabled={isGenerating}
-              className="px-4 py-2 rounded-xl bg-[#1E1E1E] hover:bg-white/5 border border-white/10 text-xs font-bold text-white transition-all flex items-center gap-2"
+              className="px-4 py-2 rounded-xl bg-card hover:bg-white/5 border border-white/10 text-xs font-bold text-white transition-all flex items-center gap-2"
             >
               {isGenerating ? <Loader2 size={14} className="animate-spin" /> : <Wand2 size={14} className="text-purple-400" />}
               {isGenerating ? "Generating..." : "AI Generate"}
@@ -182,10 +182,10 @@ export default function BrandKit() {
         <div className="p-4 md:p-6 max-w-5xl mx-auto space-y-8">
           
           {/* Canva Integration Hero */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#00C4CC]/20 via-[#7D2AE8]/20 to-[#1E1E1E] border border-white/10 p-1">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#00C4CC]/20 via-[#7D2AE8]/20 to-card border border-white/10 p-1">
             <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none" />
             
-            <div className="bg-[#121212]/80 backdrop-blur-sm rounded-[22px] p-6 md:p-8 relative overflow-hidden">
+            <div className="bg-background/80 backdrop-blur-sm rounded-[22px] p-6 md:p-8 relative overflow-hidden">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="flex items-start gap-5">
                   <div className="w-16 h-16 rounded-2xl bg-white p-3 shadow-lg shrink-0">
@@ -245,7 +245,7 @@ export default function BrandKit() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {TEMPLATES.map(t => (
                       <div key={t.id} className="group cursor-pointer relative">
-                        <div className="aspect-[3/4] rounded-xl overflow-hidden relative border border-white/10 bg-[#1E1E1E] transition-all group-hover:border-[#00C4CC]/50 group-hover:shadow-[0_0_20px_rgba(0,196,204,0.1)]">
+                        <div className="aspect-[3/4] rounded-xl overflow-hidden relative border border-white/10 bg-card transition-all group-hover:border-[#00C4CC]/50 group-hover:shadow-[0_0_20px_rgba(0,196,204,0.1)]">
                           <img loading="lazy" decoding="async" src={t.image} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all group-hover:scale-105 duration-500" alt={t.name} />
                           <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/60 backdrop-blur text-[9px] font-bold text-white border border-white/10">
                             {t.type}
@@ -286,7 +286,7 @@ export default function BrandKit() {
                   <span className="text-[10px] text-gray-600">{brandColors.length} colors defined</span>
                 </div>
                 
-                <div className="bg-[#121212] border border-white/5 rounded-2xl p-6">
+                <div className="bg-background border border-white/5 rounded-2xl p-6">
                   <div className="flex gap-4 flex-wrap">
                     {brandColors.map((color, i) => (
                       <DropdownMenu key={i}>
@@ -304,7 +304,7 @@ export default function BrandKit() {
                             </div>
                           </div>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="bg-[#1E1E1E] border-white/10 text-white">
+                        <DropdownMenuContent className="bg-card border-white/10 text-white">
                           <DropdownMenuItem onClick={() => {
                              navigator.clipboard.writeText(color.hex);
                              toast({ description: "Hex code copied!" });
@@ -332,7 +332,7 @@ export default function BrandKit() {
                  <h3 className="text-sm font-bold text-gray-400 uppercase flex items-center gap-2 tracking-wider mb-4">
                     <Sparkles size={14} /> Brand Voice
                  </h3>
-                 <div className="bg-[#121212] border border-white/5 rounded-2xl p-6">
+                 <div className="bg-background border border-white/5 rounded-2xl p-6">
                    <div className="flex flex-wrap gap-2 mb-4">
                      {BRAND_VOICE_TRAITS.map(trait => (
                        <span key={trait} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/5 text-xs font-bold text-gray-300">
@@ -343,7 +343,7 @@ export default function BrandKit() {
                        + Add Trait
                      </button>
                    </div>
-                   <div className="p-4 rounded-xl bg-[#1E1E1E] border border-white/5">
+                   <div className="p-4 rounded-xl bg-card border border-white/5">
                      <p className="text-xs text-gray-400 italic leading-relaxed">
                        "Our brand speaks with a confident, forward-thinking tone. We use concise language, avoid jargon, and always prioritize clarity and inspiration."
                      </p>
@@ -365,7 +365,7 @@ export default function BrandKit() {
                   {/* Primary Font */}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <div className="p-5 rounded-2xl bg-[#121212] border border-white/5 flex justify-between items-center cursor-pointer hover:bg-white/5 hover:border-white/10 transition-all group">
+                      <div className="p-5 rounded-2xl bg-background border border-white/5 flex justify-between items-center cursor-pointer hover:bg-white/5 hover:border-white/10 transition-all group">
                         <div>
                           <div className="flex items-center gap-2 mb-2">
                             <span className="text-[10px] font-bold text-accent bg-accent/10 px-1.5 py-0.5 rounded uppercase tracking-wider">Primary</span>
@@ -378,7 +378,7 @@ export default function BrandKit() {
                         </div>
                       </div>
                     </DialogTrigger>
-                    <DialogContent className="bg-[#1E1E1E] border-white/10 text-white">
+                    <DialogContent className="bg-card border-white/10 text-white">
                       <DialogHeader>
                         <DialogTitle>Select Primary Font</DialogTitle>
                       </DialogHeader>
@@ -406,7 +406,7 @@ export default function BrandKit() {
                   {/* Body Font */}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <div className="p-5 rounded-2xl bg-[#121212] border border-white/5 flex justify-between items-center cursor-pointer hover:bg-white/5 hover:border-white/10 transition-all group">
+                      <div className="p-5 rounded-2xl bg-background border border-white/5 flex justify-between items-center cursor-pointer hover:bg-white/5 hover:border-white/10 transition-all group">
                         <div>
                           <div className="flex items-center gap-2 mb-2">
                             <span className="text-[10px] font-bold text-gray-400 bg-white/5 px-1.5 py-0.5 rounded uppercase tracking-wider">Secondary</span>
@@ -419,7 +419,7 @@ export default function BrandKit() {
                         </div>
                       </div>
                     </DialogTrigger>
-                    <DialogContent className="bg-[#1E1E1E] border-white/10 text-white">
+                    <DialogContent className="bg-card border-white/10 text-white">
                       <DialogHeader>
                         <DialogTitle>Select Body Font</DialogTitle>
                       </DialogHeader>
@@ -466,7 +466,7 @@ export default function BrandKit() {
                     <div key={logo.id} className="aspect-square rounded-xl border border-white/5 overflow-hidden relative group">
                       <div className={cn(
                         "w-full h-full flex items-center justify-center p-4 transition-colors",
-                        logo.bg === 'light' ? "bg-[#F5F5F5]" : "bg-[#1E1E1E]"
+                        logo.bg === 'light' ? "bg-[#F5F5F5]" : "bg-card"
                       )}>
                         {logo.url ? (
                           <img loading="lazy" decoding="async" src={logo.url} className="w-full h-full object-contain" alt="Logo" />

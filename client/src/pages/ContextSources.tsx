@@ -21,7 +21,7 @@ import {
   Trash2,
   RotateCcw
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GradientButton } from "@/components/GradientButton";
@@ -140,8 +140,8 @@ export default function ContextSources() {
         
         {/* Global Settings Modal */}
         {settingsOpen && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSettingsOpen(false)}>
-            <div className="bg-[#1E1E1E] w-full max-w-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" {...clickable(() => setSettingsOpen(false))}>
+            <div className="bg-card w-full max-w-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
               <div className="p-6 border-b border-white/5 flex justify-between items-center">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2">
                   <Settings size={18} /> Context Settings
@@ -198,9 +198,9 @@ export default function ContextSources() {
 
         {/* App Settings Modal */}
         {selectedSource && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedSource(null)}>
-            <div className="bg-[#1E1E1E] w-full max-w-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
-              <div className="p-6 border-b border-white/5 flex justify-between items-center bg-[#161616]">
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" {...clickable(() => setSelectedSource(null))}>
+            <div className="bg-card w-full max-w-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
+              <div className="p-6 border-b border-white/5 flex justify-between items-center bg-surface">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-white p-1.5 flex items-center justify-center shadow-lg">
                     <img loading="lazy" decoding="async" src={selectedSource.icon} alt={selectedSource.name} className="w-full h-full object-contain" />
@@ -259,7 +259,7 @@ export default function ContextSources() {
                 </div>
               </div>
               
-              <div className="p-4 border-t border-white/5 bg-[#161616] flex justify-end">
+              <div className="p-4 border-t border-white/5 bg-surface flex justify-end">
                 <GradientButton onClick={() => setSelectedSource(null)} className="px-6 py-2 text-xs">
                   Done
                 </GradientButton>
@@ -298,7 +298,7 @@ export default function ContextSources() {
         <div className="p-6 max-w-7xl mx-auto space-y-8">
           
           {/* Visual Context Graph (Abstract Representation) */}
-          <div className="relative h-48 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 overflow-hidden flex items-center justify-center">
+          <div className="relative h-48 rounded-2xl bg-surface-2 border border-white/10 overflow-hidden flex items-center justify-center">
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("${NOISE_TEXTURE}")` }} />
             
             <div className="relative z-10 text-center">
@@ -389,7 +389,7 @@ export default function ContextSources() {
               {filteredSources.map(source => (
                 <div 
                   key={source.id}
-                  className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 hover:border-white/10 transition-all group relative overflow-hidden"
+                  className="p-5 rounded-2xl bg-card border border-white/5 hover:border-white/10 transition-all group relative overflow-hidden"
                 >
                   {/* Header */}
                   <div className="flex justify-between items-start mb-4 relative z-10">

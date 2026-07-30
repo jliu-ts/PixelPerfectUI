@@ -207,7 +207,7 @@ export default function AffiliateDashboard() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#1E1E1E]/90 backdrop-blur-md border border-white/10 p-3 rounded-xl shadow-xl">
+        <div className="bg-card/90 backdrop-blur-md border border-white/10 p-3 rounded-xl shadow-xl">
           <p className="text-gray-400 text-xs font-bold mb-1">{label}</p>
           <div className="flex flex-col gap-1">
              <p className="text-white text-sm font-bold flex items-center gap-2">
@@ -249,7 +249,7 @@ export default function AffiliateDashboard() {
 
           {/* Scoreboard */}
           <div className="flex items-center gap-2 bg-black/40 p-1 rounded-lg border border-white/10">
-            <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30">
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-primary/12 border border-primary/30">
               <Zap size={12} className="text-yellow-400 fill-yellow-400" />
               <span className="text-xs font-bold text-white">{genCredits}</span>
             </div>
@@ -263,8 +263,8 @@ export default function AffiliateDashboard() {
         <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
           
           {/* Wallet Status Card - Modernized */}
-          <div className="p-1 rounded-2xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20">
-            <div className="bg-[#121212] rounded-xl p-4 flex items-center justify-between relative overflow-hidden">
+          <div className="p-1 rounded-2xl bg-primary/12">
+            <div className="bg-background rounded-xl p-4 flex items-center justify-between relative overflow-hidden">
               <div className="flex items-center gap-4 relative z-10">
                 <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20">
                   <Wallet size={24} />
@@ -296,7 +296,7 @@ export default function AffiliateDashboard() {
           </div>
 
           {/* Navigation Tabs - Segmented Control */}
-          <div className="flex p-1 bg-[#1E1E1E] rounded-xl border border-white/5 sticky top-20 z-10 shadow-xl">
+          <div className="flex p-1 bg-card rounded-xl border border-white/5 sticky top-20 z-10 shadow-xl">
             {[
               { id: "overview", label: "Dashboard", icon: BarChart3 },
               { id: "campaigns", label: "Campaigns", icon: Briefcase },
@@ -309,7 +309,7 @@ export default function AffiliateDashboard() {
                 className={cn(
                   "flex-1 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2", 
                   activeTab === tab.id 
-                    ? "bg-[#2A2A2A] text-white shadow-lg border border-white/5" 
+                    ? "bg-muted text-white shadow-lg border border-white/5" 
                     : "text-gray-500 hover:text-gray-300 hover:bg-white/5"
                 )}
               >
@@ -327,7 +327,7 @@ export default function AffiliateDashboard() {
               <div className="animate-in fade-in slide-in-from-bottom-4 space-y-6">
                 {/* Primary Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
+                  <div className="p-5 rounded-2xl bg-card border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
                     <div className="flex justify-between items-start mb-4">
                        <div>
                          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Total Revenue</p>
@@ -344,7 +344,7 @@ export default function AffiliateDashboard() {
                     <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-green-500/5 rounded-full blur-2xl group-hover:bg-green-500/10 transition-colors" />
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
+                  <div className="p-5 rounded-2xl bg-card border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
                     <div className="flex justify-between items-start mb-4">
                        <div>
                          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Pending Payouts</p>
@@ -360,7 +360,7 @@ export default function AffiliateDashboard() {
                     </div>
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
+                  <div className="p-5 rounded-2xl bg-card border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
                     <div className="flex justify-between items-start mb-4">
                        <div>
                          <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Total Clicks</p>
@@ -380,7 +380,7 @@ export default function AffiliateDashboard() {
                 {/* Advanced Creator Insights Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                   {/* Format ROI - Horizontal Bar */}
-                  <div className="lg:col-span-2 p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+                  <div className="lg:col-span-2 p-6 rounded-2xl bg-card border border-white/5">
                     <div className="flex justify-between items-center mb-6">
                       <div>
                         <h3 className="text-base font-bold text-white flex items-center gap-2">
@@ -399,7 +399,7 @@ export default function AffiliateDashboard() {
                            </div>
                            <div className="h-2 w-full bg-black/40 rounded-full overflow-hidden flex">
                              <div 
-                               className="h-full bg-gradient-to-r from-purple-600 to-blue-500 rounded-full" 
+                               className="h-full bg-primary rounded-full" 
                                style={{ width: `${(item.rpm / 15) * 100}%` }}
                              />
                            </div>
@@ -413,7 +413,7 @@ export default function AffiliateDashboard() {
                   </div>
 
                   {/* Audience Heatmap - Radar */}
-                  <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col">
+                  <div className="p-6 rounded-2xl bg-card border border-white/5 flex flex-col">
                     <div className="mb-4">
                       <h3 className="text-base font-bold text-white">Audience Spend</h3>
                       <p className="text-xs text-gray-400">Purchase power by niche</p>
@@ -439,7 +439,7 @@ export default function AffiliateDashboard() {
 
                 {/* Missed Opportunities Alert */}
                 <div className="p-1 rounded-2xl bg-gradient-to-r from-red-500/20 to-orange-500/20">
-                  <div className="bg-[#121212] rounded-xl p-4 flex items-center justify-between">
+                  <div className="bg-background rounded-xl p-4 flex items-center justify-between">
                      <div className="flex items-center gap-4">
                        <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20 animate-pulse">
                          <Activity size={20} />
@@ -456,7 +456,7 @@ export default function AffiliateDashboard() {
                 </div>
 
                 {/* Main Chart */}
-                <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+                <div className="p-6 rounded-2xl bg-card border border-white/5">
                   <div className="flex justify-between items-center mb-6">
                     <div>
                       <h3 className="text-base font-bold text-white">Performance Analytics</h3>
@@ -507,7 +507,7 @@ export default function AffiliateDashboard() {
                 </div>
 
                 {/* Transaction Table */}
-                <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+                <div className="p-6 rounded-2xl bg-card border border-white/5">
                   <div className="flex justify-between items-center mb-4">
                     <div>
                       <h3 className="text-base font-bold text-white">Recent Conversions</h3>
@@ -577,7 +577,7 @@ export default function AffiliateDashboard() {
             {activeTab === "campaigns" && (
               <div className="animate-in fade-in slide-in-from-bottom-4 grid gap-4">
                 {CAMPAIGNS.map(campaign => (
-                  <div key={campaign.id} className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 flex flex-col gap-4 group hover:border-white/10 transition-all relative overflow-hidden">
+                  <div key={campaign.id} className="p-5 rounded-2xl bg-card border border-white/5 flex flex-col gap-4 group hover:border-white/10 transition-all relative overflow-hidden">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
                       <div className="flex items-start gap-4">
                         <div className="w-14 h-14 rounded-xl bg-white p-2 flex items-center justify-center shadow-lg">
@@ -660,9 +660,9 @@ export default function AffiliateDashboard() {
                           <p className="text-[10px] font-bold text-gray-500 uppercase mb-1">Competition</p>
                           <div className="flex -space-x-2">
                             {[1,2,3].map(i => (
-                              <div key={i} className="w-6 h-6 rounded-full bg-gray-700 border-2 border-[#1E1E1E]" />
+                              <div key={i} className="w-6 h-6 rounded-full bg-gray-700 border-2 border-card" />
                             ))}
-                            <div className="w-6 h-6 rounded-full bg-gray-800 border-2 border-[#1E1E1E] flex items-center justify-center text-[8px] text-white font-bold">
+                            <div className="w-6 h-6 rounded-full bg-gray-800 border-2 border-card flex items-center justify-center text-[8px] text-white font-bold">
                               +12
                             </div>
                           </div>
@@ -683,7 +683,7 @@ export default function AffiliateDashboard() {
                 
                 {/* Commission Scanner Alert */}
                 <div className="p-1 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20">
-                  <div className="bg-[#121212] rounded-xl p-4 flex items-center justify-between">
+                  <div className="bg-background rounded-xl p-4 flex items-center justify-between">
                      <div className="flex items-center gap-4">
                        <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20">
                          <Zap size={20} />
@@ -702,7 +702,7 @@ export default function AffiliateDashboard() {
                 {/* Major Networks */}
                 <div className="grid gap-4">
                   {NETWORKS.map(network => (
-                    <div key={network.id} className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 flex items-center justify-between group hover:border-white/10 transition-all">
+                    <div key={network.id} className="p-5 rounded-2xl bg-card border border-white/5 flex items-center justify-between group hover:border-white/10 transition-all">
                        <div className="flex items-center gap-4">
                           <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center font-black text-lg text-black">
                             {network.logo}
@@ -743,7 +743,7 @@ export default function AffiliateDashboard() {
                 </div>
 
                 {/* Custom Link Builder */}
-                <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+                <div className="p-6 rounded-2xl bg-card border border-white/5">
                   <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
                     <ExternalLink size={16} className="text-accent" /> 
                     Universal Link Builder
@@ -784,7 +784,7 @@ export default function AffiliateDashboard() {
             {activeTab === "rewards" && (
               <div className="animate-in fade-in slide-in-from-bottom-4">
                  {/* Goal Progress Header */}
-                 <div className="mb-6 p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-white/10 relative overflow-hidden">
+                 <div className="mb-6 p-6 rounded-2xl bg-gradient-to-br from-surface-2 to-surface-2 border border-white/10 relative overflow-hidden">
                     <div className="relative z-10 max-w-lg">
                        <div className="flex items-center gap-2 mb-2">
                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500 text-black">GOLD TIER</span>
@@ -815,7 +815,7 @@ export default function AffiliateDashboard() {
 
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {REWARDS.map(reward => (
-                    <div key={reward.id} className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 relative overflow-hidden group cursor-pointer hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-2xl">
+                    <div key={reward.id} className="p-5 rounded-2xl bg-card border border-white/5 relative overflow-hidden group cursor-pointer hover:border-accent/30 transition-all hover:-translate-y-1 hover:shadow-2xl">
                       <div className="flex justify-between items-start relative z-10 mb-4">
                         <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-2xl border border-white/5 group-hover:bg-white/10 transition-colors">
                           {reward.icon}

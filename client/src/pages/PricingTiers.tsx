@@ -67,7 +67,7 @@ const TIERS = [
     notIncluded: [],
     cta: "Join the Syndicate",
     popular: false,
-    gradient: "from-purple-600 to-blue-600"
+    gradient: "from-primary to-primary"
   }
 ];
 
@@ -94,7 +94,7 @@ export default function PricingTiers() {
 
           {/* Billing Toggle */}
           <div className="flex justify-center">
-            <div className="bg-[#1E1E1E] p-1 rounded-xl border border-white/10 flex relative">
+            <div className="bg-card p-1 rounded-xl border border-white/10 flex relative">
               <button 
                 onClick={() => setBillingInterval("monthly")}
                 className={cn(
@@ -116,7 +116,7 @@ export default function PricingTiers() {
               
               {/* Sliding Background */}
               <div className={cn(
-                "absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#2A2A2A] rounded-lg transition-all duration-300",
+                "absolute top-1 bottom-1 w-[calc(50%-4px)] bg-muted rounded-lg transition-all duration-300",
                 billingInterval === "yearly" ? "left-[calc(50%+2px)]" : "left-1"
               )} />
             </div>
@@ -131,7 +131,7 @@ export default function PricingTiers() {
                 key={tier.id} 
                 className={cn(
                   "rounded-2xl border relative overflow-hidden transition-all flex flex-col",
-                  tier.popular ? "bg-[#1E1E1E] border-purple-500/50 shadow-lg shadow-purple-900/20 transform md:-translate-y-2" : "bg-[#121212] border-white/10",
+                  tier.popular ? "bg-card border-purple-500/50 shadow-lg shadow-purple-900/20 transform md:-translate-y-2" : "bg-background border-white/10",
                   tier.id === "agency" && "bg-gradient-to-br from-[#1a1a2e] to-[#16213e] border-blue-500/30"
                 )}
               >
@@ -142,11 +142,11 @@ export default function PricingTiers() {
                 )}
 
                 <div className="p-6 flex flex-col h-full">
-                  <h3 className="text-lg font-display font-bold text-white mb-1 flex items-center gap-2">
+                  <h2 className="text-lg font-display font-bold text-white mb-1 flex items-center gap-2">
                     {tier.name}
                     {tier.id === "agency" && <Crown size={16} className="text-yellow-400" />}
                     {tier.id === "creator" && <Sparkles size={16} className="text-purple-400" />}
-                  </h3>
+                  </h2>
                   <p className="text-xs text-gray-400 mb-4 h-8 line-clamp-2">{tier.description}</p>
                   
                   <div className="flex items-baseline gap-1 mb-6">
@@ -202,7 +202,7 @@ export default function PricingTiers() {
                 <Globe size={32} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">Society Enterprise</h3>
+                <h2 className="text-xl font-bold text-white mb-1">Society Enterprise</h2>
                 <p className="text-sm text-gray-400 max-w-md mx-auto md:mx-0">
                   Own the rails. Custom model training, dedicated GPU clusters, and full API access for platforms.
                 </p>

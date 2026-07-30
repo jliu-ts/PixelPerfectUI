@@ -85,7 +85,7 @@ export default function AssetMarketplace() {
           </div>
           
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 bg-[#1E1E1E] border border-white/10 px-3 py-1.5 rounded-full">
+            <div className="flex items-center gap-1.5 bg-card border border-white/10 px-3 py-1.5 rounded-full">
               <Coins size={14} className="text-yellow-400" fill="currentColor" />
               <span className="text-xs font-bold text-white">{userCredits}</span>
             </div>
@@ -127,10 +127,10 @@ export default function AssetMarketplace() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search assets, prompts, creators..." 
-                  className="w-full bg-[#1E1E1E] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all placeholder:text-gray-600"
+                  className="w-full bg-card border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all placeholder:text-gray-600"
                 />
               </div>
-              <button aria-label="Filter" className="px-4 rounded-xl bg-[#1E1E1E] border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-colors">
+              <button aria-label="Filter" className="px-4 rounded-xl bg-card border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-colors">
                 <Filter size={18} />
               </button>
             </div>
@@ -144,7 +144,7 @@ export default function AssetMarketplace() {
                     "px-4 py-2 rounded-full text-xs font-bold border transition-all whitespace-nowrap flex items-center gap-2",
                     activeCategory === cat 
                       ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
-                      : "bg-[#1E1E1E] text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
+                      : "bg-card text-gray-400 border-white/5 hover:border-white/20 hover:text-white"
                   )}
                 >
                   {cat === "All" && <TrendingUp size={12} />}
@@ -165,7 +165,7 @@ export default function AssetMarketplace() {
               {filteredItems.map((item, idx) => (
                 <div 
                   key={`${item.id}-${idx}`} 
-                  className="group relative bg-[#1E1E1E] rounded-2xl border border-white/5 overflow-hidden hover:border-accent/50 hover:shadow-[0_0_20px_-5px_rgba(34,211,238,0.15)] transition-all duration-300 flex flex-col"
+                  className="group relative bg-card rounded-2xl border border-white/5 overflow-hidden hover:border-accent/50 hover:shadow-[0_0_20px_-5px_rgba(34,211,238,0.15)] transition-all duration-300 flex flex-col"
                 >
                   {/* Thumbnail */}
                   <div className="aspect-[4/3] relative overflow-hidden bg-black">
@@ -174,7 +174,7 @@ export default function AssetMarketplace() {
                       alt={item.title} 
                       className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E1E1E] to-transparent opacity-60" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
                     
                     <div className="absolute top-3 left-3">
                       <span className="px-2 py-1 rounded-lg bg-black/60 backdrop-blur text-[10px] font-bold text-white border border-white/10">

@@ -129,7 +129,7 @@ export default function MediaKit() {
         
         {/* Hero Section */}
         <div className="relative h-64 w-full bg-black overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 to-blue-900/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-r from-surface-2 to-surface-2 z-0" />
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1200&auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay" />
           
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 bg-gradient-to-t from-background to-transparent z-10">
@@ -140,7 +140,7 @@ export default function MediaKit() {
                </div>
                <div className="flex-1 mb-2">
                  <div className="flex items-center gap-2 mb-1">
-                   <h1 className="text-3xl md:text-4xl font-display font-bold text-white">Felix Kjellberg</h1>
+                   <h2 className="text-3xl md:text-4xl font-display font-bold text-white">Felix Kjellberg</h2>
                    <span className="px-2 py-1 rounded-md bg-blue-500/20 text-blue-400 text-[10px] font-bold border border-blue-500/30 uppercase tracking-wider">
                      Verified Creator
                    </span>
@@ -166,7 +166,7 @@ export default function MediaKit() {
           {/* Reach Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {REACH_STATS.map((stat) => (
-              <div key={stat.platform} className="p-5 rounded-2xl bg-[#1E1E1E] border border-white/5 hover:border-white/10 transition-all group">
+              <div key={stat.platform} className="p-5 rounded-2xl bg-card border border-white/5 hover:border-white/10 transition-all group">
                 <div className="flex justify-between items-start mb-2">
                   <div className="p-2 rounded-lg bg-white/5 text-white group-hover:scale-110 transition-transform" style={{ color: stat.color }}>
                     <stat.icon size={20} />
@@ -175,7 +175,7 @@ export default function MediaKit() {
                     {stat.growth}
                   </span>
                 </div>
-                <h3 className="text-2xl font-display font-bold text-white mt-2">{stat.followers}</h3>
+                <h2 className="text-2xl font-display font-bold text-white mt-2">{stat.followers}</h2>
                 <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">{stat.platform}</p>
               </div>
             ))}
@@ -187,10 +187,10 @@ export default function MediaKit() {
             <div className="lg:col-span-2 space-y-8">
               
               {/* Engagement Chart */}
-              <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
+              <div className="p-6 rounded-2xl bg-card border border-white/5">
                 <div className="flex justify-between items-center mb-6">
                   <div>
-                    <h3 className="text-lg font-bold text-white">Engagement Rate</h3>
+                    <h2 className="text-lg font-bold text-white">Engagement Rate</h2>
                     <p className="text-xs text-gray-400">Consistently outperforming industry benchmarks</p>
                   </div>
                   <div className="flex items-center gap-2 text-xs">
@@ -217,7 +217,7 @@ export default function MediaKit() {
 
               {/* Past Collaborations */}
               <div>
-                <h3 className="text-lg font-bold text-white mb-4">Trusted By</h3>
+                <h2 className="text-lg font-bold text-white mb-4">Trusted By</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {PAST_COLLABS.map((collab) => (
                     <div key={collab.brand} className="h-24 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all hover:bg-white/10">
@@ -233,8 +233,8 @@ export default function MediaKit() {
             <div className="space-y-8">
               
               {/* Audience Demographics */}
-              <div className="p-6 rounded-2xl bg-[#1E1E1E] border border-white/5">
-                <h3 className="text-lg font-bold text-white mb-6">Audience</h3>
+              <div className="p-6 rounded-2xl bg-card border border-white/5">
+                <h2 className="text-lg font-bold text-white mb-6">Audience</h2>
                 
                 <div className="space-y-6">
                   {/* Gender Split */}
@@ -274,11 +274,11 @@ export default function MediaKit() {
               </div>
 
               {/* Download Card */}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 text-center">
+              <div className="p-6 rounded-2xl bg-surface-2 border border-white/10 text-center">
                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
                    <Calendar size={24} />
                  </div>
-                 <h3 className="text-white font-bold mb-1">Ready to collaborate?</h3>
+                 <h2 className="text-white font-bold mb-1">Ready to collaborate?</h2>
                  <p className="text-xs text-gray-400 mb-4">Download my full media kit with detailed case studies.</p>
                  <button className="w-full py-2.5 rounded-xl bg-white text-black text-xs font-bold hover:bg-gray-200 transition-colors">
                    Download Full Kit (PDF)
@@ -290,24 +290,24 @@ export default function MediaKit() {
 
           {/* Pricing Packages */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
               <DollarSign size={24} className="text-green-400" /> 
               Partnership Packages
-            </h3>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {PRICING_PACKAGES.map((pkg) => (
                 <div key={pkg.title} className={cn(
                   "p-6 rounded-2xl border transition-all relative overflow-hidden group",
                   pkg.popular 
-                    ? "bg-[#1E1E1E] border-purple-500 shadow-[0_0_30px_rgba(124,58,237,0.2)]" 
-                    : "bg-[#1E1E1E] border-white/5 hover:border-white/20"
+                    ? "bg-card border-purple-500 shadow-[0_0_30px_rgba(124,58,237,0.2)]" 
+                    : "bg-card border-white/5 hover:border-white/20"
                 )}>
                   {pkg.popular && (
                     <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-500 text-white text-[10px] font-bold uppercase tracking-wide shadow-lg">
                       Most Popular
                     </div>
                   )}
-                  <h4 className="text-lg font-bold text-white mb-1">{pkg.title}</h4>
+                  <h3 className="text-lg font-bold text-white mb-1">{pkg.title}</h3>
                   <div className="text-2xl font-display font-bold text-white mb-6">{pkg.price}</div>
                   
                   <ul className="space-y-3 mb-8">
@@ -322,7 +322,7 @@ export default function MediaKit() {
                   <button className={cn(
                     "w-full py-3 rounded-xl text-sm font-bold transition-all",
                     pkg.popular
-                      ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:brightness-110 shadow-lg"
+                      ? "bg-primary text-white hover:brightness-110 shadow-lg"
                       : "bg-white/10 text-white hover:bg-white/20"
                   )}>
                     Select Package

@@ -16,7 +16,7 @@ import {
   Bookmark,
   Share2
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { clickable, cn } from "@/lib/utils";
 import { MOCK_ARTICLES } from "@/lib/mockData";
 import {
   Dialog,
@@ -47,12 +47,12 @@ export function RightSidebar() {
     <>
       {/* Toggle Button */}
       <div className={cn(
-        "hidden lg:flex flex-col h-screen sticky top-0 border-l border-white/5 bg-[#0A0A0A] transition-all duration-300 ease-in-out relative",
+        "hidden lg:flex flex-col h-screen sticky top-0 border-l border-white/5 bg-shell transition-all duration-300 ease-in-out relative",
         isRightSidebarOpen ? "w-[320px]" : "w-0 overflow-hidden border-l-0"
       )}>
          <button 
            onClick={() => setIsRightSidebarOpen(!isRightSidebarOpen)}
-           className="absolute -left-3 top-6 bg-[#0A0A0A] border border-white/10 rounded-full p-1 text-gray-400 hover:text-white transition-colors z-50 hidden lg:flex items-center justify-center w-6 h-6 hover:border-white/30"
+           className="absolute -left-3 top-6 bg-shell border border-white/10 rounded-full p-1 text-gray-400 hover:text-white transition-colors z-50 hidden lg:flex items-center justify-center w-6 h-6 hover:border-white/30"
            style={{ left: isRightSidebarOpen ? '-12px' : '-36px' }} 
          >
            {isRightSidebarOpen ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
@@ -62,10 +62,10 @@ export function RightSidebar() {
            
            {/* Header */}
            <div className="p-4 border-b border-white/5 flex items-center justify-between">
-             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+             <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
                <TrendingUp size={14} className="text-accent" />
                Trend Watch
-             </h3>
+             </h2>
              <button aria-label="Search" className="p-1.5 hover:bg-white/5 rounded-lg text-gray-500 hover:text-white transition-colors">
                <Search size={14} />
              </button>
@@ -80,7 +80,7 @@ export function RightSidebar() {
                 <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <ArrowRight size={10} className="text-gray-400" />
                 </div>
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center mb-2 text-white shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center mb-2 text-white shadow-lg group-hover:scale-110 transition-transform">
                   <Plus size={16} />
                 </div>
                 <span className="text-xs font-bold text-white block">New Post</span>
@@ -101,7 +101,7 @@ export function RightSidebar() {
            {/* Trending Feed */}
            <div className="flex-1 flex flex-col min-h-0 px-4 pb-4">
              <div className="flex items-center justify-between mb-3 mt-2">
-               <h4 className="text-[10px] font-bold text-gray-500 uppercase">Latest Signals</h4>
+               <h3 className="text-[10px] font-bold text-gray-500 uppercase">Latest Signals</h3>
                <button onClick={() => setLocation("/feeds")} className="text-[10px] text-accent hover:underline inline-flex items-center gap-1 min-h-6">
                  View All <ChevronRight size={10} />
                </button>
@@ -111,7 +111,7 @@ export function RightSidebar() {
                {displayedArticles.map((article) => (
                  <div 
                    key={article.id}
-                   onClick={() => setSelectedArticle(article)}
+                   {...clickable(() => setSelectedArticle(article))}
                    className="group cursor-pointer"
                  >
                    <div className="flex gap-3 p-2 rounded-xl hover:bg-white/5 transition-all">
@@ -168,7 +168,7 @@ export function RightSidebar() {
       {!isRightSidebarOpen && (
          <button aria-label="Open side panel" 
            onClick={() => setIsRightSidebarOpen(true)}
-           className="hidden lg:flex absolute right-0 top-6 bg-[#0A0A0A] border border-white/10 border-r-0 rounded-l-md p-2 text-gray-400 hover:text-white transition-colors z-50 shadow-lg group"
+           className="hidden lg:flex absolute right-0 top-6 bg-shell border border-white/10 border-r-0 rounded-l-md p-2 text-gray-400 hover:text-white transition-colors z-50 shadow-lg group"
          >
            <PanelRightOpen size={16} className="group-hover:scale-110 transition-transform" />
          </button>
@@ -176,13 +176,13 @@ export function RightSidebar() {
 
       {/* Enhanced Article Modal */}
       <Dialog open={!!selectedArticle} onOpenChange={(open) => !open && setSelectedArticle(null)}>
-        <DialogContent hideCloseButton className="bg-[#1E1E1E] border-white/10 text-white max-w-2xl p-0 gap-0 overflow-hidden shadow-2xl">
+        <DialogContent hideCloseButton className="bg-card border-white/10 text-white max-w-2xl p-0 gap-0 overflow-hidden shadow-2xl">
            {selectedArticle && (
              <div className="flex flex-col max-h-[85vh]">
                {/* Sticky Modal Header with Image */}
                <div className="relative w-full h-48 flex-shrink-0">
                  <img loading="lazy" decoding="async" src={selectedArticle.image} className="w-full h-full object-cover" alt={selectedArticle.title} />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#1E1E1E] via-[#1E1E1E]/50 to-transparent" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
                  
                  <button aria-label="Close" 
                    onClick={() => setSelectedArticle(null)}
@@ -229,10 +229,10 @@ export function RightSidebar() {
                      Published on {selectedArticle.source} under {selectedArticle.category}. The summary above is the top line; the full piece works through the numbers.
                    </p>
                    
-                   <div className="p-4 rounded-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/20 my-4">
-                     <h4 className="text-xs font-bold text-purple-300 mb-2 flex items-center gap-2">
+                   <div className="p-4 rounded-xl bg-surface-2 border border-primary/20 my-4">
+                     <p className="text-xs font-bold text-purple-300 mb-2 flex items-center gap-2">
                        <Sparkles size={12} /> AI Insight
-                     </h4>
+                     </p>
                      <p className="text-xs text-gray-300 italic">
                        "Top 5% of tech discussion volume this week. Creators posting on this angle are averaging 3x their usual engagement."
                      </p>
@@ -245,7 +245,7 @@ export function RightSidebar() {
                </div>
 
                {/* Sticky Footer Actions */}
-               <div className="p-4 border-t border-white/5 bg-[#1E1E1E] flex gap-3">
+               <div className="p-4 border-t border-white/5 bg-card flex gap-3">
                  <button 
                    onClick={() => {
                       setLocation("/create");

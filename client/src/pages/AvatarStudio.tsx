@@ -170,7 +170,7 @@ export default function AvatarStudio() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-purple-900/10" />
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
             
-            <div className="bg-[#121212]/80 backdrop-blur-sm rounded-[20px] p-6 md:p-8 relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="bg-background/80 backdrop-blur-sm rounded-[20px] p-6 md:p-8 relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="flex items-center gap-5">
                 <div className={cn(
                   "w-16 h-16 rounded-2xl flex items-center justify-center border shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0 relative",
@@ -214,7 +214,7 @@ export default function AvatarStudio() {
             {/* HeyGen Card */}
             <div className={cn(
               "p-5 rounded-2xl border transition-all relative overflow-hidden group",
-              connectedServices.heygen ? "bg-[#1A1A1A] border-purple-500/20" : "bg-[#121212] border-white/5"
+              connectedServices.heygen ? "bg-surface-2 border-purple-500/20" : "bg-background border-white/5"
             )}>
               <div className="flex justify-between items-start mb-4 relative z-10">
                 <div className="flex items-center gap-3">
@@ -250,7 +250,7 @@ export default function AvatarStudio() {
             {/* ElevenLabs Card */}
             <div className={cn(
               "p-5 rounded-2xl border transition-all relative overflow-hidden group",
-              connectedServices.elevenlabs ? "bg-[#1A1A1A] border-orange-500/20" : "bg-[#121212] border-white/5"
+              connectedServices.elevenlabs ? "bg-surface-2 border-orange-500/20" : "bg-background border-white/5"
             )}>
               <div className="flex justify-between items-start mb-4 relative z-10">
                 <div className="flex items-center gap-3">
@@ -291,12 +291,12 @@ export default function AvatarStudio() {
 
           {/* Main Content Tabs */}
           <div>
-            <div className="flex p-1 bg-[#121212] rounded-xl border border-white/10 mb-6 w-full md:w-fit">
+            <div className="flex p-1 bg-background rounded-xl border border-white/10 mb-6 w-full md:w-fit">
               <button 
                 onClick={() => setActiveTab("avatar")}
                 className={cn(
                   "flex-1 md:flex-none px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2", 
-                  activeTab === "avatar" ? "bg-[#2A2A2A] text-white shadow-sm" : "text-gray-500 hover:text-gray-300"
+                  activeTab === "avatar" ? "bg-muted text-white shadow-sm" : "text-gray-500 hover:text-gray-300"
                 )}
               >
                 <Video size={16} className={activeTab === "avatar" ? "text-purple-400" : ""} />
@@ -306,7 +306,7 @@ export default function AvatarStudio() {
                 onClick={() => setActiveTab("voice")}
                 className={cn(
                   "flex-1 md:flex-none px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2", 
-                  activeTab === "voice" ? "bg-[#2A2A2A] text-white shadow-sm" : "text-gray-500 hover:text-gray-300"
+                  activeTab === "voice" ? "bg-muted text-white shadow-sm" : "text-gray-500 hover:text-gray-300"
                 )}
               >
                 <Mic size={16} className={activeTab === "voice" ? "text-orange-400" : ""} />
@@ -333,7 +333,7 @@ export default function AvatarStudio() {
                     </button>
 
                     {avatars.map(avatar => (
-                      <div key={avatar.id} className="group bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all hover:shadow-lg relative">
+                      <div key={avatar.id} className="group bg-background border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all hover:shadow-lg relative">
                         <div className="absolute top-3 right-3 z-10">
                            <button aria-label="More options" className="p-1.5 rounded-full bg-black/40 backdrop-blur hover:bg-black/60 text-white/80 hover:text-white transition-colors">
                              <MoreHorizontal size={16} />
@@ -388,7 +388,7 @@ export default function AvatarStudio() {
               {activeTab === "voice" && (
                 <>
                   {!connectedServices.elevenlabs ? (
-                    <div className="py-16 flex flex-col items-center justify-center text-center border border-dashed border-white/10 rounded-2xl bg-[#121212]">
+                    <div className="py-16 flex flex-col items-center justify-center text-center border border-dashed border-white/10 rounded-2xl bg-background">
                       <div className="w-16 h-16 rounded-full bg-orange-500/10 flex items-center justify-center mb-4 border border-orange-500/20">
                          <Mic size={32} className="text-orange-500" />
                       </div>
@@ -412,7 +412,7 @@ export default function AvatarStudio() {
                           "w-full p-4 rounded-2xl border border-dashed flex items-center justify-center gap-3 transition-all group",
                           isBiometricVerified 
                             ? "border-white/10 hover:border-orange-500/50 hover:bg-orange-500/5 cursor-pointer" 
-                            : "border-white/5 bg-[#121212] cursor-not-allowed opacity-60"
+                            : "border-white/5 bg-background cursor-not-allowed opacity-60"
                         )}
                       >
                         <div className={cn(
@@ -428,7 +428,7 @@ export default function AvatarStudio() {
                       </button>
 
                       {VOICES.map(voice => (
-                        <div key={voice.id} className="bg-[#121212] border border-white/5 rounded-2xl p-5 flex flex-col sm:flex-row justify-between items-center gap-4 group hover:border-orange-500/30 transition-all">
+                        <div key={voice.id} className="bg-background border border-white/5 rounded-2xl p-5 flex flex-col sm:flex-row justify-between items-center gap-4 group hover:border-orange-500/30 transition-all">
                           <div className="flex items-center gap-4 w-full sm:w-auto">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 border border-orange-500/20 shadow-[0_0_15px_rgba(249,115,22,0.1)]">
                               <Mic size={20} />

@@ -110,7 +110,7 @@ export function FeedItem({ item, isLiked, likeCount, onToggleLike, onComment, on
              type="button"
              onClick={onRemix}
              aria-label="Remix this post in the studio"
-             className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 flex items-center justify-center animate-[spin_4s_linear_infinite] motion-reduce:animate-none shadow-lg border-2 border-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+             className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center animate-[spin_4s_linear_infinite] motion-reduce:animate-none shadow-lg border-2 border-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
            >
              <img loading="lazy" decoding="async" src={item.avatar} alt="" className="w-6 h-6 md:w-8 md:h-8 rounded-full" />
           </button>
