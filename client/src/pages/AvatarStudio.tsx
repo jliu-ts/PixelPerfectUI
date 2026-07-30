@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
 import { 
@@ -25,30 +25,45 @@ import {
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import avatarImage from "@assets/generated_images/candid_avatar_portrait.png";
+import casualAvatarImage from "@assets/generated_images/candid_casual_avatar.png";
 import heyGenLogo from "@assets/brand_logos/heygen-icon.png";
 import elevenLabsLogo from "@assets/brand_logos/elevenlabs-icon.png";
 
 // Enhanced Mock Data
-const AVATARS = [
-  { 
-    id: "hg_1", 
-    name: "Studio Felix", 
-    image: avatarImage, 
-    type: "Instant Avatar", 
-    status: "ready", 
+interface AvatarEntry {
+  id: string;
+  name: string;
+  image: string;
+  type: string;
+  status: "ready" | "processing";
+  capabilities: string[];
+  lastUsed: string;
+}
+
+// hg_2 starts in flight so the render pipeline is visible on load, then settles via
+// PROCESSING_MS. Without that transition the card spins forever and reads as a hung job.
+const AVATARS: AvatarEntry[] = [
+  {
+    id: "hg_1",
+    name: "Studio Felix",
+    image: avatarImage,
+    type: "Instant Avatar",
+    status: "ready",
     capabilities: ["4K Video", "Gestures"],
     lastUsed: "2h ago"
   },
-  { 
-    id: "hg_2", 
-    name: "Casual Felix", 
-    image: "https://picsum.photos/seed/casual/200/200", 
-    type: "Photo Avatar", 
-    status: "processing", 
+  {
+    id: "hg_2",
+    name: "Casual Felix",
+    image: casualAvatarImage,
+    type: "Photo Avatar",
+    status: "processing",
     capabilities: ["Talking Photo"],
-    lastUsed: "Never" 
+    lastUsed: "Never"
   },
 ];
+
+const PROCESSING_MS = 4000;
 
 const VOICES = [
   { id: "el_1", name: "Felix (Professional)", type: "Cloned", status: "ready", model: "Eleven Multilingual v2", accent: "American" },
@@ -65,6 +80,17 @@ export default function AvatarStudio() {
   const [connectedServices, setConnectedServices] = useState({ heygen: true, elevenlabs: false });
   const [isIrisVerified, setIsIrisVerified] = useState(false);
   const [isVerifyingIris, setIsVerifyingIris] = useState(false);
+  const [avatars, setAvatars] = useState<AvatarEntry[]>(AVATARS);
+
+  useEffect(() => {
+    if (!avatars.some(a => a.status === "processing")) return;
+    const timer = setTimeout(() => {
+      const finished = avatars.filter(a => a.status === "processing");
+      setAvatars(prev => prev.map(a => a.status === "processing" ? { ...a, status: "ready", lastUsed: "Just now" } : a));
+      finished.forEach(a => toast({ title: "Avatar Ready", description: `${a.name} finished rendering.` }));
+    }, PROCESSING_MS);
+    return () => clearTimeout(timer);
+  }, [avatars, toast]);
 
   const handleConnect = (service: "heygen" | "elevenlabs") => {
     if (service === "heygen") setIsConnectingHeyGen(true);
@@ -307,7 +333,7 @@ export default function AvatarStudio() {
                       <span className="text-xs font-bold text-gray-500 group-hover:text-purple-400">Create New Avatar</span>
                     </button>
 
-                    {AVATARS.map(avatar => (
+                    {avatars.map(avatar => (
                       <div key={avatar.id} className="group bg-[#121212] border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all hover:shadow-lg relative">
                         <div className="absolute top-3 right-3 z-10">
                            <button className="p-1.5 rounded-full bg-black/40 backdrop-blur hover:bg-black/60 text-white/80 hover:text-white transition-colors">
@@ -318,9 +344,8 @@ export default function AvatarStudio() {
                         <div className="aspect-video bg-black relative overflow-hidden">
                           <img src={avatar.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={avatar.name} />
                           {avatar.status === "processing" && (
-                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center flex-col gap-2">
+                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                               <Loader2 size={24} className="animate-spin text-purple-400" />
-                              <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider">Processing</span>
                             </div>
                           )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
